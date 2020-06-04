@@ -3,7 +3,18 @@ IeXod - https://github.com/3F/IeXod
 - - - - - - - - - - - - - - - - - - 
 
 
+[v0.1-beta] 2020.06.04
 
-[alpha state] 2020.??.??
+    * Initial public release.
+    
+      The most portable alternative to Microsoft.Build for evaluating, manipulating, 
+      and other progressive data processing in a compatible XML-like syntax. 
+      https://github.com/3F/IeXod
 
-    * ...
+    
+[v1.0][SdkResolver] 2020.06.04
+
+    * Initial public release.
+    
+      Public Interface of Sdk Resolvers in IeXod project. 
+      Alternative to Microsoft.Build. https://github.com/3F/IeXod

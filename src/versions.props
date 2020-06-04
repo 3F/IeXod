@@ -1,7 +1,7 @@
 ﻿<Project>
 
   <PropertyGroup>
-    <ProductIeXodVersion>0.1.0-alpha1</ProductIeXodVersion>
+    <ProductIeXodVersion>0.1.0-beta</ProductIeXodVersion>
     <ProductIeXodSdkResolverVersion>1.0.0</ProductIeXodSdkResolverVersion>
   </PropertyGroup>
 
