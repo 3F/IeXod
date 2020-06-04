@@ -1,0 +1,42 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <ProductIeXodVersion>0.1.0-alpha1</ProductIeXodVersion>
+    <ProductIeXodSdkResolverVersion>1.0.0</ProductIeXodSdkResolverVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+
+    <XliffTasksVersion>1.0.0-beta.19253.1</XliffTasksVersion> <!-- https://github.com/dotnet/xliff-tasks -->
+    <SystemCollectionsImmutableVersion>1.7.1</SystemCollectionsImmutableVersion>
+    <SystemThreadingTasksDataflowVersion>4.11.1</SystemThreadingTasksDataflowVersion>
+    <SystemMemoryVersion>4.5.4</SystemMemoryVersion>
+    <SystemReflectionMetadataVersion>1.8.1</SystemReflectionMetadataVersion>
+    <MicrosoftVisualStudioSetupConfigurationInteropVersion>1.16.30</MicrosoftVisualStudioSetupConfigurationInteropVersion>
+    <SystemDiagnosticsTraceSourceVersion>4.3.0</SystemDiagnosticsTraceSourceVersion>
+    <SystemReflectionTypeExtensionsVersion>4.7.0</SystemReflectionTypeExtensionsVersion>
+    <SystemRuntimeLoaderVersion>4.3.0</SystemRuntimeLoaderVersion>
+    <SystemSecurityPrincipalWindowsVersion>4.7.0</SystemSecurityPrincipalWindowsVersion>
+    <SystemTextEncodingCodePagesVersion>4.7.1</SystemTextEncodingCodePagesVersion>
+    <MicrosoftWin32RegistryVersion>4.7.0</MicrosoftWin32RegistryVersion>
+    <SystemThreadingThreadVersion>4.3.0</SystemThreadingThreadVersion>
+    <SystemSecurityPermissionsVersion>4.7.0</SystemSecurityPermissionsVersion>
+    <SystemRuntimeSerializationPrimitivesVersion>4.3.0</SystemRuntimeSerializationPrimitivesVersion>
+    <MicrosoftNETTestSdkVersion>16.6.1</MicrosoftNETTestSdkVersion>
+    <xunitVersion>2.4.1</xunitVersion>
+    <xunitrunnervisualstudioVersion>2.4.1</xunitrunnervisualstudioVersion>
+    <ShouldlyVersion>3.0.2</ShouldlyVersion>
+    <FluentAssertionsVersion>5.10.3</FluentAssertionsVersion>
+    <NewtonsoftJsonVersion>12.0.3</NewtonsoftJsonVersion>
+    <MicrosoftExtensionsDependencyModelVersion>5.0.0-preview.6.20263.7</MicrosoftExtensionsDependencyModelVersion>
+    <NuGetVersioningVersion>5.7.0-preview.1.6609</NuGetVersioningVersion>
+    <NuGetPackagingVersion>5.7.0-preview.1.6609</NuGetPackagingVersion>
+    <NuGetPackagingCoreVersion>5.7.0-preview.1.6609</NuGetPackagingCoreVersion>
+    <NuGetFrameworksVersion>5.7.0-preview.1.6609</NuGetFrameworksVersion>
+    <NuGetProjectModelVersion>5.7.0-preview.1.6609</NuGetProjectModelVersion>
+    <MicrosoftDotNetPlatformAbstractionsVersion>3.1.4</MicrosoftDotNetPlatformAbstractionsVersion>
+    <MicrosoftNETCoreDotNetHostResolverVersion>5.0.0-preview.2.20152.11</MicrosoftNETCoreDotNetHostResolverVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>5.0.0-beta.20261.9</MicrosoftDotNetXUnitExtensionsVersion>
+
+  </PropertyGroup>
+</Project>

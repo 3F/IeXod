@@ -1,0 +1,21 @@
+﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) 2020  Denis Kuzmin < x-3F@outlook.com > GitHub/3F
+// Copyright (c) IeXod contributors https://github.com/3F/IeXod/graphs/contributors
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System.IO;
+
+namespace Microsoft.DotNet.Cli.Utils
+{
+    internal interface IBuiltInCommandEnvironment
+    {
+        TextWriter GetConsoleOut();
+        void SetConsoleOut(TextWriter newOut);
+
+        TextWriter GetConsoleError();
+        void SetConsoleError(TextWriter newError);
+
+        string GetWorkingDirectory();
+        void SetWorkingDirectory(string path);
+    }
+}

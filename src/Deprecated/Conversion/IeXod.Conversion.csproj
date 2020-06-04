@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>net.r_eg.IeXod.Conversion.Core</AssemblyName>
+    <TargetFramework>$(FullFrameworkTFM)</TargetFramework>
+    <GenerateReferenceAssemblySources>true</GenerateReferenceAssemblySources>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <IsPackable>true</IsPackable>
+    <PackageDescription>This package contains the $(MSBuildProjectName) assembly which contains logic for converting projects.  NOTE: This assembly is deprecated.</PackageDescription>
+    <IncludeSatelliteOutputInPack>false</IncludeSatelliteOutputInPack>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Source Files -->
+    <Compile Include="AdditionalOptionsParser.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AssemblyResources.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="FxCopExclusions\IeXod.Conversion.Suppressions.cs" />
+    <Compile Include="OldVSProjectFileReader.cs" />
+    <Compile Include="ProjectFileConverter.cs" />
+
+    <!-- Resource Files -->
+    
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <LogicalName>$(AssemblyName).Strings.resources</LogicalName>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+
+    <EmbeddedResource Include="..\..\Shared\Resources\Strings.shared.resx">
+      <Link>Resources\Strings.shared.resx</Link>
+      <LogicalName>$(AssemblyName).Strings.shared.resources</LogicalName>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    
+    <!-- Assemblies Files we depend on -->
+    <Reference Include="System.Configuration" />
+    <ProjectReference Include="..\..\Build\IeXod.csproj" />
+    <ProjectReference Include="..\Engine\IeXod.Engine.csproj" />
+  </ItemGroup>
+
+  <Import Project="$(RepoRoot)eng\ProducesNoOutput.Settings.props" Condition="'$(OsEnvironment)'!='windows'" />
+</Project>

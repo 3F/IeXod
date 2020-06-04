@@ -1,0 +1,971 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\common.props" />
+  <Import Project="..\Shared\FileSystemSources.proj" />
+
+  <PropertyGroup>
+    <Version>$(ProductIeXodVersion)</Version>
+    <RootNamespace>net.r_eg.IeXod</RootNamespace>
+    <AssemblyName>IeXod</AssemblyName>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>$(DefineConstants);BUILD_ENGINE</DefineConstants>
+
+    <EnableDefaultItems>false</EnableDefaultItems>
+
+    <GenerateReferenceAssemblySources>false</GenerateReferenceAssemblySources>
+    <CreateTlb>true</CreateTlb>
+    <IsPackable>true</IsPackable>
+    <IncludeSatelliteOutputInPack>false</IncludeSatelliteOutputInPack>
+    <ApplyNgenOptimization Condition="'$(TargetFramework)' == '$(FullFrameworkTFM)'">partial</ApplyNgenOptimization>
+
+    <!-- Do not generate a warning that our 'stable' package should not have a prerelease dependency. -->
+    <NoWarn>$(NoWarn);NU5104</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\..\THIRDPARTYNOTICES.txt" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\..\changelog.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sdk\SdkResolver.csproj" />
+
+    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
+    <PackageReference Include="System.Threading.Tasks.Dataflow" Version="$(SystemThreadingTasksDataflowVersion)" />
+    <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
+
+    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" Condition="'$(MonoBuild)' == 'true'" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop" Version="$(MicrosoftVisualStudioSetupConfigurationInteropVersion)" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.IO.Compression" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <PackageReference Include="System.Diagnostics.TraceSource" Version="$(SystemDiagnosticsTraceSourceVersion)" />
+    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="$(SystemReflectionTypeExtensionsVersion)" />
+    <PackageReference Include="System.Runtime.Loader" Version="$(SystemRuntimeLoaderVersion)" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="$(SystemSecurityPrincipalWindowsVersion)" Condition="'$(TargetFramework)' == 'netcoreapp2.1'" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="$(SystemTextEncodingCodePagesVersion)" />
+    <!-- Need Win32 API on .NET Core to ping registry to determine long path support -->
+    <PackageReference Include="Microsoft.Win32.Registry" Version="$(MicrosoftWin32RegistryVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\EncodingUtilities.cs">
+      <Link>SharedUtilities\EncodingUtilities.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\EnvironmentUtilities.cs">
+      <Link>SharedUtilities\EnvironmentUtilities.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\BuildEnvironmentHelper.cs">
+      <Link>SharedUtilities\BuildEnvironmentHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\EncodingStringWriter.cs">
+      <Link>SharedUtilities\EncodingStringWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\FxCopExclusions\IeXod.Shared.Suppressions.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\AssemblyNameComparer.cs">
+      <Link>SharedUtilities\AssemblyNameComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\AwaitExtensions.cs">
+      <Link>SharedUtilities\AwaitExtensions</Link>
+    </Compile>
+    <Compile Include="..\Shared\AssemblyNameReverseVersionComparer.cs">
+      <Link>SharedUtilities\AssemblyNameReverseVersionComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\CanonicalError.cs">
+      <Link>BackEnd\Components\RequestBuilder\IntrinsicTasks\CanonicalError.cs</Link>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\IConstrainedEqualityComparer.cs">
+      <Link>IConstrainedEqualityComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\NGen.cs">
+      <Link>SharedUtilities\NGen.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\Pair.cs">
+      <Link>SharedUtilities\Pair.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\PropertyParser.cs">
+      <Link>BackEnd\Components\RequestBuilder\IntrinsicTasks\PropertyParser.cs</Link>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\StringExtensions.cs">
+      <Link>SharedUtilities\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\ReadOnlyEmptyCollection.cs">
+      <Link>Collections\ReadOnlyEmptyCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\StringBuilderCache.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\Traits.cs">
+      <Link>SharedUtilities\Traits.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\BufferedReadStream.cs" />
+    <Compile Include="..\Shared\TaskHostConfiguration.cs" />
+    <Compile Include="..\Shared\TaskHostTaskCancelled.cs" />
+    <Compile Include="..\Shared\TaskHostTaskComplete.cs" />
+    <Compile Include="..\Shared\OutOfProcTaskHostTaskResult.cs" />
+    <Compile Include="..\Shared\TaskLoader.cs" />
+    <Compile Include="..\Shared\NodeEngineShutdownReason.cs" />
+    <Compile Include="..\Shared\IKeyed.cs" />
+    <Compile Include="..\Shared\INodeEndpoint.cs" />
+    <Compile Include="..\Shared\NodeEndpointOutOfProcBase.cs" />
+    <Compile Include="..\Shared\INodePacket.cs" />
+    <Compile Include="..\Shared\INodePacketFactory.cs" />
+    <Compile Include="..\Shared\INodePacketHandler.cs" />
+    <Compile Include="..\Shared\ITranslatable.cs" />
+    <Compile Include="..\Shared\ITranslator.cs" />
+    <Compile Include="..\Shared\BinaryTranslator.cs" />
+    <Compile Include="..\Shared\LogMessagePacketBase.cs" />
+    <Compile Include="..\Shared\NodePacketFactory.cs" />
+    <Compile Include="..\Shared\NodeBuildComplete.cs" />
+    <Compile Include="..\Shared\NodeShutdown.cs" />
+    <Compile Include="..\Shared\NamedPipeUtil.cs" />
+    <Compile Include="..\Shared\TaskLoggingHelper.cs">
+      <Link>BackEnd\Components\RequestBuilder\IntrinsicTasks\TaskLoggingHelper.cs</Link>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\TaskLoggingHelperExtension.cs">
+      <Link>BackEnd\Components\RequestBuilder\IntrinsicTasks\TaskLoggingHelperExtension.cs</Link>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\TaskParameter.cs" />
+    <Compile Include="..\Shared\TaskParameterTypeVerifier.cs" />
+    <Compile Include="..\Shared\CommunicationsUtilities.cs" />
+    <Compile Include="..\Shared\InterningBinaryReader.cs" />
+    <Compile Include="..\Shared\TaskEngineAssemblyResolver.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ReuseableStringBuilder.cs" />
+    <Compile Include="..\Shared\ThreadPoolExtensions.cs" />
+    <Compile Include="..\Shared\VisualStudioLocationHelper.cs">
+      <Link>SharedUtilities\VisualStudioLocationHelper.cs</Link>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BackEnd\BuildManager\BuildManager.cs" />
+    <Compile Include="BackEnd\BuildManager\BuildParameters.cs" />
+    <Compile Include="BackEnd\BuildManager\CacheSerialization.cs" />
+    <Compile Include="BackEnd\BuildManager\CacheAggregator.cs" />
+    <Compile Include="BackEnd\Components\Caching\ConfigCacheWithOverride.cs" />
+    <Compile Include="BackEnd\Components\Caching\ResultsCacheWithOverride.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkEnv.cs" />
+    <Compile Include="Definition\ProjectToolsOptions.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectUsingTaskParameterElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ExternalProjectsProvider.cs" />
+    <Compile Include="ObjectModelRemoting\LinkedObjectFactory.cs" />
+    <Compile Include="ObjectModelRemoting\DefinitionObjectsLinks\ProjectItemDefinitionLink.cs" />
+    <Compile Include="ObjectModelRemoting\DefinitionObjectsLinks\ProjectItemLink.cs" />
+    <Compile Include="ObjectModelRemoting\DefinitionObjectsLinks\ProjectLink.cs" />
+    <Compile Include="Evaluation\PropertyTrackingEvaluatorDataWrapper.cs" />
+    <Compile Include="Graph\GraphBuilder.cs" />
+    <Compile Include="Graph\ParallelWorkSet.cs" />
+    <Compile Include="Graph\ProjectInterpretation.cs" />
+    <Compile Include="Graph\GraphBuildResult.cs" />
+    <Compile Include="Graph\GraphBuildSubmission.cs" />
+    <Compile Include="Graph\GraphBuildRequestData.cs" />
+    <Compile Include="BackEnd\BuildManager\BuildSubmission.cs" />
+    <Compile Include="BackEnd\BuildManager\LegacyThreadingData.cs" />
+    <Compile Include="BackEnd\BuildManager\RequestedProjectState.cs" />
+    <Compile Include="BackEnd\Components\BuildComponentFactoryCollection.cs" />
+    <Compile Include="BackEnd\Components\Caching\IRegisteredTaskObjectCache.cs" />
+    <Compile Include="..\Shared\RegisteredTaskObjectCacheBase.cs" />
+    <Compile Include="BackEnd\Components\Caching\RegisteredTaskObjectCache.cs" />
+    <Compile Include="BackEnd\Components\Logging\EvaluationLoggingContext.cs" />
+    <Compile Include="BackEnd\Components\Logging\BuildLoggingContext.cs" />
+    <Compile Include="BackEnd\Components\Logging\LoggingContext.cs" />
+    <Compile Include="BackEnd\Components\Logging\BuildEventArgTransportSink.cs" />
+    <Compile Include="BackEnd\Components\Logging\CentralForwardingLogger.cs" />
+    <Compile Include="BackEnd\Components\Logging\EventRedirectorToSink.cs" />
+    <Compile Include="BackEnd\Components\Logging\EventSourceSink.cs" />
+    <Compile Include="BackEnd\Components\Logging\ForwardingLoggerRecord.cs" />
+    <Compile Include="BackEnd\Components\Logging\ILoggingService.cs" />
+    <Compile Include="BackEnd\Components\Logging\LoggingService.cs" />
+    <Compile Include="BackEnd\Components\Logging\LoggingServiceFactory.cs" />
+    <Compile Include="BackEnd\Components\Logging\LoggingServiceLogMethods.cs" />
+    <Compile Include="BackEnd\Components\Logging\NodeLoggingContext.cs" />
+    <Compile Include="BackEnd\Components\Logging\ProjectLoggingContext.cs" />
+    <Compile Include="BackEnd\Components\Logging\TargetLoggingContext.cs" />
+    <Compile Include="BackEnd\Components\Logging\TaskLoggingContext.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\IntrinsicTasks\CallTarget.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="BackEnd\Components\RequestBuilder\IntrinsicTasks\IntrinsicTaskFactory.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\IntrinsicTasks\ItemGroupLoggingHelper.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\IntrinsicTasks\MSBuild.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="BackEnd\Components\Scheduler\SchedulableRequest.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\FullTracking.cs" />
+    <Compile Include="BackEnd\Components\Scheduler\SchedulingData.cs" />
+    <Compile Include="BackEnd\Components\Scheduler\Scheduler.cs" />
+    <Compile Include="BackEnd\Components\Scheduler\SchedulerCircularDependencyException.cs" />
+    <Compile Include="BackEnd\Components\Scheduler\ScheduleTimeRecord.cs" />
+    <Compile Include="BackEnd\Components\Scheduler\SchedulingPlan.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\DefaultSdkResolver.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\ISdkResolverService.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\OutOfProcNodeSdkResolverService.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\OutOfProcNodeSdkResolverServiceFactory.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkLogger.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\CachingSdkResolverService.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkResolverContext.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkResolverLoader.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkResolverManifest.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkResolverRequest.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\MainNodeSdkResolverService.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkResolverService.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\HostedSdkResolverServiceBase.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkResult.cs" />
+    <Compile Include="BackEnd\Components\SdkResolution\SdkResultFactory.cs" />
+    <Compile Include="BackEnd\Node\LoggingNodeConfiguration.cs" />
+    <Compile Include="BackEnd\Shared\ConfigurationMetadata.cs" />
+    <Compile Include="Collections\ConcurrentQueueExtensions.cs" />
+    <Compile Include="Collections\ConcurrentStackExtensions.cs" />
+    <Compile Include="Collections\LookasideStringInterner.cs" />
+    <Compile Include="Collections\RetrievableEntryHashSet\HashSet.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Collections\RetrievableEntryHashSet\BitHelper.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Collections\RetrievableEntryHashSet\HashSetDebugView.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Collections\RetrievableEntryHashSet\HashHelpers.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Construction\ImplicitImportLocation.cs" />
+    <Compile Include="Construction\ProjectSdkElement.cs" />
+    <Compile Include="Definition\ProjectOptions.cs" />
+    <Compile Include="Definition\NewProjectFileOptions.cs" />
+    <Compile Include="Definition\ProjectCollectionChangedEventArgs.cs" />
+    <Compile Include="Definition\ProjectImportPathMatch.cs" />
+    <Compile Include="Definition\ProjectLoadSettings.cs" />
+    <Compile Include="Definition\ToolsetLocalReader.cs" />
+    <Compile Include="Evaluation\Context\EvaluationContext.cs" />
+    <Compile Include="Evaluation\Profiler\EvaluationLocationMarkdownPrettyPrinter.cs" />
+    <Compile Include="Evaluation\Profiler\EvaluationLocationPrettyPrinterBase.cs" />
+    <Compile Include="Evaluation\Profiler\EvaluationLocationTabSeparatedPrettyPrinter.cs" />
+    <Compile Include="Evaluation\Profiler\EvaluationProfiler.cs" />
+    <Compile Include="Evaluation\ItemSpec.cs" />
+    <Compile Include="Evaluation\ItemsAndMetadataPair.cs" />
+    <Compile Include="Evaluation\LazyItemEvaluator.cs" />
+    <Compile Include="Evaluation\LazyItemEvaluator.IItemOperation.cs" />
+    <Compile Include="Evaluation\LazyItemEvaluator.UpdateOperation.cs" />
+    <Compile Include="Evaluation\LazyItemEvaluator.IncludeOperation.cs" />
+    <Compile Include="Evaluation\LazyItemEvaluator.ItemFactoryWrapper.cs" />
+    <Compile Include="Evaluation\LazyItemEvaluator.RemoveOperation.cs" />
+    <Compile Include="Evaluation\MetadataReference.cs" />
+    <Compile Include="Graph\ProjectGraphEntryPoint.cs" />
+    <Compile Include="Graph\ProjectGraph.cs" />
+    <Compile Include="Graph\ProjectGraphNode.cs" />
+    <Compile Include="Instance\HostObjectException.cs" />
+    <Compile Include="Instance\IRunningObjectTableWrapper.cs" />
+    <Compile Include="Instance\RunningObjectTable.cs" />
+    <Compile Include="Logging\EvaluationLocationIdAgnosticComparer.cs" />
+    <Compile Include="Logging\ProfilerLogger.cs" />
+    <Compile Include="Evaluation\Profiler\ProfilerResultPrettyPrinter.cs" />
+    <Compile Include="Evaluation\ProjectChangedEventArgs.cs" />
+    <Compile Include="Evaluation\ProjectXmlChangedEventArgs.cs" />
+    <Compile Include="Construction\Solution\SolutionProjectGenerator.cs" />
+    <Compile Include="Evaluation\IToolsetProvider.cs" />
+    <Compile Include="BackEnd\Components\Caching\ResultsCacheResponse.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeEndpointOutOfProc.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeManager.cs" />
+    <Compile Include="BackEnd\Components\Communications\TaskHostNodeManager.cs" />
+    <Compile Include="BackEnd\Components\Communications\LogMessagePacket.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeFailedToLaunchException.cs" />
+    <Compile Include="BackEnd\Components\BuildRequestEngine\BuildRequestConfigurationResponse.cs" />
+    <Compile Include="BackEnd\Components\BuildRequestEngine\BuildRequestEngine.cs" />
+    <Compile Include="BackEnd\Components\BuildRequestEngine\BuildRequestEntry.cs" />
+    <Compile Include="BackEnd\Components\BuildRequestEngine\FullyQualifiedBuildRequest.cs" />
+    <Compile Include="BackEnd\Components\Caching\IConfigCache.cs" />
+    <Compile Include="BackEnd\Components\Caching\ResultsCache.cs" />
+    <Compile Include="BackEnd\Components\Caching\ConfigCache.cs" />
+    <Compile Include="BackEnd\Components\Caching\IPropertyCache.cs" />
+    <Compile Include="BackEnd\Components\Caching\IResultsCache.cs" />
+    <Compile Include="BackEnd\Components\Communications\TranslatorExtensions.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeProviderOutOfProc.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeProviderOutOfProcBase.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeProviderOutOfProcTaskHost.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\BatchingEngine.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="BackEnd\BuildManager\BuildRequestData.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\IntrinsicTask.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\IntrinsicTasks\ItemGroupIntrinsicTask.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\IntrinsicTasks\PropertyGroupIntrinsicTask.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\ITargetBuilderCallback.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\TargetSpecification.cs" />
+    <Compile Include="BackEnd\Node\InProcNode.cs" />
+    <Compile Include="BackEnd\Node\NodeConfiguration.cs" />
+    <Compile Include="BackEnd\Node\OutOfProcNode.cs" />
+    <Compile Include="BackEnd\Node\NativeMethods.cs" />
+    <Compile Include="BackEnd\Shared\BuildAbortedException.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\IRequestBuilder.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\IRequestBuilderCallback.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\ITargetBuilder.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\ITaskBuilder.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\ItemBucket.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="BackEnd\Components\RequestBuilder\Lookup.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="BackEnd\Components\RequestBuilder\RequestBuilder.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\TargetBuilder.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\TargetEntry.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\TargetUpToDateChecker.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="BackEnd\Components\RequestBuilder\TaskBuilder.cs" />
+    <Compile Include="BackEnd\Components\RequestBuilder\TaskHost.cs" />
+    <Compile Include="BackEnd\Shared\BuildRequest.cs" />
+    <Compile Include="BackEnd\Shared\BuildRequestBlocker.cs" />
+    <Compile Include="BackEnd\Shared\BuildRequestConfiguration.cs" />
+    <Compile Include="BackEnd\Shared\BuildResult.cs" />
+    <Compile Include="BackEnd\Shared\CircularDependencyException.cs" />
+    <Compile Include="BackEnd\Shared\BuildRequestUnblocker.cs" />
+    <Compile Include="BackEnd\Shared\IBuildResults.cs" />
+    <Compile Include="BackEnd\Shared\ITargetResult.cs" />
+    <Compile Include="BackEnd\Shared\TargetResult.cs" />
+    <Compile Include="BackEnd\Shared\WorkUnitResult.cs" />
+    <Compile Include="BackEnd\Components\BuildRequestEngine\IBuildRequestEngine.cs" />
+    <Compile Include="BackEnd\Components\Communications\INodeManager.cs" />
+    <Compile Include="BackEnd\Components\Communications\INodeProvider.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeEndpointInProc.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeInfo.cs" />
+    <Compile Include="BackEnd\Components\Communications\NodeProviderInProc.cs" />
+    <Compile Include="BackEnd\Components\IBuildComponent.cs" />
+    <Compile Include="BackEnd\Components\IBuildComponentHost.cs" />
+    <Compile Include="BackEnd\Components\Scheduler\IScheduler.cs" />
+    <Compile Include="BackEnd\Components\Scheduler\ScheduleResponse.cs" />
+    <Compile Include="BackEnd\Node\INode.cs" />
+    <!-- ########################## -->
+    <Compile Include="BackEnd\TaskExecutionHost\AddInParts\ITaskExecutionHost.cs" />
+    <Compile Include="BackEnd\TaskExecutionHost\TaskExecutionHost.cs" />
+    <!-- #### COLLECTIONS ### -->
+    <Compile Include="..\Shared\CollectionHelpers.cs" />
+    <Compile Include="Collections\ConvertingEnumerable.cs" />
+    <Compile Include="Collections\CopyOnReadEnumerable.cs" />
+    <Compile Include="..\Shared\OpportunisticIntern.cs" />
+    <Compile Include="..\Shared\CopyOnWriteDictionary.cs">
+      <Link>Collections\CopyOnWriteDictionary.cs</Link>
+    </Compile>
+    <Compile Include="Collections\CopyOnWritePropertyDictionary.cs" />
+    <Compile Include="Collections\IDeepCloneable.cs" />
+    <Compile Include="..\Shared\MSBuildNameIgnoreCaseComparer.cs" />
+    <Compile Include="Collections\HashTableUtility.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Collections\ItemDictionary.cs" />
+    <Compile Include="Collections\IImmutable.cs" />
+    <Compile Include="Collections\MultiDictionary.cs" />
+    <Compile Include="Collections\IValued.cs" />
+    <Compile Include="Collections\PropertyDictionary.cs" />
+    <Compile Include="..\Shared\ReadOnlyCollection.cs" />
+    <Compile Include="Collections\ReadOnlyConvertingDictionary.cs" />
+    <!-- ######################## -->
+    <Compile Include="Collections\WeakValueDictionary.cs" />
+    <!-- #### CONSTRUCTION MODEL ### -->
+    <Compile Include="Construction\ProjectElement.cs" />
+    <Compile Include="Construction\ProjectElementContainer.cs" />
+    <Compile Include="Construction\ProjectImportElement.cs" />
+    <Compile Include="Construction\ProjectImportGroupElement.cs" />
+    <Compile Include="Construction\ProjectItemDefinitionGroupElement.cs" />
+    <Compile Include="Construction\ProjectItemDefinitionElement.cs" />
+    <Compile Include="Construction\ProjectItemGroupElement.cs" />
+    <Compile Include="Construction\ProjectItemElement.cs" />
+    <Compile Include="Construction\ProjectMetadataElement.cs" />
+    <Compile Include="Construction\ProjectOnErrorElement.cs" />
+    <Compile Include="Construction\ProjectOtherwiseElement.cs" />
+    <Compile Include="Construction\ProjectOutputElement.cs" />
+    <Compile Include="Construction\ProjectExtensionsElement.cs" />
+    <Compile Include="Construction\ProjectPropertyGroupElement.cs" />
+    <Compile Include="Construction\ProjectPropertyElement.cs" />
+    <Compile Include="Construction\ProjectTargetElement.cs" />
+    <Compile Include="Construction\ProjectTaskElement.cs" />
+    <Compile Include="Construction\ProjectUsingTaskElement.cs" />
+    <Compile Include="Construction\ProjectRootElement.cs" />
+    <Compile Include="Construction\ProjectChooseElement.cs" />
+    <Compile Include="Construction\ProjectWhenElement.cs" />
+    <Compile Include="Construction\UsingTaskParameterGroupElement.cs" />
+    <Compile Include="Construction\ProjectUsingTaskParameterElement.cs" />
+    <Compile Include="Construction\ProjectUsingTaskBodyElement.cs" />
+    <Compile Include="Construction\Solution\SolutionConfigurationInSolution.cs" />
+    <Compile Include="Construction\Solution\ProjectConfigurationInSolution.cs" />
+    <Compile Include="Construction\Solution\ProjectInSolution.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Construction\Solution\SolutionFile.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <!-- #### DEFINITION MODEL ### -->
+    <Compile Include="Definition\BuiltInMetadata.cs" />
+    <Compile Include="Definition\ProjectCollection.cs" />
+    <Compile Include="Definition\Project.cs" />
+    <Compile Include="Definition\ProjectItem.cs" />
+    <Compile Include="Definition\ProjectItemDefinition.cs" />
+    <Compile Include="Definition\ProjectMetadata.cs" />
+    <Compile Include="Definition\ProjectProperty.cs" />
+    <Compile Include="Definition\ResolvedImport.cs" />
+    <Compile Include="Definition\SubToolset.cs" />
+    <Compile Include="Definition\Toolset.cs" />
+    <Compile Include="Definition\ToolsetConfigurationReader.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+    <Compile Include="..\Shared\ToolsetElement.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Definition\ToolsetPropertyDefinition.cs" />
+    <Compile Include="Definition\ToolsetReader.cs" />
+    <Compile Include="Definition\ToolsetRegistryReader.cs" />
+    <!-- ######################## -->
+    <Compile Include="ElementLocation\ElementLocation.cs" />
+    <Compile Include="ElementLocation\RegistryLocation.cs" />
+    <Compile Include="ElementLocation\XmlAttributeWithLocation.cs" />
+    <Compile Include="ElementLocation\XmlDocumentWithLocation.cs" />
+    <Compile Include="ElementLocation\XmlElementWithLocation.cs" />
+    <Compile Include="ElementLocation\XmlNameTableThreadSafe.cs" />
+    <Compile Include="Errors\InternalLoggerException.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Errors\InvalidProjectFileException.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Errors\InvalidToolsetDefinitionException.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Errors\RegistryException.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <!-- #### EVALUATION ### -->
+    <Compile Include="Evaluation\ConditionEvaluator.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\AndExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\CharacterUtilities.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\EqualExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\FunctionCallExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\GenericExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\GreaterThanExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\GreaterThanOrEqualExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\LessThanExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\LessThanOrEqualExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\MultipleComparisonExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\NotEqualExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\NotExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\NumericComparisonExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\NumericExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\OperandExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\OperatorExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\OrExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\Parser.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\Scanner.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\StringExpressionNode.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\Conditionals\Token.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\EvaluatorMetadataTable.cs" />
+    <Compile Include="Evaluation\IEvaluatorData.cs" />
+    <Compile Include="Evaluation\IItem.cs" />
+    <Compile Include="Evaluation\IItemDefinition.cs" />
+    <Compile Include="Evaluation\IItemFactory.cs" />
+    <Compile Include="Evaluation\Conditionals\IItem.cs" />
+    <Compile Include="Evaluation\IItemProvider.cs" />
+    <Compile Include="Evaluation\IMetadataTable.cs" />
+    <Compile Include="Evaluation\IntrinsicFunctions.cs" />
+    <Compile Include="Evaluation\IMetadatum.cs" />
+    <Compile Include="Evaluation\IProjectMetadataParent.cs" />
+    <Compile Include="Evaluation\IProperty.cs" />
+    <Compile Include="Evaluation\IPropertyProvider.cs" />
+    <Compile Include="Evaluation\Preprocessor.cs" />
+    <Compile Include="Evaluation\ProjectParser.cs" />
+    <Compile Include="Evaluation\ProjectRootElementCacheBase.cs" />
+    <Compile Include="Evaluation\ProjectRootElementCache.cs" />
+    <Compile Include="Evaluation\SimpleProjectRootElementCache.cs" />
+    <Compile Include="Evaluation\ProjectStringCache.cs" />
+    <Compile Include="Evaluation\SemiColonTokenizer.cs" />
+    <Compile Include="Evaluation\StringMetadataTable.cs" />
+    <Compile Include="Evaluation\ExpressionShredder.cs" />
+    <Compile Include="Evaluation\Evaluator.cs" />
+    <Compile Include="Evaluation\Expander.cs" />
+    <Compile Include="Evaluation\ToolsetProvider.cs" />
+    <Compile Include="Globbing\CompositeGlob.cs" />
+    <Compile Include="Globbing\Extensions\MSBuildGlobExtensions.cs" />
+    <Compile Include="Globbing\Visitor\GlobVisitor.cs" />
+    <Compile Include="Globbing\MSBuildGlobWithGaps.cs" />
+    <Compile Include="Globbing\MSBuildGlob.cs" />
+    <Compile Include="Globbing\IMSBuildGlob.cs" />
+    <Compile Include="Globbing\Visitor\ParsedGlobCollector.cs" />
+    <!-- #### INSTANCE MODEL ### -->
+    <Compile Include="Instance\ReflectableTaskPropertyInfo.cs" />
+    <Compile Include="Instance\HostServices.cs" />
+    <Compile Include="Instance\ProjectTargetInstanceChild.cs" />
+    <Compile Include="Instance\ProjectTaskInstanceChild.cs" />
+    <Compile Include="Instance\ProjectInstance.cs" />
+    <Compile Include="Instance\ProjectItemDefinitionInstance.cs" />
+    <Compile Include="Instance\ProjectItemGroupTaskInstance.cs" />
+    <Compile Include="Instance\ProjectItemGroupTaskItemInstance.cs" />
+    <Compile Include="Instance\ProjectItemGroupTaskMetadataInstance.cs" />
+    <Compile Include="Instance\ProjectItemInstance.cs" />
+    <Compile Include="Instance\ProjectMetadataInstance.cs" />
+    <Compile Include="Instance\ProjectOnErrorInstance.cs" />
+    <Compile Include="Instance\ProjectPropertyGroupTaskInstance.cs" />
+    <Compile Include="Instance\ProjectPropertyGroupTaskPropertyInstance.cs" />
+    <Compile Include="Instance\ProjectPropertyInstance.cs" />
+    <Compile Include="Instance\ProjectTargetInstance.cs" />
+    <Compile Include="Instance\ProjectTaskInstance.cs" />
+    <Compile Include="Instance\ProjectTaskOutputItemInstance.cs" />
+    <Compile Include="Instance\ProjectTaskOutputPropertyInstance.cs" />
+    <Compile Include="Instance\TaskFactories\AssemblyTaskFactory.cs" />
+    <Compile Include="Instance\TaskFactories\TaskHostTask.cs" />
+    <Compile Include="Instance\TaskFactoryLoggingHost.cs" />
+    <Compile Include="Instance\TaskFactoryWrapper.cs" />
+    <Compile Include="Instance\TaskRegistry.cs" />
+    <!-- ######################## -->
+    <Compile Include="Evaluation\LazyItemEvaluator.LazyItemOperation.cs" />
+    <Compile Include="Logging\BaseConsoleLogger.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\BinaryLogger\BinaryLogger.cs" />
+    <Compile Include="Logging\BinaryLogger\BinaryLogRecordKind.cs" />
+    <Compile Include="Logging\BinaryLogger\BinaryLogReplayEventSource.cs" />
+    <Compile Include="Logging\BinaryLogger\BuildEventArgsDispatcher.cs" />
+    <Compile Include="Logging\BinaryLogger\BuildEventArgsFieldFlags.cs" />
+    <Compile Include="Logging\BinaryLogger\BuildEventArgsFields.cs" />
+    <Compile Include="Logging\BinaryLogger\BuildEventArgsReader.cs" />
+    <Compile Include="Logging\BinaryLogger\BuildEventArgsWriter.cs" />
+    <Compile Include="Logging\BinaryLogger\ProjectImportsCollector.cs" />
+    <Compile Include="Logging\ConsoleLogger.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\DistributedLoggers\DistributedFileLogger.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\DistributedLoggers\ConfigurableForwardingLogger.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\NullCentralLogger.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\LoggerDescription.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\ParallelLogger\ParallelLoggerHelpers.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\ParallelLogger\ParallelConsoleLogger.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\FileLogger.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\LogFormatter.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Logging\SerialConsoleLogger.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="ObjectModelRemoting\DefinitionObjectsLinks\ProjectMetadataLink.cs" />
+    <Compile Include="ObjectModelRemoting\DefinitionObjectsLinks\ProjectPropertyLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectElementContainerLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectExtensionsElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectImportElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectItemElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectMetadataElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectPropertyElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectRootElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectTargetElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectTaskElementLink.cs" />
+    <Compile Include="ObjectModelRemoting\ConstructionObjectLinks\ProjectUsingTaskBodyElementLink.cs" />
+    <Compile Include="Resources\AssemblyResources.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Resources\Constants.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Resources\MSBuildAssemblyFileVersion.cs" />
+    <!-- ######################## -->
+    <!-- ######################## -->
+    <!-- ######################## -->
+    <Compile Include="Utilities\EngineFileUtilities.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utilities\FileSpecMatchTester.cs" />
+    <Compile Include="Utilities\RegistryKeyWrapper.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utilities\Utilities.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utilities\SimpleVersion.cs" />
+    <Compile Include="Xml\ProjectXmlUtilities.XmlElementChildIterator.cs" />
+    <Compile Include="Xml\ProjectXmlUtilities.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Xml\XmlReaderExtension.cs" />
+    <Compile Include="..\Shared\AssemblyLoadInfo.cs">
+      <Link>SharedUtilities\AssemblyLoadInfo.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ReadOnlyEmptyDictionary.cs">
+      <Link>SharedUtilities\ReadOnlyEmptyDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\AssemblyNameExtension.cs">
+      <Link>SharedUtilities\AssemblyNameExtension.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\BuildEventFileInfo.cs">
+      <Link>SharedUtilities\BuildEventFileInfo.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ConversionUtilities.cs">
+      <Link>SharedUtilities\ConversionUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\FileDelegates.cs">
+      <Link>SharedUtilities\FileDelegates.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ErrorUtilities.cs">
+      <Link>Errors\ErrorUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\EscapingUtilities.cs">
+      <Link>SharedUtilities\EscapingUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\VersionUtilities.cs">
+      <Link>SharedUtilities\VersionUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\EventArgsFormatting.cs">
+      <Link>SharedUtilities\EventArgsFormatting.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ExceptionHandling.cs">
+      <Link>SharedUtilities\ExceptionHandling.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\EscapingStringExtensions\EscapingStringExtensions.cs">
+      <Link>SharedUtilities\EscapingStringExtensions\EscapingStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\FileMatcher.cs">
+      <Link>SharedUtilities\FileMatcher.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\FileUtilities.cs">
+      <Link>SharedUtilities\FileUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\TempFileUtilities.cs" />
+    <Compile Include="..\Shared\Modifiers.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\FileUtilitiesRegex.cs">
+      <Link>SharedUtilities\FileUtilitiesRegex.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\FrameworkLocationHelper.cs">
+      <Link>SharedUtilities\FrameworkLocationHelper.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\IElementLocation.cs">
+      <Link>SharedUtilities\IElementLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\InternalErrorException.cs">
+      <Link>Errors\InternalErrorException.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\LoadedType.cs">
+      <Link>SharedUtilities\LoadedType.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\NativeMethodsShared.cs">
+      <Link>SharedUtilities\NativeMethodsShared.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\AssemblyUtilities.cs">
+      <Link>SharedUtilities\AssemblyUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\InprocTrackingNativeMethods.cs">
+      <Link>InprocTrackingNativeMethods.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ProjectErrorUtilities.cs">
+      <Link>Errors\ProjectErrorUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ProjectFileErrorUtilities.cs">
+      <Link>Errors\ProjectFileErrorUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ProjectWriter.cs">
+      <Link>SharedUtilities\ProjectWriter.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\ResourceUtilities.cs">
+      <Link>SharedUtilities\ResourceUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\Tracing.cs" />
+    <Compile Include="..\Shared\CoreCLRAssemblyLoader.cs" Condition="'$(TargetFrameworkIdentifier)'!='.NETFramework'" />
+    <Compile Include="..\Shared\TypeLoader.cs">
+      <Link>SharedUtilities\TypeLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\MSBuildLoadContext.cs" Condition="'$(TargetFrameworkIdentifier)'!='.NETFramework'">
+      <Link>SharedUtilities\MSBuildLoadContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\VisualStudioConstants.cs">
+      <Link>VisualStudioConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\XMakeAttributes.cs">
+      <Link>Resources\XMakeAttributes.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\XMakeElements.cs">
+      <Link>Resources\XMakeElements.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\XmlUtilities.cs">
+      <Link>SharedUtilities\XmlUtilities.cs</Link>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="FxCopExclusions\IeXod.Suppressions.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Evaluation\LazyItemEvaluator.EvaluatorData.cs" />
+
+    <!-- Win32 RC Files -->
+    <RCResourceFile Include="native.rc" />
+    <!-- Resource Files -->
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <LogicalName>$(AssemblyName).Strings.resources</LogicalName>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Shared\Resources\Strings.shared.resx">
+      <Link>Resources\Strings.shared.resx</Link>
+      <SubType>Designer</SubType>
+      <LogicalName>$(AssemblyName).Strings.shared.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Collections\RetrievableEntryHashSet\Originals\*" />
+  </ItemGroup>
+
+  <!-- IeXod.Framework -->
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="$(SystemRuntimeSerializationPrimitivesVersion)" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
+    <PackageReference Include="System.Security.Permissions" Version="$(SystemSecurityPermissionsVersion)" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
+    <PackageReference Include="System.Threading.Thread" Version="$(SystemThreadingThreadVersion)" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
+    <Reference Include="System.Xaml" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Framework\BuildEngineResult.cs" Link="Framework\BuildEngineResult.cs" />
+    <Compile Include="..\Framework\BuildErrorEventArgs.cs" Link="Framework\BuildErrorEventArgs.cs" />
+    <Compile Include="..\Framework\BuildEventArgs.cs" Link="Framework\BuildEventArgs.cs" />
+    <Compile Include="..\Framework\BuildEventContext.cs" Link="Framework\BuildEventContext.cs" />
+    <Compile Include="..\Framework\BuildFinishedEventArgs.cs" Link="Framework\BuildFinishedEventArgs.cs" />
+    <Compile Include="..\Framework\BuildMessageEventArgs.cs" Link="Framework\BuildMessageEventArgs.cs" />
+    <Compile Include="..\Framework\BuildStartedEventArgs.cs" Link="Framework\BuildStartedEventArgs.cs" />
+    <Compile Include="..\Framework\BuildStatusEventArgs.cs" Link="Framework\BuildStatusEventArgs.cs" />
+    <Compile Include="..\Framework\BuildWarningEventArgs.cs" Link="Framework\BuildWarningEventArgs.cs" />
+    <Compile Include="..\Framework\CriticalBuildMessageEventArgs.cs" Link="Framework\CriticalBuildMessageEventArgs.cs" />
+    <Compile Include="..\Framework\CustomBuildEventArgs.cs" Link="Framework\CustomBuildEventArgs.cs" />
+    <Compile Include="..\Framework\Debugging\CommonWriter.cs" Link="Framework\Debugging\CommonWriter.cs" />
+    <Compile Include="..\Framework\EnvironmentVariableReadEventArgs.cs" Link="Framework\EnvironmentVariableReadEventArgs.cs" />
+    <Compile Include="..\Framework\ExternalProjectFinishedEventArgs.cs" Link="Framework\ExternalProjectFinishedEventArgs.cs" />
+    <Compile Include="..\Framework\ExternalProjectStartedEventArgs.cs" Link="Framework\ExternalProjectStartedEventArgs.cs" />
+    <Compile Include="..\Framework\FxCopExclusions\IeXod.Framework.Suppressions.cs" Link="Framework\FxCopExclusions\IeXod.Framework.Suppressions.cs" />
+    <Compile Include="..\Framework\IBuildEngine.cs" Link="Framework\IBuildEngine.cs" />
+    <Compile Include="..\Framework\IBuildEngine2.cs" Link="Framework\IBuildEngine2.cs" />
+    <Compile Include="..\Framework\IBuildEngine3.cs" Link="Framework\IBuildEngine3.cs" />
+    <Compile Include="..\Framework\IBuildEngine4.cs" Link="Framework\IBuildEngine4.cs" />
+    <Compile Include="..\Framework\IBuildEngine5.cs" Link="Framework\IBuildEngine5.cs" />
+    <Compile Include="..\Framework\IBuildEngine6.cs" Link="Framework\IBuildEngine6.cs" />
+    <Compile Include="..\Framework\IBuildEngine7.cs" Link="Framework\IBuildEngine7.cs" />
+    <Compile Include="..\Framework\ICancelableTask.cs" Link="Framework\ICancelableTask.cs" />
+    <Compile Include="..\Framework\IEventRedirector.cs" Link="Framework\IEventRedirector.cs" />
+    <Compile Include="..\Framework\IEventSource.cs" Link="Framework\IEventSource.cs" />
+    <Compile Include="..\Framework\IEventSource2.cs" Link="Framework\IEventSource2.cs" />
+    <Compile Include="..\Framework\IEventSource3.cs" Link="Framework\IEventSource3.cs" />
+    <Compile Include="..\Framework\IForwardingLogger.cs" Link="Framework\IForwardingLogger.cs" />
+    <Compile Include="..\Framework\IGeneratedTask.cs" Link="Framework\IGeneratedTask.cs" />
+    <Compile Include="..\Framework\ILogger.cs" Link="Framework\ILogger.cs" />
+    <Compile Include="..\Framework\INodeLogger.cs" Link="Framework\INodeLogger.cs" />
+    <Compile Include="..\Framework\IProjectElement.cs" Link="Framework\IProjectElement.cs" />
+    <Compile Include="..\Framework\ITask.cs" Link="Framework\ITask.cs" />
+    <Compile Include="..\Framework\ITaskFactory.cs" Link="Framework\ITaskFactory.cs" />
+    <Compile Include="..\Framework\ITaskFactory2.cs" Link="Framework\ITaskFactory2.cs" />
+    <Compile Include="..\Framework\ITaskHost.cs" Link="Framework\ITaskHost.cs" />
+    <Compile Include="..\Framework\ITaskItem.cs" Link="Framework\ITaskItem.cs" />
+    <Compile Include="..\Framework\ITaskItem2.cs" Link="Framework\ITaskItem2.cs" />
+    <Compile Include="..\Framework\LazyFormattedBuildEventArgs.cs" Link="Framework\LazyFormattedBuildEventArgs.cs" />
+    <Compile Include="..\Framework\LoadInSeparateAppDomainAttribute.cs" Link="Framework\LoadInSeparateAppDomainAttribute.cs" />
+    <Compile Include="..\Framework\LoggerException.cs" Link="Framework\LoggerException.cs" />
+    <Compile Include="..\Framework\MetaProjectGeneratedEventArgs.cs" Link="Framework\MetaProjectGeneratedEventArgs.cs" />
+    <Compile Include="..\Framework\MSBuildEventSource.cs" Link="Framework\MSBuildEventSource.cs" />
+    <Compile Include="..\Framework\OutputAttribute.cs" Link="Framework\OutputAttribute.cs" />
+    <Compile Include="..\Framework\Profiler\EvaluationIdProvider.cs" Link="Framework\Profiler\EvaluationIdProvider.cs" />
+    <Compile Include="..\Framework\Profiler\EvaluationLocation.cs" Link="Framework\Profiler\EvaluationLocation.cs" />
+    <Compile Include="..\Framework\Profiler\ProfilerResult.cs" Link="Framework\Profiler\ProfilerResult.cs" />
+    <Compile Include="..\Framework\ProjectEvaluationFinishedEventArgs.cs" Link="Framework\ProjectEvaluationFinishedEventArgs.cs" />
+    <Compile Include="..\Framework\ProjectEvaluationStartedEventArgs.cs" Link="Framework\ProjectEvaluationStartedEventArgs.cs" />
+    <Compile Include="..\Framework\ProjectFinishedEventArgs.cs" Link="Framework\ProjectFinishedEventArgs.cs" />
+    <Compile Include="..\Framework\ProjectImportedEventArgs.cs" Link="Framework\ProjectImportedEventArgs.cs" />
+    <Compile Include="..\Framework\ProjectStartedEventArgs.cs" Link="Framework\ProjectStartedEventArgs.cs" />
+    <Compile Include="..\Framework\PropertyInitialValueSetEventArgs.cs" Link="Framework\PropertyInitialValueSetEventArgs.cs" />
+    <Compile Include="..\Framework\PropertyReassignmentEventArgs.cs" Link="Framework\PropertyReassignmentEventArgs.cs" />
+    <Compile Include="..\Framework\RequiredAttribute.cs" Link="Framework\RequiredAttribute.cs" />
+    <Compile Include="..\Framework\RequiredRuntimeAttribute.cs" Link="Framework\RequiredRuntimeAttribute.cs" />
+    <Compile Include="..\Framework\RunInMTAAttribute.cs" Link="Framework\RunInMTAAttribute.cs" />
+    <Compile Include="..\Framework\RunInSTAAttribute.cs" Link="Framework\RunInSTAAttribute.cs" />
+    <Compile Include="..\Framework\TargetBuiltReason.cs" Link="Framework\TargetBuiltReason.cs" />
+    <Compile Include="..\Framework\TargetFinishedEventArgs.cs" Link="Framework\TargetFinishedEventArgs.cs" />
+    <Compile Include="..\Framework\TargetSkippedEventArgs.cs" Link="Framework\TargetSkippedEventArgs.cs" />
+    <Compile Include="..\Framework\TargetStartedEventArgs.cs" Link="Framework\TargetStartedEventArgs.cs" />
+    <Compile Include="..\Framework\TaskCommandLineEventArgs.cs" Link="Framework\TaskCommandLineEventArgs.cs" />
+    <Compile Include="..\Framework\TaskFinishedEventArgs.cs" Link="Framework\TaskFinishedEventArgs.cs" />
+    <Compile Include="..\Framework\TaskPropertyInfo.cs" Link="Framework\TaskPropertyInfo.cs" />
+    <Compile Include="..\Framework\TaskStartedEventArgs.cs" Link="Framework\TaskStartedEventArgs.cs" />
+    <Compile Include="..\Framework\TelemetryEventArgs.cs" Link="Framework\TelemetryEventArgs.cs" />
+    <Compile Include="..\Framework\TestInfo.cs" Link="Framework\TestInfo.cs" />
+    <Compile Include="..\Framework\UninitializedPropertyReadEventArgs.cs" Link="Framework\UninitializedPropertyReadEventArgs.cs" />
+    <Compile Include="..\Shared\Constants.cs" Link="Framework\Shared\Constants.cs" />
+    <Compile Include="..\Shared\BinaryWriterExtensions.cs" Link="Framework\Shared\BinaryWriterExtensions.cs" />
+    <None Include="..\Framework\Event args classes.cd" Link="Framework\Event args classes.cd" />
+    <None Include="..\Framework\IeXod.Framework.pkgdef" Link="Framework\IeXod.Framework.pkgdef" />
+    <None Include="..\Framework\native.rc" Link="Framework\native.rc" />
+  </ItemGroup>
+  <!-- / IeXod.Framework -->
+
+  <!-- IeXod.Utilities -->
+  <ItemGroup>
+    <Compile Include="..\Utilities\ApiContract.cs">
+      <Link>Utilities\ApiContract.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\AssemblyFolders\AssemblyFoldersExInfo.cs">
+      <Link>Utilities\AssemblyFolders\AssemblyFoldersExInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\AssemblyFolders\AssemblyFoldersFromConfigInfo.cs">
+      <Link>Utilities\AssemblyFolders\AssemblyFoldersFromConfigInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\PlatformManifest.cs">
+      <Link>Utilities\PlatformManifest.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\ExtensionSDK.cs">
+      <Link>Utilities\ExtensionSDK.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\ProcessorArchitecture.cs">
+      <Link>Utilities\ProcessorArchitecture.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\SDKType.cs">
+      <Link>Utilities\SDKType.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\SDKManifest.cs">
+      <Link>Utilities\SDKManifest.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\ToolLocationHelper.cs">
+      <Link>Utilities\ToolLocationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\TargetPlatformSDK.cs">
+      <Link>Utilities\TargetPlatformSDK.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\AssemblyFolders\AssemblyFoldersFromConfig.cs">
+      <Link>Shared\AssemblyFolders\AssemblyFoldersFromConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\AssemblyFolders\AssemblyFoldersEx.cs">
+      <Link>Shared\AssemblyFolders\AssemblyFoldersEx.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\AssemblyFolders\Serialization\AssemblyFolderItem.cs">
+      <Link>Shared\AssemblyFolders\Serialization\AssemblyFolderItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\AssemblyFolders\Serialization\AssemblyFolderCollection.cs">
+      <Link>Shared\AssemblyFolders\Serialization\AssemblyFolderCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\ExtensionFoldersRegistryKey.cs">
+      <Link>Shared\ExtensionFoldersRegistryKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\RegistryDelegates.cs">
+      <Link>Shared\RegistryDelegates.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\RegistryHelper.cs">
+      <Link>Shared\RegistryHelper.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <!-- / IeXod.Utilities -->
+
+  <!-- IeXod.MSBSdkResolver -->
+  <PropertyGroup>
+    <PathToIeXodMSBSdkResolverProject>..\DotNet.Sdk\IeXod.MSBSdkResolver\</PathToIeXodMSBSdkResolverProject>
+  </PropertyGroup>
+  <Import Project="$(PathToIeXodMSBSdkResolverProject)build.props" />
+  <Import Project="$(PathToIeXodMSBSdkResolverProject)build.proj" />
+  
+  <ItemGroup Condition="'$(IeXodMSBSdkResolverAsExternalDll)'!='true'">
+    <EmbeddedResource Include="$(PathToIeXodMSBSdkResolverProject)Strings.resx" Link="Resources\$(EmbeddedResxFilePostfix).resx">
+      <LogicalName>$(AssemblyName).$(EmbeddedResxFilePostfix).resources</LogicalName>
+      <XlfTranslatedFilename>%(XlfSource.Namespace).%(XlfSource.Filename)</XlfTranslatedFilename>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+
+    <Compile Include="$(PathToIeXodMSBSdkResolverProject)*.cs" Link="DotNet.Sdk\%(Filename)%(Extension)" />
+    <Compile Remove="$(PathToIeXodMSBSdkResolverProject)AssemblyInfo.cs" />
+  </ItemGroup>
+  <!-- / IeXod.MSBSdkResolver -->
+
+</Project>

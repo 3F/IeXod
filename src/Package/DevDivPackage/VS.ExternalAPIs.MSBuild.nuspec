@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>VS.ExternalAPIs.MSBuild</id>
+    <summary>CoreXT package containing MSBuild binaries for the VS build.</summary>
+    <description>CoreXT package containing MSBuild binaries for the VS build. Produced from the MSBuild $branchname$ branch.</description>
+    <authors>MSBuild</authors>
+    <version>0.0</version>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="net.r_eg.IeXod.dll" target="lib\net472" />
+    <file src="net.r_eg.IeXod.Framework.dll" target="lib\net472" />
+    <file src="net.r_eg.IeXod.Tasks.Core.dll" target="lib\net472" />
+    <file src="net.r_eg.IeXod.Utilities.Core.dll" target="lib\net472" />
+
+    <!-- Obsolete but still referenced in the VS repo -->
+    <file src="net.r_eg.IeXod.Engine.dll" target="lib\net472" />
+    <file src="net.r_eg.IeXod.Conversion.Core.dll" target="lib\net472" />
+
+    <file src="net.r_eg.IeXod.tlb" target="lib\net472" />
+    <file src="net.r_eg.IeXod.Framework.tlb" target="lib\net472" />
+    <file src="net.r_eg.IeXod.Tasks.Core.tlb" target="lib\net472" />
+  </files>
+</package>

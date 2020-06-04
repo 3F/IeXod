@@ -1,0 +1,28 @@
+﻿<Project>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <PropertyGroup>
+    <TargetFramework>$(FullFrameworkTFM)</TargetFramework>
+    <NuspecFile>VS.ExternalAPIs.MSBuild.nuspec</NuspecFile>
+    <IsShipping>false</IsShipping>
+    <PlatformTarget>x86</PlatformTarget>
+    <DisableSemVer2>true</DisableSemVer2>
+    <IsVisualStudioInsertionPackage>true</IsVisualStudioInsertionPackage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MSBuild\MSBuild.csproj" />
+    <ProjectReference Include="..\..\Framework\IeXod.Framework.csproj" />
+    <ProjectReference Include="..\..\Deprecated\Conversion\IeXod.Conversion.csproj" />
+    <ProjectReference Include="..\..\Deprecated\Engine\IeXod.Engine.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\NuspecProject.targets" />
+
+  <Import Project="$(RepoRoot)eng\ProducesNoOutput.Settings.props" Condition="'$(OsEnvironment)'!='windows'" />
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <AllowedReferenceRelatedFileExtensions>$(AllowedReferenceRelatedFileExtensions);.tlb</AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+</Project>

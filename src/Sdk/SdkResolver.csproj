@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\common.props" />
+
+  <PropertyGroup>
+    <Version>$(ProductIeXodSdkResolverVersion)</Version>
+    <RootNamespace>net.r_eg.IeXod.Sdk</RootNamespace>
+    <AssemblyName>IeXod.SdkResolver</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>IeXod.SdkResolver</Title>
+    <Description>Public Interface of Sdk Resolvers in IeXod project. Alternative to Microsoft.Build. https://github.com/3F/IeXod</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\..\THIRDPARTYNOTICES.txt" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\..\changelog.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <!-- IeXod.Framework -->
+  <ItemGroup>
+    <Compile Include="..\Framework\Sdk\SdkResolver.cs" />
+    <Compile Include="..\Framework\Sdk\SdkResult.cs" />
+    <Compile Include="..\Framework\Sdk\SdkReference.cs" />
+    <Compile Include="..\Framework\Sdk\SdkResultFactory.cs" />
+    <Compile Include="..\Framework\Sdk\SdkResolverContext.cs" />
+    <Compile Include="..\Framework\Sdk\SdkLogger.cs" />
+  </ItemGroup>
+  <!-- / IeXod.Framework -->
+
+  <ItemGroup>
+    <Compile Include="..\Shared\Constants.cs" Link="Framework\Shared\Constants.cs" />
+  </ItemGroup>
+
+</Project>

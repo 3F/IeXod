@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+  <Import Project="build.proj" />
+
+  <PropertyGroup>
+    <DefineConstants>SDKRESOLVER_AS_EXTDLL;$(DefineConstants)</DefineConstants>
+
+    <RootNamespace>net.r_eg.IeXod</RootNamespace>
+    <AssemblyName>IeXod.MSBSdkResolver</AssemblyName>
+
+    <WarningsAsErrors>true</WarningsAsErrors>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="*.resx" />
+    <EmbeddedResource Include="Strings.resx" Link="Resources\$(EmbeddedResxFilePostfix).resx">
+      <LogicalName>$(AssemblyName).$(EmbeddedResxFilePostfix).resources</LogicalName>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sdk\SdkResolver.csproj" />
+  </ItemGroup>
+
+</Project>

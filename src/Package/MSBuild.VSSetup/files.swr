@@ -1,0 +1,315 @@
+use vs
+
+package name=net.r_eg.IeXod
+        version=$(Version)
+        vs.package.chip=neutral
+        vs.package.language=neutral
+
+vs.dependencies
+  vs.dependency id=Microsoft.VisualStudio.PackageGroup.NuGet
+                version=[15.0,17.0)
+
+vs.relatedProcessFiles
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\net.r_eg.IeXod.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\net.r_eg.IeXod.Framework.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\net.r_eg.IeXod.Tasks.Core.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\net.r_eg.IeXod.Utilities.Core.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\net.r_eg.IeXod.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\net.r_eg.IeXod.Framework.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\net.r_eg.IeXod.Tasks.Core.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\net.r_eg.IeXod.Utilities.Core.dll"
+
+folder InstallDir:\MSBuild\Current
+  file source=$(X86BinPath)Microsoft.Common.props
+  file source=$(X86BinPath)Microsoft.VisualStudioVersion.v16.Common.props
+  file source=$(ThirdPartyNotice)
+
+folder InstallDir:\MSBuild\Current\Bin
+  file source=$(MSBuildConversionBinPath)net.r_eg.IeXod.Conversion.Core.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)net.r_eg.IeXod.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all vs.file.ngenPriority=1
+  file source=$(MSBuildConversionBinPath)net.r_eg.IeXod.Engine.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)net.r_eg.IeXod.Framework.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)net.r_eg.IeXod.Framework.tlb
+  file source=$(X86BinPath)net.r_eg.IeXod.Tasks.Core.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all vs.file.ngenPriority=1
+  file source=$(X86BinPath)net.r_eg.IeXod.Utilities.Core.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all vs.file.ngenPriority=1
+  file source=$(X86BinPath)MSBuild.exe vs.file.ngenArchitecture=x86 vs.file.ngenPriority=1
+  file source=$(X86BinPath)MSBuild.exe.config
+  file source=$(TaskHostBinPath)MSBuildTaskHost.exe vs.file.ngenArchitecture=x86
+  file source=$(TaskHostBinPath)MSBuildTaskHost.exe.config
+  file source=$(X86BinPath)System.Buffers.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Memory.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Numerics.Vectors.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Resources.Extensions.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Runtime.CompilerServices.Unsafe.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Threading.Tasks.Dataflow.dll vs.file.ngenArchitecture=all vs.file.ngenPriority=1
+  file source=$(X86BinPath)System.Collections.Immutable.dll vs.file.ngenArchitecture=all vs.file.ngenPriority=1
+  file source=$(X86BinPath)Microsoft.Common.CurrentVersion.targets
+  file source=$(X86BinPath)Microsoft.Common.CrossTargeting.targets
+  file source=$(X86BinPath)Microsoft.Common.overridetasks
+  file source=$(X86BinPath)Microsoft.Common.targets
+  file source=$(X86BinPath)Microsoft.Common.tasks
+  file source=$(X86BinPath)Microsoft.Managed.targets
+  file source=$(X86BinPath)Microsoft.Managed.Before.targets
+  file source=$(X86BinPath)Microsoft.Managed.After.targets
+  file source=$(X86BinPath)Microsoft.CSharp.CurrentVersion.targets
+  file source=$(X86BinPath)Microsoft.CSharp.CrossTargeting.targets
+  file source=$(X86BinPath)Microsoft.CSharp.targets
+  file source=$(X86BinPath)Microsoft.Net.props
+  file source=$(X86BinPath)Microsoft.NetFramework.CurrentVersion.props
+  file source=$(X86BinPath)Microsoft.NetFramework.CurrentVersion.targets
+  file source=$(X86BinPath)Microsoft.NetFramework.props
+  file source=$(X86BinPath)Microsoft.NetFramework.targets
+  file source=$(X86BinPath)Microsoft.VisualBasic.CurrentVersion.targets
+  file source=$(X86BinPath)Microsoft.VisualBasic.CrossTargeting.targets
+  file source=$(X86BinPath)Microsoft.VisualBasic.targets
+  file source=$(X86BinPath)MSBuild.rsp
+  file source=$(X86BinPath)Workflow.targets
+  file source=$(X86BinPath)Workflow.VisualBasic.targets
+  file source=$(X86BinPath)Microsoft.Xaml.targets
+  file source=$(X86BinPath)Microsoft.Data.Entity.targets
+  file source=$(X86BinPath)Microsoft.ServiceModel.targets
+  file source=$(X86BinPath)Microsoft.WinFx.targets
+  file source=$(X86BinPath)Microsoft.WorkflowBuildExtensions.targets
+
+folder InstallDir:\MSBuild\Current\Bin\MSBuild
+  file source=$(X86BinPath)\MSBuild\net.r_eg.IeXod.Core.xsd
+  file source=$(X86BinPath)\MSBuild\net.r_eg.IeXod.CommonTypes.xsd
+
+folder InstallDir:\MSBuild\Current\Bin\ref
+  file source=$(X86BinPath)ref\mscorlib.dll
+  file source=$(X86BinPath)ref\netstandard.dll
+
+folder InstallDir:\MSBuild\Current\Bin\SdkResolvers\net.r_eg.IeXod.NuGetSdkResolver
+  file source=$(SourceDir)MSBuild\SdkResolvers\VS\net.r_eg.IeXod.NuGetSdkResolver.xml
+
+folder InstallDir:\MSBuild\Current\Bin\cs
+  file source=$(X86BinPath)cs\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)cs\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)cs\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)cs\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)cs\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\de
+  file source=$(X86BinPath)de\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)de\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)de\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)de\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)de\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\en
+  file source=$(X86BinPath)en\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)en\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)en\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)en\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)en\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\es
+  file source=$(X86BinPath)es\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)es\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)es\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)es\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)es\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\fr
+  file source=$(X86BinPath)fr\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)fr\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)fr\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)fr\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)fr\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\it
+  file source=$(X86BinPath)it\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)it\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)it\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)it\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)it\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\ja
+  file source=$(X86BinPath)ja\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ja\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ja\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ja\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)ja\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\ko
+  file source=$(X86BinPath)ko\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ko\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ko\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ko\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)ko\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\pl
+  file source=$(X86BinPath)pl\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)pl\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)pl\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)pl\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)pl\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\pt-BR
+  file source=$(X86BinPath)pt-BR\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)pt-BR\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)pt-BR\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)pt-BR\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)pt-BR\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\ru
+  file source=$(X86BinPath)ru\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ru\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ru\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)ru\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)ru\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\tr
+  file source=$(X86BinPath)tr\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)tr\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)tr\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)tr\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)tr\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\zh-Hans
+  file source=$(X86BinPath)zh-Hans\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)zh-Hans\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)zh-Hans\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)zh-Hans\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)zh-Hans\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\zh-Hant
+  file source=$(X86BinPath)zh-Hant\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)zh-Hant\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)zh-Hant\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)zh-Hant\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostBinPath)zh-Hant\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+
+folder InstallDir:\MSBuild\Current\Bin\amd64
+  file source=$(X64BinPath)MSBuild.exe vs.file.ngenArchitecture=x64
+  file source=$(TaskHostX64BinPath)MSBuildTaskHost.exe vs.file.ngenArchitecture=x64
+  file source=$(X64BinPath)MSBuild.exe.config
+  file source=$(TaskHostX64BinPath)MSBuildTaskHost.exe.config
+
+  file source=$(MSBuildConversionBinPath)net.r_eg.IeXod.Conversion.Core.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)net.r_eg.IeXod.dll vs.file.ngenArchitecture=all
+  file source=$(MSBuildConversionBinPath)net.r_eg.IeXod.Engine.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)net.r_eg.IeXod.Framework.dll vs.file.ngenArchitecture=all
+  file source=$(FrameworkBinPath)x64\net.r_eg.IeXod.Framework.tlb
+  file source=$(X86BinPath)net.r_eg.IeXod.Tasks.Core.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)net.r_eg.IeXod.Utilities.Core.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Buffers.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Memory.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Numerics.Vectors.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Resources.Extensions.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Runtime.CompilerServices.Unsafe.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Threading.Tasks.Dataflow.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Collections.Immutable.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)Microsoft.Common.CurrentVersion.targets
+  file source=$(X86BinPath)Microsoft.Common.CrossTargeting.targets
+  file source=$(X86BinPath)Microsoft.Common.overridetasks
+  file source=$(X86BinPath)Microsoft.Common.targets
+  file source=$(X86BinPath)Microsoft.Common.tasks
+  file source=$(X86BinPath)Microsoft.Managed.targets
+  file source=$(X86BinPath)Microsoft.Managed.Before.targets
+  file source=$(X86BinPath)Microsoft.Managed.After.targets
+  file source=$(X86BinPath)Microsoft.CSharp.CurrentVersion.targets
+  file source=$(X86BinPath)Microsoft.CSharp.CrossTargeting.targets
+  file source=$(X86BinPath)Microsoft.CSharp.targets
+  file source=$(X86BinPath)Microsoft.Net.props
+  file source=$(X86BinPath)Microsoft.NetFramework.CurrentVersion.props
+  file source=$(X86BinPath)Microsoft.NetFramework.CurrentVersion.targets
+  file source=$(X86BinPath)Microsoft.NetFramework.props
+  file source=$(X86BinPath)Microsoft.NetFramework.targets
+  file source=$(X86BinPath)Microsoft.VisualBasic.CurrentVersion.targets
+  file source=$(X86BinPath)Microsoft.VisualBasic.CrossTargeting.targets
+  file source=$(X86BinPath)Microsoft.VisualBasic.targets
+  file source=$(X86BinPath)MSBuild.rsp
+  file source=$(X86BinPath)Workflow.targets
+  file source=$(X86BinPath)Workflow.VisualBasic.targets
+  file source=$(X86BinPath)Microsoft.Xaml.targets
+  file source=$(X86BinPath)Microsoft.Data.Entity.targets
+  file source=$(X86BinPath)Microsoft.ServiceModel.targets
+  file source=$(X86BinPath)Microsoft.WinFx.targets
+  file source=$(X86BinPath)Microsoft.WorkflowBuildExtensions.targets
+
+folder InstallDir:\MSBuild\Current\Bin\amd64\MSBuild
+  file source=$(X86BinPath)\MSBuild\net.r_eg.IeXod.Core.xsd
+  file source=$(X86BinPath)\MSBuild\net.r_eg.IeXod.CommonTypes.xsd
+
+folder InstallDir:\MSBuild\Current\Bin\amd64\cs
+  file source=$(X64BinPath)cs\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)cs\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)cs\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)cs\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)cs\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\de
+  file source=$(X64BinPath)de\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)de\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)de\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)de\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)de\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\en
+  file source=$(X64BinPath)en\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)en\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)en\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)en\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)en\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\es
+  file source=$(X64BinPath)es\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)es\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)es\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)es\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)es\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\fr
+  file source=$(X64BinPath)fr\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)fr\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)fr\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)fr\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)fr\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\it
+  file source=$(X64BinPath)it\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)it\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)it\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)it\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)it\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\ja
+  file source=$(X64BinPath)ja\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ja\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ja\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ja\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)ja\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\ko
+  file source=$(X64BinPath)ko\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ko\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ko\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ko\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)ko\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\pl
+  file source=$(X64BinPath)pl\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)pl\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)pl\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)pl\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)pl\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\pt-BR
+  file source=$(X64BinPath)pt-BR\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)pt-BR\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)pt-BR\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)pt-BR\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)pt-BR\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\ru
+  file source=$(X64BinPath)ru\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ru\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ru\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)ru\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)ru\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\tr
+  file source=$(X64BinPath)tr\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)tr\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)tr\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)tr\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)tr\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\zh-Hans
+  file source=$(X64BinPath)zh-Hans\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)zh-Hans\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)zh-Hans\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)zh-Hans\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)zh-Hans\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+folder InstallDir:\MSBuild\Current\Bin\amd64\zh-Hant
+  file source=$(X64BinPath)zh-Hant\net.r_eg.IeXod.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)zh-Hant\net.r_eg.IeXod.Tasks.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)zh-Hant\net.r_eg.IeXod.Utilities.Core.resources.dll vs.file.ngenArchitecture=all
+  file source=$(X64BinPath)zh-Hant\MSBuild.resources.dll vs.file.ngenArchitecture=all
+  file source=$(TaskHostX64BinPath)zh-Hant\MSBuildTaskHost.resources.dll vs.file.ngenArchitecture=all
+
+folder InstallDir:\Common7\IDE\CommonExtensions\MSBuild
+  file source=$(SourceDir)Package\MSBuild.VSSetup\MSBuild.clientenabledpkg
+  file source=$(SourceDir)Framework\net.r_eg.IeXod.Framework.pkgdef
+  file source=$(SourceDir)Build\net.r_eg.IeXod.pkgdef
+  file source=$(SourceDir)Tasks\net.r_eg.IeXod.Tasks.Core.pkgdef
+  file source=$(SourceDir)Tasks\System.Resources.Extensions.pkgdef
+  file source=$(SourceDir)Utilities\net.r_eg.IeXod.Utilities.Core.pkgdef
+  file source=$(SourceDir)Deprecated\Conversion\net.r_eg.IeXod.Conversion.Core.pkgdef
+  file source=$(SourceDir)Deprecated\Engine\net.r_eg.IeXod.Engine.pkgdef

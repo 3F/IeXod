@@ -1,0 +1,337 @@
+﻿<Project>
+  <Import Project="versions.props" />
+  
+  <PropertyGroup>
+    <RepoRoot>$(SolutionDir)</RepoRoot>
+
+    <ArtifactsDir Condition="'$(ArtifactsDir)' == ''">$([MSBuild]::NormalizeDirectory('$(RepoRoot)', 'artifacts'))</ArtifactsDir>
+    <ArtifactsObjDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsDir)', 'obj'))</ArtifactsObjDir>
+    <ArtifactsBinDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsDir)', 'bin'))</ArtifactsBinDir>
+
+    <OutputPath>$(ArtifactsBinDir)$(AssemblyName)\</OutputPath>
+    <IntermediateOutputPath>$(ArtifactsObjDir)$(AssemblyName)\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Platforms>AnyCPU;x64</Platforms>
+    <Configurations>Debug;Release;Debug-MONO;Release-MONO;MachineIndependent</Configurations>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)com.github.3F.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OsEnvironment Condition="$([MSBuild]::IsOSPlatform('windows'))">windows</OsEnvironment>
+    <OsEnvironment Condition="$([MSBuild]::IsOSPlatform('linux'))">linux</OsEnvironment>
+    <OsEnvironment Condition="$([MSBuild]::IsOSPlatform('osx'))">osx</OsEnvironment>
+    <!-- Replace with MSBuild::IsBsdLike once the initial msbuild knows about it -->
+    <OsEnvironment Condition="$([MSBuild]::IsOSPlatform('FREEBSD')) Or $([MSBuild]::IsOSPlatform('NETBSD')) Or $([MSBuild]::IsOSPlatform('OPENBSD'))">bsd</OsEnvironment>
+
+    <OsUnixLike>false</OsUnixLike>
+    <OsUnixLike Condition="$([MSBuild]::IsOsUnixLike())">true</OsUnixLike>
+
+    <TargetPlatformIdentifier Condition="'$(TargetPlatformIdentifier)'==''">$(OS)</TargetPlatformIdentifier>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug-MONO'">
+    <DebugSymbols Condition="'$(DebugSymbols)' == ''">true</DebugSymbols>
+    <Optimize Condition="'$(Optimize)' == ''">false</Optimize>
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+    <MonoBuild>true</MonoBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release-MONO'">
+    <DebugSymbols Condition="'$(DebugSymbols)' == ''">true</DebugSymbols>
+    <Optimize Condition="'$(Optimize)' == ''">true</Optimize>
+    <MonoBuild>true</MonoBuild>
+  </PropertyGroup>
+  <!-- Configuration MSBuild for portable (xcopy-install) toolsets: works on WinNT and linux/mac via Mono, isolates from machine environment:
+    uses only tools installed with it, ignores Registry and GAC and Visual Studio installations to provide the same build experience on all machines -->
+  <PropertyGroup Condition="'$(Configuration)' == 'MachineIndependent'">
+    <DebugSymbols Condition="'$(DebugSymbols)' == ''">true</DebugSymbols>
+    <Optimize Condition="'$(Optimize)' == ''">true</Optimize>
+    <DebugType Condition="'$(DebugType)' == ''">none</DebugType>
+    <MachineIndependentBuild>true</MachineIndependentBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <FullFrameworkTFM>net472</FullFrameworkTFM>
+    
+    <!-- Defaults for target frameworks and architecture -->
+    <LibraryTargetFrameworks>$(FullFrameworkTFM);netstandard2.0</LibraryTargetFrameworks>
+    <LibraryTargetFrameworks Condition="'$(DotNetBuildFromSource)' == 'true'">netstandard2.0</LibraryTargetFrameworks>
+    <LibraryTargetFrameworks Condition="'$(MonoBuild)'=='true'">$(FullFrameworkTFM)</LibraryTargetFrameworks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+
+    <!-- Target frameworks for Exe and unit test projects (ie projects with runtime output) -->
+    <RuntimeOutputTargetFrameworks>netcoreapp2.1</RuntimeOutputTargetFrameworks>
+    <RuntimeOutputTargetFrameworks Condition="'$(OsEnvironment)'=='windows' and '$(DotNetBuildFromSource)' != 'true'">$(FullFrameworkTFM);$(RuntimeOutputTargetFrameworks)</RuntimeOutputTargetFrameworks>
+    <RuntimeOutputTargetFrameworks Condition="'$(MonoBuild)' == 'true'">$(FullFrameworkTFM)</RuntimeOutputTargetFrameworks>
+    
+    <!-- Node reuse requires an API new to .NET Core 2.1 not yet available in .NETStandard. -->
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OsEnvironment)'=='windows'">$(FullFrameworkTFM);netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks Condition="'$(MonoBuild)'=='true'">$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);*.log</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);*.binlog</DefaultItemExcludes>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <DiscoverEditorConfigFiles>true</DiscoverEditorConfigFiles>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+
+    <!-- NU1603: Microsoft.xunit.netcore.extensions package has dependencies to versions which aren't published, so ignore those warnings
+         NU5105: we're explicitly opting in to semver2, as is most of .NET Core
+        CS1701 and CS1702 are by default ignored by Microsoft.NET.Sdk, but if you define the NoWarn property in Directory.Build.props,
+        you don't get those defaults.
+        NU5125: Arcade uses licenseUrl when doing pack, which now causes NU5125 warning. This disables that warning until arcade can switch over.
+    -->
+
+    <NoWarn>$(NoWarn);NU1603;NU5105;NU5125;1701;1702</NoWarn>
+  </PropertyGroup>
+
+  <!-- Override project defaults provided by Repo toolset -->
+  <PropertyGroup>
+    <!-- Ensure that compiler errors emit full paths so that files
+         can be correctly annotated in GitHub. -->
+    <GenerateFullPaths>true</GenerateFullPaths>
+
+    <!-- Do not mangle paths for test assemblies, because Shoudly assertions want actual on-disk paths. -->
+    <DeterministicSourcePaths Condition="'$(IsTestProject)' == 'true'">false</DeterministicSourcePaths>
+
+    <ProduceReferenceAssembly Condition="'$(IsTestProject)' != 'true'">true</ProduceReferenceAssembly>
+
+    <!-- Set up BeforeCommon.targets -->
+    <CustomBeforeMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Directory.BeforeCommon.targets</CustomBeforeMicrosoftCommonTargets>
+
+    <!-- Don't automatically append target framework to output path, since we want to put the Platform Target beforehand, if it's not AnyCPU -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <!-- Work around issue where bootstrapped TaskHostTask seems to be loading the wrong assemblies.
+         https://github.com/Microsoft/msbuild/issues/2865-->
+    <GenerateResourceMSBuildArchitecture>CurrentArchitecture</GenerateResourceMSBuildArchitecture>
+    <GenerateResourceMSBuildRuntime>CurrentRuntime</GenerateResourceMSBuildRuntime>
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Disable warnings from XML documentation. https://github.com/Microsoft/msbuild/issues/2927 -->
+    <NoWarn>$(NoWarn);1570;1572;1573;1587</NoWarn>
+
+    <GenAPIAdditionalParameters>$(GenAPIAdditionalParameters) -excludeApiList:&quot;$(RepoRoot)ref\ExcludeAPIList.txt&quot;</GenAPIAdditionalParameters>
+    <GenAPIAdditionalParameters>$(GenAPIAdditionalParameters) -excludeAttributesList:&quot;$(RepoRoot)ref\ExcludeAttributeList.txt&quot;</GenAPIAdditionalParameters>
+    <GenAPIAdditionalParameters>$(GenAPIAdditionalParameters) -headerFile:&quot;$(RepoRoot)ref\LicenseHeader.txt&quot;</GenAPIAdditionalParameters>
+
+    <DevDivPackagesDir>$(VisualStudioSetupOutputPath)DevDivPackages\</DevDivPackagesDir>
+  </PropertyGroup>
+
+  <!-- Localization -->
+  <PropertyGroup>
+    <!--
+      https://github.com/dotnet/xliff-tasks
+      For Arcade.Sdk toolset it is already pulled and enabled by default.
+      For IeXod we added Azure DevOps feed
+      https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json 
+      into NuGet.config
+     -->
+
+    <!-- 
+      It is only intended to automatically run update during dev cycle. However, it will fail the build on CI if the XLF file is not updated.
+      XLF file should be checked in and loc team will update the XLF it with translated version.
+    -->
+    <UpdateXlfOnBuild Condition="'$(ContinuousIntegrationBuild)' != 'true'">true</UpdateXlfOnBuild>
+
+    <!-- Create English satellite assemblies (which shouldn't be required, but preserves previous build behavior) -->
+    <XlfLanguages>en;cs;de;es;fr;it;ja;ko;pl;pt-BR;ru;tr;zh-Hans;zh-Hant</XlfLanguages>
+
+    <ErrorOnOutOfDateXlf>true</ErrorOnOutOfDateXlf>
+
+    <!-- Workaround that can be removed when we update machines to 15.6.
+         Use Satellite assembly generation task from Microsoft.NET.Sdk even when building with
+         full Framework MSBuild.  This will support public signing, is deterministic, and always
+         generates them as AnyCPU. -->
+    <GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="XliffTasks" Version="$(XliffTasksVersion)" PrivateAssets="all" IsImplicitlyDefined="true" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <!-- When targeting .NET Framework, Exe and unit test projects build with x86 architecture if Platform is AnyCPU,
+         and build for x64 architecture when Platform is x64 -->
+    <RuntimeOutputPlatformTarget>x86</RuntimeOutputPlatformTarget>
+    <RuntimeOutputPlatformTarget Condition="'$(Platform)' == 'x64'">x64</RuntimeOutputPlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="!$(TargetFramework.StartsWith('net4'))">
+    <!-- When targeting .NET Core, Exe and unit tests projects always use AnyCPU architecture -->
+    <RuntimeOutputPlatformTarget>AnyCPU</RuntimeOutputPlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Copyright>Copyright (c) .NET Foundation and contributors
+  | Copyright (c) 2020  Denis Kuzmin &lt; x-3F@outlook.com &gt; GitHub/3F
+  | Copyright (c) IeXod contributors
+    </Copyright>
+    <Title>[ IeXod ] 🧰 The most portable alternative to Microsoft.Build</Title>
+    <Description>This is IeXod and its components. 🧰 The most portable alternative to Microsoft.Build for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax. https://github.com/3F/IeXod</Description>
+    <PackageOwners>reg</PackageOwners>
+    <PackageProjectUrl>https://github.com/3F/IeXod</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/3F/IeXod</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>MSBuild evaluator MicrosoftBuild evaluating VisualStudio parser project-parser projects csproj vcxproj MSBuildSdkResolver VS2019 VS2017 VS2015 VS2013 VS2012 VS2010 msbuildtargets xml targets props proj EvMSBuild SobaScript IeXod IeXodSdkResolver</PackageTags>
+    <PackageReleaseNotes> changelog: https://github.com/3F/IeXod/blob/master/changelog.txt </PackageReleaseNotes>
+    <Authors>github.com/3F/IeXod</Authors>
+  </PropertyGroup>
+
+  <!--  -->
+
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>$(OutputPath)$(TargetFramework.ToLowerInvariant())\</OutputPath>
+    <PublishDir>$(OutputPath)$(TargetFramework.ToLowerInvariant())\publish</PublishDir>
+    <IntermediateOutputPath>$(IntermediateOutputPath)$(TargetFramework.ToLowerInvariant())\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);STANDALONEBUILD</DefineConstants>
+
+    <DefineConstants Condition="'$(MonoBuild)' != 'true'">$(DefineConstants);FEATURE_DEBUG_LAUNCH</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4')) Or $(TargetFramework.StartsWith('net3'))">
+    <DefineConstants>$(DefineConstants);FEATURE_64BIT_ENVIRONMENT_QUERY</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_APARTMENT_STATE</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true'">$(DefineConstants);FEATURE_APM</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_APPDOMAIN</DefineConstants>
+    <FeatureAppDomain>true</FeatureAppDomain>
+    <DefineConstants>$(DefineConstants);FEATURE_APPDOMAIN_UNHANDLED_EXCEPTION</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_ASPNET_COMPILER</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_ASSEMBLY_LOCATION</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_ASSEMBLY_GETENTRYASSEMBLY</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_ASSEMBLYNAME_CLONE</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_TYPE_GETCONSTRUCTOR</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_COM_INTEROP</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true'">$(DefineConstants);FEATURE_COMPILED_XSL</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true'">$(DefineConstants);FEATURE_COMPILE_IN_TESTS</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_CONSOLE_BUFFERWIDTH</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_CONSTRAINED_EXECUTION</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_CHARSET_AUTO</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_CODETASKFACTORY</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_CULTUREINFO_CONSOLE_FALLBACK</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_CULTUREINFO_GETCULTUREINFO</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_CULTUREINFO_GETCULTURES</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_DOTNETVERSION</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true' and '$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_ENCODING_DEFAULT</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_ENVIRONMENT_SYSTEMDIRECTORY</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true'">$(DefineConstants);FEATURE_FILE_TRACKER</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_FUSION_COMPAREASSEMBLYIDENTITY</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_GAC</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_GET_COMMANDLINE</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_HANDLE_SAFEWAITHANDLE</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_HANDLEPROCESSCORRUPTEDSTATEEXCEPTIONS</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_HANDLEREF</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_HTTP_LISTENER</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_INSTALLED_MSBUILD</DefineConstants>
+    <!-- Directory.GetCurrentDirectory The pre .Net 4.6.2 implementation of Directory.GetCurrentDirectory is slow and creates strings in its work. -->
+    <DefineConstants>$(DefineConstants);FEATURE_LEGACY_GETCURRENTDIRECTORY</DefineConstants>
+    <!-- Path.GetFullPath The pre .Net 4.6.2 implementation of Path.GetFullPath is slow and creates strings in its work. -->
+    <DefineConstants>$(DefineConstants);FEATURE_LEGACY_GETFULLPATH</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_NAMED_PIPE_SECURITY_CONSTRUCTOR</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_OSVERSION</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_PERFORMANCE_COUNTERS</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_PIPE_SECURITY</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_PFX_SIGNING</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_REFLECTION_EMIT_DEBUG_INFO</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_REGISTRY_TOOLSETS</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_REGISTRY_SDKS</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_REGISTRYHIVE_DYNDATA</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_RESGEN</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_RESGENCACHE</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_RESOURCE_EXPOSURE</DefineConstants>
+    <!-- System.Resources.ResourceManager.GetResourceSet() method is currently only in full framework -->
+    <DefineConstants>$(DefineConstants);FEATURE_RESOURCEMANAGER_GETRESOURCESET</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_RESXREADER_LIVEDESERIALIZATION</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true'">$(DefineConstants);FEATURE_RTLMOVEMEMORY</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_RUN_EXE_IN_TESTS</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' == 'true'">$(DefineConstants);USE_MSBUILD_DLL_EXTN</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true' and '$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_SECURITY_PERMISSIONS</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_SECURITY_PRINCIPAL_WINDOWS</DefineConstants>
+    <FeatureSpecialFolders>true</FeatureSpecialFolders>
+    <DefineConstants>$(DefineConstants);FEATURE_STRING_INTERN</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_STRONG_NAMES</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_SYSTEM_CONFIGURATION</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_SYSTEMPAGESIZE</DefineConstants>
+    <FeatureSystemConfiguration>true</FeatureSystemConfiguration>
+    <DefineConstants>$(DefineConstants);FEATURE_TASK_GENERATERESOURCES</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_TASKHOST</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_THREAD_ABORT</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_THREAD_CULTURE</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_THREAD_PRIORITY</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_MULTIPLE_TOOLSETS</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_NODE_REUSE</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_NET35_TASKHOST</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_TYPE_GETINTERFACE</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_USERINTERACTIVE</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_USERDOMAINNAME</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_XAML_TYPES</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_XAMLTASKFACTORY</DefineConstants>
+    <FeatureXamlTypes>true</FeatureXamlTypes>
+    <DefineConstants>$(DefineConstants);FEATURE_XML_SOURCE_URI</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_XML_LOADPATH</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true'">$(DefineConstants);FEATURE_XML_SCHEMA_VALIDATION</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_DEBUGGER</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_WIN32_REGISTRY</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_WORKINGSET</DefineConstants>
+    <DefineConstants Condition="'$(MonoBuild)' != 'true' and '$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_VISUALSTUDIOSETUP</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_MSCOREE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefineConstants Condition="'$(MonoBuild)'=='true'">$(DefineConstants);MONO</DefineConstants>
+
+    <!-- Useful for tests that need OS information as a constant -->
+    <DefineConstants Condition="'$(OsEnvironment)'=='windows'">$(DefineConstants);TEST_ISWINDOWS</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard')) or $(TargetFramework.StartsWith('netcore'))">
+    <NetCoreBuild>true</NetCoreBuild>
+    <DefineConstants>$(DefineConstants);RUNTIME_TYPE_NETCORE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(NetCoreBuild)'=='true'">
+    <CompilerToolsDir>$([System.IO.Path]::Combine($(ToolPackagesDir)Microsoft.Net.Compilers, $(CompilerToolsVersion), "tools"))$([System.IO.Path]::DirectorySeparatorChar)</CompilerToolsDir>
+    <DefineConstants>$(DefineConstants);FEATURE_ASSEMBLYLOADCONTEXT</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_PROCESSSTARTINFO_ENVIRONMENT</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_RUNTIMEINFORMATION</DefineConstants>
+    <DefineConstants>$(DefineConstants);USE_MSBUILD_DLL_EXTN</DefineConstants>
+    <DefineConstants>$(DefineConstants);WORKAROUND_COREFX_19110</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
+    <DefineConstants>$(DefineConstants);FEATURE_PIPEOPTIONS_CURRENTUSERONLY</DefineConstants>
+    <DefineConstants Condition="'$(MachineIndependentBuild)' != 'true'">$(DefineConstants);FEATURE_NODE_REUSE</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_SPAN</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GenerateReferenceAssemblySources)' != 'true'">
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <DocumentationFile/>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!--
+      For some reason at the moment our $(DocumentationFile) property does not contain the TFM.  I can't figure out why...
+      Resetting it here corrects it because $(IntermediateOutputPath) includes the TFM at this point
+    -->
+    <DocumentationFile Condition=" '$(GenerateDocumentationFile)' == 'true' ">$(IntermediateOutputPath)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>

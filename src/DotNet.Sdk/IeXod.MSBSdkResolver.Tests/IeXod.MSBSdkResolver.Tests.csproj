@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+  <Import Project="..\IeXod.MSBSdkResolver\build.props" />
+  
+  <PropertyGroup>
+    <!-- By default test projects don't append TargetFramework to output path, but for multi-targeted tests
+         we need to -->
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+
+    <AssemblyName>net.r_eg.IeXod.MSBSdkResolver.Tests</AssemblyName>
+
+    <dotnetexeForTests>3.1.202</dotnetexeForTests>
+    <dotnetexeForTestsPath>$(ArtifactsBinDir)redist\$(Configuration)\dotnet</dotnetexeForTestsPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Condition="'$(IeXodMSBSdkResolverAsExternalDll)'!='true'" Include="..\..\Build\IeXod.csproj" />
+    <ProjectReference Condition="'$(IeXodMSBSdkResolverAsExternalDll)'=='true'" Include="..\IeXod.MSBSdkResolver\IeXod.MSBSdkResolver.csproj" />
+    <ProjectReference Include="..\Microsoft.NET.TestFramework\Microsoft.NET.TestFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(xunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xunitrunnervisualstudioVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Shouldly" Version="$(ShouldlyVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
+    <Reference Include="System.Core" />
+  </ItemGroup>
+
+  <Target Name="InstallDotNetForTests" AfterTargets="Build"
+          Condition="$(TargetFrameworks.StartsWith('$(TargetFramework)'))"> <!-- FIXME: prevents multiple processing for each Framework -->
+
+    <Exec Condition="!Exists($(dotnetexeForTestsPath))" ContinueOnError="true"
+          Command="powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;([scriptblock]::Create((Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1'))) -InstallDir '$(dotnetexeForTestsPath)' -Version '$(dotnetexeForTests)' -ProxyAddress $env:HTTP_PROXY -ProxyUseDefaultCredentials&quot;" />
+  </Target>
+</Project>

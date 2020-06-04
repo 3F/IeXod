@@ -1,0 +1,7 @@
+[$RootKey$\RuntimeConfiguration\dependentAssembly\bindingRedirection\{604B5E67-4DE2-41A7-AA00-AC65BE513FED}]
+"name"="net.r_eg.IeXod.Framework"
+"codeBase"="$BaseInstallDir$\MSBuild\Current\Bin\net.r_eg.IeXod.Framework.dll"
+"publicKeyToken"="4bbd2ef743db151e"
+"culture"="neutral"
+"oldVersion"="0.0.0.0-99.9.9.9"
+"newVersion"="15.1.0.0"

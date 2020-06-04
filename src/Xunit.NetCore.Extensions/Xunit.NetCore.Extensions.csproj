@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\common.props" />
+
+  <PropertyGroup>
+    <CLSCompliant>false</CLSCompliant>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsShipping>false</IsShipping>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GenerateReferenceAssemblySources>false</GenerateReferenceAssemblySources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(xunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xunitrunnervisualstudioVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="AssemblyFixtureSupport\*.cs" />
+  </ItemGroup>
+
+</Project>

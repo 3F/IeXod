@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <CopyNuGetImplementations>false</CopyNuGetImplementations>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFrameworks>$(LibraryTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="net.r_eg.IeXod.Framework" Version="14.3.0" />
+    <PackageReference Include="net.r_eg.IeXod.Utilities.Core" Version="14.3.0" />
+    <PackageReference Include="net.r_eg.IeXod" Version="14.3.0" />
+  </ItemGroup>
+  
+</Project>
