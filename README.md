@@ -8,6 +8,13 @@ Copyright (c) IeXod contributors https://github.com/3F/IeXod/graphs/contributors
 
 🧰 The most portable alternative to Microsoft.Build for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/mclqcptonbch6jjv/branch/master?svg=true)](https://ci.appveyor.com/project/3Fs/iexod/branch/master)
+[![release](https://img.shields.io/github/release/3F/IeXod.svg)](https://github.com/3F/IeXod/releases/latest)
+[![License](https://img.shields.io/badge/License-MIT-74A5C2.svg)](https://github.com/3F/IeXod/blob/master/LICENSE)
+[![NuGet package](https://img.shields.io/nuget/v/IeXod.svg)](https://www.nuget.org/packages/IeXod/)
+
+[![Build history](https://buildstats.info/appveyor/chart/3Fs/iexod?buildCount=20&includeBuildsFromPullRequest=true&showStats=true)](https://ci.appveyor.com/project/3Fs/iexod/history)
+
 # License
 
 IeXod is licensed under the [MIT license](LICENSE).
@@ -79,7 +86,7 @@ That continues direction of https://github.com/3F/hMSBuild
 
 This is most important goal for [IeXod](https://github.com/3F/IeXod) project. To help to avoid the following nightmare: 
 
-❌ From difficulty use (~[Microsoft.Build.Locator](https://www.nuget.org/packages/Microsoft.Build.Locator/) an official solution) to unpredictable behavior in various products (~ Visual Studio etc) due to active integration inside a single environment with *Microsoft.Build.*
+❌ From difficulty use (\~ [Microsoft.Build.Locator](https://www.nuget.org/packages/Microsoft.Build.Locator/) an official solution) to unpredictable behavior in various products (\~ Visual Studio etc) due to active integration inside a single environment with *Microsoft.Build.*
 
 ## 🎈 Something More
 

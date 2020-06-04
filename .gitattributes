@@ -7,6 +7,10 @@
 # in Unix via a file share from Windows, the scripts will work.
 *.sh text eol=lf
 
+# batch files requires CRLF https://github.com/3F/hMSBuild/issues/2
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
 # Ensure .bin files are stored as binary
 *.bin binary
 
