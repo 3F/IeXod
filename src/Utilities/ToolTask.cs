@@ -73,13 +73,13 @@ namespace net.r_eg.IeXod.Utilities
         {
             LogPrivate = new TaskLoggingHelper(this)
             {
-                TaskResources = AssemblyResources.PrimaryResources,
+                TaskResources = AssemblyResources.PrimaryTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
 
             LogShared = new TaskLoggingHelper(this)
             {
-                TaskResources = AssemblyResources.SharedResources,
+                TaskResources = AssemblyResources.SharedTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
 

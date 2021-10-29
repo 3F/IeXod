@@ -62,7 +62,7 @@ namespace net.r_eg.IeXod.Tasks.DataDriven
             : base(taskResources)
         {
             logPrivate = new TaskLoggingHelper(this);
-            logPrivate.TaskResources = AssemblyResources.PrimaryResources;
+            logPrivate.TaskResources = AssemblyResources.PrimaryTasksResources;
             logPrivate.HelpKeywordPrefix = "MSBuild.";
         }
 

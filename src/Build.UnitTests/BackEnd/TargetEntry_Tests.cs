@@ -865,7 +865,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
                 Project project = new Project(
                     XmlReader.Create(new StringReader(content)),
                     (IDictionary<string, string>)null,
-                    ObjectModelHelpers.MSBuildDefaultToolsVersion,
+                    ProjectToolsOptions.Default,
                     collection)
                 { FullPath = FileUtilities.GetTemporaryFile() };
                 project.Save();

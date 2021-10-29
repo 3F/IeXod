@@ -189,6 +189,8 @@ namespace net.r_eg.IeXod.UnitTests
             artifactsDirectory.ShouldNotBeNull();
             artifactsDirectory.ShouldEndWith(Path.Combine("log", "Debug"), Case.Sensitive);
             Path.IsPathRooted(artifactsDirectory).ShouldBeTrue();
+
+            PrintLineDebuggerWriters.IdBasedFilesWriter.FromArtifactLogDirectory();
             Directory.Exists(artifactsDirectory).ShouldBeTrue();
         }
 

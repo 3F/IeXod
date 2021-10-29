@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.Build.UnitTests;
-using Microsoft.Build.UnitTests.Shared;
-using Shouldly;
 using System.IO;
+using net.r_eg.IeXod.UnitTests;
+using net.r_eg.IeXod.UnitTests.Shared;
+using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
 

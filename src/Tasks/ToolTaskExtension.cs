@@ -26,12 +26,12 @@ namespace net.r_eg.IeXod.Tasks
         /// Default constructor.
         /// </summary>
         internal ToolTaskExtension() :
-            base(AssemblyResources.PrimaryResources, "MSBuild.")
+            base(AssemblyResources.PrimaryTasksResources, "MSBuild.")
         {
             _logExtension = new TaskLoggingHelperExtension(
                 this,
-                AssemblyResources.PrimaryResources,
-                AssemblyResources.SharedResources,
+                AssemblyResources.PrimaryTasksResources,
+                AssemblyResources.SharedTasksResources,
                 "MSBuild.");
         }
 

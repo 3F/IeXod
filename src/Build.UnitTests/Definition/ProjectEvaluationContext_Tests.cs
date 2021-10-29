@@ -15,6 +15,7 @@ using net.r_eg.IeXod.Evaluation;
 using net.r_eg.IeXod.Evaluation.Context;
 using net.r_eg.IeXod.Execution;
 using net.r_eg.IeXod.Framework;
+using net.r_eg.IeXod.Sdk;
 using net.r_eg.IeXod.Unittest;
 using Shouldly;
 using Xunit;

@@ -7,8 +7,9 @@
     <CLSCompliant>false</CLSCompliant>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsShipping>false</IsShipping>
-    <EnableDefaultItems>false</EnableDefaultItems>
+    <EnableDefaultItems>true</EnableDefaultItems>
     <GenerateReferenceAssemblySources>false</GenerateReferenceAssemblySources>
+    <IsTestProject>false</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,10 +19,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="AssemblyFixtureSupport\*.cs" />
   </ItemGroup>
 
 </Project>

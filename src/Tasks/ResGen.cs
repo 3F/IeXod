@@ -397,7 +397,7 @@ namespace net.r_eg.IeXod.Tasks
             /// Validates the parameters passed to the task
             /// </summary>
             /// <returns>True if parameters are valid</returns>
-            protected override bool ValidateParameters()
+            protected internal override bool ValidateParameters()
             {
                 ErrorUtilities.VerifyThrow(!IsNullOrEmpty(InputFiles), "If InputFiles is empty, the task should have returned before reaching this point");
 

@@ -126,7 +126,7 @@ namespace net.r_eg.IeXod.Tasks
         /// Validates the parameters passed to the task
         /// </summary>
         /// <returns>True if parameters are valid</returns>
-        protected override bool ValidateParameters()
+        protected internal override bool ValidateParameters()
         {
             // Verify that a path for the tool exists -- if the tool doesn't exist in it 
             // we'll worry about that later

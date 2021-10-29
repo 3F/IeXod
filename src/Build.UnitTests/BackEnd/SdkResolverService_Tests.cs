@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using net.r_eg.IeXod.Unittest;
 using Shouldly;
 using Xunit;
-using SdkResolverContextBase = net.r_eg.IeXod.Framework.SdkResolverContext;
-using SdkResultBase = net.r_eg.IeXod.Framework.SdkResult;
-using SdkResultFactoryBase = net.r_eg.IeXod.Framework.SdkResultFactory;
+using SdkResolverContextBase = net.r_eg.IeXod.Sdk.SdkResolverContext;
+using SdkResultBase = net.r_eg.IeXod.Sdk.SdkResult;
+using SdkResultFactoryBase = net.r_eg.IeXod.Sdk.SdkResultFactory;
 using SdkResultImpl = net.r_eg.IeXod.BackEnd.SdkResolution.SdkResult;
+using net.r_eg.IeXod.Sdk;
 
 namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 {
@@ -41,7 +42,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             SdkReference sdk = new SdkReference("notfound", "referencedVersion", "minimumVersion");
 
-            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false);
+            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false);
 
             result.Success.ShouldBeFalse();
             result.ShouldNotBeNull();
@@ -74,7 +75,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
                             ))
                 });
 
-            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false);
+            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false);
 
             result.Path.ShouldBe("path");
 
@@ -89,7 +90,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             SdkReference sdk = new SdkReference("1sdkName", "version1", "minimumVersion");
 
-            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false);
+            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false);
 
             result.Path.ShouldBe("resolverpath1");
             _logger.Warnings.Select(i => i.Message).ShouldBe(new [] { "The SDK resolver \"MockSdkResolverThrows\" failed to run. EXMESSAGE" });
@@ -102,7 +103,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             SdkReference sdk = new SdkReference("1sdkName", "referencedVersion", "minimumVersion");
 
-            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false);
+            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false);
 
             result.Path.ShouldBe("resolverpath1");
             _logger.BuildMessageEvents.Select(i => i.Message).ShouldContain("MockSdkResolver1 running");
@@ -117,7 +118,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
             // be logged because MockSdkResolver2 will succeed.
             SdkReference sdk = new SdkReference("2sdkName", "version2", "minimumVersion");
 
-            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false);
+            var result = SdkResolverService.Instance.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false);
 
             result.Path.ShouldBe("resolverpath2");
 
@@ -140,10 +141,10 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
             SdkReference sdk = new SdkReference("othersdk", "1.0", "minimumVersion");
 
             // First call should not know state
-            SdkResolverService.Instance.ResolveSdk(submissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false).Path.ShouldBe("resolverpath");
+            SdkResolverService.Instance.ResolveSdk(submissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false).Path.ShouldBe("resolverpath");
 
             // Second call should have received state
-            SdkResolverService.Instance.ResolveSdk(submissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false).Path.ShouldBe(MockSdkResolverWithState.Expected);
+            SdkResolverService.Instance.ResolveSdk(submissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false).Path.ShouldBe(MockSdkResolverWithState.Expected);
         }
 
         [Fact]
@@ -156,10 +157,10 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
             SdkReference sdk = new SdkReference("othersdk", "1.0", "minimumVersion");
 
             // First call should not know state
-            SdkResolverService.Instance.ResolveSdk(submissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false).Path.ShouldBe("resolverpath");
+            SdkResolverService.Instance.ResolveSdk(submissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false).Path.ShouldBe("resolverpath");
 
             // Second call should have received state
-            SdkResolverService.Instance.ResolveSdk(submissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false).Path.ShouldBe("resolverpath");
+            SdkResolverService.Instance.ResolveSdk(submissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false).Path.ShouldBe("resolverpath");
         }
 
         [Theory]
@@ -200,13 +201,13 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
                     resolver
                 });
 
-            var result = service.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false);
+            var result = service.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false);
             resolver.ResolvedCalls.Count.ShouldBe(1);
             result.Path.ShouldBe("path");
             result.Version.ShouldBe("1.0.0");
             _logger.WarningCount.ShouldBe(0);
 
-            result = service.ResolveSdk(BuildEventContext.InvalidSubmissionId, new SdkReference("foo", "2.0.0", null), _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false);
+            result = service.ResolveSdk(BuildEventContext.InvalidSubmissionId, new SdkReference("foo", "2.0.0", null), _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false);
             resolver.ResolvedCalls.Count.ShouldBe(1);
             result.Path.ShouldBe("path");
             result.Version.ShouldBe("1.0.0");
@@ -245,7 +246,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
             Parallel.For(
                 0,
                 10,
-                _ => service.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), "sln", "projectPath", interactive: false));
+                _ => service.ResolveSdk(BuildEventContext.InvalidSubmissionId, sdk, _loggingContext, new MockElementLocation("file"), new SdkEnv("sln", "projectPath"), interactive: false));
 
             var result = resolver.ResolvedCalls.ShouldHaveSingleItem();
 
@@ -279,8 +280,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
                 new SdkReference("foo", "1.0.0", null),
                 _loggingContext,
                 new MockElementLocation("file"),
-                "sln",
-                "projectPath",
+                new SdkEnv("sln", "projectPath"),
                 // Pass along interactive and expect it to be received in the SdkResolverContext
                 interactive: true);
 
@@ -296,7 +296,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
                 _includeErrorResolver = includeErrorResolver;
             }
 
-            internal override IList<SdkResolver> LoadResolvers(LoggingContext loggingContext, ElementLocation location)
+            internal override IList<SdkResolver> LoadResolvers(LoggingContext loggingContext, ElementLocation location, SdkEnv sdkEnv)
             {
                 List<SdkResolver> resolvers = new List<SdkResolver>
                 {
@@ -332,7 +332,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             public override SdkResultBase Resolve(SdkReference sdk, SdkResolverContextBase resolverContext, SdkResultFactoryBase factory)
             {
-                resolverContext.Logger.LogMessage("MockSdkResolver1 running", MessageImportance.Normal);
+                resolverContext.Logger.LogMessage("MockSdkResolver1 running", SdkLogVerbosity.Normal);
 
                 if (sdk.Name.StartsWith("1"))
                     return factory.IndicateSuccess("resolverpath1", "version1");
@@ -349,7 +349,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             public override SdkResultBase Resolve(SdkReference sdk, SdkResolverContextBase resolverContext, SdkResultFactoryBase factory)
             {
-                resolverContext.Logger.LogMessage("MockSdkResolver2 running", MessageImportance.Normal);
+                resolverContext.Logger.LogMessage("MockSdkResolver2 running", SdkLogVerbosity.Normal);
 
                 if (sdk.Name.StartsWith("2"))
                     return factory.IndicateSuccess("resolverpath2", "version2", new[] {"WARNING2"});
@@ -390,7 +390,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             public override SdkResultBase Resolve(SdkReference sdk, SdkResolverContextBase resolverContext, SdkResultFactoryBase factory)
             {
-                resolverContext.Logger.LogMessage("MockSdkResolverThrows running", MessageImportance.Normal);
+                resolverContext.Logger.LogMessage("MockSdkResolverThrows running", SdkLogVerbosity.Normal);
 
                 throw new ArithmeticException("EXMESSAGE");
             }

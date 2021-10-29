@@ -319,7 +319,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
             Project project = new Project(
                 XmlReader.Create(new StringReader(projectBody)),
                 globalProperties,
-                ObjectModelHelpers.MSBuildDefaultToolsVersion,
+                ProjectToolsOptions.Default,
                 new ProjectCollection());
             project.FullPath = "foo";
             ProjectInstance instance = project.CreateProjectInstance();
@@ -421,7 +421,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
             globalProperties["ThreeIn"] = "3";
             globalProperties["BazIn"] = "bazfile";
 
-            Project project = new Project(XmlReader.Create(new StringReader(projectBody)), globalProperties, ObjectModelHelpers.MSBuildDefaultToolsVersion, new ProjectCollection());
+            Project project = new Project(XmlReader.Create(new StringReader(projectBody)), globalProperties, ProjectToolsOptions.Default, new ProjectCollection());
             project.FullPath = "foo";
             ProjectInstance instance = project.CreateProjectInstance();
             BuildRequestConfiguration configuration = new BuildRequestConfiguration(new BuildRequestData(instance, new string[] { }, null), "2.0");

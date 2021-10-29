@@ -35,7 +35,7 @@ namespace net.r_eg.IeXod.UnitTests
             TaskToLogFrom loggingTask = new TaskToLogFrom();
             loggingTask.BuildEngine = _mockEngine;
             _log = loggingTask.Log;
-            _log.TaskResources = AssemblyResources.PrimaryResources;
+            _log.TaskResources = AssemblyResources.PrimaryTasksResources;
         }
 
 

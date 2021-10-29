@@ -3,6 +3,7 @@ using net.r_eg.IeXod.BackEnd.Logging;
 using net.r_eg.IeXod.BackEnd.SdkResolution;
 using net.r_eg.IeXod.Construction;
 using net.r_eg.IeXod.Framework;
+using net.r_eg.IeXod.Sdk;
 using System;
 
 namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
@@ -19,7 +20,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
         {
         }
 
-        public Build.BackEnd.SdkResolution.SdkResult ResolveSdk(int submissionId, SdkReference sdk, LoggingContext loggingContext, ElementLocation sdkReferenceLocation, string solutionPath, string projectPath, bool interactive)
+        public IeXod.BackEnd.SdkResolution.SdkResult ResolveSdk(int submissionId, SdkReference sdk, LoggingContext loggingContext, ElementLocation sdkReferenceLocation, SdkEnv sdkEnv, bool interactive)
         {
             return null;
         }

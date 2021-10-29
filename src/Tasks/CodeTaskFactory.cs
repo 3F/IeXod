@@ -175,7 +175,7 @@ namespace net.r_eg.IeXod.Tasks
                     // pick the highest version on the machine, which means that in hosts with restrictive binding 
                     // redirects, or no binding redirects, we'd end up creating an inline task that could not be 
                     // run.  Instead, to make sure that we can actually use what we're building, just use the Framework
-                    // and Utilities currently loaded into this process -- Since we're in net.r_eg.IeXod.Tasks.Core.dll
+                    // and Utilities currently loaded into this process -- Since we're in IeXod.Tasks.dll
                     // right now, by definition both of them are always already loaded. 
                     string msbuildFrameworkPath = Assembly.GetAssembly(typeof(ITask)).Location;
                     string msbuildUtilitiesPath = Assembly.GetAssembly(typeof(Task)).Location;
@@ -206,7 +206,7 @@ namespace net.r_eg.IeXod.Tasks
             _nameOfTask = taskName;
             _log = new TaskLoggingHelper(taskFactoryLoggingHost, taskName)
             {
-                TaskResources = AssemblyResources.PrimaryResources,
+                TaskResources = AssemblyResources.PrimaryTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
 
@@ -345,7 +345,7 @@ namespace net.r_eg.IeXod.Tasks
                 // In order to use the resource strings from the tasks assembly we need to register the resources with the task logging helper.
                 var log = new TaskLoggingHelper(loggingHost, _nameOfTask)
                 {
-                    TaskResources = AssemblyResources.PrimaryResources,
+                    TaskResources = AssemblyResources.PrimaryTasksResources,
                     HelpKeywordPrefix = "MSBuild."
                 };
 
@@ -733,7 +733,7 @@ namespace net.r_eg.IeXod.Tasks
             // "c#;cs;csharp", "vb;vbs;visualbasic;vbscript", "js;jscript;javascript", "vj#;vjs;vjsharp", "c++;mc;cpp"
             using (CodeDomProvider provider = CodeDomProvider.CreateProvider(_language))
             {
-                if (provider is CSharp.CSharpCodeProvider)
+                if (provider is Microsoft.CSharp.CSharpCodeProvider)
                 {
                     AddReferenceAssemblyToReferenceList(finalReferencedAssemblies, "System");
                 }
@@ -1025,7 +1025,7 @@ namespace net.r_eg.IeXod.Tasks
         {
             TaskLoggingHelper log = new TaskLoggingHelper(taskFactoryLoggingHost, taskName)
             {
-                TaskResources = AssemblyResources.PrimaryResources,
+                TaskResources = AssemblyResources.PrimaryTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
             

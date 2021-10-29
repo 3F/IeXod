@@ -1096,7 +1096,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             Project project = new Project(
                 xml,
                 new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-                ObjectModelHelpers.MSBuildDefaultToolsVersion);
+                ProjectToolsOptions.Default);
 
             Assert.Equal(ObjectModelHelpers.MSBuildDefaultToolsVersion, project.ToolsVersion);
         }
@@ -1256,7 +1256,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             {
                 Environment.SetEnvironmentVariable("VisualStudioVersion", null);
 
-                Project p = new Project(GetSampleProjectRootElement(), null, ObjectModelHelpers.MSBuildDefaultToolsVersion, new ProjectCollection());
+                Project p = new Project(GetSampleProjectRootElement(), null, ProjectToolsOptions.Default, new ProjectCollection());
 
                 Assert.Equal(ObjectModelHelpers.MSBuildDefaultToolsVersion, p.ToolsVersion);
 
@@ -1286,7 +1286,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             {
                 Environment.SetEnvironmentVariable("VisualStudioVersion", "ABCD");
 
-                Project p = new Project(GetSampleProjectRootElement(), null, ObjectModelHelpers.MSBuildDefaultToolsVersion, new ProjectCollection());
+                Project p = new Project(GetSampleProjectRootElement(), null, ProjectToolsOptions.Default, new ProjectCollection());
 
                 Assert.Equal(ObjectModelHelpers.MSBuildDefaultToolsVersion, p.ToolsVersion);
                 Assert.Equal("ABCD", p.SubToolsetVersion);
@@ -1313,7 +1313,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
                 IDictionary<string, string> globalProperties = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                 globalProperties.Add("VisualStudioVersion", "ABCDE");
 
-                Project p = new Project(GetSampleProjectRootElement(), globalProperties, ObjectModelHelpers.MSBuildDefaultToolsVersion, new ProjectCollection());
+                Project p = new Project(GetSampleProjectRootElement(), globalProperties, ProjectToolsOptions.Default, new ProjectCollection());
 
                 Assert.Equal(ObjectModelHelpers.MSBuildDefaultToolsVersion, p.ToolsVersion);
                 Assert.Equal("ABCDE", p.SubToolsetVersion);
@@ -1344,7 +1344,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
                 IDictionary<string, string> projectCollectionGlobalProperties = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                 projectCollectionGlobalProperties.Add("VisualStudioVersion", "ABCDE");
 
-                Project p = new Project(GetSampleProjectRootElement(), globalProperties, ObjectModelHelpers.MSBuildDefaultToolsVersion, "ABCDEF", new ProjectCollection(projectCollectionGlobalProperties), ProjectLoadSettings.Default);
+                Project p = new Project(GetSampleProjectRootElement(), globalProperties, new ProjectToolsOptions(null, "ABCDEF"), new ProjectCollection(projectCollectionGlobalProperties), ProjectLoadSettings.Default);
 
                 Assert.Equal(ObjectModelHelpers.MSBuildDefaultToolsVersion, p.ToolsVersion);
                 Assert.Equal("ABCDEF", p.SubToolsetVersion);
@@ -1629,7 +1629,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
                 projectRootElement.Save(projectFile);
                 Assert.False(projectRootElement.HasUnsavedChanges);
 
-                var project = new Project(projectRootElement, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, projectCollection);
+                var project = new Project(projectRootElement, new Dictionary<string, string>(), ProjectToolsOptions.Default, projectCollection);
                 project.ReevaluateIfNecessary();
 
                 assertContents("p1", "i1", "m1", project);
@@ -3273,7 +3273,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             {
                 var projectCollection = env.CreateProjectCollection().Collection;
                 var testFiles = env.CreateTestProjectWithFiles(projectContents, new string[0], "u/x");
-                var project = new Project(testFiles.ProjectFile, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, projectCollection);
+                var project = new Project(testFiles.ProjectFile, new Dictionary<string, string>(), ProjectToolsOptions.Default, projectCollection);
 
                 var expected2Foo = new ProvenanceResultTupleList
                 {
@@ -3303,7 +3303,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
 
                 var testFiles = env.CreateTestProjectWithFiles(projectContents, new string[0]);
 
-                var project = new Project(testFiles.ProjectFile, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, projectCollection);
+                var project = new Project(testFiles.ProjectFile, new Dictionary<string, string>(), ProjectToolsOptions.Default, projectCollection);
 
                 var expectedProvenance = new ProvenanceResultTupleList
                 {
@@ -3594,7 +3594,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             using (var projectCollection = new ProjectCollection())
             {
                 var testFiles = env.CreateTestProjectWithFiles(projectContents, new string[0], relativePathOfProjectFile);
-                var project = new Project(testFiles.ProjectFile, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, projectCollection);
+                var project = new Project(testFiles.ProjectFile, new Dictionary<string, string>(), ProjectToolsOptions.Default, projectCollection);
 
                 ProvenanceResultTupleList expectedProvenance = null;
 
@@ -3786,7 +3786,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
 
                 var testFiles = env.CreateTestProjectWithFiles(projectContents, new string[0]);
 
-                var project = new Project(testFiles.ProjectFile, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, projectCollection);
+                var project = new Project(testFiles.ProjectFile, new Dictionary<string, string>(), ProjectToolsOptions.Default, projectCollection);
 
                 var absoluteFile = Path.Combine(Path.GetDirectoryName(testFiles.ProjectFile), "a.cs");
 
@@ -3861,7 +3861,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             using (var projectCollection = new ProjectCollection())
             {
                 var testFiles = env.CreateTestProjectWithFiles(project, new[] { "a", "b" });
-                var globResult = new Project(testFiles.ProjectFile, null, MSBuildConstants.CurrentToolsVersion, projectCollection).GetAllGlobs();
+                var globResult = new Project(testFiles.ProjectFile, null, ProjectToolsOptions.Default, projectCollection).GetAllGlobs();
 
                 var expected = new GlobResultList
                 {

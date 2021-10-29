@@ -40,5 +40,14 @@
     <MicrosoftDotNetPlatformAbstractionsVersion>3.1.4</MicrosoftDotNetPlatformAbstractionsVersion>
     <MicrosoftNETCoreDotNetHostResolverVersion>5.0.0-preview.2.20152.11</MicrosoftNETCoreDotNetHostResolverVersion>
     <MicrosoftDotNetXUnitExtensionsVersion>5.0.0-beta.20261.9</MicrosoftDotNetXUnitExtensionsVersion>
+    <SystemCollectionsConcurrentVersion>4.3.0</SystemCollectionsConcurrentVersion>
+    <MicrosoftCodeAnalysisBuildTasksVersion>3.9.0-5.21120.8</MicrosoftCodeAnalysisBuildTasksVersion>
+    <SystemConfigurationVersion>2.0.5</SystemConfigurationVersion>
+    <SystemIOFileSystemPrimitivesVersion>4.3.0</SystemIOFileSystemPrimitivesVersion>
+    <SystemCodeDomVersion>5.0.0</SystemCodeDomVersion>
+    <SystemResourcesExtensionsVersion>4.7.1</SystemResourcesExtensionsVersion>
+    <MicrosoftNetCompilersToolsetVersion>3.11.0</MicrosoftNetCompilersToolsetVersion>
+    <SystemXmlXPathVersion>4.3.0</SystemXmlXPathVersion>
+    <!-- <XUnitRunnerConsoleVersion>2.4.1</XUnitRunnerConsoleVersion> -->
   </PropertyGroup>
 </Project>

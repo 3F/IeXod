@@ -993,7 +993,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
             var globalProperties = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             globalProperties["g"] = "gv";
 
-            Project project = new Project(XmlReader.Create(new StringReader(content)), globalProperties, ObjectModelHelpers.MSBuildDefaultToolsVersion);
+            Project project = new Project(XmlReader.Create(new StringReader(content)), globalProperties, ProjectToolsOptions.Default);
             ProjectInstance instance = immutable ? project.CreateProjectInstance(ProjectInstanceSettings.Immutable) : project.CreateProjectInstance();
 
             return instance;

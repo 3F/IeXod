@@ -24,7 +24,7 @@ using Microsoft.Win32;
 
 using FrameworkNameVersioning = System.Runtime.Versioning.FrameworkName;
 using UtilitiesDotNetFrameworkArchitecture = net.r_eg.IeXod.Utilities.DotNetFrameworkArchitecture;
-using SharedDotNetFrameworkArchitecture = net.r_eg.IeXod.Shared.DotNetFrameworkArchitecture;
+using SharedDotNetFrameworkArchitecture = net.r_eg.IeXod.Shared.DotNetFrameworkArchitectureInternal;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -713,7 +713,7 @@ namespace net.r_eg.IeXod.UnitTests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-89")]
         [Trait("Category", "mono-osx-failing")]
         public void TestGetPathToBuildToolsFile()
         {
@@ -742,7 +742,7 @@ namespace net.r_eg.IeXod.UnitTests
 #if RUNTIME_TYPE_NETCORE
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/722")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-89")]
         [Trait("Category", "mono-osx-failing")]
 #endif
         public void TestGetPathToBuildToolsFile_32Bit()
@@ -1107,7 +1107,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
                     <Project xmlns='msbuildnamespace' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll' >
+                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' >
                          <ParameterGroup>     
                              <Sdk35ToolsPath />
                              <Sdk40ToolsPath />
@@ -1156,7 +1156,7 @@ namespace net.r_eg.IeXod.UnitTests
             success.ShouldBeTrue(); // "Build Failed.  See Std Out for details."
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. The Tasks feature is temporarily disabled")]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyToolsetAndToolLocationHelperAgreeWhenVisualStudioVersionIsEmpty()
         {
@@ -1198,7 +1198,7 @@ namespace net.r_eg.IeXod.UnitTests
             success.ShouldBeTrue(); // "Build Failed.  See Std Out for details."
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. The Tasks feature is temporarily disabled")]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyToolsetAndToolLocationHelperAgreeWhenVisualStudioVersionIs10()
         {
@@ -1242,7 +1242,7 @@ namespace net.r_eg.IeXod.UnitTests
             success.ShouldBeTrue(); // "Build Failed.  See Std Out for details."
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. The Tasks feature is temporarily disabled")]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void VerifyToolsetAndToolLocationHelperAgreeWhenVisualStudioVersionIs11()
         {
@@ -3640,7 +3640,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify that the GetPlatformExtensionSDKLocation method can be correctly called during evaluation time as a msbuild function.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void VerifyGetInstalledSDKLocations()
         {
             string testDirectoryRoot = Path.Combine(Path.GetTempPath(), "VerifyGetInstalledSDKLocations");
@@ -3654,10 +3654,10 @@ namespace net.r_eg.IeXod.UnitTests
                  <PropertyGroup>
                     <TargetPlatformIdentifier>MyPlatform</TargetPlatformIdentifier>
                     <TargetPlatformVersion>8.0</TargetPlatformVersion>
-                    <SDKLocation1>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=2.0','MyPlatform','8.0'))</SDKLocation1>
-                    <SDKLocation2>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=V2.0','MyPlatform','8.0'))</SDKLocation2>
-                    <SDKLocation3>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('MyPlatform','8.0'))</SDKLocation3>
-                    <SDKName>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKDisplayName('MyPlatform','8.0'))</SDKName>
+                    <SDKLocation1>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=2.0','MyPlatform','8.0'))</SDKLocation1>
+                    <SDKLocation2>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=V2.0','MyPlatform','8.0'))</SDKLocation2>
+                    <SDKLocation3>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('MyPlatform','8.0'))</SDKLocation3>
+                    <SDKName>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKDisplayName('MyPlatform','8.0'))</SDKName>
                  </PropertyGroup>
 
                  <Import Project=""$(MSBuildBinPath)\Microsoft.Common.targets""/>
@@ -3709,7 +3709,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify that the GetPlatformExtensionSDKLocation method can be correctly called during evaluation time as a msbuild function.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void VerifyGetInstalledSDKLocations2()
         {
             string testDirectoryRoot = Path.Combine(Path.GetTempPath(), "VerifyGetInstalledSDKLocations2");
@@ -3724,10 +3724,10 @@ namespace net.r_eg.IeXod.UnitTests
                     <TargetPlatformIdentifier>MyPlatform</TargetPlatformIdentifier>
                     <TargetPlatformVersion>8.0</TargetPlatformVersion>" +
                    @"<SDKDirectoryRoot>" + testDirectoryRoot + "</SDKDirectoryRoot>" +
-                    @"<SDKLocation1>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=2.0','MyPlatform','8.0', '$(SDKDirectoryRoot)',''))</SDKLocation1>
-                      <SDKLocation2>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=V2.0','MyPlatform','8.0', '$(SDKDirectoryRoot)',''))</SDKLocation2>                 
-                      <SDKLocation3>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('MyPlatform','8.0', '$(SDKDirectoryRoot)',''))</SDKLocation3>
-                      <SDKName>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKDisplayName('MyPlatform','8.0', '$(SDKDirectoryRoot)', ''))</SDKName>
+                    @"<SDKLocation1>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=2.0','MyPlatform','8.0', '$(SDKDirectoryRoot)',''))</SDKLocation1>
+                      <SDKLocation2>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=V2.0','MyPlatform','8.0', '$(SDKDirectoryRoot)',''))</SDKLocation2>                 
+                      <SDKLocation3>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('MyPlatform','8.0', '$(SDKDirectoryRoot)',''))</SDKLocation3>
+                      <SDKName>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKDisplayName('MyPlatform','8.0', '$(SDKDirectoryRoot)', ''))</SDKName>
                  </PropertyGroup>
 
                  <Import Project=""$(MSBuildBinPath)\Microsoft.Common.targets""/>
@@ -3779,7 +3779,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Setup some fake entries in the registry and verify we get the correct sdk from there.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyGetInstalledSDKLocations3()
         {
@@ -3796,10 +3796,10 @@ namespace net.r_eg.IeXod.UnitTests
                     <TargetPlatformVersion>8.0</TargetPlatformVersion>
                     <SDKRegistryRoot>SOFTWARE\Microsoft\VerifyGetInstalledSDKLocations3</SDKRegistryRoot>
                     <SDKDiskRoot>Somewhere</SDKDiskRoot>
-                    <SDKLocation1>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=2.0','MyPlatform','8.0', '$(SDKDirectoryRoot)','$(SDKRegistryRoot)'))</SDKLocation1>
-                    <SDKLocation2>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=V2.0','MyPlatform','8.0', '$(SDKDirectoryRoot)','$(SDKRegistryRoot)'))</SDKLocation2>
-                    <SDKLocation3>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('MyPlatform','8.0', '$(SDKDirectoryRoot)','$(SDKRegistryRoot)'))</SDKLocation3>
-                    <SDKName>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKDisplayName('MyPlatform','8.0', '$(SDKDirectoryRoot)', '$(SDKRegistryRoot)'))</SDKName>
+                    <SDKLocation1>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=2.0','MyPlatform','8.0', '$(SDKDirectoryRoot)','$(SDKRegistryRoot)'))</SDKLocation1>
+                    <SDKLocation2>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation('SDkWithManifest, Version=V2.0','MyPlatform','8.0', '$(SDKDirectoryRoot)','$(SDKRegistryRoot)'))</SDKLocation2>
+                    <SDKLocation3>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('MyPlatform','8.0', '$(SDKDirectoryRoot)','$(SDKRegistryRoot)'))</SDKLocation3>
+                    <SDKName>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKDisplayName('MyPlatform','8.0', '$(SDKDirectoryRoot)', '$(SDKRegistryRoot)'))</SDKName>
                  </PropertyGroup>
                  <Import Project=""$(MSBuildBinPath)\Microsoft.Common.targets""/>
               </Project>");
@@ -4244,7 +4244,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify that the GetPlatformSDKPropsFileLocation method can be correctly called for pre-OneCore SDKs during evaluation time as a msbuild function.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyGetPreOneCoreSDKPropsLocation()
         {
@@ -4261,8 +4261,8 @@ namespace net.r_eg.IeXod.UnitTests
                     <TargetPlatformVersion>8.0</TargetPlatformVersion>
                     <SDKRegistryRoot>SOFTWARE\Microsoft\VerifyGetPlatformSDKPropsLocation</SDKRegistryRoot>
                     <SDKDiskRoot>Somewhere</SDKDiskRoot>
-                    <PlatformSDKLocation>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('MyPlatform', '8.0', '$(SDKDirectoryRoot)', '$(SDKRegistryRoot)'))</PlatformSDKLocation>
-                    <PropsLocation>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKPropsFileLocation('',' ','MyPlatform',' ','8.0', '$(SDKDirectoryRoot)', '$(SDKRegistryRoot)'))</PropsLocation>
+                    <PlatformSDKLocation>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('MyPlatform', '8.0', '$(SDKDirectoryRoot)', '$(SDKRegistryRoot)'))</PlatformSDKLocation>
+                    <PropsLocation>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKPropsFileLocation('',' ','MyPlatform',' ','8.0', '$(SDKDirectoryRoot)', '$(SDKRegistryRoot)'))</PropsLocation>
                  </PropertyGroup>
                  <Import Project=""$(MSBuildBinPath)\Microsoft.Common.targets""/>
               </Project>");
@@ -4320,7 +4320,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify that the GetPlatformSDKPropsFileLocation method can be correctly called for OneCore SDK during evaluation time as a msbuild function.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyGetOneCoreSDKPropsLocation()
         {
@@ -4338,8 +4338,8 @@ namespace net.r_eg.IeXod.UnitTests
                     <TargetPlatformVersion>8.0</TargetPlatformVersion>
                     <SDKRegistryRoot>SOFTWARE\Microsoft\VerifyGetOneCoreSDKPropsLocation</SDKRegistryRoot>
                     <SDKDiskRoot>Somewhere</SDKDiskRoot>
-                    <PlatformSDKLocation>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('OneCoreSDK', '1.0', '', '$(SDKRegistryRoot)'))</PlatformSDKLocation>
-                    <PropsLocation>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKPropsFileLocation('OneCoreSDK','1.0','MyPlatform',' ','0.8.0.0', '', '$(SDKRegistryRoot)'))</PropsLocation>
+                    <PlatformSDKLocation>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKLocation('OneCoreSDK', '1.0', '', '$(SDKRegistryRoot)'))</PlatformSDKLocation>
+                    <PropsLocation>$([IeXod.Utilities.ToolLocationHelper]::GetPlatformSDKPropsFileLocation('OneCoreSDK','1.0','MyPlatform',' ','0.8.0.0', '', '$(SDKRegistryRoot)'))</PropsLocation>
                  </PropertyGroup>
                  <Import Project=""$(MSBuildBinPath)\Microsoft.Common.targets""/>
               </Project>");

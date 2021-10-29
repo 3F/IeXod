@@ -16,7 +16,6 @@ using net.r_eg.IeXod.Shared;
 using CommunicationsUtilities = net.r_eg.IeXod.Internal.CommunicationsUtilities;
 using InternalUtilities = net.r_eg.IeXod.Internal.Utilities;
 using InvalidProjectFileException = net.r_eg.IeXod.Exceptions.InvalidProjectFileException;
-using MSBuildApp = net.r_eg.IeXod.CommandLine.MSBuildApp;
 using Project = net.r_eg.IeXod.Evaluation.Project;
 using ProjectCollection = net.r_eg.IeXod.Evaluation.ProjectCollection;
 
@@ -72,65 +71,6 @@ namespace net.r_eg.IeXod.UnitTests
         public UtilitiesTestReadOnlyLoad()
         {
             this.loadAsReadOnly = true;
-        }
-
-        /// <summary>
-        /// Comments should not be stripped when doing /pp.
-        /// This is really testing msbuild.exe but it's here because it needs to
-        /// call the internal reset method on the engine
-        /// </summary>
-        [Fact]
-        public void CommentsInPreprocessing()
-        {
-            net.r_eg.IeXod.Construction.XmlDocumentWithLocation.ClearReadOnlyFlags_UnitTestsOnly();
-
-            string input = FileUtilities.GetTemporaryFile();
-            string output = FileUtilities.GetTemporaryFile();
-
-            string _initialLoadFilesWriteable = Environment.GetEnvironmentVariable("MSBUILDLOADALLFILESASWRITEABLE");
-            try
-            {
-                Environment.SetEnvironmentVariable("MSBUILDLOADALLFILESASWRITEABLE", "1");
-
-                string content = ObjectModelHelpers.CleanupFileContents(@"
-<Project DefaultTargets='Build' ToolsVersion='msbuilddefaulttoolsversion' xmlns='msbuildnamespace'>
-  <Import Project='$(MSBuildToolsPath)\Microsoft.CSharp.targets'/>
-</Project>");
-                File.WriteAllText(input, content);
-
-#if FEATURE_GET_COMMANDLINE
-                Assert.Equal(MSBuildApp.ExitType.Success, MSBuildApp.Execute(@"c:\bin\msbuild.exe """ + input +
-                    (NativeMethodsShared.IsUnixLike ? @""" -pp:""" : @""" /pp:""") + output + @""""));
-#else
-                Assert.Equal(
-                    MSBuildApp.ExitType.Success,
-                    MSBuildApp.Execute(
-                        new[] { @"c:\bin\msbuild.exe", '"' + input + '"',
-                    '"' + (NativeMethodsShared.IsUnixLike ? "-pp:" : "/pp:") + output + '"'}));
-#endif
-
-                bool foundDoNotModify = false;
-                foreach (string line in File.ReadLines(output))
-                {
-                    if (line.Contains("<!---->")) // This is what it will look like if we're loading read/only
-                    {
-                        Assert.True(false);
-                    }
-
-                    if (line.Contains("DO NOT MODIFY")) // this is in a comment in our targets
-                    {
-                        foundDoNotModify = true;
-                    }
-                }
-
-                Assert.True(foundDoNotModify);
-            }
-            finally
-            {
-                File.Delete(input);
-                File.Delete(output);
-                Environment.SetEnvironmentVariable("MSBUILDLOADALLFILESASWRITEABLE", _initialLoadFilesWriteable);
-            }
         }
 
         [Fact]

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Build\IeXod.csproj" />
+    <ProjectReference Include="..\Sdk\SdkResolver.csproj" />
     <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
   </ItemGroup>
 

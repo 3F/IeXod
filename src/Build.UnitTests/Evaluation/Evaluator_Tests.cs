@@ -2724,7 +2724,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                                    4,
                     false);
 
-            Project project = new Project(XmlReader.Create(new StringReader(content)), new Dictionary<string, string>(), ObjectModelHelpers.MSBuildDefaultToolsVersion, collection);
+            Project project = new Project(XmlReader.Create(new StringReader(content)), new Dictionary<string, string>(), ProjectToolsOptions.Default, collection);
 
             MockLogger logger = new MockLogger();
             bool result = project.Build(logger);
@@ -3701,7 +3701,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                               </Project>");
 
                 ProjectCollection fakeProjectCollection = GetProjectCollectionWithFakeToolset(null /* no global properties */);
-                Project project = new Project(XmlReader.Create(new StringReader(content)), null, "Fake", fakeProjectCollection);
+                Project project = new Project(XmlReader.Create(new StringReader(content)), null, new ProjectToolsOptions("Fake"), fakeProjectCollection);
 
                 MockLogger logger = new MockLogger();
                 bool result = project.Build(logger);
@@ -3766,7 +3766,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                               </Project>");
 
                 ProjectCollection fakeProjectCollection = GetProjectCollectionWithFakeToolset(null /* no global properties */);
-                Project project = new Project(XmlReader.Create(new StringReader(content)), null, "Fake", fakeProjectCollection);
+                Project project = new Project(XmlReader.Create(new StringReader(content)), null, new ProjectToolsOptions("Fake"), fakeProjectCollection);
 
                 MockLogger logger = new MockLogger();
                 bool result = project.Build(logger);
@@ -3817,7 +3817,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                               </Project>");
 
                 ProjectCollection fakeProjectCollection = GetProjectCollectionWithFakeToolset(null /* no global properties */);
-                Project project = new Project(XmlReader.Create(new StringReader(content)), null, "Fake", fakeProjectCollection);
+                Project project = new Project(XmlReader.Create(new StringReader(content)), null, new ProjectToolsOptions("Fake"), fakeProjectCollection);
 
                 MockLogger logger = new MockLogger();
                 bool result = project.Build(logger);
@@ -3868,7 +3868,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                               </Project>");
 
                 ProjectCollection fakeProjectCollection = GetProjectCollectionWithFakeToolset(null /* no global properties */);
-                Project project = new Project(XmlReader.Create(new StringReader(content)), null, "Fake", fakeProjectCollection);
+                Project project = new Project(XmlReader.Create(new StringReader(content)), null, new ProjectToolsOptions("Fake"), fakeProjectCollection);
 
                 MockLogger logger = new MockLogger();
                 bool result = project.Build(logger);
@@ -3926,7 +3926,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                               </Project>");
 
                 ProjectCollection fakeProjectCollection = GetProjectCollectionWithFakeToolset(null /* no global properties */);
-                Project project = new Project(XmlReader.Create(new StringReader(content)), null, "Fake", fakeProjectCollection);
+                Project project = new Project(XmlReader.Create(new StringReader(content)), null, new ProjectToolsOptions("Fake"), fakeProjectCollection);
 
                 MockLogger logger = new MockLogger();
                 bool result = project.Build(logger);
@@ -3988,7 +3988,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                 globalProperties.Add("c", "c5");
                 globalProperties.Add("d", "d5");
 
-                Project project = new Project(XmlReader.Create(new StringReader(content)), globalProperties, "Fake", fakeProjectCollection);
+                Project project = new Project(XmlReader.Create(new StringReader(content)), globalProperties, new ProjectToolsOptions("Fake"), fakeProjectCollection);
 
                 MockLogger logger = new MockLogger();
                 bool result = project.Build(logger);
@@ -4046,7 +4046,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                 IDictionary<string, string> globalProperties = new Dictionary<string, string>();
                 globalProperties.Add("VisualStudioVersion", "11.0");
 
-                Project project = new Project(XmlReader.Create(new StringReader(content)), globalProperties, "Fake", fakeProjectCollection);
+                Project project = new Project(XmlReader.Create(new StringReader(content)), globalProperties, new ProjectToolsOptions("Fake"), fakeProjectCollection);
 
                 MockLogger logger = new MockLogger();
                 bool result = project.Build(logger);
@@ -4097,7 +4097,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
             IDictionary<string, string> globalProperties = new Dictionary<string, string>();
             globalProperties.Add("VisualStudioVersion", "11.0");
 
-            Project project = new Project(XmlReader.Create(new StringReader(content)), globalProperties, "Fake", "FakeSubToolset", fakeProjectCollection, ProjectLoadSettings.Default);
+            Project project = new Project(XmlReader.Create(new StringReader(content)), globalProperties, new ProjectToolsOptions("Fake", "FakeSubToolset"), fakeProjectCollection, ProjectLoadSettings.Default);
 
             MockLogger logger = new MockLogger();
             bool result = project.Build(logger);
@@ -4140,7 +4140,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
 
             ProjectCollection fakeProjectCollection = GetProjectCollectionWithFakeToolset(null /* no project collection global properties */);
 
-            Project project = new Project(XmlReader.Create(new StringReader(content)), null, "Fake", "FakeSubToolset", fakeProjectCollection, ProjectLoadSettings.Default);
+            Project project = new Project(XmlReader.Create(new StringReader(content)), null, new ProjectToolsOptions("Fake", "FakeSubToolset"), fakeProjectCollection, ProjectLoadSettings.Default);
 
             MockLogger logger = new MockLogger();
             bool result = project.Build(logger);
@@ -4173,7 +4173,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
 
                 // No global properties are passed to the ProjectCollection so VisualStudioVersion should not be set
                 //
-                Project project = new Project(null, ObjectModelHelpers.MSBuildDefaultToolsVersion, new ProjectCollection());
+                Project project = new Project(null, ProjectToolsOptions.Default, new ProjectCollection());
 
                 string actual = project.GetPropertyValue(Constants.VisualStudioVersionPropertyName);
 

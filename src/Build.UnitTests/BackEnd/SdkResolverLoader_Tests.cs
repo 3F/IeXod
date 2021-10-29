@@ -16,10 +16,11 @@ using net.r_eg.IeXod.UnitTests;
 using Xunit;
 using Xunit.Abstractions;
 using Exception = System.Exception;
-using SdkResolverBase = net.r_eg.IeXod.Framework.SdkResolver;
-using SdkResolverContextBase = net.r_eg.IeXod.Framework.SdkResolverContext;
-using SdkResultBase = net.r_eg.IeXod.Framework.SdkResult;
-using SdkResultFactoryBase = net.r_eg.IeXod.Framework.SdkResultFactory;
+using SdkResolverBase = net.r_eg.IeXod.Sdk.SdkResolver;
+using SdkResolverContextBase = net.r_eg.IeXod.Sdk.SdkResolverContext;
+using SdkResultBase = net.r_eg.IeXod.Sdk.SdkResult;
+using SdkResultFactoryBase = net.r_eg.IeXod.Sdk.SdkResultFactory;
+using net.r_eg.IeXod.Sdk;
 
 namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 {
@@ -46,7 +47,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
         {
             var loader = new SdkResolverLoader();
 
-            var resolvers = loader.LoadResolvers(_loggingContext, new MockElementLocation("file"));
+            var resolvers = loader.LoadResolvers(_loggingContext, new MockElementLocation("file"), SdkEnv.Empty);
 
             resolvers.Select(i => i.GetType().FullName).ShouldBe(new [] { typeof(DefaultSdkResolver).FullName });
             
@@ -106,7 +107,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             InvalidProjectFileException exception = Should.Throw<InvalidProjectFileException>(() =>
             {
-                sdkResolverLoader.LoadResolvers(_loggingContext, ElementLocation.EmptyLocation);
+                sdkResolverLoader.LoadResolvers(_loggingContext, ElementLocation.EmptyLocation, SdkEnv.Empty);
             });
 
             exception.Message.ShouldBe($"The SDK resolver type \"{nameof(MockSdkResolverThatDoesNotLoad)}\" failed to load. A8BB8B3131D3475D881ACD3AF8D75BD6");
@@ -138,7 +139,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             InvalidProjectFileException exception = Should.Throw<InvalidProjectFileException>(() =>
             {
-                sdkResolverLoader.LoadResolvers(_loggingContext, ElementLocation.EmptyLocation);
+                sdkResolverLoader.LoadResolvers(_loggingContext, ElementLocation.EmptyLocation, SdkEnv.Empty);
             });
 
             exception.Message.ShouldStartWith($"The SDK resolver type \"{nameof(MockSdkResolverNoPublicConstructor)}\" failed to load.");
@@ -169,7 +170,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             InvalidProjectFileException exception = Should.Throw<InvalidProjectFileException>(() =>
             {
-                sdkResolverLoader.LoadResolvers(_loggingContext, ElementLocation.EmptyLocation);
+                sdkResolverLoader.LoadResolvers(_loggingContext, ElementLocation.EmptyLocation, SdkEnv.Empty);
             });
 
             exception.Message.ShouldBe($"The SDK resolver assembly \"{assemblyPath}\" could not be loaded. {expectedMessage}");

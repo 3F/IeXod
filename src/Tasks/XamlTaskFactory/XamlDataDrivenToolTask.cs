@@ -47,7 +47,7 @@ namespace net.r_eg.IeXod.Tasks.Xaml
 
             _logPrivate = new TaskLoggingHelper(this)
             {
-                TaskResources = AssemblyResources.PrimaryResources,
+                TaskResources = AssemblyResources.PrimaryTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
         }
@@ -426,7 +426,7 @@ namespace net.r_eg.IeXod.Tasks.Xaml
         {
             _logPrivate = new TaskLoggingHelper(this)
             {
-                TaskResources = AssemblyResources.PrimaryResources,
+                TaskResources = AssemblyResources.PrimaryTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
         }
@@ -446,7 +446,7 @@ namespace net.r_eg.IeXod.Tasks.Xaml
         /// <summary>
         /// Validates all of the set properties that have either a string type or an integer type
         /// </summary>
-        protected override bool ValidateParameters()
+        protected internal override bool ValidateParameters()
         {
             return !_logPrivate.HasLoggedErrors && !Log.HasLoggedErrors;
         }

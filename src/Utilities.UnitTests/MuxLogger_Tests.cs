@@ -93,7 +93,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
             MockLogger mockLogger2 = new MockLogger();
             mockLogger2.LogBuildFinished = false;
             ProjectCollection projectCollection = new ProjectCollection();
-            ProjectInstance project = (new Project(XmlReader.Create(new StringReader(projectBody)), null, ObjectModelHelpers.MSBuildDefaultToolsVersion, projectCollection)).CreateProjectInstance();
+            ProjectInstance project = (new Project(XmlReader.Create(new StringReader(projectBody)), null, ProjectToolsOptions.Default, projectCollection)).CreateProjectInstance();
             BuildParameters parameters = new BuildParameters(projectCollection);
             parameters.Loggers = new ILogger[] { mockLogger2 };
             buildManager.Build(parameters, new BuildRequestData(project, new string[0], null));
@@ -102,7 +102,7 @@ namespace Microsoft.VisualStudio.Build.UnitTest
             MuxLogger muxLogger = new MuxLogger();
             muxLogger.Verbosity = LoggerVerbosity.Normal;
             projectCollection = new ProjectCollection();
-            project = (new Project(XmlReader.Create(new StringReader(projectBody)), null, ObjectModelHelpers.MSBuildDefaultToolsVersion, projectCollection)).CreateProjectInstance();
+            project = (new Project(XmlReader.Create(new StringReader(projectBody)), null, ProjectToolsOptions.Default, projectCollection)).CreateProjectInstance();
             parameters = new BuildParameters(projectCollection);
             parameters.Loggers = new ILogger[] { muxLogger };
             buildManager.BeginBuild(parameters);

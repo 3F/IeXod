@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\common.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
-    <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget>
+    <TargetFrameworks>$(IeXodTestTFM)</TargetFrameworks>
+    <!-- <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget> -->
     
     <AssemblyName>net.r_eg.IeXod.Utilities.UnitTests</AssemblyName>
     <IsTestProject>true</IsTestProject>
@@ -10,16 +11,54 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Shouldly" />
-    <PackageReference Include="System.IO.FileSystem.Primitives" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Build.Tasks" />
+    <Compile Include="..\Shared\Debugging\PrintLineDebugger.cs">
+      <Link>Shared\Debugging\PrintLineDebugger.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\Debugging\PrintLineDebuggerWriters.cs">
+      <Link>Shared\Debugging\PrintLineDebuggerWriters.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\Logger.cs">
+      <Link>Utilities\Logger.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\MuxLogger.cs">
+      <Link>Utilities\MuxLogger.cs</Link>
+    </Compile>
+  </ItemGroup>
 
-    <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" />
+  <!-- IeXod. The Tasks feature is temporarily disabled -->
+  <ItemGroup>
+    <Compile Remove="MockTask.cs" />
+    <Compile Remove="MuxLogger_Tests.cs" />
+    <Compile Remove="TaskItem_Tests.cs" />
+    <Compile Remove="TaskLoggingHelper_Tests.cs" />
+    <Compile Remove="ToolTask_Tests.cs" />
+    <Compile Remove="TrackedDependencies\FileTrackerTests.cs" />
+    <Compile Remove="TrackedDependencies\TrackedDependenciesTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="CommandLineBuilder_Tests.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Shouldly" Version="$(ShouldlyVersion)" />
+    <PackageReference Include="System.IO.FileSystem.Primitives" Version="$(SystemIOFileSystemPrimitivesVersion)" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Build.Tasks" Version="$(MicrosoftCodeAnalysisBuildTasksVersion)" />
+
+    <!-- <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" /> -->
     <ProjectReference Include="..\Build\IeXod.csproj" />
-    <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" />
-    <ProjectReference Include="..\Framework\IeXod.Framework.csproj" />
-    <ProjectReference Include="..\MSBuild\MSBuild.csproj" ReferenceOutputAssembly="false" OutputItemType="ReferenceCopyLocalPaths" />
+    <!-- <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" /> -->
+    <!-- <ProjectReference Include="..\Framework\IeXod.Framework.csproj" /> -->
+    <!-- <ProjectReference Include="..\MSBuild\MSBuild.csproj" ReferenceOutputAssembly="false" OutputItemType="ReferenceCopyLocalPaths" /> -->
     <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(xunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xunitrunnervisualstudioVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +74,7 @@
     <Compile Include="..\Shared\UnitTests\TestEnvironment.cs">
       <Link>TestEnvironment.cs</Link>
     </Compile>
-    <Compile Include="..\Shared\StringExtensions.cs" />
+    <!-- <Compile Include="..\Shared\StringExtensions.cs" /> -->
     <Compile Include="..\Build\BackEnd\Node\NativeMethods.cs">
       <Link>NativeMethods.cs</Link>
     </Compile>

@@ -28,7 +28,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -121,7 +121,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyName=`net.r_eg.IeXod.Tasks.Core, Version=15.1.0.0` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyName=`IeXod.Tasks, Version=15.1.0.0` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -138,7 +138,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             MockLogger mockLogger = Helpers.BuildProjectWithNewOMExpectSuccess(projectFileContents);
             mockLogger.AssertLogContains("Hello, World!");
-            mockLogger.AssertLogContains("net.r_eg.IeXod.Tasks.Core, Version=15.1.0.0");
+            mockLogger.AssertLogContains("IeXod.Tasks, Version=15.1.0.0");
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_VerifyRequiredAttribute` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_VerifyRequiredAttribute` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text Required='true'/>
                           </ParameterGroup>
@@ -176,7 +176,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_RuntimeException` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_RuntimeException` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -205,7 +205,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyLanguage` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyLanguage` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -235,7 +235,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyType` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyType` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -264,7 +264,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptySource` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptySource` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -293,7 +293,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyReferenceInclude` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyReferenceInclude` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -323,7 +323,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyUsingNamespace` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyUsingNamespace` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -352,7 +352,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_ReferenceNotPath` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_ReferenceNotPath` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -381,7 +381,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_ReferenceInvalidChars` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_ReferenceInvalidChars` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -411,7 +411,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_UsingInvalidChars` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_UsingInvalidChars` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -441,7 +441,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_SourcesInvalidFile` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_SourcesInvalidFile` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -469,7 +469,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_MissingCodeElement` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_MissingCodeElement` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -493,7 +493,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactoryTestExtraUsing` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactoryTestExtraUsing` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -523,7 +523,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`DateTaskFromCodeFactory_BuildTaskDateCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll`>
+                        <UsingTask TaskName=`DateTaskFromCodeFactory_BuildTaskDateCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll`>
                             <ParameterGroup>
                                <CurrentDate ParameterType=`System.String` Output=`true` />
                             </ParameterGroup>
@@ -555,7 +555,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CodeMethod_MethodImplmentationVB` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll`>
+                        <UsingTask TaskName=`CodeMethod_MethodImplmentationVB` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll`>
                         <ParameterGroup>
                             <Text ParameterType='System.String' />
                         </ParameterGroup>
@@ -587,7 +587,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactoryTestSystemVB` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactoryTestSystemVB` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -616,7 +616,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactoryTestSystemCS` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactoryTestSystemCS` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -660,7 +660,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactoryTestExtraReferenceCS` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactoryTestExtraReferenceCS` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -697,7 +697,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CodeMethod_MethodImplementationJScriptNet` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll`>
+                        <UsingTask TaskName=`CodeMethod_MethodImplementationJScriptNet` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll`>
                         <ParameterGroup>
                             <Text ParameterType='System.String' />
                         </ParameterGroup>
@@ -730,7 +730,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CodeMethod_MethodImplementation` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll`>
+                        <UsingTask TaskName=`CodeMethod_MethodImplementation` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll`>
                         <ParameterGroup>
                             <Text ParameterType='System.String' />
                         </ParameterGroup>
@@ -763,7 +763,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`LogNameValue_ClassImplementationTest` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll`>
+                        <UsingTask TaskName=`LogNameValue_ClassImplementationTest` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll`>
                         <ParameterGroup>
                             <Name ParameterType='System.String' />
                             <Value ParameterType='System.String' />
@@ -829,7 +829,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`ClassImplementationTestDoesNotInheritFromITask` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll`>
+                        <UsingTask TaskName=`ClassImplementationTestDoesNotInheritFromITask` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll`>
                         <ParameterGroup>
                             <Name ParameterType='System.String' />
                             <Value ParameterType='System.String' />
@@ -888,7 +888,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyType` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyType` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -920,7 +920,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyType` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyType` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -954,7 +954,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyType` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_EmptyType` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -1030,7 +1030,7 @@ namespace net.r_eg.IeXod.UnitTests
             {
                 string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`LogNameValue_ClassSourcesTest` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll`>
+                        <UsingTask TaskName=`LogNameValue_ClassSourcesTest` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll`>
                         <ParameterGroup>
                             <Name ParameterType='System.String' />
                             <Value ParameterType='System.String' />
@@ -1066,7 +1066,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -1116,7 +1116,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>

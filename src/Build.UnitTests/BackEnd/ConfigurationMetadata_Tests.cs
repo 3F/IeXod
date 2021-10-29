@@ -159,7 +159,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 </Project>");
 
             Dictionary<string, string> globalProperties = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            Project project = new Project(XmlReader.Create(new StringReader(projectBody)), globalProperties, ObjectModelHelpers.MSBuildDefaultToolsVersion);
+            Project project = new Project(XmlReader.Create(new StringReader(projectBody)), globalProperties, ProjectToolsOptions.Default);
             project.FullPath = "file";
 
             return project;

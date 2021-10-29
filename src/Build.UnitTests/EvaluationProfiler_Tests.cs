@@ -319,7 +319,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
         /// </summary>
         private Project CreateProject(string contents, string toolsVersion, ProjectCollection projectCollection)
         {
-            Project project = new Project(XmlReader.Create(new StringReader(contents)), null, toolsVersion, projectCollection)
+            Project project = new Project(XmlReader.Create(new StringReader(contents)), null, new ProjectToolsOptions(toolsVersion), projectCollection)
             {
                 FullPath = _env.CreateFile().Path
             };

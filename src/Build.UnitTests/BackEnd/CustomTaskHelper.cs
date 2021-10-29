@@ -29,7 +29,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string referenceAssembliesPath = ToolLocationHelper.GetPathToBuildTools(ToolLocationHelper.CurrentToolsVersion);
 
-            string[] referenceAssemblies = new string[] { "System.dll", Path.Combine(referenceAssembliesPath, "net.r_eg.IeXod.Framework.dll"), Path.Combine(referenceAssembliesPath, "net.r_eg.IeXod.Utilities.Core.dll"), Path.Combine(referenceAssembliesPath, "net.r_eg.IeXod.Tasks.Core.dll") };
+            string[] referenceAssemblies = new string[] { "System.dll", Path.Combine(referenceAssembliesPath, "net.r_eg.IeXod.Framework.dll"), Path.Combine(referenceAssembliesPath, "net.r_eg.IeXod.Utilities.Core.dll"), Path.Combine(referenceAssembliesPath, "IeXod.Tasks.dll") };
             return GetAssemblyForTask(taskContents, referenceAssemblies);
         }
 

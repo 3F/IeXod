@@ -50,8 +50,9 @@ namespace net.r_eg.IeXod.Tasks
                 String.Empty,
                 new List<string>
                 {
-                    "net.r_eg.IeXod.Framework",
-                    "net.r_eg.IeXod.Utilities.Core",
+                     "IeXod",
+                    //"Microsoft.Build.Framework",
+                    //"Microsoft.Build.Utilities.Core",
                     "mscorlib",
                     "netstandard"
                 }
@@ -145,7 +146,7 @@ namespace net.r_eg.IeXod.Tasks
         {
             _log = new TaskLoggingHelper(taskFactoryLoggingHost, taskName)
             {
-                TaskResources = AssemblyResources.PrimaryResources,
+                TaskResources = AssemblyResources.PrimaryTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
 

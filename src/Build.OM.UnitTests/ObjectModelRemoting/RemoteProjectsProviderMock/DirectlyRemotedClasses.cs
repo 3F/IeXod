@@ -16,7 +16,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.ObjectModelRemoting
     using net.r_eg.IeXod.Framework;
     using net.r_eg.IeXod.Logging;
     using System.Diagnostics;
-
+    using net.r_eg.IeXod.Sdk;
 
     internal static class DirectlyRemotedClasses
     {

@@ -229,7 +229,7 @@ $@"  <assembly alias=""System.Windows.Forms"" name=""System.Windows.Forms, Versi
         [Fact]
         public void ResXFileRefToBitmap()
         {
-            string bitmapPath = Build.UnitTests.GenerateResource_Tests.Utilities.CreateWorldsSmallestBitmap();
+            string bitmapPath = IeXod.UnitTests.GenerateResource_Tests.Utilities.CreateWorldsSmallestBitmap();
 
             var resxWithLinkedBitmap = MSBuildResXReader.GetResourcesFromString(
                 ResXHelper.SurroundWithBoilerplate(

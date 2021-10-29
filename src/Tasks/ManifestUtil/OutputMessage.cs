@@ -76,7 +76,7 @@ namespace net.r_eg.IeXod.Tasks.Deployment.ManifestUtilities
     [ComVisible(false)]
     public sealed class OutputMessageCollection : IEnumerable
     {
-        private readonly System.Resources.ResourceManager _taskResources = Shared.AssemblyResources.PrimaryResources;
+        private readonly System.Resources.ResourceManager _taskResources = Shared.AssemblyResources.PrimaryTasksResources;
         private readonly List<OutputMessage> _list = new List<OutputMessage>();
 
         internal OutputMessageCollection()

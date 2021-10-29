@@ -38,7 +38,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         public void TestLoadXml()
         {
             TaskParser tp = new TaskParser();
-            string s = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string s = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                            <Rule Name=`TaskGeneratorLoadTest`>
                              <BoolProperty Name=`TestProperty1` Switch=`tp` />
                            </Rule>
@@ -53,7 +53,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestGetTaskName()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <BoolProperty Name=`GlobalOptimization` Switch=`Og` ReverseSwitch=`Og-` />
                                      </Rule>
@@ -69,7 +69,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact(Skip = "Ignored in MSTest")]
         public void TestGetBaseClass()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL` BaseClass=`mybase.class`>
                                        <BoolProperty Name=`GlobalOptimization` Switch=`Og` ReverseSwitch=`Og-` />
                                      </Rule>
@@ -85,7 +85,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact(Skip = "Ignored in MSTest")]
         public void TestGetResourceNamespace()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL` ResourceNamespace=`net.r_eg.IeXod.NativeTasks.Strings`>
                                        <BoolProperty Name=`GlobalOptimization` Switch=`Og` ReverseSwitch=`Og-` />
                                      </Rule>
@@ -101,7 +101,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact(Skip = "Ignored in MSTest")]
         public void TestGetNamespace()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL` Namespace=`mynamespace`>
                                        <BoolProperty Name=`GlobalOptimization` Switch=`Og` ReverseSwitch=`Og-` />
                                      </Rule>
@@ -121,7 +121,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
 
             try
             {
-                string incorrectXmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+                string incorrectXmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                            <Rule>
                              <BoolProperty Name=`TestProperty1` Switch=`tp` />
                            </Rule>
@@ -146,7 +146,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
 
             try
             {
-                string incorrectXmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+                string incorrectXmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                            <Rule Name=`TaskGeneratorLoadTest`>
                              <BoolProperty Name=`TestProperty1` Switch=`tp` />
                            </Rule>
@@ -167,7 +167,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestBasicReversibleBooleanSwitches()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <BoolProperty Name=`GlobalOptimizations` Switch=`Og` ReverseSwitch=`Og-` />
                                        <BoolProperty Name=`IntrinsicFunctions` Switch=`Oi` ReverseSwitch=`Oi:NO` />
@@ -198,7 +198,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         public void TestParseIncorrect_PropertyNamesMustBeUnique()
         {
             string incorrectXmlContents = @"<ProjectSchemaDefinitions
-                                       xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework`
+                                       xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks`
                                        xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml`
                                        xmlns:sys=`clr-namespace:System;assembly=mscorlib`
                                        xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -219,7 +219,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestBasicNonReversibleBooleanSwitch()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <BoolProperty Name=`KeepComments` Switch=`C` />
                                      </Rule>
@@ -244,7 +244,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestBasicNonReversibleBooleanSwitch_WithDefault()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <BoolProperty Name=`SuppressStartupBanner` Switch=`nologo` Default=`true` />
                                      </Rule>
@@ -269,7 +269,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestBasicEnumProperty()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <EnumProperty Name=`GeneratePreprocessedFile` Switch=`nologo`>
                                          <EnumValue Name=`Disabled` />
@@ -296,7 +296,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestDynamicEnumProperty()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <DynamicEnumProperty Name=`CLBeforeTargets` />
                                      </Rule>
@@ -317,7 +317,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestBasicStringProperty()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <StringProperty Name=`TargetAssembly` Switch=`/target:&quot;[value]&quot;` />
                                      </Rule>
@@ -336,7 +336,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestLoadAndParseFromAbsoluteFilePath()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <StringProperty Name=`TargetAssembly` Switch=`/target:&quot;[value]&quot;` />
                                      </Rule>
@@ -370,7 +370,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestBasicStringArrayProperty()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <StringListProperty Name=`TargetAssembly` Switch=`/target:&quot;[value]&quot;` Separator=`;` />
                                      </Rule>
@@ -393,7 +393,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestStringArrayPropertyWithDataSource()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <StringListProperty Name=`TargetAssembly` Switch=`/target:&quot;[value]&quot;` Separator=`;`>
                                          <StringListProperty.DataSource>
@@ -420,7 +420,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Fact]
         public void TestStringArrayPropertyWithDataSource_DataSourceIsItem()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <StringListProperty Name=`TargetAssembly` Switch=`/target:&quot;[value]&quot;` Separator=`;`>
                                          <StringListProperty.DataSource>
@@ -456,7 +456,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Trait("Category", "mono-osx-failing")]
         public void TestGenerateCodeToStream()
         {
-            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xmlContents = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                      <Rule Name=`CL`>
                                        <EnumProperty Name=`GeneratePreprocessedFile` Switch=`nologo`>
                                          <EnumValue Name=`Disabled` />
@@ -485,9 +485,11 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
                 // Add an assembly reference.
                 cp.ReferencedAssemblies.Add("System.dll");
                 cp.ReferencedAssemblies.Add("System.Xml.dll");
-                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "net.r_eg.IeXod.Utilities.Core.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "net.r_eg.IeXod.Tasks.Core.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "net.r_eg.IeXod.Framework.dll"));
+                cp.ReferencedAssemblies.Add("IeXod.dll");
+                cp.ReferencedAssemblies.Add("IeXod.Tasks.dll");
+                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "Microsoft.Build.Framework.dll"));
+                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "Microsoft.Build.Utilities.Core.dll"));
+                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "Microsoft.Build.Tasks.Core.dll"));
                 cp.ReferencedAssemblies.Add("System.Data.dll");
 
                 // Generate an executable instead of 
@@ -509,7 +511,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
         [Trait("Category", "mono-osx-failing")]
         public void TestGenerateToFile()
         {
-            string xml = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+            string xml = @"<ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                              <Rule Name=`CL`>
                                <EnumProperty Name=`GeneratePreprocessedFile` Switch=`nologo`>
                                  <EnumValue Name=`Disabled` />
@@ -542,9 +544,11 @@ namespace net.r_eg.IeXod.UnitTests.XamlTaskFactory_Tests
                 // Add an assembly reference.
                 cp.ReferencedAssemblies.Add("System.dll");
                 cp.ReferencedAssemblies.Add("System.Xml.dll");
-                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "net.r_eg.IeXod.Utilities.Core.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "net.r_eg.IeXod.Tasks.Core.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "net.r_eg.IeXod.Framework.dll"));
+                cp.ReferencedAssemblies.Add("IeXod.dll");
+                cp.ReferencedAssemblies.Add("IeXod.Tasks.dll");
+                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "Microsoft.Build.Framework.dll"));
+                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "Microsoft.Build.Utilities.Core.dll"));
+                cp.ReferencedAssemblies.Add(Path.Combine(XamlTestHelpers.PathToMSBuildBinaries, "Microsoft.Build.Tasks.Core.dll"));
                 cp.ReferencedAssemblies.Add("System.Data.dll");
 
                 // Generate an executable instead of 

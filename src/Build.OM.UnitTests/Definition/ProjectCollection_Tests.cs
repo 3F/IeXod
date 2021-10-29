@@ -407,14 +407,14 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
 
             var globalProperties1 = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "p", "v1" } };
             var project1 =
-                new Project(xml, globalProperties1, ObjectModelHelpers.MSBuildDefaultToolsVersion)
+                new Project(xml, globalProperties1, ProjectToolsOptions.Default)
                 {
                     FullPath = projectDirectory
                 };
 
             var globalProperties2 = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "p", "v2" } };
             var project2 =
-                new Project(xml, globalProperties2, ObjectModelHelpers.MSBuildDefaultToolsVersion)
+                new Project(xml, globalProperties2, ProjectToolsOptions.Default)
                 {
                     FullPath = projectDirectory
                 };
@@ -504,11 +504,11 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
 
             ProjectRootElement xml = ProjectRootElement.Create();
 
-            var project1 = new Project(xml, null, "2.0") { FullPath = "c:\\1" };
+            var project1 = new Project(xml, null, new ProjectToolsOptions("2.0")) { FullPath = "c:\\1" };
 
-            var project2 = new Project(xml, null, ObjectModelHelpers.MSBuildDefaultToolsVersion) { FullPath = "c:\\1" };
+            var project2 = new Project(xml, null, ProjectToolsOptions.Default) { FullPath = "c:\\1" };
             Assert.True(ReferenceEquals(project1, ProjectCollection.GlobalProjectCollection.LoadProject("c:\\1", null, "2.0")));
-            Assert.True(ReferenceEquals(project2, ProjectCollection.GlobalProjectCollection.LoadProject("c:\\1", null, ObjectModelHelpers.MSBuildDefaultToolsVersion)));
+            Assert.True(ReferenceEquals(project2, ProjectCollection.GlobalProjectCollection.LoadProject("c:\\1", null, ProjectToolsOptions.Default.ToolsVersion)));
         }
 
         /// <summary>
@@ -1203,7 +1203,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
 
             expectedChange = ProjectCollectionChangedState.Loggers;
             dirtyRaised = false;
-            collection.RegisterLoggers(new Build.Framework.ILogger[] { new MockLogger(), new MockLogger() });
+            collection.RegisterLoggers(new IeXod.Framework.ILogger[] { new MockLogger(), new MockLogger() });
             Assert.True(dirtyRaised);
 
             expectedChange = ProjectCollectionChangedState.Loggers;

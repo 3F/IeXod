@@ -499,7 +499,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName='test' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll' >
+                        <UsingTask TaskName='test' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' >
                             <Task>
                               <Using Namespace='System' />
                               <Using Namespace='System.Threading' />
@@ -535,7 +535,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName='test' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll' >
+                        <UsingTask TaskName='test' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' >
                             <Task>
                               <Using Namespace='System' />
                               <Using Namespace='System.Threading' />
@@ -571,7 +571,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName='test' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll' >
+                        <UsingTask TaskName='test' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' >
                             <Task>
                               <Using Namespace='System' />
                               <Using Namespace='System.Threading' />
@@ -607,7 +607,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName='test' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll' >
+                        <UsingTask TaskName='test' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' >
                             <Task>
                               <Using Namespace='System' />
                               <Using Namespace='System.Threading' />
@@ -644,7 +644,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string projectFileContents = @"
 <Project>
-  <UsingTask TaskName='test' TaskFactory='RoslynCodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll'>
+  <UsingTask TaskName='test' TaskFactory='RoslynCodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll'>
     <Task>
       <Code><![CDATA[
         var globalProperties = ((IBuildEngine6)BuildEngine).GetGlobalProperties();
@@ -689,7 +689,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string projectFileContents = @"
 <Project>
-  <UsingTask TaskName='test' TaskFactory='RoslynCodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll'>
+  <UsingTask TaskName='test' TaskFactory='RoslynCodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll'>
     <Task>
       <Code><![CDATA[
         var globalProperties = ((IBuildEngine6)BuildEngine).GetGlobalProperties();

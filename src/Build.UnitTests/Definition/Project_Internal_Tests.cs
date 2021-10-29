@@ -232,7 +232,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             {
                 var projectCollection = env.CreateProjectCollection().Collection;
 
-                var project = new Project(XmlReader.Create(new StringReader(projectContents)), new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, projectCollection, ProjectLoadSettings.DoNotEvaluateElementsWithFalseCondition);
+                var project = new Project(XmlReader.Create(new StringReader(projectContents)), new Dictionary<string, string>(), ProjectToolsOptions.Default, projectCollection, ProjectLoadSettings.DoNotEvaluateElementsWithFalseCondition);
 
                 var data = project.TestOnlyGetPrivateData;
 

@@ -28,7 +28,7 @@ namespace net.r_eg.IeXod.Shared
     /// <summary>
     /// Used to specify the targeted bitness of the .NET Framework for some methods of FrameworkLocationHelper
     /// </summary>
-    internal enum DotNetFrameworkArchitecture
+    internal enum DotNetFrameworkArchitectureInternal
     {
         /// <summary>
         /// Indicates the .NET Framework that is currently being run under.  
@@ -354,7 +354,7 @@ namespace net.r_eg.IeXod.Shared
             {
                 return NativeMethodsShared.IsUnixLike
                            ? Path.Combine(NativeMethodsShared.FrameworkBasePath, dotNetFrameworkVersionFolderPrefixV11)
-                           : GetPathToDotNetFrameworkV11(DotNetFrameworkArchitecture.Current);
+                           : GetPathToDotNetFrameworkV11(DotNetFrameworkArchitectureInternal.Current);
             }
         }
 
@@ -364,7 +364,7 @@ namespace net.r_eg.IeXod.Shared
             {
                 return NativeMethodsShared.IsUnixLike
                            ? Path.Combine(NativeMethodsShared.FrameworkBasePath, dotNetFrameworkVersionFolderPrefixV20)
-                           : GetPathToDotNetFrameworkV20(DotNetFrameworkArchitecture.Current);
+                           : GetPathToDotNetFrameworkV20(DotNetFrameworkArchitectureInternal.Current);
             }
         }
 
@@ -374,7 +374,7 @@ namespace net.r_eg.IeXod.Shared
             {
                 return NativeMethodsShared.IsUnixLike
                            ? Path.Combine(NativeMethodsShared.FrameworkBasePath, dotNetFrameworkVersionFolderPrefixV30)
-                           : GetPathToDotNetFrameworkV30(DotNetFrameworkArchitecture.Current);
+                           : GetPathToDotNetFrameworkV30(DotNetFrameworkArchitectureInternal.Current);
             }
         }
 
@@ -384,7 +384,7 @@ namespace net.r_eg.IeXod.Shared
             {
                 return NativeMethodsShared.IsUnixLike
                            ? Path.Combine(NativeMethodsShared.FrameworkBasePath, dotNetFrameworkVersionFolderPrefixV35)
-                           : GetPathToDotNetFrameworkV35(DotNetFrameworkArchitecture.Current);
+                           : GetPathToDotNetFrameworkV35(DotNetFrameworkArchitectureInternal.Current);
             }
         }
 
@@ -394,7 +394,7 @@ namespace net.r_eg.IeXod.Shared
             {
                 return NativeMethodsShared.IsUnixLike
                            ? Path.Combine(NativeMethodsShared.FrameworkBasePath, dotNetFrameworkVersionFolderPrefixV40)
-                           : GetPathToDotNetFrameworkV40(DotNetFrameworkArchitecture.Current);
+                           : GetPathToDotNetFrameworkV40(DotNetFrameworkArchitectureInternal.Current);
             }
         }
 
@@ -404,7 +404,7 @@ namespace net.r_eg.IeXod.Shared
             {
                 return NativeMethodsShared.IsUnixLike
                            ? Path.Combine(NativeMethodsShared.FrameworkBasePath, dotNetFrameworkVersionFolderPrefixV45)
-                           : GetPathToDotNetFrameworkV45(DotNetFrameworkArchitecture.Current);
+                           : GetPathToDotNetFrameworkV45(DotNetFrameworkArchitectureInternal.Current);
             }
         }
 
@@ -628,42 +628,42 @@ namespace net.r_eg.IeXod.Shared
             return dotNetFrameworkSpec.GetPathToDotNetFrameworkSdk(visualStudioSpec);
         }
 
-        internal static string GetPathToDotNetFrameworkV11(DotNetFrameworkArchitecture architecture)
+        internal static string GetPathToDotNetFrameworkV11(DotNetFrameworkArchitectureInternal architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion11, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV20(DotNetFrameworkArchitecture architecture)
+        internal static string GetPathToDotNetFrameworkV20(DotNetFrameworkArchitectureInternal architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion20, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV30(DotNetFrameworkArchitecture architecture)
+        internal static string GetPathToDotNetFrameworkV30(DotNetFrameworkArchitectureInternal architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion30, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV35(DotNetFrameworkArchitecture architecture)
+        internal static string GetPathToDotNetFrameworkV35(DotNetFrameworkArchitectureInternal architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion35, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV40(DotNetFrameworkArchitecture architecture)
+        internal static string GetPathToDotNetFrameworkV40(DotNetFrameworkArchitectureInternal architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion40, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV45(DotNetFrameworkArchitecture architecture)
+        internal static string GetPathToDotNetFrameworkV45(DotNetFrameworkArchitectureInternal architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion45, architecture);
         }
 
         internal static string GetPathToDotNetFramework(Version version)
         {
-            return GetPathToDotNetFramework(version, DotNetFrameworkArchitecture.Current);
+            return GetPathToDotNetFramework(version, DotNetFrameworkArchitectureInternal.Current);
         }
 
-        internal static string GetPathToDotNetFramework(Version version, DotNetFrameworkArchitecture architecture)
+        internal static string GetPathToDotNetFramework(Version version, DotNetFrameworkArchitectureInternal architecture)
         {
             return GetDotNetFrameworkSpec(version).GetPathToDotNetFramework(architecture);
         }
@@ -717,7 +717,7 @@ namespace net.r_eg.IeXod.Shared
             string prefix,
             DirectoryExists directoryExists,
             GetDirectories getDirectories,
-            DotNetFrameworkArchitecture architecture
+            DotNetFrameworkArchitectureInternal architecture
         )
         {
             if (!NativeMethodsShared.IsWindows)
@@ -744,7 +744,7 @@ namespace net.r_eg.IeXod.Shared
             // If the current runtime starts with correct prefix, then this is the runtime we want to use.
             // However, only if we're requesting current architecture -- otherwise, the base path may be different, so we'll need to look it up. 
             string leaf = Path.GetFileName(currentRuntimePath);
-            if (leaf.StartsWith(prefix, StringComparison.Ordinal) && architecture == DotNetFrameworkArchitecture.Current)
+            if (leaf.StartsWith(prefix, StringComparison.Ordinal) && architecture == DotNetFrameworkArchitectureInternal.Current)
             {
                 return currentRuntimePath;
             }
@@ -756,7 +756,7 @@ namespace net.r_eg.IeXod.Shared
 
             int indexOfFramework64 = baseLocation.IndexOf("Framework64", StringComparison.OrdinalIgnoreCase);
 
-            if (indexOfFramework64 != -1 && architecture == DotNetFrameworkArchitecture.Bitness32)
+            if (indexOfFramework64 != -1 && architecture == DotNetFrameworkArchitectureInternal.Bitness32)
             {
                 // need to get rid of just the 64, but want to look up 'Framework64' rather than '64' to avoid the case where 
                 // the path is something like 'C:\MyPath\64\Framework64'.  9 = length of 'Framework', to make the index match 
@@ -765,7 +765,7 @@ namespace net.r_eg.IeXod.Shared
                 string tempLocation = baseLocation;
                 baseLocation = tempLocation.Substring(0, indexOf64) + tempLocation.Substring(indexOf64 + 2, tempLocation.Length - indexOf64 - 2);
             }
-            else if (indexOfFramework64 == -1 && architecture == DotNetFrameworkArchitecture.Bitness64)
+            else if (indexOfFramework64 == -1 && architecture == DotNetFrameworkArchitectureInternal.Bitness64)
             {
                 // need to add 64 -- since this is a heuristic, we assume that we just need to append.  
                 baseLocation = baseLocation + "64";
@@ -900,7 +900,7 @@ namespace net.r_eg.IeXod.Shared
         /// <param name="architecture">Target build tools architecture.</param>
         /// <returns>The path to the build tools folder for that ToolsVersion, if it exists, or 
         /// null otherwise</returns>
-        internal static string GeneratePathToBuildToolsForToolsVersion(string toolsVersion, DotNetFrameworkArchitecture architecture)
+        internal static string GeneratePathToBuildToolsForToolsVersion(string toolsVersion, DotNetFrameworkArchitectureInternal architecture)
         {
             if (string.Compare(toolsVersion, MSBuildConstants.CurrentToolsVersion, StringComparison.Ordinal) == 0)
             {
@@ -1003,13 +1003,13 @@ namespace net.r_eg.IeXod.Shared
         /// <summary>
         /// Look up the path to the build tools directory for the requested ToolsVersion in the .exe.config file of this executable 
         /// </summary>
-        private static string GetPathToBuildToolsFromEnvironment(DotNetFrameworkArchitecture architecture)
+        private static string GetPathToBuildToolsFromEnvironment(DotNetFrameworkArchitectureInternal architecture)
         {
             switch (architecture)
             {
-                case DotNetFrameworkArchitecture.Bitness64:
+                case DotNetFrameworkArchitectureInternal.Bitness64:
                     return BuildEnvironmentHelper.Instance.MSBuildToolsDirectory64;
-                case DotNetFrameworkArchitecture.Bitness32:
+                case DotNetFrameworkArchitectureInternal.Bitness32:
                     return BuildEnvironmentHelper.Instance.MSBuildToolsDirectory32;
                 default:
                     return BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory;
@@ -1020,7 +1020,7 @@ namespace net.r_eg.IeXod.Shared
         /// <summary>
         /// Look up the path to the build tools directory in the registry for the requested ToolsVersion and requested architecture  
         /// </summary>
-        private static string GetPathToBuildToolsFromRegistry(string toolsVersion, DotNetFrameworkArchitecture architecture)
+        private static string GetPathToBuildToolsFromRegistry(string toolsVersion, DotNetFrameworkArchitectureInternal architecture)
         {
             string toolsVersionSpecificKey = ToolsVersionsRegistryPath + "\\" + toolsVersion;
 
@@ -1028,13 +1028,13 @@ namespace net.r_eg.IeXod.Shared
 
             switch (architecture)
             {
-                case DotNetFrameworkArchitecture.Bitness32:
+                case DotNetFrameworkArchitectureInternal.Bitness32:
                     view = RegistryView.Registry32;
                     break;
-                case DotNetFrameworkArchitecture.Bitness64:
+                case DotNetFrameworkArchitectureInternal.Bitness64:
                     view = RegistryView.Registry64;
                     break;
-                case DotNetFrameworkArchitecture.Current:
+                case DotNetFrameworkArchitectureInternal.Current:
                     view = RegistryView.Default;
                     break;
             }
@@ -1251,7 +1251,7 @@ namespace net.r_eg.IeXod.Shared
             /// <summary>
             /// Cached paths of .net framework on different architecture.
             /// </summary>
-            private readonly ConcurrentDictionary<DotNetFrameworkArchitecture, string> _pathsToDotNetFramework;
+            private readonly ConcurrentDictionary<DotNetFrameworkArchitectureInternal, string> _pathsToDotNetFramework;
 
             /// <summary>
             /// Cached paths of .net framework sdk tools folder path on different visual studio version.
@@ -1288,7 +1288,7 @@ namespace net.r_eg.IeXod.Shared
                 this._dotNetFrameworkSdkRegistryToolsKey = dotNetFrameworkSdkRegistryToolsKey;
                 this.DotNetFrameworkSdkRegistryInstallationFolderName = dotNetFrameworkSdkRegistryInstallationFolderName;
                 this._hasMsBuild = hasMSBuild;
-                this._pathsToDotNetFramework = new ConcurrentDictionary<DotNetFrameworkArchitecture, string>();
+                this._pathsToDotNetFramework = new ConcurrentDictionary<DotNetFrameworkArchitectureInternal, string>();
                 this._pathsToDotNetFrameworkSdkTools = new ConcurrentDictionary<Version, string>();
             }
 
@@ -1324,7 +1324,7 @@ namespace net.r_eg.IeXod.Shared
             /// <summary>
             /// Gets the full path of .net framework for the given architecture.
             /// </summary>
-            public virtual string GetPathToDotNetFramework(DotNetFrameworkArchitecture architecture)
+            public virtual string GetPathToDotNetFramework(DotNetFrameworkArchitectureInternal architecture)
             {
                 string cachedPath;
                 if (this._pathsToDotNetFramework.TryGetValue(architecture, out cachedPath))
@@ -1633,7 +1633,7 @@ namespace net.r_eg.IeXod.Shared
             /// </summary>
             public override string GetPathToDotNetFrameworkReferenceAssemblies()
             {
-                return this.GetPathToDotNetFramework(DotNetFrameworkArchitecture.Current);
+                return this.GetPathToDotNetFramework(DotNetFrameworkArchitectureInternal.Current);
             }
         }
 

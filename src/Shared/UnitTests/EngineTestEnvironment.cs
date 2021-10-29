@@ -144,7 +144,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             using (ProjectCollection projectCollection = new ProjectCollection())
             {
-                Project project = new Project(ProjectFile, globalProperties, toolsVersion, projectCollection);
+                Project project = new Project(ProjectFile, globalProperties, new ProjectToolsOptions(toolsVersion), projectCollection);
 
                 return project.Build(logger);
             }

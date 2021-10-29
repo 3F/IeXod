@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\common.props" />
 
   <Import Project="..\Shared\FileSystemSources.proj" />
   <Import Project="..\Shared\DebuggingSources.proj" />
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
-    <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget>
+    <TargetFrameworks>$(IeXodTFM)</TargetFrameworks>
+    <!-- <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
+    <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget> -->
 
     <!-- Set RuntimeIdentifiers so that NuGet will restore for both AnyCPU as well as x86 and x64.
          This is important for the MSBuild.VSSetup project, which "references" both the x86 and x64

@@ -949,6 +949,13 @@
       <Link>Shared\RegistryHelper.cs</Link>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Utilities\Resources\Strings.resx" Link="Resources\Utilities.resx">
+      <LogicalName>$(AssemblyName).Utilities.resources</LogicalName>
+      <XlfTranslatedFilename>%(XlfSource.Namespace).Utilities.resx</XlfTranslatedFilename>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>  
   <!-- / IeXod.Utilities -->
 
   <!-- IeXod.MSBSdkResolver -->
@@ -959,8 +966,8 @@
   <Import Project="$(PathToIeXodMSBSdkResolverProject)build.proj" />
   
   <ItemGroup Condition="'$(IeXodMSBSdkResolverAsExternalDll)'!='true'">
-    <EmbeddedResource Include="$(PathToIeXodMSBSdkResolverProject)Strings.resx" Link="Resources\$(EmbeddedResxFilePostfix).resx">
-      <LogicalName>$(AssemblyName).$(EmbeddedResxFilePostfix).resources</LogicalName>
+    <EmbeddedResource Include="$(PathToIeXodMSBSdkResolverProject)Strings.resx" Link="Resources\$(EmbdSdkResolverResxName).resx">
+      <LogicalName>$(AssemblyName).$(EmbdSdkResolverResxName).resources</LogicalName>
       <XlfTranslatedFilename>%(XlfSource.Namespace).%(XlfSource.Filename)</XlfTranslatedFilename>
       <SubType>Designer</SubType>
     </EmbeddedResource>

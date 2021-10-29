@@ -16,7 +16,7 @@ namespace net.r_eg.IeXod.UnitTests
     sealed public class CommandLineGenerator_Tests
     {
         private const string testXamlFile = @"<?xml version='1.0' encoding='utf-8'?>
-<Rule Name='mem' ToolName='mem.exe' PageTemplate='tool' SwitchPrefix='/' Order='10' xmlns='clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' xmlns:sys='clr-namespace:System;assembly=mscorlib'>
+<Rule Name='mem' ToolName='mem.exe' PageTemplate='tool' SwitchPrefix='/' Order='10' xmlns='clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' xmlns:sys='clr-namespace:System;assembly=mscorlib'>
   <Rule.DisplayName>
     <sys:String>Memory Reporting Tool</sys:String>
   </Rule.DisplayName>

@@ -273,7 +273,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlDataDrivenToolTask_Tests
                         <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
                           <Task>
                             <![CDATA[
-                              <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+                              <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                 <Rule Name=`TestTask` ToolName=`findstr.exe`>
                                   <StringProperty Name=`test` />
                                 </Rule>
@@ -327,7 +327,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlDataDrivenToolTask_Tests
                         <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
                           <Task>
                             <![CDATA[
-                              <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+                              <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                 <Rule Name=`TestTask` ToolName=`echoparameters.exe`>
                                   <StringProperty Name=`test` />
                                 </Rule>
@@ -364,7 +364,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlDataDrivenToolTask_Tests
                         <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
                           <Task>
                             <![CDATA[
-                              <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=net.r_eg.IeXod.Framework` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
+                              <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
                                 <Rule Name=`TestTask` ToolName=`echoparameters.exe`>
                                   <StringProperty Name=`test` />
                                 </Rule>

@@ -15,6 +15,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.ObjectModelRemoting
     using System.Xml.Schema;
     using System.Collections;
     using net.r_eg.IeXod.Framework;
+    using net.r_eg.IeXod.Sdk;
 
     internal class ProjectPair : LinkPair<Project>
     {

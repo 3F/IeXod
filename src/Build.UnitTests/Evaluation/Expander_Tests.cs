@@ -42,6 +42,8 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         private string _dateToParse = new DateTime(2010, 12, 25).ToString(CultureInfo.CurrentCulture);
         private static readonly string s_rootPathPrefix = NativeMethodsShared.IsWindows ? "C:\\" : Path.VolumeSeparatorChar.ToString();
 
+#if !IEXOD_DISABLE_TASKS
+
         [Fact]
         public void ExpandAllIntoTaskItems0()
         {
@@ -127,6 +129,8 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                 dd
                 ", GetTaskArrayFromItemList(itemsOut));
         }
+
+#endif
 
         /// <summary>
         /// Expand property expressions into ProjectPropertyInstance items
@@ -1337,6 +1341,8 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
             readOnlyLookup = lookup;
         }
 
+#if !IEXOD_DISABLE_TASKS
+
         /// <summary>
         /// Exercises ExpandAllIntoTaskItems with a complex set of data.
         /// </summary>
@@ -1368,6 +1374,8 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                 ghi
                 ", GetTaskArrayFromItemList(taskItems));
         }
+
+#endif
 
         /// <summary>
         /// Exercises ExpandAllIntoString with a complex set of data but in a piecemeal fashion
@@ -1845,7 +1853,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                         </GetReferenceAssemblyPaths>
 
                         <PropertyGroup>
-                            <ReferenceAssemblyPathsFromFunction>$([net.r_eg.IeXod.Utilities.ToolLocationHelper]::GetPathToStandardLibraries($(TargetFrameworkIdentifier), $(TargetFrameworkVersion), $(TargetFrameworkProfile)))\</ReferenceAssemblyPathsFromFunction>
+                            <ReferenceAssemblyPathsFromFunction>$([IeXod.Utilities.ToolLocationHelper]::GetPathToStandardLibraries($(TargetFrameworkIdentifier), $(TargetFrameworkVersion), $(TargetFrameworkProfile)))\</ReferenceAssemblyPathsFromFunction>
                         </PropertyGroup>
 
                         <Message Text=""Task:     $(ReferenceAssemblyPathsFromTask)"" Importance=""High"" />

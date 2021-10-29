@@ -1249,7 +1249,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
                     <Message Text='end:[$(global)]'/>
                   </Target>
                 </Project>
-            "))), globalProperties, ObjectModelHelpers.MSBuildDefaultToolsVersion);
+            "))), globalProperties, ProjectToolsOptions.Default);
 
             ProjectInstance p = project.CreateProjectInstance();
 
@@ -3908,7 +3908,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             ObjectModelHelpers.AssertItemEvaluationFromGenericItemEvaluator((p, c) =>
                 {
-                    var project = new Project(p, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, c);
+                    var project = new Project(p, new Dictionary<string, string>(), ProjectToolsOptions.Default, c);
                     var projectInstance = project.CreateProjectInstance();
                     var targetChild = projectInstance.Targets["t"].Children.First();
 

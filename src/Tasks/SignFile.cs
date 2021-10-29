@@ -22,7 +22,7 @@ namespace net.r_eg.IeXod.Tasks
     public sealed class SignFile : Task
     {
         public SignFile()
-            : base(AssemblyResources.PrimaryResources, "MSBuild.")
+            : base(AssemblyResources.PrimaryTasksResources, "MSBuild.")
         {
         }
 

@@ -228,7 +228,7 @@ namespace net.r_eg.IeXod.BackEnd
                 string taskHostNameForClr2TaskHost = Path.GetFileNameWithoutExtension(NodeProviderOutOfProcTaskHost.TaskHostNameForClr2TaskHost);
                 if (Path.GetFileNameWithoutExtension(msbuildLocation).Equals(taskHostNameForClr2TaskHost, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (FrameworkLocationHelper.GetPathToDotNetFrameworkV35(Shared.DotNetFrameworkArchitecture.Current) == null)
+                    if (FrameworkLocationHelper.GetPathToDotNetFrameworkV35(DotNetFrameworkArchitectureInternal.Current) == null)
                     {
                         CommunicationsUtilities.Trace
                             (

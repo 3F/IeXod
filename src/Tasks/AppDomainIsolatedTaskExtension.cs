@@ -21,12 +21,12 @@ namespace net.r_eg.IeXod.Tasks
         #region Constructors
 
         internal AppDomainIsolatedTaskExtension() :
-            base(AssemblyResources.PrimaryResources, "MSBuild.")
+            base(AssemblyResources.PrimaryTasksResources, "MSBuild.")
         {
             _logExtension = new TaskLoggingHelperExtension(
                 this,
-                AssemblyResources.PrimaryResources,
-                AssemblyResources.SharedResources,
+                AssemblyResources.PrimaryTasksResources,
+                AssemblyResources.SharedTasksResources,
                 "MSBuild.");
         }
 

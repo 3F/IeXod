@@ -20,7 +20,7 @@
   <files>
 
     <!-- MSBuild.dll -->
-    <file src="cs\MSBuild.resources.dll" target="lib\netstandard1.3\cs\MSBuild.resources.dll"/>
+    <!-- <file src="cs\MSBuild.resources.dll" target="lib\netstandard1.3\cs\MSBuild.resources.dll"/>
     <file src="de\MSBuild.resources.dll" target="lib\netstandard1.3\de\MSBuild.resources.dll"/>
     <file src="en\MSBuild.resources.dll" target="lib\netstandard1.3\en\MSBuild.resources.dll"/>
     <file src="es\MSBuild.resources.dll" target="lib\netstandard1.3\es\MSBuild.resources.dll"/>
@@ -33,42 +33,42 @@
     <file src="ru\MSBuild.resources.dll" target="lib\netstandard1.3\ru\MSBuild.resources.dll"/>
     <file src="tr\MSBuild.resources.dll" target="lib\netstandard1.3\tr\MSBuild.resources.dll"/>
     <file src="zh-Hans\MSBuild.resources.dll" target="lib\netstandard1.3\zh-Hans\MSBuild.resources.dll"/>
-    <file src="zh-Hant\MSBuild.resources.dll" target="lib\netstandard1.3\zh-Hant\MSBuild.resources.dll"/>
+    <file src="zh-Hant\MSBuild.resources.dll" target="lib\netstandard1.3\zh-Hant\MSBuild.resources.dll"/> -->
 
     <!-- net.r_eg.IeXod.dll-->
-    <file src="cs\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\cs\net.r_eg.IeXod.resources.dll" />
-    <file src="de\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\de\net.r_eg.IeXod.resources.dll" />
-    <file src="en\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\en\net.r_eg.IeXod.resources.dll" />
-    <file src="es\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\es\net.r_eg.IeXod.resources.dll" />
-    <file src="fr\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\fr\net.r_eg.IeXod.resources.dll" />
-    <file src="it\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\it\net.r_eg.IeXod.resources.dll" />
-    <file src="ja\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\ja\net.r_eg.IeXod.resources.dll" />
-    <file src="ko\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\ko\net.r_eg.IeXod.resources.dll" />
-    <file src="pl\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\pl\net.r_eg.IeXod.resources.dll" />
-    <file src="pt-BR\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\pt-BR\net.r_eg.IeXod.resources.dll" />
-    <file src="ru\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\ru\net.r_eg.IeXod.resources.dll" />
-    <file src="tr\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\tr\net.r_eg.IeXod.resources.dll" />
-    <file src="zh-Hans\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\zh-Hans\net.r_eg.IeXod.resources.dll" />
-    <file src="zh-Hant\net.r_eg.IeXod.resources.dll" target="lib\netstandard1.3\zh-Hant\net.r_eg.IeXod.resources.dll" />
+    <file src="cs\IeXod.resources.dll" target="lib\netstandard1.3\cs\IeXod.resources.dll" />
+    <file src="de\IeXod.resources.dll" target="lib\netstandard1.3\de\IeXod.resources.dll" />
+    <file src="en\IeXod.resources.dll" target="lib\netstandard1.3\en\IeXod.resources.dll" />
+    <file src="es\IeXod.resources.dll" target="lib\netstandard1.3\es\IeXod.resources.dll" />
+    <file src="fr\IeXod.resources.dll" target="lib\netstandard1.3\fr\IeXod.resources.dll" />
+    <file src="it\IeXod.resources.dll" target="lib\netstandard1.3\it\IeXod.resources.dll" />
+    <file src="ja\IeXod.resources.dll" target="lib\netstandard1.3\ja\IeXod.resources.dll" />
+    <file src="ko\IeXod.resources.dll" target="lib\netstandard1.3\ko\IeXod.resources.dll" />
+    <file src="pl\IeXod.resources.dll" target="lib\netstandard1.3\pl\IeXod.resources.dll" />
+    <file src="pt-BR\IeXod.resources.dll" target="lib\netstandard1.3\pt-BR\IeXod.resources.dll" />
+    <file src="ru\IeXod.resources.dll" target="lib\netstandard1.3\ru\IeXod.resources.dll" />
+    <file src="tr\IeXod.resources.dll" target="lib\netstandard1.3\tr\IeXod.resources.dll" />
+    <file src="zh-Hans\IeXod.resources.dll" target="lib\netstandard1.3\zh-Hans\IeXod.resources.dll" />
+    <file src="zh-Hant\IeXod.resources.dll" target="lib\netstandard1.3\zh-Hant\IeXod.resources.dll" />
 
-    <!-- net.r_eg.IeXod.Tasks.Core.dll-->
-    <file src="cs\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\cs\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="de\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\de\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="en\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\en\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="es\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\es\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="fr\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\fr\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="it\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\it\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="ja\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\ja\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="ko\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\ko\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="pl\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\pl\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="pt-BR\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\pt-BR\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="ru\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\ru\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="tr\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\tr\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="zh-Hans\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\zh-Hans\net.r_eg.IeXod.Tasks.Core.resources.dll" />
-    <file src="zh-Hant\net.r_eg.IeXod.Tasks.Core.resources.dll" target="lib\netstandard1.3\zh-Hant\net.r_eg.IeXod.Tasks.Core.resources.dll" />
+    <!-- IeXod.Tasks.dll-->
+    <file src="cs\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\cs\IeXod.Tasks.resources.dll" />
+    <file src="de\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\de\IeXod.Tasks.resources.dll" />
+    <file src="en\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\en\IeXod.Tasks.resources.dll" />
+    <file src="es\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\es\IeXod.Tasks.resources.dll" />
+    <file src="fr\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\fr\IeXod.Tasks.resources.dll" />
+    <file src="it\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\it\IeXod.Tasks.resources.dll" />
+    <file src="ja\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\ja\IeXod.Tasks.resources.dll" />
+    <file src="ko\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\ko\IeXod.Tasks.resources.dll" />
+    <file src="pl\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\pl\IeXod.Tasks.resources.dll" />
+    <file src="pt-BR\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\pt-BR\IeXod.Tasks.resources.dll" />
+    <file src="ru\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\ru\IeXod.Tasks.resources.dll" />
+    <file src="tr\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\tr\IeXod.Tasks.resources.dll" />
+    <file src="zh-Hans\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\zh-Hans\IeXod.Tasks.resources.dll" />
+    <file src="zh-Hant\IeXod.Tasks.resources.dll" target="lib\netstandard1.3\zh-Hant\IeXod.Tasks.resources.dll" />
 
     <!-- net.r_eg.IeXod.Utilities.Core.dll-->
-    <file src="cs\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\cs\net.r_eg.IeXod.Utilities.Core.resources.dll" />
+    <!-- <file src="cs\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\cs\net.r_eg.IeXod.Utilities.Core.resources.dll" />
     <file src="de\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\de\net.r_eg.IeXod.Utilities.Core.resources.dll" />
     <file src="en\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\en\net.r_eg.IeXod.Utilities.Core.resources.dll" />
     <file src="es\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\es\net.r_eg.IeXod.Utilities.Core.resources.dll" />
@@ -81,6 +81,6 @@
     <file src="ru\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\ru\net.r_eg.IeXod.Utilities.Core.resources.dll" />
     <file src="tr\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\tr\net.r_eg.IeXod.Utilities.Core.resources.dll" />
     <file src="zh-Hans\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\zh-Hans\net.r_eg.IeXod.Utilities.Core.resources.dll" />
-    <file src="zh-Hant\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\zh-Hant\net.r_eg.IeXod.Utilities.Core.resources.dll" />
+    <file src="zh-Hant\net.r_eg.IeXod.Utilities.Core.resources.dll" target="lib\netstandard1.3\zh-Hant\net.r_eg.IeXod.Utilities.Core.resources.dll" /> -->
   </files>
 </package>

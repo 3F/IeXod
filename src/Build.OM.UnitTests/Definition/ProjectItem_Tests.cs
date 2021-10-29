@@ -900,7 +900,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             using (var projectCollection = new ProjectCollection())
             {
                 var testFiles = env.CreateTestProjectWithFiles(projectContents, files,relativePathFromRootToProject);
-                ObjectModelHelpers.AssertItems(expectedInclude, new Project(testFiles.ProjectFile, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, projectCollection).Items.ToList());
+                ObjectModelHelpers.AssertItems(expectedInclude, new Project(testFiles.ProjectFile, new Dictionary<string, string>(), ProjectToolsOptions.Default, projectCollection).Items.ToList());
             }
 
         }
@@ -921,7 +921,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             using (var projectCollection = new ProjectCollection())
             {
                 var testFiles = env.CreateTestProjectWithFiles(projectContents, files, relativePathFromRootToProject);
-                ObjectModelHelpers.AssertItems(expectedInclude, new Project(testFiles.ProjectFile, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, projectCollection).Items.ToList());
+                ObjectModelHelpers.AssertItems(expectedInclude, new Project(testFiles.ProjectFile, new Dictionary<string, string>(), ProjectToolsOptions.Default, projectCollection).Items.ToList());
             }
 
         }
@@ -1965,7 +1965,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             {
                 var testProject = env.CreateTestProjectWithFiles(projectContents.Cleanup(), new[] {"a.cs"});
 
-                var project = new Project(testProject.ProjectFile, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, env.CreateProjectCollection().Collection);
+                var project = new Project(testProject.ProjectFile, new Dictionary<string, string>(), ProjectToolsOptions.Default, env.CreateProjectCollection().Collection);
 
                 var items = project.GetItems("I");
 
@@ -2025,7 +2025,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             {
                 var testProject = env.CreateTestProjectWithFiles(projectContents.Cleanup(), new[] { "a.cs" });
 
-                var project = new Project(testProject.ProjectFile, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, env.CreateProjectCollection().Collection);
+                var project = new Project(testProject.ProjectFile, new Dictionary<string, string>(), ProjectToolsOptions.Default, env.CreateProjectCollection().Collection);
 
                 var items = project.GetItems("I");
 
@@ -3297,7 +3297,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
             ObjectModelHelpers.AssertItemEvaluationFromGenericItemEvaluator(
                 (p, c) =>
                 {
-                    return new Project(p, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, c)
+                    return new Project(p, new Dictionary<string, string>(), ProjectToolsOptions.Default, c)
                         .Items
                         .Where(i => i.ItemType.Equals("i"))
                         .Select(i => (ObjectModelHelpers.TestItem) new ObjectModelHelpers.ProjectItemTestItemAdapter(i))

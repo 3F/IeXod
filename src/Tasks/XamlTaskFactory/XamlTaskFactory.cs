@@ -90,7 +90,7 @@ namespace net.r_eg.IeXod.Tasks
 
             var log = new TaskLoggingHelper(taskFactoryLoggingHost, taskName)
             {
-                TaskResources = AssemblyResources.PrimaryResources,
+                TaskResources = AssemblyResources.PrimaryTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
 
@@ -122,9 +122,11 @@ namespace net.r_eg.IeXod.Tasks
                 new[]
                 {
                     "System.dll",
-                    Path.Combine(pathToMSBuildBinaries, "net.r_eg.IeXod.Framework.dll"),
-                    Path.Combine(pathToMSBuildBinaries, "net.r_eg.IeXod.Utilities.Core.dll"),
-                    Path.Combine(pathToMSBuildBinaries, "net.r_eg.IeXod.Tasks.Core.dll")
+                    "IeXod.dll",
+                    "IeXod.Tasks.dll",
+                    Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Framework.dll"),
+                    Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Utilities.Core.dll"),
+                    Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Tasks.Core.dll")
                 }
             )
             {
@@ -252,7 +254,7 @@ namespace net.r_eg.IeXod.Tasks
         {
             TaskLoggingHelper log = new TaskLoggingHelper(taskFactoryLoggingHost, taskName)
             {
-                TaskResources = AssemblyResources.PrimaryResources,
+                TaskResources = AssemblyResources.PrimaryTasksResources,
                 HelpKeywordPrefix = "MSBuild."
             };
             

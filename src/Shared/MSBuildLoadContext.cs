@@ -27,9 +27,12 @@ namespace net.r_eg.IeXod.Shared
             {
                 "MSBuild",
                 "net.r_eg.IeXod",
-                "net.r_eg.IeXod.Framework",
-                "net.r_eg.IeXod.Tasks.Core",
-                "net.r_eg.IeXod.Utilities.Core",
+                "IeXod",
+                "IeXod.Tasks",
+                "Microsoft.Build",
+                "Microsoft.Build.Framework",
+                "Microsoft.Build.Tasks.Core",
+                "Microsoft.Build.Utilities.Core",
             }.ToImmutableHashSet();
 
         internal static readonly string[] Extensions = new[] { "ni.dll", "ni.exe", "dll", "exe" };

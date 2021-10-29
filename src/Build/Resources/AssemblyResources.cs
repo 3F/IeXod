@@ -3,23 +3,50 @@
 // Copyright (c) IeXod contributors https://github.com/3F/IeXod/graphs/contributors
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Resources;
-using System.Reflection;
+using System;
+using System.Collections.Concurrent;
 using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Resources;
 
 namespace net.r_eg.IeXod.Shared
 {
     /// <summary>
     /// This class provides access to the assembly's resources.
+    /// FIXME: Since msbuild conatins its weird AssemblyResources defenitions between Shared, Framework, Utilities, Tasks, main code, etc.,
+    //         we will temporarily rely on the same mechanism according to the new logical structure. You need review this later.
     /// </summary>
     internal static class AssemblyResources
     {
-        internal const string ASM = nameof(net.r_eg.IeXod);
+        internal const string ASM = nameof(IeXod);
+
+        private static readonly Assembly currasm = typeof(AssemblyResources).GetTypeInfo().Assembly;
+
+        // core assembly resources
+        private static readonly ResourceManager s_resources = new(ASM + ".Strings", currasm);
+        // shared resources
+        private static readonly ResourceManager s_sharedResources = new(ASM + ".Strings.shared", currasm);
+        // shared resources
+        private static readonly ResourceManager s_utilitiesResources = new(ASM + ".Utilities", currasm);
+
+        private static readonly ConcurrentDictionary<string, Assembly> external = new();
+
+        // external tasks resources
+        private static readonly Lazy<ResourceManager> s_tasksResources, s_tasksSharedResources;
 
         /// <summary>
         /// A slot for msbuild.exe to add a resource manager over its own resources, that can also be consulted.
         /// </summary>
         private static ResourceManager s_msbuildExeResourceManager;
+
+        internal static ResourceManager PrimaryResources => s_resources;
+
+        internal static ResourceManager SharedResources => s_sharedResources;
+
+        internal static ResourceManager PrimaryTasksResources => s_tasksResources.Value;
+
+        internal static ResourceManager SharedTasksResources => s_tasksSharedResources.Value;
 
         /// <summary>
         /// The internals of the Engine are exposed to MSBuild.exe, so they must share the same AssemblyResources class and 
@@ -71,18 +98,24 @@ namespace net.r_eg.IeXod.Shared
             return resource;
         }
 
+        static AssemblyResources()
+        {
+            s_tasksResources = new Lazy<ResourceManager>(() => GetResourceManager(ASM + ".Tasks.Strings", ASM + ".Tasks,"));
+            s_tasksSharedResources = new Lazy<ResourceManager>(() => GetResourceManager(ASM + ".Tasks.Strings.shared", ASM + ".Tasks,"));
+        }
+
         /// <summary>
         /// Loads the specified resource string, from the Engine or else Shared resources.
         /// </summary>
         /// <returns>The resource string, or null if not found.</returns>
         private static string GetStringFromEngineResources(string name)
         {
-            string resource = s_resources.GetString(name, CultureInfo.CurrentUICulture);
-
-            if (resource == null)
-            {
-                resource = s_sharedResources.GetString(name, CultureInfo.CurrentUICulture);
-            }
+            string resource =
+                s_resources.GetString(name, CultureInfo.CurrentUICulture)
+                ?? s_sharedResources.GetString(name, CultureInfo.CurrentUICulture)
+                ?? s_utilitiesResources.GetString(name, CultureInfo.CurrentUICulture)
+                ?? s_tasksResources.Value?.GetString(name, CultureInfo.CurrentUICulture)
+                ?? s_tasksSharedResources.Value?.GetString(name, CultureInfo.CurrentUICulture);
 
             ErrorUtilities.VerifyThrow(resource != null, "Missing resource '{0}'", name);
 
@@ -106,19 +139,32 @@ namespace net.r_eg.IeXod.Shared
             return resource;
         }
 
-        internal static ResourceManager PrimaryResources
+        private static ResourceManager GetResourceManager(string baseName, string assemblyId)
         {
-            get { return s_resources; }
+            Assembly asm = FindAssembly(assemblyId);
+
+            return (asm == null) ? null : new ResourceManager
+            (
+                baseName ?? throw new ArgumentNullException(nameof(baseName)),
+                asm
+            );
         }
 
-        internal static ResourceManager SharedResources
+        private static Assembly FindAssembly(string id)
         {
-            get { return s_sharedResources; }
-        }
+            if(external.TryGetValue(id ?? throw new ArgumentNullException(nameof(id)), out Assembly found))
+            {
+                return found;
+            }
 
-        // assembly resources
-        private static readonly ResourceManager s_resources = new ResourceManager(ASM + ".Strings", typeof(AssemblyResources).GetTypeInfo().Assembly);
-        // shared resources
-        private static readonly ResourceManager s_sharedResources = new ResourceManager(ASM + ".Strings.shared", typeof(AssemblyResources).GetTypeInfo().Assembly);
+            found = AppDomain.CurrentDomain.GetAssemblies()
+                            .FirstOrDefault(a => a.FullName.StartsWith(id));
+
+            if(found != null)
+            {
+                external[id] = found;
+            }
+            return found;
+        }
     }
 }

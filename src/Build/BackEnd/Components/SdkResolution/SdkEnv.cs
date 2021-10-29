@@ -12,6 +12,8 @@ namespace net.r_eg.IeXod.BackEnd.SdkResolution
     /// </summary>
     internal struct SdkEnv
     {
+        public readonly static SdkEnv Empty = new();
+
         /// <summary>
         /// The full path to the solution file, if any, that is resolving the SDK.
         /// </summary>

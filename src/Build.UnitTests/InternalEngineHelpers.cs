@@ -14,9 +14,10 @@ using net.r_eg.IeXod.Definition;
 using net.r_eg.IeXod.Evaluation.Context;
 using net.r_eg.IeXod.Execution;
 using net.r_eg.IeXod.Framework;
-using SdkResolverContext = net.r_eg.IeXod.Framework.SdkResolverContext;
+using net.r_eg.IeXod.Sdk;
+using SdkResolverContext = net.r_eg.IeXod.Sdk.SdkResolverContext;
 using SdkResult = net.r_eg.IeXod.BackEnd.SdkResolution.SdkResult;
-using SdkResultFactory = net.r_eg.IeXod.Framework.SdkResultFactory;
+using SdkResultFactory = net.r_eg.IeXod.Sdk.SdkResultFactory;
 
 namespace net.r_eg.IeXod.Unittest
 {
@@ -37,7 +38,7 @@ namespace net.r_eg.IeXod.Unittest
         internal class ConfigurableMockSdkResolver : SdkResolver
         {
             private readonly Dictionary<string, SdkResult> _resultMap;
-            private readonly Func<SdkReference, SdkResolverContext, SdkResultFactory, Framework.SdkResult> _resolveFunc;
+            private readonly Func<SdkReference, SdkResolverContext, SdkResultFactory, Sdk.SdkResult> _resolveFunc;
 
             public ConcurrentDictionary<string, int> ResolvedCalls { get; } = new ConcurrentDictionary<string, int>();
 
@@ -51,7 +52,7 @@ namespace net.r_eg.IeXod.Unittest
                 _resultMap = resultMap;
             }
 
-            public ConfigurableMockSdkResolver(Func<SdkReference, SdkResolverContext, SdkResultFactory, Framework.SdkResult> resolveFunc)
+            public ConfigurableMockSdkResolver(Func<SdkReference, SdkResolverContext, SdkResultFactory, Sdk.SdkResult> resolveFunc)
             {
                 _resolveFunc = resolveFunc;
             }
@@ -60,7 +61,7 @@ namespace net.r_eg.IeXod.Unittest
 
             public override int Priority => int.MaxValue;
 
-            public override Framework.SdkResult Resolve(SdkReference sdkReference, SdkResolverContext resolverContext, SdkResultFactory factory)
+            public override Sdk.SdkResult Resolve(SdkReference sdkReference, SdkResolverContext resolverContext, SdkResultFactory factory)
             {
                 if (_resolveFunc != null)
                 {
@@ -88,11 +89,11 @@ namespace net.r_eg.IeXod.Unittest
             public override string Name => "FileBasedMockSdkResolver";
             public override int Priority => int.MinValue;
 
-            public override Framework.SdkResult Resolve(SdkReference sdkReference, SdkResolverContext resolverContext, SdkResultFactory factory)
+            public override Sdk.SdkResult Resolve(SdkReference sdkReference, SdkResolverContext resolverContext, SdkResultFactory factory)
             {
-                resolverContext.Logger.LogMessage($"{nameof(resolverContext.ProjectFilePath)} = {resolverContext.ProjectFilePath}", MessageImportance.High);
-                resolverContext.Logger.LogMessage($"{nameof(resolverContext.SolutionFilePath)} = {resolverContext.SolutionFilePath}", MessageImportance.High);
-                resolverContext.Logger.LogMessage($"{nameof(resolverContext.MSBuildVersion)} = {resolverContext.MSBuildVersion}", MessageImportance.High);
+                resolverContext.Logger.LogMessage($"{nameof(resolverContext.ProjectFilePath)} = {resolverContext.ProjectFilePath}", SdkLogVerbosity.High);
+                resolverContext.Logger.LogMessage($"{nameof(resolverContext.SolutionFilePath)} = {resolverContext.SolutionFilePath}", SdkLogVerbosity.High);
+                resolverContext.Logger.LogMessage($"{nameof(resolverContext.MSBuildVersion)} = {resolverContext.MSBuildVersion}", SdkLogVerbosity.High);
 
                 return _mapping.ContainsKey(sdkReference.Name)
                     ? factory.IndicateSuccess(_mapping[sdkReference.Name], null)

@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\common.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
-    <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget>
+    <TargetFrameworks>$(IeXodTestTFM)</TargetFrameworks>
     
     <IsPackable>false</IsPackable>
     <AssemblyName>net.r_eg.IeXod.Engine.UnitTests</AssemblyName>
@@ -11,32 +11,34 @@
     
     <!-- Define a constant so we can skip tests that require MSBuildTaskHost -->
     <DefineConstants Condition="'$(MSBuildRuntimeType)' == 'Core' or '$(MonoBuild)' == 'true'">$(DefineConstants);NO_MSBUILDTASKHOST</DefineConstants>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Collections.Concurrent" />
-    <PackageReference Include="Shouldly" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Build.Tasks" />
+    <PackageReference Include="System.Collections.Concurrent" Version="$(SystemCollectionsConcurrentVersion)" />
+    <PackageReference Include="Shouldly" Version="$(ShouldlyVersion)" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Build.Tasks" Version="$(MicrosoftCodeAnalysisBuildTasksVersion)" />
 
     <ProjectReference Include="..\Build\IeXod.csproj" />
-    <ProjectReference Include="..\Framework\IeXod.Framework.csproj" />
-    <ProjectReference Include="..\MSBuild\MSBuild.csproj" />
-    <ProjectReference Include="..\MSBuildTaskHost\MSBuildTaskHost.csproj"
+    <ProjectReference Include="..\Sdk\SdkResolver.csproj" />
+    <!-- <ProjectReference Include="..\Framework\IeXod.Framework.csproj" /> -->
+    <!-- <ProjectReference Include="..\MSBuild\MSBuild.csproj" /> -->
+    <!-- <ProjectReference Include="..\MSBuildTaskHost\MSBuildTaskHost.csproj"
                       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(MonoBuild)' != 'true'"
                       ReferenceOutputAssembly="false"
-                      OutputItemType="Content" />
-    <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" />
-    <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" />
+                      OutputItemType="Content" /> -->
+    <!-- <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" /> -->
+    <!-- <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" /> -->
     <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
 
-    <ProjectReference Include="..\Samples\TaskWithDependency\TaskWithDependency.csproj" Private="false" ReferenceOutputAssembly="false" OutputItemType="TaskWithDependencyResolvedProjectReferencePath">
+    <!-- <ProjectReference Include="..\Samples\TaskWithDependency\TaskWithDependency.csproj" Private="false" ReferenceOutputAssembly="false" OutputItemType="TaskWithDependencyResolvedProjectReferencePath">
       <SetTargetFramework Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">TargetFramework=$(FullFrameworkTFM)</SetTargetFramework>
       <SetTargetFramework Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(MonoBuild)' == 'true'">TargetFramework=$(FullFrameworkTFM)</SetTargetFramework>
       <SetTargetFramework Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">TargetFramework=netstandard2.0</SetTargetFramework>
-    </ProjectReference>
-    <ProjectReference Include="..\Samples\PortableTask\PortableTask.csproj" Private="false" ReferenceOutputAssembly="false" OutputItemType="PortableTaskResolvedProjectReferencePath" SetTargetFramework="TargetFramework=netstandard1.3" />
+    </ProjectReference> -->
+    <!-- <ProjectReference Include="..\Samples\PortableTask\PortableTask.csproj" Private="false" ReferenceOutputAssembly="false" OutputItemType="PortableTaskResolvedProjectReferencePath" SetTargetFramework="TargetFramework=netstandard1.3" /> -->
 
-    <Reference Include="System.Configuration" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+    <Reference Include="System.Configuration" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" Version="$(SystemConfigurationVersion)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -104,9 +106,6 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
       <Link>AssemblyNameEx_Tests.cs</Link>
     </Compile>
-    <Compile Include="..\Shared\UnitTests\TaskParameter_Tests.cs">
-      <Link>TaskParameter_Tests.cs</Link>
-    </Compile>
     <Compile Include="..\Shared\UnitTests\ObjectModelHelpers.cs" />
     <Compile Include="..\Shared\UnitTests\CopyOnWriteDictionary_Tests.cs" />
     <Compile Include="..\Shared\UnitTests\TestData\GlobbingTestData.cs">
@@ -122,6 +121,12 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- <Compile Include="..\Shared\UnitTests\TestEnvironment.cs" /> -->
+    <Compile Include="..\Shared\Debugging\PrintLineDebugger.cs" />
+    <Compile Include="..\Shared\Debugging\PrintLineDebuggerWriters.cs" />
+  </ItemGroup>
+
   <Target Name="CopyTestProjects" AfterTargets="ResolveProjectReferences">
     <!-- In TypeLoader, the following logic is used for loading assemblies on .NET Core:
             - if the simple name of the assembly exists in the same folder as msbuild.exe, then that assembly gets loaded, indifferent of the user specified path
@@ -131,10 +136,10 @@
           target puts them in subfolders of the test output folder instead.    
     -->
 
-    <Error Condition="'@(PortableTaskResolvedProjectReferencePath)' == ''" Text="Couldn't find PortableTaskResolvedProjectReferencePath item for PortableTask" />
-    <Error Condition="'@(TaskWithDependencyResolvedProjectReferencePath)' == ''" Text="Couldn't find TaskWithDependencyResolvedProjectReferencePath item for TaskWithDependency" />
+    <!-- <Error Condition="'@(PortableTaskResolvedProjectReferencePath)' == ''" Text="Couldn't find PortableTaskResolvedProjectReferencePath item for PortableTask" />
+    <Error Condition="'@(TaskWithDependencyResolvedProjectReferencePath)' == ''" Text="Couldn't find TaskWithDependencyResolvedProjectReferencePath item for TaskWithDependency" /> -->
     
-    <PropertyGroup>
+    <!-- <PropertyGroup>
       <PortableTaskOutputPath>@(PortableTaskResolvedProjectReferencePath->'%(RootDir)%(Directory)')</PortableTaskOutputPath>
       <TaskWithDependencyOutputPath>@(TaskWithDependencyResolvedProjectReferencePath->'%(RootDir)%(Directory)')</TaskWithDependencyOutputPath>
     </PropertyGroup>
@@ -144,7 +149,7 @@
 
       <TaskWithDependencyContentContent Include="$(TaskWithDependencyOutputPath)*.*" />
       <Content Include="@(TaskWithDependencyContentContent)" Link="TaskWithDependency\%(TaskWithDependencyContentContent.Filename)%(TaskWithDependencyContentContent.Extension)" CopyToOutputDirectory="PreserveNewest" />
-    </ItemGroup>
+    </ItemGroup> -->
     
   </Target>
 
@@ -157,4 +162,49 @@
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
+
+  <!-- IeXod. The Tasks feature is temporarily disabled -->
+  <ItemGroup>
+    <Compile Remove="BackEnd\FailingBuilderTask.cs" />
+    <Compile Remove="BackEnd\AssemblyLoadContextTestTasks.cs" />
+    <Compile Remove="BackEnd\FailingTask.cs" />
+    <Compile Remove="BackEnd\ProcessIdTask.cs" />
+    <Compile Remove="BackEnd\ItemCreationTask.cs" />
+    <Compile Remove="BackEnd\NullMetadataTask.cs" />
+    <Compile Remove="BackEnd\TaskRegistry_Tests.cs" />
+    <Compile Remove="BackEnd\TaskBuilderTestTask.cs" />
+    <Compile Remove="BackEnd\TaskBuilder_Tests.cs" />
+    <Compile Remove="BackEnd\TaskExecutionHost_Tests.cs" />
+    <Compile Remove="BackEnd\TaskHostConfiguration_Tests.cs" />
+    <Compile Remove="BackEnd\TaskHostFactory_Tests.cs" />
+    <Compile Remove="BackEnd\TaskHostTaskCancelled_Tests.cs" />
+    <Compile Remove="BackEnd\TaskHostTaskComplete_Tests.cs" />
+    <Compile Remove="BackEnd\TaskHost_Tests.cs" />
+    <Compile Remove="BackEnd\TaskItemComparer.cs" />
+    <Compile Remove="BackEnd\AssemblyTaskFactory_Tests.cs" />
+    <Compile Remove="BackEnd\ReturnFailureWithoutLoggingErrorTask.cs" />
+    <Compile Remove="FixPathOnUnix_Tests.cs" />
+    <Compile Remove="EscapingInProjects_Tests.cs" />
+    <!-- <Compile Include="..\Shared\UnitTests\TaskParameter_Tests.cs">
+      <Link>TaskParameter_Tests.cs</Link>
+    </Compile> -->
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop" Version="$(MicrosoftVisualStudioSetupConfigurationInteropVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CodeDom" Version="$(SystemCodeDomVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(xunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xunitrunnervisualstudioVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>

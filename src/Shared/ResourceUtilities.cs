@@ -147,11 +147,7 @@ namespace net.r_eg.IeXod.Shared
         /// </summary>
         /// <param name="resourceName">Resource string name.</param>
         /// <returns>Resource string contents.</returns>
-        internal static string GetResourceString(string resourceName)
-        {
-            string result = AssemblyResources.GetString(resourceName);
-            return result;
-        }
+        internal static string GetResourceString(string resourceName) => AssemblyResources.GetString(resourceName);
 
         /// <summary>
         /// Loads the specified string resource and formats it with the arguments passed in. If the string resource has an MSBuild
@@ -307,7 +303,7 @@ namespace net.r_eg.IeXod.Shared
             {
                 // Look up the resource string in the engine's string table.
                 // NOTE: the AssemblyResources.GetString() method is thread-safe
-                string unformattedMessage = AssemblyResources.GetString(resourceName);
+                string unformattedMessage = GetResourceString(resourceName);
 
                 if (unformattedMessage == null)
                 {

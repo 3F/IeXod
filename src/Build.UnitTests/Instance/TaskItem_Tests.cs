@@ -220,7 +220,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
            <Project ToolsVersion='msbuilddefaulttoolsversion' xmlns='msbuildnamespace'>
-                  <UsingTask TaskName='CreateItem' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll' TaskFactory='TaskHostFactory' />
+                  <UsingTask TaskName='CreateItem' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' TaskFactory='TaskHostFactory' />
                   <ItemGroup>
                     <i Include='i1'>
                       <m>i1m1;i1m2</m>
@@ -277,7 +277,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
            <Project ToolsVersion='msbuilddefaulttoolsversion' xmlns='msbuildnamespace'>
-                  <UsingTask TaskName='AssignCulture' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll' TaskFactory='TaskHostFactory' />
+                  <UsingTask TaskName='AssignCulture' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' TaskFactory='TaskHostFactory' />
                   <ItemGroup>
                     <i Include='i1%252ai2' />
                   </ItemGroup>

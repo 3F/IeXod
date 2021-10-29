@@ -15,6 +15,7 @@ using net.r_eg.IeXod.Engine.UnitTests;
 using net.r_eg.IeXod.Evaluation;
 using net.r_eg.IeXod.Exceptions;
 using net.r_eg.IeXod.Framework;
+using net.r_eg.IeXod.Sdk;
 using net.r_eg.IeXod.Unittest;
 using Shouldly;
 using Xunit;
@@ -466,7 +467,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Construction
 
             Project project = new Project(rootElement,
                 globalProperties: null,
-                toolsVersion: null,
+                toolsOptions: ProjectToolsOptions.Default,
                 projectCollection: projectCollection,
                 loadSettings: ProjectLoadSettings.IgnoreMissingImports);
 

@@ -1,14 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\common.props" />
 
-  <Import Project="..\Shared\FileSystemSources.proj" />
+  <!-- <Import Project="..\Shared\FileSystemSources.proj" /> -->
   <Import Project="..\Shared\DebuggingSources.proj" />
 
   <PropertyGroup>
-    <TargetFrameworks>$(LibraryTargetFrameworks)</TargetFrameworks>
+    <Version>$(ProductIeXodVersion)</Version>
+    <TargetFrameworks>$(IeXodTFM)</TargetFrameworks>
+
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateReferenceAssemblySources>true</GenerateReferenceAssemblySources>
-    <AssemblyName>net.r_eg.IeXod.Tasks.Core</AssemblyName>
+    <AssemblyName>IeXod.Tasks</AssemblyName>
     <RootNamespace>net.r_eg.IeXod.Tasks</RootNamespace>
     <DefineConstants>$(DefineConstants);MICROSOFT_BUILD_TASKS</DefineConstants>
     <CreateTlb>true</CreateTlb>
@@ -29,91 +32,91 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Source Files -->
-    <Compile Include="..\Shared\EnvironmentUtilities.cs">
+    <!-- <Compile Include="..\Shared\EnvironmentUtilities.cs">
       <Link>EnvironmentUtilities.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\AssemblyFolders\AssemblyFoldersEx.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\AssemblyFolders\AssemblyFoldersEx.cs">
       <Link>AssemblyDependency\AssemblyFoldersEx.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\AssemblyFolders\AssemblyFoldersFromConfig.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\AssemblyFolders\AssemblyFoldersFromConfig.cs">
       <Link>AssemblyDependency\AssemblyFoldersFromConfig\AssemblyFoldersFromConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\AssemblyFolders\Serialization\AssemblyFolderCollection.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\AssemblyFolders\Serialization\AssemblyFolderCollection.cs">
       <Link>AssemblyDependency\AssemblyFoldersFromConfig\Serialization\AssemblyFolderCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\AssemblyFolders\Serialization\AssemblyFolderItem.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\AssemblyFolders\Serialization\AssemblyFolderItem.cs">
       <Link>AssemblyDependency\AssemblyFoldersFromConfig\Serialization\AssemblyFolderItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\BuildEnvironmentHelper.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\BuildEnvironmentHelper.cs">
       <Link>BuildEnvironmentHelper.cs</Link>
-    </Compile>
+    </Compile> -->
     <Compile Include="..\Shared\FxCopExclusions\IeXod.Shared.Suppressions.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="..\Shared\AssemblyNameComparer.cs">
+    <!-- <Compile Include="..\Shared\AssemblyNameComparer.cs">
       <Link>AssemblyNameComparer.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\AssemblyNameReverseVersionComparer.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\AssemblyNameReverseVersionComparer.cs">
       <Link>AssemblyDependency\AssemblyNameReverseVersionComparer.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\CanonicalError.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\CanonicalError.cs">
       <Link>CanonicalError.cs</Link>
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
+    </Compile> -->
     <Compile Include="AssemblyDependency\AssemblyMetadata.cs" />
     <Compile Include="ConvertToAbsolutePath.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="..\Shared\CopyOnWriteDictionary.cs" />
-    <Compile Include="..\Shared\ExtensionFoldersRegistryKey.cs">
+    <!-- <Compile Include="..\Shared\CopyOnWriteDictionary.cs" /> -->
+    <!-- <Compile Include="..\Shared\ExtensionFoldersRegistryKey.cs">
       <Link>ExtensionFoldersRegistryKey.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\FileDelegates.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\FileDelegates.cs">
       <Link>FileDelegates.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\NativeMethodsShared.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\NativeMethodsShared.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\AssemblyUtilities.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\AssemblyUtilities.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\NGen.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\NGen.cs">
       <Link>NGen.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\OpportunisticIntern.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\OpportunisticIntern.cs">
       <Link>OpportunisticIntern.cs</Link>
-    </Compile>
+    </Compile> -->
     <Compile Include="..\Shared\PropertyParser.cs">
       <Link>PropertyParser.cs</Link>
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="..\Shared\ReadOnlyEmptyCollection.cs">
+    <!-- <Compile Include="..\Shared\ReadOnlyEmptyCollection.cs">
       <Link>ReadOnlyEmptyCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\RegistryDelegates.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\RegistryDelegates.cs">
       <Link>RegistryDelegates.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\RegistryHelper.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\RegistryHelper.cs">
       <Link>RegistryHelper.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\StringBuilderCache.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\StringBuilderCache.cs">
       <Link>StringBuilderCache.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\ReuseableStringBuilder.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\ReuseableStringBuilder.cs">
       <Link>ReuseableStringBuilder.cs</Link>
-    </Compile>
+    </Compile> -->
     <Compile Include="..\Shared\StrongNameHelpers.cs">
       <Link>StrongNameHelpers.cs</Link>
     </Compile>
-    <Compile Include="..\Shared\TaskLoggingHelperExtension.cs">
+    <!-- <Compile Include="..\Shared\TaskLoggingHelperExtension.cs">
       <Link>TaskLoggingHelperExtension.cs</Link>
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\TempFileUtilities.cs" />
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\TempFileUtilities.cs" /> -->
     <Compile Include="..\Shared\MetadataConversionUtilities.cs">
       <Link>MetadataConversionUtilities.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
@@ -122,60 +125,60 @@
       <Link>StreamMappedString.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="..\Shared\ExceptionHandling.cs">
+    <!-- <Compile Include="..\Shared\ExceptionHandling.cs">
       <Link>ExceptionHandling.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\FileUtilities.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\FileUtilities.cs">
       <Link>FileUtilities.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\EscapingUtilities.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\EscapingUtilities.cs">
       <Link>EscapingUtilities.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\FileMatcher.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\FileMatcher.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\Modifiers.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\Modifiers.cs">
       <Link>Modifiers.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
+    </Compile> -->
     <Compile Include="..\Shared\ReadOnlyCollection.cs" />
-    <Compile Include="..\Shared\ReadOnlyEmptyDictionary.cs" />
-    <Compile Include="..\Shared\Tracing.cs" />
-    <Compile Include="..\Shared\Traits.cs">
+    <!-- <Compile Include="..\Shared\ReadOnlyEmptyDictionary.cs" /> -->
+    <!-- <Compile Include="..\Shared\Tracing.cs" /> -->
+    <!-- <Compile Include="..\Shared\Traits.cs">
       <Link>SharedTraits.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\VersionUtilities.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\VersionUtilities.cs">
       <Link>VersionUtilities.cs</Link>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\VisualStudioConstants.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\VisualStudioConstants.cs">
       <Link>VisualStudioConstants.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\VisualStudioLocationHelper.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\VisualStudioLocationHelper.cs">
       <Link>VisualStudioLocationHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\AssemblyNameExtension.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\AssemblyNameExtension.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\EncodingUtilities.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\EncodingUtilities.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\ErrorUtilities.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\ErrorUtilities.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\ConversionUtilities.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\ConversionUtilities.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\FileUtilitiesRegex.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\FileUtilitiesRegex.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="..\Shared\InternalErrorException.cs">
-    </Compile>
-    <Compile Include="..\Shared\ResourceUtilities.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\InternalErrorException.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\ResourceUtilities.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
+    </Compile> -->
     <Compile Include="..\Shared\LanguageParser\token.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -206,6 +209,14 @@
     <Compile Include="..\Shared\LanguageParser\VisualBasictokenizer.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="..\Shared\TaskLoggingHelper.cs">
+      <Link>BackEnd\Components\RequestBuilder\IntrinsicTasks\TaskLoggingHelper.cs</Link>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="..\Shared\TaskLoggingHelperExtension.cs">
+      <Link>BackEnd\Components\RequestBuilder\IntrinsicTasks\TaskLoggingHelperExtension.cs</Link>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>    
     <Compile Include="AppConfig\*.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -310,9 +321,6 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="AssemblyRemapping.cs" />
-    <Compile Include="AssemblyResources.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="AssignLinkMetadata.cs" />
     <Compile Include="AssignProjectConfiguration.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
@@ -794,27 +802,27 @@
     </EmbeddedResource>
     <!-- Other Source Files -->
     <EmbeddedResource Include="ManifestUtil\manifest.xml">
-      <LogicalName>net.r_eg.IeXod.Tasks.Deployment.ManifestUtilities.manifest.xml</LogicalName>
+      <LogicalName>IeXod.Tasks.Deployment.ManifestUtilities.manifest.xml</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="ManifestUtil\merge.xsl">
-      <LogicalName>net.r_eg.IeXod.Tasks.Deployment.ManifestUtilities.merge.xsl</LogicalName>
+      <LogicalName>IeXod.Tasks.Deployment.ManifestUtilities.merge.xsl</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="ManifestUtil\read2.xsl">
-      <LogicalName>net.r_eg.IeXod.Tasks.Deployment.ManifestUtilities.read2.xsl</LogicalName>
+      <LogicalName>IeXod.Tasks.Deployment.ManifestUtilities.read2.xsl</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="ManifestUtil\trustinfo2.xsl">
-      <LogicalName>net.r_eg.IeXod.Tasks.Deployment.ManifestUtilities.trustinfo2.xsl</LogicalName>
+      <LogicalName>IeXod.Tasks.Deployment.ManifestUtilities.trustinfo2.xsl</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="ManifestUtil\write2.xsl">
-      <LogicalName>net.r_eg.IeXod.Tasks.Deployment.ManifestUtilities.write2.xsl</LogicalName>
+      <LogicalName>IeXod.Tasks.Deployment.ManifestUtilities.write2.xsl</LogicalName>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ManifestUtil\write3.xsl">
-      <LogicalName>net.r_eg.IeXod.Tasks.Deployment.ManifestUtilities.write3.xsl</LogicalName>
+      <LogicalName>IeXod.Tasks.Deployment.ManifestUtilities.write3.xsl</LogicalName>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="BootstrapperUtil\xmltoconfig.xsl">
-      <LogicalName>net.r_eg.IeXod.Tasks.Deployment.Bootstrapper.xmltoconfig.xsl</LogicalName>
+      <LogicalName>IeXod.Tasks.Deployment.Bootstrapper.xmltoconfig.xsl</LogicalName>
     </EmbeddedResource>
     <TextStringResource Include="system.design\System.Design.txt">
       <ResFile>System.Design</ResFile>
@@ -943,6 +951,98 @@
     </CopyFile>
   </ItemGroup>
 
+  <!-- IeXod.Framework -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <Compile Remove="..\Framework\XamlTypes\**" />
+    <EmbeddedResource Remove="..\Framework\XamlTypes\**" />
+    <None Remove="..\Framework\XamlTypes\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <Compile Include="..\Framework\XamlTypes\Rule.cs">
+      <Link>Framework\XamlTypes\Rule.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\BaseProperty.cs">
+      <Link>Framework\XamlTypes\BaseProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\ProjectSchemaDefinitions.cs">
+      <Link>Framework\XamlTypes\ProjectSchemaDefinitions.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\IProjectSchemaNode.cs">
+      <Link>Framework\XamlTypes\IProjectSchemaNode.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\EnumProperty.cs">
+      <Link>Framework\XamlTypes\EnumProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\EnumValue.cs">
+      <Link>Framework\XamlTypes\EnumValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\Argument.cs">
+      <Link>Framework\XamlTypes\Argument.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\BoolProperty.cs">
+      <Link>Framework\XamlTypes\BoolProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\DynamicEnumProperty.cs">
+      <Link>Framework\XamlTypes\DynamicEnumProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\IntProperty.cs">
+      <Link>Framework\XamlTypes\IntProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\StringProperty.cs">
+      <Link>Framework\XamlTypes\StringProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\StringListProperty.cs">
+      <Link>Framework\XamlTypes\StringListProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\DataSource.cs">
+      <Link>Framework\XamlTypes\DataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\NameValuePair.cs">
+      <Link>Framework\XamlTypes\NameValuePair.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\ValueEditor.cs">
+      <Link>Framework\XamlTypes\ValueEditor.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\Category.cs">
+      <Link>Framework\XamlTypes\Category.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\RuleSchema.cs">
+      <Link>Framework\XamlTypes\RuleSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\Framework\XamlTypes\CategorySchema.cs">
+      <Link>Framework\XamlTypes\CategorySchema.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <!-- /IeXod.Framework -->
+
+
+  <!-- IeXod.Utilities -->
+  <ItemGroup>
+    <Compile Include="..\Utilities\ToolTask.cs">
+      <Link>Utilities\ToolTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\TaskItem.cs">
+      <Link>Utilities\TaskItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\Task.cs">
+      <Link>Utilities\Task.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\ProcessExtensions.cs">
+      <Link>Utilities\ProcessExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\AppDomainIsolatedTask.cs">
+      <Link>Utilities\AppDomainIsolatedTask.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\CommandLineBuilder.cs">
+      <Link>Utilities\CommandLineBuilder.cs</Link>
+    </Compile>
+    <!-- <Compile Include="..\Framework\ITask.cs">
+      <Link>Framework\ITask.cs</Link>
+    </Compile> -->
+  </ItemGroup>
+  <!-- / IeXod.Utilities -->
+
 
   <!-- ==========================================================================================-->
   <!-- Assemblies Files we depend on -->
@@ -963,43 +1063,49 @@
     <!-- Needed by Xaml Task Factory -->
     <Reference Include="System.Xaml" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Framework\IeXod.Framework.csproj" />
-    <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" />
+    <ProjectReference Include="..\Build\IeXod.csproj" />
+    <!-- <ProjectReference Include="..\Framework\IeXod.Framework.csproj" /> -->
+    <!-- <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" /> -->
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="System.Resources.Extensions" />
+    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
+    <PackageReference Include="System.Resources.Extensions" Version="$(SystemResourcesExtensionsVersion)" />
   </ItemGroup>
 
   <!-- Tasks need to mimic redistributing the compilers, so add references to both full framework and .net core -->
   <ItemGroup>
     <!-- Reference this package to get binaries at runtime even when Arcade is not adding compiler references -->
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset" ExcludeAssets="all" Condition="'$(UsingToolMicrosoftNetCompilers)' == 'false'" />
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" ExcludeAssets="all" Condition="'$(UsingToolMicrosoftNetCompilers)' == 'false'" Version="$(MicrosoftNetCompilersToolsetVersion)" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
-    <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop" />
-    <PackageReference Include="System.Threading.Tasks.Dataflow" />
+    <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop" Version="$(MicrosoftVisualStudioSetupConfigurationInteropVersion)" />
+    <PackageReference Include="System.Threading.Tasks.Dataflow" Version="$(SystemThreadingTasksDataflowVersion)" />
 
     <Content Include="$(NuGetPackageRoot)microsoft.net.compilers.toolset\$(MicrosoftNetCompilersToolsetVersion)\tasks\net472\**\*" CopyToOutputDirectory="PreserveNewest" LinkBase="Roslyn" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.CodeDom" Version="$(SystemCodeDomVersion)" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
-    <PackageReference Include="System.CodeDom" />
-    <PackageReference Include="System.Reflection.Metadata" />
-    <PackageReference Include="System.Reflection.TypeExtensions" />
-    <PackageReference Include="System.Security.Permissions" />
-    <PackageReference Include="System.Threading.Tasks.Dataflow" />
+    <!-- <PackageReference Include="System.CodeDom" Version="$(SystemCodeDomVersion)" /> -->
+    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="$(SystemReflectionTypeExtensionsVersion)" />
+    <PackageReference Include="System.Security.Permissions" Version="$(SystemSecurityPermissionsVersion)" />
+    <PackageReference Include="System.Threading.Tasks.Dataflow" Version="$(SystemThreadingTasksDataflowVersion)" />
 
     <!-- Need Win32 API on .NET Core to ping registry to determine long path support -->
-    <PackageReference Include="Microsoft.Win32.Registry" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="$(MicrosoftWin32RegistryVersion)" />
 
     <Content Include="$(NuGetPackageRoot)microsoft.net.compilers.toolset\$(MicrosoftNetCompilersToolsetVersion)\tasks\netcoreapp2.1\**\*" CopyToOutputDirectory="PreserveNewest" LinkBase="Roslyn" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(MonoBuild)' == 'true'">
-    <PackageReference Include="System.Reflection.Metadata" />
+    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
   </ItemGroup>
   <ItemGroup>
     <!--

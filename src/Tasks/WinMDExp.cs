@@ -241,7 +241,7 @@ namespace net.r_eg.IeXod.Tasks
         /// <summary>
         /// Validate parameters, log errors and warnings and return true if Execute should proceed.
         /// </summary>
-        protected override bool ValidateParameters()
+        protected internal override bool ValidateParameters()
         {
             if (References == null)
             {

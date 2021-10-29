@@ -417,7 +417,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
                 IDictionary<string, string> projectCollectionGlobalProperties = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                 projectCollectionGlobalProperties.Add("VisualStudioVersion", "ABCDE");
 
-                ProjectInstance p = new ProjectInstance(xml, globalProperties, ObjectModelHelpers.MSBuildDefaultToolsVersion, "ABCDEF", new ProjectCollection(projectCollectionGlobalProperties));
+                ProjectInstance p = new ProjectInstance(xml, globalProperties, new ProjectToolsOptions(null, "ABCDEF"), new ProjectCollection(projectCollectionGlobalProperties));
 
                 Assert.Equal(ObjectModelHelpers.MSBuildDefaultToolsVersion, p.Toolset.ToolsVersion);
                 Assert.Equal("ABCDEF", p.SubToolsetVersion);
@@ -561,7 +561,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
 
             string projectFileContent = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
-                        <UsingTask TaskName='net.r_eg.IeXod.Tasks.Message' AssemblyFile='net.r_eg.IeXod.Tasks.Core.dll'/>
+                        <UsingTask TaskName='net.r_eg.IeXod.Tasks.Message' AssemblyFile='IeXod.Tasks.dll'/>
                         <ItemGroup>
                             <i Include='i0'/>
                         </ItemGroup>
@@ -851,8 +851,8 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
 
                 ProjectRootElement rootElement = ProjectRootElement.Create(XmlReader.Create(new StringReader(projectFileContent)));
                 ProjectInstance projectInstance = useDirectConstruction
-                    ? new ProjectInstance(rootElement, globalProperties: null, toolsVersion: null, buildParameters, projectCollection.LoggingService, buildEventContext, sdkResolverService: null, 0)
-                    : new Project(rootElement, globalProperties: null, toolsVersion: null, projectCollection, projectLoadSettings).CreateProjectInstance();
+                    ? new ProjectInstance(rootElement, globalProperties: null, toolsOptions: ProjectToolsOptions.Default, buildParameters, projectCollection.LoggingService, buildEventContext, sdkResolverService: null, 0)
+                    : new Project(rootElement, globalProperties: null, toolsOptions: ProjectToolsOptions.Default, projectCollection, projectLoadSettings).CreateProjectInstance();
 
                 string[] expectedImportPaths = new string[] { import1Path, import2Path, import3Path };
                 string[] expectedImportPathsIncludingDuplicates = projectLoadSettings.HasFlag(ProjectLoadSettings.RecordDuplicateButNotCircularImports)
@@ -899,7 +899,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
                 globalProperties.Add("g2", "v2");
             }
 
-            Project project = new Project(reader, globalProperties, toolsVersion ?? ObjectModelHelpers.MSBuildDefaultToolsVersion, projectCollection ?? ProjectCollection.GlobalProjectCollection);
+            Project project = new Project(reader, globalProperties, new ProjectToolsOptions(toolsVersion ?? ObjectModelHelpers.MSBuildDefaultToolsVersion), projectCollection ?? ProjectCollection.GlobalProjectCollection);
 
             ProjectInstance instance = project.CreateProjectInstance();
 

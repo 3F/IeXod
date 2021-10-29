@@ -12,11 +12,11 @@ vs.dependencies
 vs.relatedProcessFiles
   vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\net.r_eg.IeXod.dll"
   vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\net.r_eg.IeXod.Framework.dll"
-  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\net.r_eg.IeXod.Tasks.Core.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\IeXod.Tasks.dll"
   vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\net.r_eg.IeXod.Utilities.Core.dll"
   vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\net.r_eg.IeXod.dll"
   vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\net.r_eg.IeXod.Framework.dll"
-  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\net.r_eg.IeXod.Tasks.Core.dll"
+  vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\IeXod.Tasks.dll"
   vs.relatedProcessFile Path="[InstallDir]\MSBuild\Current\Bin\amd64\net.r_eg.IeXod.Utilities.Core.dll"
 
 folder InstallDir:\MSBuild\Current
@@ -30,7 +30,7 @@ folder InstallDir:\MSBuild\Current\Bin
   file source=$(MSBuildConversionBinPath)net.r_eg.IeXod.Engine.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all
   file source=$(X86BinPath)net.r_eg.IeXod.Framework.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all
   file source=$(X86BinPath)net.r_eg.IeXod.Framework.tlb
-  file source=$(X86BinPath)net.r_eg.IeXod.Tasks.Core.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all vs.file.ngenPriority=1
+  file source=$(X86BinPath)IeXod.Tasks.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all vs.file.ngenPriority=1
   file source=$(X86BinPath)net.r_eg.IeXod.Utilities.Core.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all vs.file.ngenPriority=1
   file source=$(X86BinPath)MSBuild.exe vs.file.ngenArchitecture=x86 vs.file.ngenPriority=1
   file source=$(X86BinPath)MSBuild.exe.config
@@ -178,7 +178,7 @@ folder InstallDir:\MSBuild\Current\Bin\amd64
   file source=$(MSBuildConversionBinPath)net.r_eg.IeXod.Engine.dll vs.file.ngenArchitecture=all
   file source=$(X86BinPath)net.r_eg.IeXod.Framework.dll vs.file.ngenArchitecture=all
   file source=$(FrameworkBinPath)x64\net.r_eg.IeXod.Framework.tlb
-  file source=$(X86BinPath)net.r_eg.IeXod.Tasks.Core.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)IeXod.Tasks.dll vs.file.ngenArchitecture=all
   file source=$(X86BinPath)net.r_eg.IeXod.Utilities.Core.dll vs.file.ngenArchitecture=all
   file source=$(X86BinPath)System.Buffers.dll vs.file.ngenArchitecture=all
   file source=$(X86BinPath)System.Memory.dll vs.file.ngenArchitecture=all

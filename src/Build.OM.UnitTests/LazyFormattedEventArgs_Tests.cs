@@ -42,7 +42,7 @@ namespace net.r_eg.IeXod.UnitTests.Framework
    <UsingTask
      TaskName=`Crash`
      TaskFactory=`CodeTaskFactory`
-     AssemblyFile=`$(MSBuildToolsPath)" + Path.DirectorySeparatorChar + @"net.r_eg.IeXod.Tasks.Core.dll` >
+     AssemblyFile=`$(MSBuildToolsPath)" + Path.DirectorySeparatorChar + @"IeXod.Tasks.dll` >
      <Task>
        <Code Type=`Fragment` Language=`cs`>
          this.Log.LogError(`Correct: {0}`, `[goodone]`);

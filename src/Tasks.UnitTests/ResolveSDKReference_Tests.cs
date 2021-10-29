@@ -201,7 +201,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
                 // Resolve with PlatformVersion 7.0
                 MockEngine engine1 = new MockEngine();
                 TaskLoggingHelper log1 = new TaskLoggingHelper(engine1, "ResolveSDKReference");
-                log1.TaskResources = AssemblyResources.PrimaryResources;
+                log1.TaskResources = AssemblyResources.PrimaryTasksResources;
 
                 ResolveSDKReference t1 = new ResolveSDKReference();
                 t1.SDKReferences = new ITaskItem[] { item };
@@ -219,7 +219,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
                 // Resolve with PlatformVersion 8.0
                 MockEngine engine2 = new MockEngine();
                 TaskLoggingHelper log2 = new TaskLoggingHelper(engine2, "ResolveSDKReference");
-                log2.TaskResources = AssemblyResources.PrimaryResources;
+                log2.TaskResources = AssemblyResources.PrimaryTasksResources;
 
                 ResolveSDKReference t2 = new ResolveSDKReference();
                 t2.SDKReferences = new ITaskItem[] { item };
@@ -237,7 +237,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
                 // Resolve with PlatformVersion 8.1
                 MockEngine engine3 = new MockEngine();
                 TaskLoggingHelper log3 = new TaskLoggingHelper(engine3, "ResolveSDKReference");
-                log3.TaskResources = AssemblyResources.PrimaryResources;
+                log3.TaskResources = AssemblyResources.PrimaryTasksResources;
 
                 ResolveSDKReference t3 = new ResolveSDKReference();
                 t3.SDKReferences = new ITaskItem[] { item };
@@ -255,7 +255,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
                 // Resolve with PlatformVersion 8.1 with WarnOnMissingPlatformVersion = false
                 MockEngine engine3a = new MockEngine();
                 TaskLoggingHelper log3a = new TaskLoggingHelper(engine3a, "ResolveSDKReference");
-                log3a.TaskResources = AssemblyResources.PrimaryResources;
+                log3a.TaskResources = AssemblyResources.PrimaryTasksResources;
 
                 ResolveSDKReference t3a = new ResolveSDKReference();
                 t3a.SDKReferences = new ITaskItem[] { item };
@@ -277,7 +277,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
                 // Resolve with PlatformVersion 8.0
                 MockEngine engine4 = new MockEngine();
                 TaskLoggingHelper log4 = new TaskLoggingHelper(engine4, "ResolveSDKReference");
-                log4.TaskResources = AssemblyResources.PrimaryResources;
+                log4.TaskResources = AssemblyResources.PrimaryTasksResources;
                 ResolveSDKReference t4 = new ResolveSDKReference();
                 t4.SDKReferences = new ITaskItem[] { item };
                 t4.InstalledSDKs = new ITaskItem[] { installLocation };
@@ -294,7 +294,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
                 // Resolve with PlatformVersion 8.1
                 MockEngine engine5 = new MockEngine();
                 TaskLoggingHelper log5 = new TaskLoggingHelper(engine5, "ResolveSDKReference");
-                log5.TaskResources = AssemblyResources.PrimaryResources;
+                log5.TaskResources = AssemblyResources.PrimaryTasksResources;
                 ResolveSDKReference t5 = new ResolveSDKReference();
                 t5.SDKReferences = new ITaskItem[] { item };
                 t5.InstalledSDKs = new ITaskItem[] { installLocation };
@@ -324,7 +324,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
         {
             MockEngine engine = new MockEngine();
             TaskLoggingHelper log = new TaskLoggingHelper(engine, "ResolveSDKReference");
-            log.TaskResources = AssemblyResources.PrimaryResources;
+            log.TaskResources = AssemblyResources.PrimaryTasksResources;
 
             HashSet<SDKReference> references = new HashSet<SDKReference>();
             SDKReference reference1 = new SDKReference(new TaskItem(), "Microsoft.VCLibs", "12.0");
@@ -396,7 +396,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
 
             engine = new MockEngine();
             log = new TaskLoggingHelper(engine, "ResolveSDKReference");
-            log.TaskResources = AssemblyResources.PrimaryResources;
+            log.TaskResources = AssemblyResources.PrimaryTasksResources;
 
             references = new HashSet<SDKReference>();
 

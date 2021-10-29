@@ -279,7 +279,7 @@ namespace net.r_eg.IeXod.Evaluation
                     {
                         // The 4.0 toolset is installed in the framework directory
                         var v4Dir =
-                            FrameworkLocationHelper.GetPathToDotNetFrameworkV40(DotNetFrameworkArchitecture.Current);
+                            FrameworkLocationHelper.GetPathToDotNetFrameworkV40(DotNetFrameworkArchitectureInternal.Current);
                         if (v4Dir != null && !toolsets.ContainsKey("4.0"))
                         {
                             // Create standard properties. On Mono they are well known
@@ -660,9 +660,9 @@ namespace net.r_eg.IeXod.Evaluation
         {
             if (NativeMethodsShared.IsMono)
             {
-                var v4Dir = FrameworkLocationHelper.GetPathToDotNetFrameworkV40(DotNetFrameworkArchitecture.Current)
+                var v4Dir = FrameworkLocationHelper.GetPathToDotNetFrameworkV40(DotNetFrameworkArchitectureInternal.Current)
                             + Path.DirectorySeparatorChar;
-                var v35Dir = FrameworkLocationHelper.GetPathToDotNetFrameworkV35(DotNetFrameworkArchitecture.Current)
+                var v35Dir = FrameworkLocationHelper.GetPathToDotNetFrameworkV35(DotNetFrameworkArchitectureInternal.Current)
                              + Path.DirectorySeparatorChar;
 
                 if (root == null)

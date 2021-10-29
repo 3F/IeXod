@@ -454,7 +454,7 @@ namespace net.r_eg.IeXod.Tasks
         /// Validate the task arguments, log any warnings/errors
         /// </summary>
         /// <returns>true if arguments are corrent enough to continue processing, false otherwise</returns>
-        protected override bool ValidateParameters()
+        protected internal override bool ValidateParameters()
         {
             // If either of the encoding parameters passed to the task were
             // invalid, then we should report that fact back to tooltask

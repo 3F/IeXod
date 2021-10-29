@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\common.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
-    <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget>
+    <TargetFrameworks>$(IeXodTestTFM)</TargetFrameworks>
+    <!-- <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget> -->
     
     <IsPackable>false</IsPackable>
 
@@ -12,17 +13,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Security.Principal.Windows" />
-    <PackageReference Include="System.Xml.XPath" />
-    <PackageReference Include="Shouldly" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="$(SystemSecurityPrincipalWindowsVersion)" />
+    <PackageReference Include="System.Xml.XPath" Version="$(SystemXmlXPathVersion)" />
+    <PackageReference Include="Shouldly" Version="$(ShouldlyVersion)" />
 
     <ProjectReference Include="..\Build\IeXod.csproj" />
-    <ProjectReference Include="..\Framework\IeXod.Framework.csproj" />
-    <ProjectReference Include="..\MSBuild\MSBuild.csproj" />
+    <!-- <ProjectReference Include="..\Framework\IeXod.Framework.csproj" /> -->
+    <!-- <ProjectReference Include="..\MSBuild\MSBuild.csproj" /> -->
     <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" />
-    <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" />
+    <!-- <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" /> -->
     <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
-    <ProjectReference Include="..\Samples\PortableTask\PortableTask.csproj" ReferenceOutputAssembly="false" Private="false" SetTargetFramework="TargetFramework=netstandard1.3" />
+    <!-- <ProjectReference Include="..\Samples\PortableTask\PortableTask.csproj" ReferenceOutputAssembly="false" Private="false" SetTargetFramework="TargetFramework=netstandard1.3" /> -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(xunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xunitrunnervisualstudioVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">

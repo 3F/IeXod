@@ -1,6 +1,6 @@
 [$RootKey$\RuntimeConfiguration\dependentAssembly\bindingRedirection\{5BDA9EB8-561A-405C-A482-2CD328059DEA}]
 "name"="net.r_eg.IeXod.Tasks.Core"
-"codeBase"="$BaseInstallDir$\MSBuild\Current\Bin\net.r_eg.IeXod.Tasks.Core.dll"
+"codeBase"="$BaseInstallDir$\MSBuild\Current\Bin\IeXod.Tasks.dll"
 "publicKeyToken"="4bbd2ef743db151e"
 "culture"="neutral"
 "oldVersion"="0.0.0.0-99.9.9.9"

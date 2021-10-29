@@ -35,9 +35,9 @@
     <Compile Include="XmlFileLogger.cs" /> -->
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="net.r_eg.IeXod.Framework" Version="14.3.0" />
-    <PackageReference Include="net.r_eg.IeXod.Utilities.Core" Version="14.3.0" />
-    <PackageReference Include="net.r_eg.IeXod" Version="14.3.0" />
+    <!-- <PackageReference Include="Microsoft.Build.Framework" Version="14.3.0" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="14.3.0" />
+    <PackageReference Include="Microsoft.Build" Version="14.3.0" /> -->
   </ItemGroup>
   <!-- <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.targets))\dir.targets" /> -->
 </Project>

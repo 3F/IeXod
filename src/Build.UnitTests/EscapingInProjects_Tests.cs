@@ -102,7 +102,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         {
             MockLogger logger = Helpers.BuildProjectWithNewOMExpectSuccess(@"
                 <Project ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <UsingTask TaskName=`Message` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` TaskFactory=`TaskHostFactory` />
+                    <UsingTask TaskName=`Message` AssemblyFile=`IeXod.Tasks.dll` TaskFactory=`TaskHostFactory` />
                     <PropertyGroup>
                         <MyPropertyWithSemicolons>abc %3b def %3b ghi</MyPropertyWithSemicolons>
                     </PropertyGroup>
@@ -594,7 +594,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
             MockLogger logger = Helpers.BuildProjectWithNewOMExpectSuccess(@"
 
                 <Project ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <UsingTask TaskName=`Message` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` TaskFactory=`TaskHostFactory` />
+                    <UsingTask TaskName=`Message` AssemblyFile=`IeXod.Tasks.dll` TaskFactory=`TaskHostFactory` />
 
                     <ItemGroup>
                         <TextFile Include=`X.txt`/>
@@ -721,7 +721,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
                 EscapingInProjectsHelper.CreateThreeWeirdoFiles();
                 Project project = ObjectModelHelpers.CreateInMemoryProject(@"
                 <Project ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <UsingTask TaskName=`Message` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll` TaskFactory=`TaskHostFactory` />
+                    <UsingTask TaskName=`Message` AssemblyFile=`IeXod.Tasks.dll` TaskFactory=`TaskHostFactory` />
 
                     <Target Name=`t`>
                         <ItemGroup>

@@ -3685,7 +3685,7 @@ namespace net.r_eg.IeXod.UnitTests.Project_Tests
                         <UsingTask TaskName=`net.r_eg.IeXod.UnitTests.Project_Tests.Message` AssemblyFile=`{0}`/>
 
                         <!-- In our .tasks file Message is used fully qualified. In order to perform this test, we need to make sure it's defined partially qualified-->
-                        <UsingTask TaskName='Message' AssemblyName='net.r_eg.IeXod.Tasks.Core, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e'/>
+                        <UsingTask TaskName='Message' AssemblyName='IeXod.Tasks, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e'/>
 
                         <Target Name=`Build`>
 
@@ -6012,7 +6012,7 @@ namespace net.r_eg.IeXod.UnitTests.Project_Tests
 
             Project project = ObjectModelHelpers.CreateInMemoryProject(e, ObjectModelHelpers.CleanupFileContents(@"
                 <Project DefaultTargets=`Build` xmlns=`msbuildnamespace`>
-                    <UsingTask TaskName='Message' AssemblyName='net.r_eg.IeXod.Tasks.Core, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e'/>    
+                    <UsingTask TaskName='Message' AssemblyName='IeXod.Tasks, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e'/>    
                     <Target Name=`Build`>
                         <Message Text=`##$(MSBuildToolsVersion)##`/>
                     </Target>
@@ -6033,7 +6033,7 @@ namespace net.r_eg.IeXod.UnitTests.Project_Tests
 
             Project project = ObjectModelHelpers.CreateInMemoryProject(e, ObjectModelHelpers.CleanupFileContents(@"
                 <Project DefaultTargets=`Build` xmlns=`msbuildnamespace`>
-                    <UsingTask TaskName='Message' AssemblyName='net.r_eg.IeXod.Tasks.Core, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e'/>    
+                    <UsingTask TaskName='Message' AssemblyName='IeXod.Tasks, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e'/>    
                     <Target Name=`Build`>
                         <Message Text=`##$(MSBuildToolsVersion)##`/>
                     </Target>
@@ -6056,7 +6056,7 @@ namespace net.r_eg.IeXod.UnitTests.Project_Tests
 
             Project project = ObjectModelHelpers.CreateInMemoryProject(e, ObjectModelHelpers.CleanupFileContents(@"
                 <Project ToolsVersion=`myValidToolsVersion` DefaultTargets=`Build` xmlns=`msbuildnamespace`>
-                    <UsingTask TaskName='Message' AssemblyName='net.r_eg.IeXod.Tasks.Core, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e'/>    
+                    <UsingTask TaskName='Message' AssemblyName='IeXod.Tasks, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e'/>    
                     <PropertyGroup>
                        <TheToolsVersion>$(MSBuildToolsVersion)</TheToolsVersion>
                     </PropertyGroup>

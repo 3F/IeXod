@@ -393,7 +393,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 Project project = new Project(XmlReader.Create(new StringReader(@"<Project ToolsVersion='invalidToolsVersion' xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Target Name='Foo'>
                     </Target>
-                   </Project>")), null /* no global properties */, "goober", p);
+                   </Project>")), null /* no global properties */, new ProjectToolsOptions("goober"), p);
                 success = project.Build(mockLogger);
                 // BANG!
             }

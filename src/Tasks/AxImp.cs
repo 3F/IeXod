@@ -142,7 +142,7 @@ namespace net.r_eg.IeXod.Tasks
             /// Validates the parameters passed to the task
             /// </summary>
             /// <returns>True if parameters are valid</returns>
-            protected override bool ValidateParameters()
+            protected internal override bool ValidateParameters()
             {
                 // Verify that we were actually passed a .ocx to import
                 if (String.IsNullOrEmpty(ActiveXControlName))

@@ -257,7 +257,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string contents1 = CleanupFileContents(@"
 <Project xmlns='msbuildnamespace' ToolsVersion='msbuilddefaulttoolsversion'>
- <UsingTask TaskName='SetEnvv' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll' >
+ <UsingTask TaskName='SetEnvv' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' >
                             <Task>
                                 <Code Language='cs'>
                                     System.Environment.SetEnvironmentVariable(""MOO"", ""When the dawn comes, tonight will be a memory too"");
@@ -841,7 +841,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
             string contents = CleanupFileContents(@"
 <Project xmlns='msbuildnamespace' ToolsVersion='msbuilddefaulttoolsversion'>
-<UsingTask TaskName='VerifyGlobalProjectCollection' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll'>
+<UsingTask TaskName='VerifyGlobalProjectCollection' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll'>
                         <Task>
                             <Using Namespace='net.r_eg.IeXod.Evaluation'/>
                                <Reference Include='$(MSBuildToolsPath)\net.r_eg.IeXod.dll'/>
@@ -1646,7 +1646,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string contents = CleanupFileContents(@"
 <Project xmlns='msbuildnamespace' ToolsVersion='msbuilddefaulttoolsversion'>
- <UsingTask TaskName='net.r_eg.IeXod.Tasks.Exec' AssemblyName='net.r_eg.IeXod.Tasks.Core, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' TaskFactory='TaskHostFactory' />
+ <UsingTask TaskName='net.r_eg.IeXod.Tasks.Exec' AssemblyName='IeXod.Tasks, Version=msbuildassemblyversion, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' TaskFactory='TaskHostFactory' />
  <Target Name='test'>
     <Exec Command='" + Helpers.GetSleepCommand(TimeSpan.FromSeconds(10)) + @"'/>
     <Message Text='[errormessage]'/>
@@ -3543,7 +3543,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// </summary>
         private Project CreateProject(string contents, string toolsVersion, ProjectCollection projectCollection, bool deleteTempProject)
         {
-            var project = new Project(XmlReader.Create(new StringReader(contents)), null, toolsVersion, projectCollection)
+            var project = new Project(XmlReader.Create(new StringReader(contents)), null, new ProjectToolsOptions(toolsVersion), projectCollection)
             {
                 FullPath = _env.CreateFile().Path
             };
@@ -3651,7 +3651,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
                     // build p2p project as a real p2p dependency of some other project. This loads the p2p into msbuild's caches
 
-                    var mainProject = new Project(mainRootElement, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, collection);
+                    var mainProject = new Project(mainRootElement, new Dictionary<string, string>(), ProjectToolsOptions.Default, collection);
                     var mainInstance = mainProject.CreateProjectInstance(ProjectInstanceSettings.Immutable).DeepCopy(isImmutable: false);
 
                     Assert.Empty(mainInstance.GlobalProperties);
@@ -3675,7 +3675,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
                     // build p2p directly via mutated ProjectInstances based of the same Project.
                     // This should rebuild and the result should reflect the in-memory changes and not reuse stale cache info
 
-                    var p2pProject = new Project(p2pProjectPath, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion, collection);
+                    var p2pProject = new Project(p2pProjectPath, new Dictionary<string, string>(), ProjectToolsOptions.Default, collection);
 
                     for (var i = 0; i < 2; i++)
                     {
@@ -3800,7 +3800,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
             // build a project which runs a target from an imported file
 
-            var project = new Project(root, new Dictionary<string, string>(), MSBuildConstants.CurrentToolsVersion,
+            var project = new Project(root, new Dictionary<string, string>(), ProjectToolsOptions.Default,
                 _projectCollection);
             ProjectInstance instance = project.CreateProjectInstance(ProjectInstanceSettings.Immutable).DeepCopy(false);
 

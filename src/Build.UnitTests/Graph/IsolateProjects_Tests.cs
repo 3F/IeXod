@@ -61,7 +61,7 @@ namespace net.r_eg.IeXod.Graph.UnitTests
                     <Target Name='SelfTarget'>
                     </Target>
 
-                    <UsingTask TaskName='CustomMSBuild' TaskFactory='RoslynCodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.Core.dll'>
+                    <UsingTask TaskName='CustomMSBuild' TaskFactory='RoslynCodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll'>
                         <ParameterGroup>
                           <Projects ParameterType='net.r_eg.IeXod.Framework.ITaskItem[]' Required='true' />
                           <Targets ParameterType='net.r_eg.IeXod.Framework.ITaskItem[]' Required='true' />

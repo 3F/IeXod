@@ -206,7 +206,7 @@ namespace net.r_eg.IeXod.Shared
             private static void LoadFileTrackerDll()
             {
                 // Get the FileTracker in our directory that matches the currently running process
-                string buildToolsPath = FrameworkLocationHelper.GeneratePathToBuildToolsForToolsVersion(MSBuildConstants.CurrentToolsVersion, DotNetFrameworkArchitecture.Current);
+                string buildToolsPath = FrameworkLocationHelper.GeneratePathToBuildToolsForToolsVersion(MSBuildConstants.CurrentToolsVersion, DotNetFrameworkArchitectureInternal.Current);
                 string fileTrackerPath = Path.Combine(buildToolsPath, fileTrackerDllName.Value);
 
                 if (!FileSystems.Default.FileExists(fileTrackerPath))

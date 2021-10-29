@@ -31,7 +31,7 @@ namespace net.r_eg.IeXod.Tasks
         protected abstract Type GetObjectType();
 
 
-        protected GenerateManifestBase() : base(AssemblyResources.PrimaryResources, "MSBuild.")
+        protected GenerateManifestBase() : base(AssemblyResources.PrimaryTasksResources, "MSBuild.")
         {
         }
 

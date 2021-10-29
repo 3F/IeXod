@@ -18,7 +18,7 @@ using Microsoft.Win32;
 
 using FrameworkNameVersioning = System.Runtime.Versioning.FrameworkName;
 using UtilitiesDotNetFrameworkArchitecture = net.r_eg.IeXod.Utilities.DotNetFrameworkArchitecture;
-using SharedDotNetFrameworkArchitecture = net.r_eg.IeXod.Shared.DotNetFrameworkArchitecture;
+using SharedDotNetFrameworkArchitecture = net.r_eg.IeXod.Shared.DotNetFrameworkArchitectureInternal;
 using System.Collections.ObjectModel;
 using net.r_eg.IeXod.Shared.FileSystem;
 using net.r_eg.IeXod.Tasks.AssemblyFoldersFromConfig;

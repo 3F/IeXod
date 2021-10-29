@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="it" original="../strings.resx">
+    <body>
+      <trans-unit id="MyErrorResource">
+        <source>Oops I wiped your harddrive {0}</source>
+        <target state="new">Oops I wiped your harddrive {0}</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="MySubcategoryResource">
+        <source>Romulan</source>
+        <target state="new">Romulan</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="MyWarningResource">
+        <source>Be nice or I wipe your harddrive {0}</source>
+        <target state="new">Be nice or I wipe your harddrive {0}</target>
+        <note />
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -494,7 +494,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
 </Project>
 ");
 
-            Project project = new Project(new XmlTextReader(new StringReader(contents)), new Dictionary<string, string>(), ObjectModelHelpers.MSBuildDefaultToolsVersion);
+            Project project = new Project(new XmlTextReader(new StringReader(contents)), new Dictionary<string, string>(), ProjectToolsOptions.Default);
             project.FullPath = fileName;
             ProjectInstance instance = project.CreateProjectInstance();
 

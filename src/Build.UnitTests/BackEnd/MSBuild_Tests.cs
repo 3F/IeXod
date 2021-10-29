@@ -1055,10 +1055,13 @@ namespace net.r_eg.IeXod.UnitTests
 
             try
             {
+
+#if !IEXOD_DISABLE_TASKS
                 ITaskItem[] projects = new ITaskItem[]
                 {
                     new TaskItem(project1), new TaskItem(project2)
                 };
+#endif
 
                 // Test the various combinations of BuildInParallel and StopOnFirstFailure when the msbuild task is told there are not multiple nodes 
                 // running in the system
@@ -1378,10 +1381,13 @@ namespace net.r_eg.IeXod.UnitTests
 
             try
             {
+
+#if !IEXOD_DISABLE_TASKS
                 ITaskItem[] projects = new ITaskItem[]
                 {
                     new TaskItem(project1)
                 };
+#endif
                 for (int i = 0; i < 6; i++)
                 {
                     bool stopOnFirstFailure = false;
@@ -1560,10 +1566,13 @@ namespace net.r_eg.IeXod.UnitTests
 
             try
             {
+
+#if !IEXOD_DISABLE_TASKS
                 ITaskItem[] projects = new ITaskItem[]
                 {
                     new TaskItem(projectFile2)
                 };
+#endif
 
                 Project p = ObjectModelHelpers.CreateInMemoryProject(parentProjectContents);
                 ProjectInstance pi = p.CreateProjectInstance();

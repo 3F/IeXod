@@ -24,9 +24,9 @@
     <file src="$TaskHostBinPath$/MSBuildTaskHost.exe.config" target="v15.0/bin" />
     <file src="$MSBuildConversionBinPath$/net.r_eg.IeXod.Conversion.Core.dll" target="v15.0/bin" />
     <file src="$MSBuildConversionBinPath$/net.r_eg.IeXod.Engine.dll" target="v15.0/bin" />
-    <file src="$X86BinPath$/net.r_eg.IeXod.dll" target="v15.0/bin" />
+    <file src="$X86BinPath$/IeXod.dll" target="v15.0/bin" />
     <file src="$X86BinPath$/net.r_eg.IeXod.Framework.dll" target="v15.0/bin" />
-    <file src="$X86BinPath$/net.r_eg.IeXod.Tasks.Core.dll" target="v15.0/bin" />
+    <file src="$X86BinPath$/IeXod.Tasks.dll" target="v15.0/bin" />
     <file src="$X86BinPath$/net.r_eg.IeXod.Utilities.Core.dll" target="v15.0/bin" />
     <file src="$X86BinPath$/System.Collections.Immutable.dll" target="v15.0/bin" />
     <file src="$X86BinPath$/System.Memory.dll" target="v15.0/bin" />
@@ -74,7 +74,7 @@
     <file src="$MSBuildConversionBinPath$/net.r_eg.IeXod.Engine.dll" target="v15.0/bin/amd64" />
     <file src="$X86BinPath$/net.r_eg.IeXod.dll" target="v15.0/bin/amd64" />
     <file src="$X86BinPath$/net.r_eg.IeXod.Framework.dll" target="v15.0/bin/amd64" />
-    <file src="$X86BinPath$/net.r_eg.IeXod.Tasks.Core.dll" target="v15.0/bin/amd64" />
+    <file src="$X86BinPath$/IeXod.Tasks.dll" target="v15.0/bin/amd64" />
     <file src="$X86BinPath$/net.r_eg.IeXod.Utilities.Core.dll" target="v15.0/bin/amd64" />
     <file src="$X86BinPath$/System.Collections.Immutable.dll" target="v15.0/bin/amd64" />
     <file src="$X86BinPath$/System.Memory.dll" target="v15.0/bin/amd64" />
