@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <DotnetSdkForTestsVersion>3.1.202</DotnetSdkForTestsVersion>
+  </PropertyGroup>
 
+  <PropertyGroup>
     <XliffTasksVersion>1.0.0-beta.19253.1</XliffTasksVersion> <!-- https://github.com/dotnet/xliff-tasks -->
     <SystemCollectionsImmutableVersion>1.7.1</SystemCollectionsImmutableVersion>
     <SystemThreadingTasksDataflowVersion>4.11.1</SystemThreadingTasksDataflowVersion>
@@ -37,6 +40,5 @@
     <MicrosoftDotNetPlatformAbstractionsVersion>3.1.4</MicrosoftDotNetPlatformAbstractionsVersion>
     <MicrosoftNETCoreDotNetHostResolverVersion>5.0.0-preview.2.20152.11</MicrosoftNETCoreDotNetHostResolverVersion>
     <MicrosoftDotNetXUnitExtensionsVersion>5.0.0-beta.20261.9</MicrosoftDotNetXUnitExtensionsVersion>
-
   </PropertyGroup>
 </Project>

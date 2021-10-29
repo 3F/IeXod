@@ -6,6 +6,8 @@
     <Version>$(ProductIeXodSdkResolverVersion)</Version>
     <RootNamespace>net.r_eg.IeXod.Sdk</RootNamespace>
     <AssemblyName>IeXod.SdkResolver</AssemblyName>
+
+    <TargetFrameworks>$(IeXodTFM)</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>

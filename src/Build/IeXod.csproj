@@ -8,6 +8,8 @@
     <RootNamespace>net.r_eg.IeXod</RootNamespace>
     <AssemblyName>IeXod</AssemblyName>
 
+    <TargetFrameworks>$(IeXodTFM)</TargetFrameworks>
+
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);BUILD_ENGINE</DefineConstants>
 

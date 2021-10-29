@@ -4,13 +4,13 @@
   <Import Project="..\IeXod.MSBSdkResolver\build.props" />
   
   <PropertyGroup>
+    <TargetFrameworks>$(IeXodTestTFM)</TargetFrameworks>
+    
     <!-- By default test projects don't append TargetFramework to output path, but for multi-targeted tests
          we need to -->
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
 
     <AssemblyName>net.r_eg.IeXod.MSBSdkResolver.Tests</AssemblyName>
-
-    <dotnetexeForTests>3.1.202</dotnetexeForTests>
     <dotnetexeForTestsPath>$(ArtifactsBinDir)redist\$(Configuration)\dotnet</dotnetexeForTestsPath>
   </PropertyGroup>
 
@@ -38,10 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
 
-  <Target Name="InstallDotNetForTests" AfterTargets="Build"
-          Condition="$(TargetFrameworks.StartsWith('$(TargetFramework)'))"> <!-- FIXME: prevents multiple processing for each Framework -->
-
-    <Exec Condition="!Exists($(dotnetexeForTestsPath))" ContinueOnError="true"
-          Command="powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;([scriptblock]::Create((Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1'))) -InstallDir '$(dotnetexeForTestsPath)' -Version '$(dotnetexeForTests)' -ProxyAddress $env:HTTP_PROXY -ProxyUseDefaultCredentials&quot;" />
+  <Target Name="InstallDotNetForTests" AfterTargets="Build" Condition="$(TargetFrameworks.StartsWith('$(TargetFramework)'))"> <!-- FIXME: prevents multiple processing for each Framework -->
+    <Exec Condition="!Exists($(dotnetexeForTestsPath))" ContinueOnError="true" Command="powershell -NoProfile -ExecutionPolicy unrestricted -Command &quot;&amp;([scriptblock]::Create((Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1'))) -InstallDir '$(dotnetexeForTestsPath)' -Version '$(DotnetSdkForTestsVersion)' -ProxyAddress $env:HTTP_PROXY -ProxyUseDefaultCredentials&quot;" />
   </Target>
 </Project>

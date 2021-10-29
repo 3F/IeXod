@@ -4,6 +4,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <RuntimeIdentifiers Condition="'$(OS)' == 'Windows_NT'">win-x86;win-x64</RuntimeIdentifiers>
     <EmbeddedResxFilePostfix>MSBSdkResolver</EmbeddedResxFilePostfix>
+
+    <EmitLegacyAssetsFileItems>true</EmitLegacyAssetsFileItems> <!-- L-76. Required for `ResolveHostfxrCopyLocalContent` target below -->
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,6 +3,7 @@
   <Import Project="..\common.props" />
 
   <PropertyGroup>
+    <TargetFrameworks>$(IeXodTestTFM)</TargetFrameworks>
     <AssemblyName>net.r_eg.IeXod.UnitTests</AssemblyName>
     <CLSCompliant>false</CLSCompliant>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

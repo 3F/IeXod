@@ -9,6 +9,8 @@
     <RootNamespace>net.r_eg.IeXod</RootNamespace>
     <AssemblyName>IeXod.MSBSdkResolver</AssemblyName>
 
+    <TargetFrameworks>$(IeXodTFM)</TargetFrameworks>
+
     <WarningsAsErrors>true</WarningsAsErrors>
     <IsPackable>true</IsPackable>
   </PropertyGroup>

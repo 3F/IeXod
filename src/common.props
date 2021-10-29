@@ -30,7 +30,7 @@
     <OsUnixLike>false</OsUnixLike>
     <OsUnixLike Condition="$([MSBuild]::IsOsUnixLike())">true</OsUnixLike>
 
-    <TargetPlatformIdentifier Condition="'$(TargetPlatformIdentifier)'==''">$(OS)</TargetPlatformIdentifier>
+    <!-- <TargetPlatformIdentifier Condition="'$(TargetPlatformIdentifier)'==''">$(OS)</TargetPlatformIdentifier> -->
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug-MONO'">
@@ -71,6 +71,22 @@
     <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <TargetFrameworks Condition="'$(OsEnvironment)'=='windows'">$(FullFrameworkTFM);netcoreapp2.1</TargetFrameworks>
     <TargetFrameworks Condition="'$(MonoBuild)'=='true'">$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
+
+    <!-- -->
+    <NetStdTFM>netstandard2.0</NetStdTFM>
+    <NetStdTFM Condition="$(SuppressNetStdTFM) == 'true'"></NetStdTFM>
+
+    <NetCoreTFM>netcoreapp2.1;net5</NetCoreTFM>
+
+    <!-- <IeXodTFM>net40;net472;$(NetCoreTFM);$(NetStdTFM)</IeXodTFM> -->
+    <IeXodTFM>net472;netcoreapp2.1</IeXodTFM>
+    <IeXodTFM Condition="$(OsUnixLike) == 'true'">$(NetCoreTFM);$(NetStdTFM)</IeXodTFM>
+
+    <!-- <IeXodTestTFM>net472;$(NetCoreTFM)</IeXodTestTFM> -->
+    <IeXodTestTFM>net472;netcoreapp2.1</IeXodTestTFM>
+    <IeXodTestTFM Condition="$(OsUnixLike)=='true'">$(NetCoreTFM)</IeXodTestTFM>
+
+    <NoWarn>$(NoWarn);NETSDK1138</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>

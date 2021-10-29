@@ -5,6 +5,8 @@
   <PropertyGroup>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <AssemblyName>net.r_eg.IeXod.Framework.UnitTests</AssemblyName>
+
+    <TargetFrameworks>$(IeXodTestTFM)</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
