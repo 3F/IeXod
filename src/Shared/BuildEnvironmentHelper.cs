@@ -239,13 +239,6 @@ namespace net.r_eg.IeXod.Shared
 
         private static BuildEnvironment TryFromDevConsole()
         {
-            if (s_runningTests())
-            {
-                //  If running unit tests, then don't try to get the build environment from MSBuild installed on the machine
-                //  (we should be using the locally built MSBuild instead)
-                return null;
-            }
-
             // VSINSTALLDIR and VisualStudioVersion are set from the Developer Command Prompt.
             var vsInstallDir = s_getEnvironmentVariable("VSINSTALLDIR");
             var vsVersion = s_getEnvironmentVariable("VisualStudioVersion");
@@ -256,21 +249,14 @@ namespace net.r_eg.IeXod.Shared
             return new BuildEnvironment(
                 BuildEnvironmentMode.VisualStudio,
                 GetMSBuildExeFromVsRoot(vsInstallDir),
-                runningTests: false,
+                runningTests: s_runningTests(),
                 runningInVisualStudio: false,
                 visualStudioPath: vsInstallDir);
         }
 
         private static BuildEnvironment TryFromSetupApi()
         {
-            if (s_runningTests())
-            {
-                //  If running unit tests, then don't try to get the build environment from MSBuild installed on the machine
-                //  (we should be using the locally built MSBuild instead)
-                return null;
-            }
-
-            Version v = new Version(CurrentVisualStudioVersion);
+            Version v = new(CurrentVisualStudioVersion);
             var instances = s_getVisualStudioInstances()
                 .Where(i => i.Version.Major == v.Major && FileSystems.Default.DirectoryExists(i.Path))
                 .ToList();
@@ -285,7 +271,7 @@ namespace net.r_eg.IeXod.Shared
             return new BuildEnvironment(
                 BuildEnvironmentMode.VisualStudio,
                 GetMSBuildExeFromVsRoot(instances[0].Path),
-                runningTests: false,
+                runningTests: s_runningTests(),
                 runningInVisualStudio: false,
                 visualStudioPath: instances[0].Path);
         }

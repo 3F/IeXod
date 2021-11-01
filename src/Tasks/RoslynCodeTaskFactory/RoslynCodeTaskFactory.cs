@@ -47,14 +47,16 @@ namespace net.r_eg.IeXod.Tasks
         {
             // Common assembly references for all code languages
             {
-                String.Empty,
+                string.Empty,
                 new List<string>
                 {
-                     "IeXod",
-                    //"Microsoft.Build.Framework",
-                    //"Microsoft.Build.Utilities.Core",
+                    "IeXod",
+                    "IeXod.Tasks",
                     "mscorlib",
-                    "netstandard"
+                    "netstandard",
+                    //-
+                    "Microsoft.Build.Framework",
+                    "Microsoft.Build.Utilities.Core",
                 }
             },
             // CSharp specific assembly references
@@ -532,6 +534,15 @@ namespace net.r_eg.IeXod.Tasks
                 references = references.Union(DefaultReferences[taskInfo.CodeLanguage]);
             }
 
+            IEnumerable<string> paths = new[]
+            {
+                Path.Combine(ThisAssemblyDirectoryLazy.Value, ReferenceAssemblyDirectoryName),
+                ThisAssemblyDirectoryLazy.Value,
+                Path.Combine(BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory, ReferenceAssemblyDirectoryName),
+                BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory
+            }
+            .Concat(MonoLibDirs);
+
             // Loop through the user specified references as well as the default references
             foreach (string reference in references)
             {
@@ -548,13 +559,7 @@ namespace net.r_eg.IeXod.Tasks
                     ? reference
                     : $"{reference}.dll";
 
-                string resolvedDir = new[]
-                {
-                    Path.Combine(ThisAssemblyDirectoryLazy.Value, ReferenceAssemblyDirectoryName),
-                    ThisAssemblyDirectoryLazy.Value,
-                }
-                .Concat(MonoLibDirs)
-                .FirstOrDefault(p => File.Exists(Path.Combine(p, assemblyFileName)));
+                string resolvedDir = paths.FirstOrDefault(p => File.Exists(Path.Combine(p, assemblyFileName)));
 
                 if (resolvedDir != null)
                 {
