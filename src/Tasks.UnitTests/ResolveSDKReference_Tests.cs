@@ -3712,7 +3712,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
     /// </summary>
     public class GatherSDKOutputGroupsTestFixture
     {
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [PlatformSpecific(TestPlatforms.Windows)]     // No GetResolvedSDKReferences target in Unix
         public void GatherSDKOutputGroupsTargetArchitectureExists()
         {
@@ -3856,7 +3856,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [PlatformSpecific(TestPlatforms.Windows)]     // No GetResolvedSDKReferences target in Unix
         public void GatherSDKOutputGroupsTargetArchitectureExists2()
         {
@@ -4001,7 +4001,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
         }
 
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [PlatformSpecific(TestPlatforms.Windows)]     // No GetResolvedSDKReferences target in Unix
         public void GatherSDKOutputGroupsTargetArchitectureDoesNotExists()
         {
@@ -4111,7 +4111,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [PlatformSpecific(TestPlatforms.Windows)]     // No GetResolvedSDKReferences target in Unix
         public void CheckDefaultingOfTargetConfigAndArchitecture()
         {
@@ -4209,7 +4209,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveSDKReference_Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [PlatformSpecific(TestPlatforms.Windows)]     // No GetResolvedSDKReferences target in Unix
         public void CheckAttributesFromManifestArePassedToResolvedAssemblies()
         {

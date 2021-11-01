@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using net.r_eg.IeXod.Shared.FileSystem;
+using System.Reflection;
 
 namespace net.r_eg.IeXod.Shared
 {
@@ -515,6 +516,8 @@ namespace net.r_eg.IeXod.Shared
                 MSBuildToolsDirectory64 = CurrentMSBuildToolsDirectory;
             }
 
+            IeXodBinPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
             // We can't detect an environment, don't try to set other paths.
             if (mode == BuildEnvironmentMode.None || currentMSBuildExeFile == null || currentToolsDirectory == null)
                 return;
@@ -632,5 +635,10 @@ namespace net.r_eg.IeXod.Shared
         /// VisualStudio mode this folder will be %VSINSTALLDIR%\MSBuild.
         /// </summary>
         internal string MSBuildExtensionsPath { get; set; }
+
+        /// <summary>
+        /// Path to the IeXod directory.
+        /// </summary>
+        internal string IeXodBinPath { get; }
     }
 }

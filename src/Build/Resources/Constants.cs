@@ -37,6 +37,7 @@ namespace net.r_eg.IeXod.Internal
         internal const string thisFileFullPath = "MSBuildThisFileFullPath";
         internal const string thisFileName = "MSBuildThisFileName";
         internal const string binPath = "MSBuildBinPath";
+        internal const string binIeXodPath = "IeXodBinPath";
         internal const string projectDefaultTargets = "MSBuildProjectDefaultTargets";
         internal const string extensionsPath = "MSBuildExtensionsPath";
         internal const string extensionsPath32 = "MSBuildExtensionsPath32";
@@ -82,6 +83,7 @@ namespace net.r_eg.IeXod.Internal
             thisFileName,
 
             binPath,
+            binIeXodPath,
             projectDefaultTargets,
             toolsPath,
             toolsVersion,

@@ -436,6 +436,8 @@ namespace net.r_eg.IeXod.Evaluation
             }
         }
 
+        public string IeXodBinPath => BuildEnvironmentHelper.Instance.IeXodBinPath;
+
         /// <summary>
         /// Properties associated with the toolset
         /// </summary>
@@ -923,6 +925,7 @@ namespace net.r_eg.IeXod.Evaluation
                     List<ProjectPropertyInstance> reservedProperties = new List<ProjectPropertyInstance>();
 
                     reservedProperties.Add(ProjectPropertyInstance.Create(ReservedPropertyNames.binPath, EscapingUtilities.Escape(ToolsPath), mayBeReserved: true));
+                    reservedProperties.Add(ProjectPropertyInstance.Create(ReservedPropertyNames.binIeXodPath, EscapingUtilities.Escape(IeXodBinPath), mayBeReserved: true));
                     reservedProperties.Add(ProjectPropertyInstance.Create(ReservedPropertyNames.toolsVersion, ToolsVersion, mayBeReserved: true));
                     reservedProperties.Add(ProjectPropertyInstance.Create(ReservedPropertyNames.appVersion, Constants.AppVersion, mayBeReserved: true));
                     reservedProperties.Add(ProjectPropertyInstance.Create(ReservedPropertyNames.appProductVersion, Constants.AppProductVersion, mayBeReserved: true));

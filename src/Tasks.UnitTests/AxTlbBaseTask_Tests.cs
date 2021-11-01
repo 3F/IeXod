@@ -42,7 +42,7 @@ namespace net.r_eg.IeXod.UnitTests.AxTlbImp_Tests
         /// <summary>
         /// Tests the /keycontainer: switch
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-104")]
         public void KeyContainer()
         {
             if (!NativeMethodsShared.IsWindows)

@@ -114,6 +114,7 @@ namespace net.r_eg.IeXod.Tasks
             CodeCompileUnit dom = generator.GenerateCode();
 
             string pathToMSBuildBinaries = ToolLocationHelper.GetPathToBuildTools(ToolLocationHelper.CurrentToolsVersion);
+            string pathToIeXodBinaries = BuildEnvironmentHelper.Instance.IeXodBinPath;
 
             // create the code generator options    
             // Since we are running msbuild 12.0 these had better load.
@@ -122,8 +123,8 @@ namespace net.r_eg.IeXod.Tasks
                 new[]
                 {
                     "System.dll",
-                    "IeXod.dll",
-                    "IeXod.Tasks.dll",
+                    Path.Combine(pathToIeXodBinaries, "IeXod.dll"),
+                    Path.Combine(pathToIeXodBinaries, "IeXod.Tasks.dll"),
                     Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Framework.dll"),
                     Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Utilities.Core.dll"),
                     Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Tasks.Core.dll")

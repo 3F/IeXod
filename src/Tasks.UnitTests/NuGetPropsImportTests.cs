@@ -47,7 +47,7 @@ namespace net.r_eg.IeXod.UnitTests
                     <PropertyGroup>
                         <{NuGetPropsPropertyName}>{nugetPropsRelativePath}</{NuGetPropsPropertyName}>
                     </PropertyGroup>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                 </Project>
             ");
 
@@ -73,7 +73,7 @@ namespace net.r_eg.IeXod.UnitTests
                     <PropertyGroup>
                         <{NuGetPropsPropertyName}>{nugetPropsRelativePath}</{NuGetPropsPropertyName}>
                     </PropertyGroup>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                 </Project>
             ");
 

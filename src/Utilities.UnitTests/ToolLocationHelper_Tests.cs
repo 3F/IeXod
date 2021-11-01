@@ -1162,7 +1162,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='4.0'>
-                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
+                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='IeXod.Tasks, Version=0.1.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
                          <ParameterGroup>     
                              <Sdk35ToolsPath />
                              <Sdk40ToolsPath />
@@ -1204,7 +1204,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='4.0'>
-                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
+                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='IeXod.Tasks, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
                          <ParameterGroup>     
                              <Sdk35ToolsPath />
                              <Sdk40ToolsPath />
@@ -1248,7 +1248,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='4.0'>
-                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
+                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='IeXod.Tasks, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
                          <ParameterGroup>     
                              <Sdk35ToolsPath />
                              <Sdk40ToolsPath />

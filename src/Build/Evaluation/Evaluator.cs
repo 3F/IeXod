@@ -1184,6 +1184,7 @@ namespace net.r_eg.IeXod.Evaluation
             builtInProperties.Add(SetBuiltInProperty(ReservedPropertyNames.appProductVersion, Constants.AppProductVersion));
             builtInProperties.Add(SetBuiltInProperty(ReservedPropertyNames.toolsPath, _data.Toolset.ToolsPath));
             builtInProperties.Add(SetBuiltInProperty(ReservedPropertyNames.binPath, _data.Toolset.ToolsPath));
+            builtInProperties.Add(SetBuiltInProperty(ReservedPropertyNames.binIeXodPath, _data.Toolset.IeXodBinPath));
             builtInProperties.Add(SetBuiltInProperty(ReservedPropertyNames.startupDirectory, startupDirectory));
             builtInProperties.Add(SetBuiltInProperty(ReservedPropertyNames.buildNodeCount, _maxNodeCount.ToString(CultureInfo.CurrentCulture)));
             builtInProperties.Add(SetBuiltInProperty(ReservedPropertyNames.programFiles32, FrameworkLocationHelper.programFiles32));

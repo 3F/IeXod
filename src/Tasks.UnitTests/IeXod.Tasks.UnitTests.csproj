@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="PortableTasks_Tests.cs" /> <!-- L-101 -->
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Security.Principal.Windows" Version="$(SystemSecurityPrincipalWindowsVersion)" />
     <PackageReference Include="System.Xml.XPath" Version="$(SystemXmlXPathVersion)" />
     <PackageReference Include="Shouldly" Version="$(ShouldlyVersion)" />

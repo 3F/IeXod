@@ -270,7 +270,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlDataDrivenToolTask_Tests
         {
             string projectFile = @"
                       <Project ToolsVersion=`msbuilddefaulttoolsversion` DefaultTargets=`XamlTaskFactory` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                        <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
+                        <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`IeXod.Tasks, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
                           <Task>
                             <![CDATA[
                               <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -324,7 +324,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlDataDrivenToolTask_Tests
         {
             string projectFile = @"
                       <Project ToolsVersion=`msbuilddefaulttoolsversion` DefaultTargets=`XamlTaskFactory` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                        <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
+                        <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`IeXod.Tasks, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
                           <Task>
                             <![CDATA[
                               <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>
@@ -361,7 +361,7 @@ namespace net.r_eg.IeXod.UnitTests.XamlDataDrivenToolTask_Tests
         {
             string projectFile = @"
                       <Project ToolsVersion=`msbuilddefaulttoolsversion` DefaultTargets=`XamlTaskFactory` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                        <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`net.r_eg.IeXod.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
+                        <UsingTask TaskName=`TestTask` TaskFactory=`XamlTaskFactory` AssemblyName=`IeXod.Tasks, Culture=neutral, PublicKeyToken=4bbd2ef743db151e`>
                           <Task>
                             <![CDATA[
                               <ProjectSchemaDefinitions xmlns=`clr-namespace:net.r_eg.IeXod.Framework.XamlTypes;assembly=IeXod.Tasks` xmlns:x=`http://schemas.microsoft.com/winfx/2006/xaml` xmlns:sys=`clr-namespace:System;assembly=mscorlib` xmlns:impl=`clr-namespace:Microsoft.VisualStudio.Project.Contracts.Implementation;assembly=Microsoft.VisualStudio.Project.Contracts.Implementation`>

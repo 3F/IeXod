@@ -339,7 +339,7 @@ namespace net.r_eg.IeXod.UnitTests
 #if RUNTIME_TYPE_NETCORE
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/259")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
 #endif
         [Trait("Category", "mono-osx-failing")]
         public void PropertyOverridesContainSemicolon()
@@ -355,7 +355,7 @@ namespace net.r_eg.IeXod.UnitTests
                 Path.Combine("bug'533'369", "Sub;Dir", "ConsoleApplication1", "ConsoleApplication1.csproj"), @"
 
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`msbuildnamespace`>
-                  <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                  <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                   <PropertyGroup>
                     <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                     <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>

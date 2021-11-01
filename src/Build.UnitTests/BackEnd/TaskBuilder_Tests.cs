@@ -601,7 +601,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string projectContents = @"
                     <Project xmlns='msbuildnamespace' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`NullMetadataTask_v4` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildFrameworkToolsPath)\net.r_eg.IeXod.Tasks.v4.0.dll`>
+                        <UsingTask TaskName=`NullMetadataTask_v4` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll`>
                             <ParameterGroup>
                                <OutputItems ParameterType=`net.r_eg.IeXod.Framework.ITaskItem[]` Output=`true` />
                             </ParameterGroup>

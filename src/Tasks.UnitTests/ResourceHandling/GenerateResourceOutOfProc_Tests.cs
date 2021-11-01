@@ -2358,7 +2358,7 @@ namespace net.r_eg.IeXod.UnitTests.GenerateResource_Tests.OutOfProc
             _output = output;
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         //FIXME: mono: looks for csc.exe
         // https://github.com/Microsoft/msbuild/issues/677
         [Trait("Category", "mono-osx-failing")]
@@ -2535,7 +2535,7 @@ namespace net.r_eg.IeXod.UnitTests.GenerateResource_Tests.OutOfProc
         /// Assembly.LoadFile on that relative path, which fails (LoadFile requires an
         /// absolute path).  The fix was to use Assembly.LoadFrom instead.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         //FIXME: mono: looks for csc.exe
         // https://github.com/Microsoft/msbuild/issues/677
         [Trait("Category", "mono-osx-failing")]

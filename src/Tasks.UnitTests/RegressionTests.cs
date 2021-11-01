@@ -26,12 +26,12 @@ namespace net.r_eg.IeXod.Tasks.UnitTests
         /// Verifies that when a user overrides the BaseIntermediateOutputPath that the build still works.
         /// </summary>
         /// <remarks>This was written because of regression https://github.com/Microsoft/msbuild/issues/1509. </remarks>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void OverrideBaseIntermediateOutputPathSucceeds()
         {
             Project project = ObjectModelHelpers.CreateInMemoryProject($@"
                 <Project DefaultTargets=""Build"" xmlns=""msbuildnamespace"" ToolsVersion=""msbuilddefaulttoolsversion"">
-                    <Import Project=""$(MSBuildToolsPath)\Microsoft.Common.props"" />
+                    <Import Project=""$(IeXodBinPath)\Microsoft.Common.props"" />
 
                     <PropertyGroup>
                         <BaseIntermediateOutputPath>obj\x86\Debug</BaseIntermediateOutputPath>
@@ -51,14 +51,14 @@ namespace net.r_eg.IeXod.Tasks.UnitTests
         /// <summary>
         /// Tests fix for https://github.com/microsoft/msbuild/issues/1479.
         /// </summary>
-        [ConditionalFact(typeof(NativeMethodsShared), nameof(NativeMethodsShared.IsWindows))]
+        [ConditionalFact(typeof(NativeMethodsShared), nameof(NativeMethodsShared.IsWindows), Skip = "IeXod. L-81")]
         public void AssemblyAttributesLocation()
         {
             var expectedCompileItems = "a.cs;" + Path.Combine("obj", "Debug", ".NETFramework,Version=v4.0.AssemblyAttributes.cs");
 
             var project = ObjectModelHelpers.CreateInMemoryProject($@"
 <Project>
-  <Import Project=""$(MSBuildToolsPath)\Microsoft.Common.props"" />
+  <Import Project=""$(IeXodBinPath)\Microsoft.Common.props"" />
   <ItemGroup>
     <Compile Include=""a.cs""/>       
   </ItemGroup>

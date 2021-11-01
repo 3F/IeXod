@@ -950,7 +950,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
             // ---------------------
             ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
@@ -1015,7 +1015,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
                 // ---------------------
                 ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
@@ -1080,7 +1080,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
             // ---------------------
             ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
@@ -1140,7 +1140,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
                 // ---------------------
                 ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
@@ -1200,7 +1200,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
             // ---------------------
             ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
@@ -1260,7 +1260,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
                 // ---------------------
                 ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
@@ -1320,7 +1320,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
             // ---------------------
             ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
@@ -1380,7 +1380,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
                 // ---------------------
                 ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>

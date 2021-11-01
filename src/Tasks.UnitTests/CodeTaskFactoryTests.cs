@@ -50,7 +50,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Test the simple case where we have a string parameter and we want to log that.
         /// Specifically testing that even when the ToolsVersion is post-4.0, and thus 
-        /// net.r_eg.IeXod.Tasks.v4.0.dll is expected to NOT be in MSBuildToolsPath, that 
+        /// Microsoft.Build.Tasks.v4.0.dll is expected to NOT be in MSBuildToolsPath, that 
         /// we will redirect under the covers to use the current tasks instead.
         /// </summary>
         [Fact]
@@ -58,7 +58,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.v4.0.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -75,13 +75,13 @@ namespace net.r_eg.IeXod.UnitTests
 
             MockLogger mockLogger = Helpers.BuildProjectWithNewOMExpectSuccess(projectFileContents);
             mockLogger.AssertLogContains("Hello, World!");
-            mockLogger.AssertLogDoesntContain("net.r_eg.IeXod.Tasks.v4.0.dll");
+            mockLogger.AssertLogDoesntContain("Microsoft.Build.Tasks.v4.0.dll");
         }
 
         /// <summary>
         /// Test the simple case where we have a string parameter and we want to log that.
         /// Specifically testing that even when the ToolsVersion is post-12.0, and thus 
-        /// net.r_eg.IeXod.Tasks.v12.0.dll is expected to NOT be in MSBuildToolsPath, that 
+        /// Microsoft.Build.Tasks.v12.0.dll is expected to NOT be in MSBuildToolsPath, that 
         /// we will redirect under the covers to use the current tasks instead.
         /// </summary>
         [Fact]
@@ -89,7 +89,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`$(MSBuildToolsPath)\net.r_eg.IeXod.Tasks.v12.0.dll` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyFile=`IeXod.Tasks.dll` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -106,7 +106,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             MockLogger mockLogger = Helpers.BuildProjectWithNewOMExpectSuccess(projectFileContents);
             mockLogger.AssertLogContains("Hello, World!");
-            mockLogger.AssertLogDoesntContain("net.r_eg.IeXod.Tasks.v12.0.dll");
+            mockLogger.AssertLogDoesntContain("Microsoft.Build.Tasks.v12.0.dll");
         }
 
         /// <summary>

@@ -67,7 +67,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string resx = FileUtilities.GetTemporaryFile();
             File.Delete(resx);
-            Stream fileToSend = Assembly.GetExecutingAssembly().GetManifestResourceStream("net.r_eg.IeXod.Tasks.UnitTests.SampleResx");
+            Stream fileToSend = Assembly.GetExecutingAssembly().GetManifestResourceStream("IeXod.Tasks.UnitTests.SampleResx");
             using (FileStream f = new FileStream(resx, FileMode.CreateNew))
             {
                 byte[] buffer = new byte[2048];

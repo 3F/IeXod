@@ -2723,7 +2723,7 @@ namespace net.r_eg.IeXod.UnitTests.GenerateResource_Tests.InProc
             _output = output;
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [SkipOnTargetFramework(TargetFrameworkMonikers.Netcoreapp, "Linked resources not supported on Core: https://github.com/microsoft/msbuild/issues/4094")]
         [SkipOnTargetFramework(TargetFrameworkMonikers.Mono, "https://github.com/Microsoft/msbuild/issues/677")]
         public void DontLockP2PReferenceWhenResolvingSystemTypes()
@@ -2901,7 +2901,7 @@ namespace net.r_eg.IeXod.UnitTests.GenerateResource_Tests.InProc
         /// which fails (LoadFile requires an absolute path).  The fix was to use
         /// Assembly.LoadFrom instead.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         [SkipOnTargetFramework(TargetFrameworkMonikers.Netcoreapp, "Linked resources not supported on Core: https://github.com/microsoft/msbuild/issues/4094")]
         [SkipOnTargetFramework(TargetFrameworkMonikers.Mono, "https://github.com/Microsoft/msbuild/issues/677")]
         public void ReferencedAssemblySpecifiedUsingRelativePath()

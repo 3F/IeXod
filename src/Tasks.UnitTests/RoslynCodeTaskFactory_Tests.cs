@@ -741,11 +741,12 @@ namespace InlineCode {{
             }
         }
 
-        private static readonly Regex RuntimeVersionLine = new Regex("Runtime Version:.*");
+        private static readonly Regex RuntimeVersionLine = new("[\r\n]{1,2}^.*Runtime Version:.*$", RegexOptions.Multiline);
 
         private static string NormalizeRuntime(string input)
         {
-            return RuntimeVersionLine.Replace(input, "Runtime Version:SOMETHING");
+            // NOTE: For .NET Core runtime it will not contain a `Runtime Version:` line at all. Only for netfx.
+            return RuntimeVersionLine.Replace(input, string.Empty);
         }
     }
 }

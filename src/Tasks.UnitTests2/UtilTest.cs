@@ -66,7 +66,7 @@ namespace XMakeTasksUnitTests
         ///A test for GetClrVersion
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("net.r_eg.IeXod.Tasks.v4.0.dll")]
+        [DeploymentItem("IeXod.Tasks.dll")]
         public void GetClrVersionTest()
         {
             string targetFrameworkVersion = "v3.5";

@@ -243,7 +243,7 @@ namespace net.r_eg.IeXod.Utilities
         /// <summary>
         /// Enables the user of autorun functionality in CMD.exe on Windows which is disabled by default in MSBuild.
         /// </summary>
-        public readonly bool UseAutoRunWhenLaunchingProcessUnderCmd = Environment.GetEnvironmentVariable("MSBUILDUSERAUTORUNINCMD") == "1";
+        public bool UseAutoRunWhenLaunchingProcessUnderCmd => Environment.GetEnvironmentVariable("MSBUILDUSERAUTORUNINCMD") == "1"; //L-102
 
         /// <summary>
         /// Disables switching codepage to UTF-8 after detection of characters that can't be represented in the current codepage.

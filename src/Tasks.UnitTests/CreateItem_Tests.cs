@@ -190,7 +190,7 @@ namespace net.r_eg.IeXod.UnitTests
             BuildRequestData data = new BuildRequestData(projectFileFullPath, new Dictionary<string, string>(), null, new string[] { "Repro" }, null);
             BuildParameters parameters = new BuildParameters
             {
-                DisableInProcNode = true,
+                //DisableInProcNode = true, // IeXod: L-98
                 EnableNodeReuse = false,
                 Loggers = new ILogger[] { new MockLogger(_testOutput) },
             };

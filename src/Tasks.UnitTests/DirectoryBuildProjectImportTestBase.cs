@@ -76,7 +76,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             Project project = ObjectModelHelpers.LoadProjectFileInTempProjectDirectory(ObjectModelHelpers.CreateFileInTempProjectDirectory(_projectRelativePath, @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
 
                     <Import Project=`$(MSBuildBinPath)\Microsoft.CSharp.targets` />
                 </Project>
@@ -109,7 +109,7 @@ namespace net.r_eg.IeXod.UnitTests
                         <{ImportDirectoryBuildProjectPropertyName}>false</{ImportDirectoryBuildProjectPropertyName}>
                     </PropertyGroup>
 
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
 
                     <Import Project=`$(MSBuildBinPath)\Microsoft.CSharp.targets` />
                 </Project>
@@ -125,7 +125,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Ensures that when the user specifies a custom directory build props file that it is imported correctly.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void ImportsDirectoryBuildProjectCustomFile()
         {
             string customFilePath = ObjectModelHelpers.CreateFileInTempProjectDirectory(CustomBuildProjectFile, BasicDirectoryBuildProjectContents);
@@ -139,7 +139,7 @@ namespace net.r_eg.IeXod.UnitTests
                     <PropertyGroup>
                         <{DirectoryBuildProjectPathPropertyName}>{customFilePath}</{DirectoryBuildProjectPathPropertyName}>
                     </PropertyGroup>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
 
                     <Import Project=`$(MSBuildBinPath)\Microsoft.CSharp.targets` />
                 </Project>
@@ -153,7 +153,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Ensures that if a directory build project exists, it will be imported.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void ImportsDirectoryBuildProjectIfExists()
         {
             ObjectModelHelpers.CreateFileInTempProjectDirectory(DirectoryBuildProjectFile, BasicDirectoryBuildProjectContents);
@@ -164,7 +164,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             Project project = ObjectModelHelpers.LoadProjectFileInTempProjectDirectory(ObjectModelHelpers.CreateFileInTempProjectDirectory(_projectRelativePath, @"
                 <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
-                    <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
+                    <Import Project=`$(IeXodBinPath)\Microsoft.Common.props` />
 
                     <Import Project=`$(MSBuildBinPath)\Microsoft.CSharp.targets` />
                 </Project>
