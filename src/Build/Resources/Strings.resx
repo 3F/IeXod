@@ -301,7 +301,7 @@
     LOCALIZATION: "{0}" is a message from some FX method and is already localized.</comment>
   </data>
   <data name="DefaultTasksFileLoadFailureWarning" xml:space="preserve">
-    <value>MSB4010: The "{0}" files could not be successfully loaded from their expected location "{1}". Default tasks will not be available. {2}</value>
+    <value>MSB4010: The "{0}" files could not be successfully loaded from their expected location "{1}". Default tasks will be used from the nearest assembly. {2}</value>
     <comment>{StrBegin="MSB4010: "}UE: This message is shown when the default tasks files that are located alongside the MSBuild binaries cannot be
     found, either because they don't exist, or because of lack of permissions. "{2}" contains a message explaining why.
     LOCALIZATION: "{2}" is a message from some FX method and is already localized.</comment>

@@ -718,11 +718,10 @@ namespace net.r_eg.IeXod.Evaluation
 
                 if (defaultTasksFiles.Length == 0)
                 {
-                    loggingServices.LogWarning
+                    loggingServices.LogComment
                         (
                         buildEventContext,
-                        null,
-                        new BuildEventFileInfo(/* this warning truly does not involve any file */ String.Empty),
+                        MessageImportance.Normal,
                         taskFileWarning,
                         taskPattern,
                         searchPath,
@@ -732,11 +731,10 @@ namespace net.r_eg.IeXod.Evaluation
             }
             catch (Exception e) when (ExceptionHandling.IsIoRelatedException(e))
             {
-                loggingServices.LogWarning
+                loggingServices.LogComment
                     (
                     buildEventContext,
-                    null,
-                    new BuildEventFileInfo(/* this warning truly does not involve any file */ String.Empty),
+                    MessageImportance.Normal,
                     taskFileWarning,
                     taskPattern,
                     searchPath,
