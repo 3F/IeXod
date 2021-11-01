@@ -49,8 +49,16 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 
             var resolvers = loader.LoadResolvers(_loggingContext, new MockElementLocation("file"), SdkEnv.Empty);
 
+#if SDKRESOLVER_AS_EXTDLL
             resolvers.Select(i => i.GetType().FullName).ShouldBe(new [] { typeof(DefaultSdkResolver).FullName });
-            
+#else
+            resolvers.Select(i => i.GetType().FullName).ShouldBe(new[]
+            {
+                typeof(MSBSdkResolver).FullName,
+                typeof(DefaultSdkResolver).FullName
+            });
+#endif
+
             _logger.ErrorCount.ShouldBe(0);
             _logger.WarningCount.ShouldBe(0);
         }

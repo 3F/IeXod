@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Xml;
 using net.r_eg.IeXod.BackEnd.Logging;
 using net.r_eg.IeXod.Construction;
+using net.r_eg.IeXod.Evaluation;
 using net.r_eg.IeXod.Sdk;
 using net.r_eg.IeXod.Shared;
 
@@ -24,25 +25,27 @@ namespace net.r_eg.IeXod.BackEnd.SdkResolution
 
         internal virtual IList<SdkResolver> LoadResolvers(LoggingContext loggingContext, ElementLocation location, SdkEnv sdkEnv)
         {
-            ErrorUtilities.VerifyThrowArgumentNull(sdkEnv.toolsOptions, nameof(sdkEnv.toolsOptions));
+            ProjectToolsOptions options = sdkEnv.toolsOptions ?? ProjectToolsOptions.Default;
 
-            var resolvers = InitSdkResolvers(sdkEnv, new List<SdkResolver>(sdkEnv.toolsOptions.SdkResolvers)
-            {
-                new DefaultSdkResolver() // Always add the default resolver
-            });
+            var resolvers = InitSdkResolvers
+            (
+                new List<SdkResolver>(options.SdkResolvers)
+                {
+                    new DefaultSdkResolver() // Always add the default resolver
+                },
+                options
+            );
 
-            var potentialResolvers = new List<string>();
-            foreach (var sdkpath in sdkEnv.toolsOptions.SdkResolversPaths)
+            List<string> potentialResolvers = new();
+            foreach(string sdkpath in options.SdkResolversPaths)
             {
                 potentialResolvers.AddRange(FindPotentialSdkResolvers(sdkpath, location));
             }
 
-            if (potentialResolvers.Count == 0)
-            {
-                return Order(resolvers);
-            }
+            // since FindPotentialSdkResolvers override is possible
+            potentialResolvers.AddRange(FindPotentialSdkResolvers(null, location));
 
-            foreach (var potentialResolver in potentialResolvers)
+            foreach(string potentialResolver in potentialResolvers)
             {
                 LoadResolvers(potentialResolver, loggingContext, location, resolvers);
             }
@@ -197,13 +200,11 @@ namespace net.r_eg.IeXod.BackEnd.SdkResolution
             }
         }
 
-        private List<SdkResolver> InitSdkResolvers(SdkEnv sdkEnv, List<SdkResolver> resolvers)
+        private List<SdkResolver> InitSdkResolvers(List<SdkResolver> resolvers, ProjectToolsOptions options)
         {
-            if(!sdkEnv.toolsOptions.DisablePredefinedSdkResolvers)
-            {
-                resolvers.AddRange(GetPredefinedSdkResolvers());
-                return resolvers;
-            }
+            if(options.DisablePredefinedSdkResolvers) return resolvers;
+
+            resolvers.AddRange(GetPredefinedSdkResolvers());
             return resolvers;
         }
     }

@@ -321,7 +321,7 @@ namespace net.r_eg.IeXod.Execution
         {
             _projectFileLocation = ElementLocation.Create(projectFile);
             _globalProperties = new PropertyDictionary<ProjectPropertyInstance>(globalProperties.Count);
-            ToolsOptions = projectToInheritFrom.ToolsOptions.Copy();
+            ToolsOptions = projectToInheritFrom.ToolsOptions?.Copy();
             this.Toolset = projectToInheritFrom.Toolset;
             this.SubToolsetVersion = projectToInheritFrom.SubToolsetVersion;
             _explicitToolsVersionSpecified = projectToInheritFrom._explicitToolsVersionSpecified;
@@ -434,7 +434,7 @@ namespace net.r_eg.IeXod.Execution
             this.CreateTargetsSnapshot(data);
             this.CreateImportsSnapshot(data);
 
-            ToolsOptions = data.ToolsOptions.Copy();
+            ToolsOptions = data.ToolsOptions?.Copy();
             this.Toolset = data.Toolset; // UNDONE: This isn't immutable, should be cloned or made immutable; it currently has a pointer to project collection
             this.SubToolsetVersion = data.SubToolsetVersion;
             this.TaskRegistry = data.TaskRegistry;
@@ -519,7 +519,7 @@ namespace net.r_eg.IeXod.Execution
                 this.TaskRegistry =
                     that.TaskRegistry; // UNDONE: This isn't immutable, should be cloned or made immutable; it currently has a pointer to project collection
 
-                ToolsOptions = (ProjectToolsOptions)that.ToolsOptions.Clone();
+                ToolsOptions = (ProjectToolsOptions)that.ToolsOptions?.Clone();
 
                 // These are immutable so we don't need to clone them:
                 this.Toolset = that.Toolset;

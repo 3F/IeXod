@@ -312,15 +312,18 @@ namespace net.r_eg.IeXod.UnitTests.OM.Construction
 
             _env.SetEnvironmentVariable("MSBuildSDKsPath", _testSdkRoot);
 
+            ProjectToolsOptions options = ProjectToolsOptions.Default;
+            options.ThrowExceptionIfNotResolvedSdk = throwsOnEvaluate;
+
             string content = string.Format(projectFormatString, string.Empty, projectInnerContents);
             if (throwsOnEvaluate)
             {
                 Assert.Throws<InvalidProjectFileException>(
-                    () => new Project(ProjectRootElement.Create(XmlReader.Create(new StringReader(content)))));
+                    () => new Project(ProjectRootElement.Create(XmlReader.Create(new StringReader(content))), null, options));
             }
             else
             {
-                var project = new Project(ProjectRootElement.Create(XmlReader.Create(new StringReader(content))));
+                var project = new Project(ProjectRootElement.Create(XmlReader.Create(new StringReader(content))), null, options);
                 Assert.Empty(project.Imports);
             }
         }
