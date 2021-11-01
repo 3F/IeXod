@@ -3,11 +3,12 @@
 // Copyright (c) IeXod contributors https://github.com/3F/IeXod/graphs/contributors
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using net.r_eg.IeXod.Framework;
-using net.r_eg.IeXod.Utilities;
 using System;
 using System.IO;
 using System.Linq;
+using net.r_eg.IeXod.Framework;
+using net.r_eg.IeXod.Shared;
+using net.r_eg.IeXod.Utilities;
 
 namespace net.r_eg.IeXod.Tasks
 {
@@ -27,6 +28,9 @@ namespace net.r_eg.IeXod.Tasks
 
                 Func<string>[] possibleLocations =
                 {
+                    // optionally distributed together with IeXod
+                    () => Path.Combine(BuildEnvironmentHelper.Instance.IeXodBinPath, "Roslyn", ToolName),
+
 #if !RUNTIME_TYPE_NETCORE
                     // Full framework MSBuild
                     () => Path.Combine(pathToBuildTools, "Roslyn", ToolName),

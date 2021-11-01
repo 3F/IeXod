@@ -534,12 +534,18 @@ namespace net.r_eg.IeXod.Tasks
                 references = references.Union(DefaultReferences[taskInfo.CodeLanguage]);
             }
 
+            string pathToMSBuildTools = ToolLocationHelper.GetPathToBuildTools
+            (
+                ToolLocationHelper.CurrentToolsVersion,
+                DotNetFrameworkArchitecture.Current
+            );
+
             IEnumerable<string> paths = new[]
             {
                 Path.Combine(ThisAssemblyDirectoryLazy.Value, ReferenceAssemblyDirectoryName),
                 ThisAssemblyDirectoryLazy.Value,
-                Path.Combine(BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory, ReferenceAssemblyDirectoryName),
-                BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory
+                Path.Combine(pathToMSBuildTools, ReferenceAssemblyDirectoryName),
+                pathToMSBuildTools
             }
             .Concat(MonoLibDirs);
 
