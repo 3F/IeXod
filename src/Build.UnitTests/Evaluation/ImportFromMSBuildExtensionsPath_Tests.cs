@@ -796,7 +796,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
                 var configFileContents = @"
                 <configuration>
                   <configSections>
-                    <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod, Version=15.1.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e"" />
+                    <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod, Version=0.1.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e"" />
                   </configSections>
                   <msbuildToolsets default=""" + toolsVersionToUse + @""">
                     <toolset toolsVersion=""" + toolsVersionToUse + @""">

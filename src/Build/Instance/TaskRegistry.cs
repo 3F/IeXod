@@ -6,6 +6,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Reflection;
 using net.r_eg.IeXod.Collections;
@@ -52,6 +53,12 @@ namespace net.r_eg.IeXod.Execution
     /// </example>
     internal sealed class TaskRegistry : ITranslatable
     {
+        internal const string NS = "net.r_eg.IeXod.Tasks";
+
+        internal const string MODULE = "IeXod.Tasks";
+
+        internal const string ASM = MODULE + ", PublicKeyToken=4bbd2ef743db151e";
+
         /// <summary>
         /// The fallback task registry
         /// </summary>
@@ -107,13 +114,13 @@ namespace net.r_eg.IeXod.Execution
         /// Simple name for the MSBuild tasks (v14+), used for shimming in loading 
         /// task factory UsingTasks
         /// </summary>
-        private static string s_tasksCoreSimpleName = "net.r_eg.IeXod.Tasks.Core";
+        private static readonly string s_tasksCoreSimpleName = NS;
 
         /// <summary>
         /// Filename for the MSBuild tasks (v14+), used for shimming in loading 
         /// task factory UsingTasks
         /// </summary>
-        private static string s_tasksCoreFilename = s_tasksCoreSimpleName + ".dll";
+        private static readonly string s_tasksCoreFilename = MODULE + ".dll";
 
         /// <summary>
         /// Expected location that MSBuild tasks (v14+) is picked up from if the user 
@@ -525,7 +532,11 @@ namespace net.r_eg.IeXod.Execution
                     }
                 }
 
-                Dictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> registrations = GetRelevantRegistrations(taskIdentity, exactMatchRequired);
+                Dictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> registrations = GetRelevantRegistrations(taskIdentity, exactMatchRequired, qualified: false);
+                if(registrations.Count < 1)
+                {
+                    registrations = GetRelevantRegistrations(taskIdentity, !exactMatchRequired, qualified: true);
+                }
 
                 // look for the given task name in the registry; if not found, gather all registered task names that partially
                 // match the given name
@@ -603,25 +614,33 @@ namespace net.r_eg.IeXod.Execution
         /// If no exact match is found, looks for partial matches.
         /// A task name that is not fully qualified may produce several partial matches.
         /// </summary>
-        private Dictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> GetRelevantRegistrations(RegisteredTaskIdentity taskIdentity, bool exactMatchRequired)
+        private Dictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> GetRelevantRegistrations(RegisteredTaskIdentity taskIdentity, bool exactMatchRequired, bool qualified)
         {
-            Dictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> relevantTaskRegistrations =
-                new Dictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>>(RegisteredTaskIdentity.RegisteredTaskIdentityComparer.Exact);
+            Dictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> relevantTaskRegistrations = new(RegisteredTaskIdentity.RegisteredTaskIdentityComparer.Exact);
 
-            List<RegisteredTaskRecord> taskAssemblies;
-
-            // if we find an exact match
-            if (_taskRegistrations.TryGetValue(taskIdentity, out taskAssemblies))
+            if(!qualified)
             {
-                // we're done
-                relevantTaskRegistrations[taskIdentity] = taskAssemblies;
-                return relevantTaskRegistrations;
+                // if we find an exact match
+                if(_taskRegistrations.TryGetValue(taskIdentity, out List<RegisteredTaskRecord> taskAssemblies))
+                {
+                    // we're done
+                    relevantTaskRegistrations[taskIdentity] = taskAssemblies;
+                    return relevantTaskRegistrations;
+                }
+            }
+            else
+            {
+                foreach(var registration in _taskRegistrations)
+                {
+                    if(RegisteredTaskIdentity.RegisteredTaskIdentityComparer.IsQualifiedMatch(taskIdentity, registration.Key))
+                    {
+                        relevantTaskRegistrations[registration.Key] = registration.Value;
+                        return relevantTaskRegistrations;
+                    }
+                }
             }
 
-            if (exactMatchRequired)
-            {
-                return relevantTaskRegistrations;
-            }
+            if(exactMatchRequired) return relevantTaskRegistrations;
 
             // look through all task declarations for partial matches
             foreach (KeyValuePair<RegisteredTaskIdentity, List<RegisteredTaskRecord>> taskRegistration in _taskRegistrations)
@@ -701,10 +720,11 @@ namespace net.r_eg.IeXod.Execution
         /// An object representing the identity of a task -- not just task name, but also 
         /// the set of identity parameters
         /// </summary>
-        [DebuggerDisplay("{Name} ParameterCount = {TaskIdentityParameters.Count}")]
+        [DebuggerDisplay("{Name} ParameterCount = {TaskIdentityParameters?.Count}")]
         internal class RegisteredTaskIdentity : ITranslatable
         {
             private string _name;
+            private string _qualified;
             private IDictionary<string, string> _taskIdentityParameters;
 
             /// <summary>
@@ -713,6 +733,7 @@ namespace net.r_eg.IeXod.Execution
             internal RegisteredTaskIdentity(string name, IDictionary<string, string> taskIdentityParameters)
             {
                 _name = name;
+                _qualified = s_tasksCoreSimpleName + "." + name;
 
                 // The ReadOnlyDictionary is a *wrapper*, the Dictionary is the copy.
                 _taskIdentityParameters = taskIdentityParameters == null ? null : new ReadOnlyDictionary<string, string>(CreateTaskIdentityParametersDictionary(taskIdentityParameters));
@@ -742,18 +763,18 @@ namespace net.r_eg.IeXod.Execution
             /// <summary>
             /// The name of the task
             /// </summary>
-            public string Name
-            {
-                get { return _name; }
-            }
+            public string Name => _name;
+
+            /// <summary>
+            /// The name of the task qualified by default for IeXod
+            /// </summary>
+            public string QualifiedName => _qualified;
 
             /// <summary>
             /// The identity parameters
             /// </summary>
             public IDictionary<string, string> TaskIdentityParameters
-            {
-                get { return _taskIdentityParameters; }
-            }
+                => _taskIdentityParameters;
 
             /// <summary>
             /// Comparer used to figure out whether two RegisteredTaskIdentities are equal or not. 
@@ -817,6 +838,10 @@ namespace net.r_eg.IeXod.Execution
                     }
                 }
 
+                public static bool IsQualifiedMatch(RegisteredTaskIdentity x, RegisteredTaskIdentity y)
+                    => string.Equals(x.Name, y.QualifiedName, StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(x.QualifiedName, y.Name, StringComparison.OrdinalIgnoreCase);
+
                 /// <summary>
                 /// Returns true if the two task identities are equal; false otherwise. 
                 /// </summary>
@@ -833,7 +858,7 @@ namespace net.r_eg.IeXod.Execution
                     }
 
                     // have to have the same name 
-                    if (String.Equals(x.Name, y.Name, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(x.Name, y.Name, StringComparison.OrdinalIgnoreCase))
                     {
                         return IdentityParametersMatch(x.TaskIdentityParameters, y.TaskIdentityParameters, _exactMatchRequired);
                     }

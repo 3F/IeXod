@@ -746,10 +746,11 @@
     <Content Include="Microsoft.VisualBasic.targets">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <!-- L-96
     <Content Include="Microsoft.Common.overridetasks">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </Content>
+    </Content> -->
     <Content Include="Microsoft.Common.props">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -759,9 +760,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>Current\Microsoft.Common.props</Link>
     </Content>
+    <!-- L-96
     <Content Include="Microsoft.Common.tasks">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Content> -->
     <Content Include="Microsoft.NET.props">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

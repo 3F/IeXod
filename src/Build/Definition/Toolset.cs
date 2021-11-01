@@ -9,8 +9,9 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
-
+using Microsoft.Win32;
 using net.r_eg.IeXod.BackEnd;
 using net.r_eg.IeXod.Collections;
 using net.r_eg.IeXod.Construction;
@@ -19,7 +20,6 @@ using net.r_eg.IeXod.Framework;
 using net.r_eg.IeXod.Internal;
 using net.r_eg.IeXod.Shared;
 using net.r_eg.IeXod.Shared.FileSystem;
-using Microsoft.Win32;
 using ILoggingService = net.r_eg.IeXod.BackEnd.Logging.ILoggingService;
 using ObjectModel = System.Collections.ObjectModel;
 using ReservedPropertyNames = net.r_eg.IeXod.Internal.ReservedPropertyNames;
@@ -114,6 +114,8 @@ namespace net.r_eg.IeXod.Evaluation
         /// </summary>
         private static bool? s_dev10IsInstalled = null;
 #endif // FEATURE_WIN32_REGISTRY
+
+        private readonly string _localTasksDefPath = Path.GetDirectoryName(typeof(Toolset).Assembly.Location);
 
         /// <summary>
         /// Name of the tools version
@@ -901,7 +903,7 @@ namespace net.r_eg.IeXod.Evaluation
 
                     InitializeProperties(loggingServices, buildEventContext);
 
-                    string[] defaultTasksFiles = GetTaskFiles(_getFiles, loggingServices, buildEventContext, DefaultTasksFilePattern, ToolsPath, "DefaultTasksFileLoadFailureWarning");
+                    string[] defaultTasksFiles = GetTaskFiles(_getFiles, loggingServices, buildEventContext, DefaultTasksFilePattern, _localTasksDefPath, "DefaultTasksFileLoadFailureWarning");
                     LoadAndRegisterFromTasksFile(defaultTasksFiles, loggingServices, buildEventContext, "DefaultTasksFileFailure", projectRootElementCache, _defaultTaskRegistry);
                 }
                 finally
@@ -1050,61 +1052,105 @@ namespace net.r_eg.IeXod.Evaluation
         /// </summary>
         private void LoadAndRegisterFromTasksFile(string[] defaultTaskFiles, ILoggingService loggingServices, BuildEventContext buildEventContext, string taskFileError, ProjectRootElementCacheBase projectRootElementCache, TaskRegistry registry)
         {
-            foreach (string defaultTasksFile in defaultTaskFiles)
+            if(defaultTaskFiles == null || defaultTaskFiles.Length < 1)
             {
-                try
+                LoadAndRegisterFromTasksFile((string)null, loggingServices, buildEventContext, taskFileError, projectRootElementCache, registry);
+                return;
+            }
+
+            foreach(string file in defaultTaskFiles)
+            {
+                if(!LoadAndRegisterFromTasksFile(file, loggingServices, buildEventContext, taskFileError, projectRootElementCache, registry))
                 {
-                    // Important to keep the following line since unit tests use the delegate.
-                    ProjectRootElement projectRootElement;
-                    if (_loadXmlFromPath != null)
-                    {
-                        XmlDocumentWithLocation defaultTasks = _loadXmlFromPath(defaultTasksFile);
-                        projectRootElement = ProjectRootElement.Open(defaultTasks);
-                    }
-                    else
-                    {
-                        projectRootElement = ProjectRootElement.Open(defaultTasksFile, projectRootElementCache,
-                            false /*The tasks file is not a explicitly loaded file*/,
-                            preserveFormatting: false);
-                    }
+                    return;
+                }
+            }
+        }
 
-                    foreach (ProjectElement elementXml in projectRootElement.Children)
+        private bool LoadAndRegisterFromTasksFile(string tasksFile, ILoggingService loggingServices, BuildEventContext buildEventContext, string taskFileError, ProjectRootElementCacheBase projectRootElementCache, TaskRegistry registry)
+        {
+            ProjectRootElement projectRootElement;
+            try
+            {
+                if(tasksFile == null)
+                {
+                    Assembly asm = GetTasksAssembly(loggingServices, buildEventContext);
+
+                    if(asm == null) return false;
+                    projectRootElement = ProjectRootElement.Create();
+
+                    IEnumerable<Type> types = asm.GetExportedTypes().Where
+                    (
+                        t => t.Namespace == TaskRegistry.NS && t.GetInterfaces().Contains(typeof(ITask))
+                    );
+                    foreach(Type t in types) projectRootElement.AddUsingTask(t.FullName, null, asm.FullName);
+
+                    tasksFile = asm.Location;
+                }
+                // Important to keep the following line since unit tests use the delegate.
+                else if (_loadXmlFromPath != null)
+                {
+                    XmlDocumentWithLocation defaultTasks = _loadXmlFromPath(tasksFile);
+                    projectRootElement = ProjectRootElement.Open(defaultTasks);
+                }
+                else
+                {
+                    projectRootElement = ProjectRootElement.Open(tasksFile, projectRootElementCache,
+                        false /*The tasks file is not a explicitly loaded file*/,
+                        preserveFormatting: false);
+                }
+
+                foreach (ProjectElement elementXml in projectRootElement.Children)
+                {
+                    ProjectUsingTaskElement usingTask = elementXml as ProjectUsingTaskElement;
+
+                    if (null == usingTask)
                     {
-                        ProjectUsingTaskElement usingTask = elementXml as ProjectUsingTaskElement;
-
-                        if (null == usingTask)
-                        {
-                            ProjectErrorUtilities.ThrowInvalidProject
-                                (
-                                elementXml.Location,
-                                "UnrecognizedElement",
-                                elementXml.XmlElement.Name
-                                );
-                        }
-
-                        TaskRegistry.RegisterTasksFromUsingTaskElement<ProjectPropertyInstance, ProjectItemInstance>
+                        ProjectErrorUtilities.ThrowInvalidProject
                             (
-                            loggingServices,
-                            buildEventContext,
-                            Path.GetDirectoryName(defaultTasksFile),
-                            usingTask,
-                            registry,
-                            _expander,
-                            ExpanderOptions.ExpandProperties,
-                            FileSystems.Default
+                            elementXml.Location,
+                            "UnrecognizedElement",
+                            elementXml.XmlElement.Name
                             );
                     }
+
+                    TaskRegistry.RegisterTasksFromUsingTaskElement<ProjectPropertyInstance, ProjectItemInstance>
+                        (
+                        loggingServices,
+                        buildEventContext,
+                        Path.GetDirectoryName(tasksFile),
+                        usingTask,
+                        registry,
+                        _expander,
+                        ExpanderOptions.ExpandProperties,
+                        FileSystems.Default
+                        );
                 }
-                catch (XmlException e)
-                {
-                    // handle XML errors in the default tasks file
-                    ProjectFileErrorUtilities.VerifyThrowInvalidProjectFile(false, new BuildEventFileInfo(defaultTasksFile, e), taskFileError, e.Message);
-                }
-                catch (Exception e) when (ExceptionHandling.IsIoRelatedException(e))
-                {
-                    loggingServices.LogError(buildEventContext, new BuildEventFileInfo(defaultTasksFile), taskFileError, e.Message);
-                    break;
-                }
+                return true;
+            }
+            catch(XmlException ex)
+            {
+                // handle XML errors in the default tasks file
+                ProjectFileErrorUtilities.VerifyThrowInvalidProjectFile(false, new BuildEventFileInfo(tasksFile, ex), taskFileError, ex.Message);
+                return true;
+            }
+            catch(Exception ex) when (ExceptionHandling.IsIoRelatedException(ex))
+            {
+                loggingServices.LogError(buildEventContext, new BuildEventFileInfo(tasksFile), taskFileError, ex.Message);
+                return false;
+            }
+        }
+
+        private static Assembly GetTasksAssembly(ILoggingService loggingServices, BuildEventContext buildEventContext)
+        {
+            try
+            {
+                return Assembly.Load(TaskRegistry.ASM);
+            }
+            catch(Exception ex)
+            {
+                loggingServices.LogWarning(buildEventContext, null, new BuildEventFileInfo(string.Empty), "LoadAndRegisterTasks.Assembly", TaskRegistry.ASM, ex.Message);
+                return null;
             }
         }
     }

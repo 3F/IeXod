@@ -121,7 +121,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectFileContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyName=`IeXod.Tasks, Version=15.1.0.0` >
+                        <UsingTask TaskName=`CustomTaskFromCodeFactory_BuildTaskSimpleCodeFactory` TaskFactory=`CodeTaskFactory` AssemblyName=`IeXod.Tasks, Version=0.1.0.0` >
                          <ParameterGroup>     
                              <Text/>
                           </ParameterGroup>
@@ -138,7 +138,7 @@ namespace net.r_eg.IeXod.UnitTests
 
             MockLogger mockLogger = Helpers.BuildProjectWithNewOMExpectSuccess(projectFileContents);
             mockLogger.AssertLogContains("Hello, World!");
-            mockLogger.AssertLogContains("IeXod.Tasks, Version=15.1.0.0");
+            mockLogger.AssertLogContains("IeXod.Tasks, Version=0.1.0.0");
         }
 
         /// <summary>

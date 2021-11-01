@@ -1306,6 +1306,11 @@
         <target state="translated">找到安装在“{0}”的 Microsoft Windows SDK。</target>
         <note />
       </trans-unit>
+      <trans-unit id="LoadAndRegisterTasks.Assembly">
+        <source>Module `{0}` cannot be loaded to construct the default UsingTask information due to error `{1}`.</source>
+        <target state="new">Module `{0}` cannot be loaded to construct the default UsingTask information due to error `{1}`.</target>
+        <note />
+      </trans-unit>
       <trans-unit id="MakeDir.Comment">
         <source>Creating directory "{0}".</source>
         <target state="translated">正在创建目录“{0}”。</target>

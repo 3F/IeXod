@@ -2931,4 +2931,8 @@
         error codes, because those exceptions should ideally be caught at a higher scope and logged with a wrapper message that
         DOES have an error code.
   -->
+
+  <data name="LoadAndRegisterTasks.Assembly" xml:space="preserve">
+    <value>Module `{0}` cannot be loaded to construct the default UsingTask information due to error `{1}`.</value>
+  </data>
 </root>
