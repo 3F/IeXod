@@ -188,7 +188,10 @@ namespace net.r_eg.IeXod.UnitTests.Definition
 
             string[] unexpectedRegisteredTasks = { "a1", "a2", "a3", "a4", "b1", "c1", "d1", "e1", "f1", "g1", "g2", "g3", "11", "12", "13", "21" };
 
-            Assert.Equal(1, mockLogger.WarningCount); // "Expected 1 warning logged!"
+            Assert.Equal(0, mockLogger.WarningCount);
+            Assert.Single(mockLogger.BuildMessageEvents);
+            Assert.Contains("MSB4010", mockLogger.FullLog);
+
             foreach (string unexpectedRegisteredTask in unexpectedRegisteredTasks)
             {
                 Assert.False(taskRegistry.TaskRegistrations.ContainsKey(new TaskRegistry.RegisteredTaskIdentity(unexpectedRegisteredTask, null)),
@@ -209,7 +212,9 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             TaskRegistry taskRegistry = (TaskRegistry)t.GetTaskRegistry(service, BuildEventContext.Invalid, ProjectCollection.GlobalProjectCollection.ProjectRootElementCache);
 
             Console.WriteLine(mockLogger.FullLog);
-            Assert.Equal(1, mockLogger.WarningCount); // "Expected a warning for invalid character in toolpath"
+            Assert.Equal(0, mockLogger.WarningCount);
+            Assert.Single(mockLogger.BuildMessageEvents);
+            Assert.Contains("MSB4010", mockLogger.FullLog);
         }
 
         /// <summary>
@@ -954,6 +959,8 @@ namespace net.r_eg.IeXod.UnitTests.Definition
 
         private XmlDocumentWithLocation loadXmlFromPath(string path)
         {
+            if(path == null) return null;
+
             string xmlContents = _defaultTasksFileMap[path];
             XmlDocumentWithLocation xmlDocument = new XmlDocumentWithLocation();
             xmlDocument.LoadXml(xmlContents);

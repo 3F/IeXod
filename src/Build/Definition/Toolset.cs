@@ -708,7 +708,8 @@ namespace net.r_eg.IeXod.Evaluation
 
             try
             {
-                if (null != getFiles)
+                // Important to keep this FIRST since unit tests override getFiles.
+                if(getFiles != null)
                 {
                     defaultTasksFiles = getFiles(searchPath, taskPattern);
                 }
@@ -903,7 +904,15 @@ namespace net.r_eg.IeXod.Evaluation
 
                     InitializeProperties(loggingServices, buildEventContext);
 
-                    string[] defaultTasksFiles = GetTaskFiles(_getFiles, loggingServices, buildEventContext, DefaultTasksFilePattern, _localTasksDefPath, "DefaultTasksFileLoadFailureWarning");
+                    string[] defaultTasksFiles = GetTaskFiles
+                    (
+                        _getFiles,
+                        loggingServices,
+                        buildEventContext,
+                        DefaultTasksFilePattern,
+                        _getFiles != null ? ToolsPath :_localTasksDefPath, // keep origin ToolsPath since _getFiles can be overridden due to tests etc.
+                        "DefaultTasksFileLoadFailureWarning"
+                    );
                     LoadAndRegisterFromTasksFile(defaultTasksFiles, loggingServices, buildEventContext, "DefaultTasksFileFailure", projectRootElementCache, _defaultTaskRegistry);
                 }
                 finally
@@ -1073,7 +1082,15 @@ namespace net.r_eg.IeXod.Evaluation
             ProjectRootElement projectRootElement;
             try
             {
-                if(tasksFile == null)
+                // Important to keep this FIRST since unit tests override _loadXmlFromPath.
+                if(_loadXmlFromPath != null)
+                {
+                    XmlDocumentWithLocation defaultTasks = _loadXmlFromPath(tasksFile);
+
+                    if(defaultTasks == null) return false;
+                    projectRootElement = ProjectRootElement.Open(defaultTasks);
+                }
+                else if(tasksFile == null)
                 {
                     Assembly asm = GetTasksAssembly(loggingServices, buildEventContext);
 
@@ -1087,12 +1104,6 @@ namespace net.r_eg.IeXod.Evaluation
                     foreach(Type t in types) projectRootElement.AddUsingTask(t.FullName, null, asm.FullName);
 
                     tasksFile = asm.Location;
-                }
-                // Important to keep the following line since unit tests use the delegate.
-                else if (_loadXmlFromPath != null)
-                {
-                    XmlDocumentWithLocation defaultTasks = _loadXmlFromPath(tasksFile);
-                    projectRootElement = ProjectRootElement.Open(defaultTasks);
                 }
                 else
                 {
