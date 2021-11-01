@@ -42,7 +42,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets />
                  </configuration>"));
@@ -66,7 +66,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"">
                      <toolset toolsVersion=""2.0"">
@@ -102,7 +102,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"" msbuildOverrideTasksPath=""c:\foo"">
                      <toolset toolsVersion=""2.0"">
@@ -128,7 +128,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"" msbuildOverrideTasksPath="""">
                      <toolset toolsVersion=""2.0"">
@@ -156,7 +156,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                     <startup>
                      <supportedRuntime imageVersion=""v2.0.60510"" version=""v2.0.x86chk""/>
@@ -209,7 +209,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"">
                      <toolset>
@@ -238,7 +238,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"">
                      <toolset toolsVersion=""2.0"">
@@ -268,7 +268,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"">
                      <toolset />
@@ -297,7 +297,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""4.0"">
                      <toolset toolsVersion=""4.0"">
@@ -337,7 +337,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""4.0"">
                      <toolset toolsVersion=""4.0"">
@@ -363,7 +363,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""4.0"">
                      <toolset name=""4.0"">
@@ -389,7 +389,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""4.0"">
                      <toolset ToolsVersion=""msbuilddefaulttoolsversion"">
@@ -417,7 +417,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""4.0"">
                      <toolset toolsVersion=""4.0"">
@@ -446,7 +446,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"">
                      <toolset toolsVersion=""2.0"">
@@ -481,7 +481,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"">
                      <toolset toolsVersion=""2.0"">
@@ -521,7 +521,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""2.0"">
                      <toolset toolsVersion=""2.0"">
@@ -618,7 +618,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""4.0"">
                      <toolset ToolsVersion=""2.0"">
@@ -654,7 +654,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                 ToolsetConfigurationReaderTestHelper.WriteConfigFile(ObjectModelHelpers.CleanupFileContents(@"
                  <configuration>
                    <configSections>
-                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod"" />
+                     <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod"" />
                    </configSections>
                    <msbuildToolsets default=""4.0"">
                      <toolset ToolsVersion=""2.0"">

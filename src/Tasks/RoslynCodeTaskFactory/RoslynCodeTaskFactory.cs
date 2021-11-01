@@ -71,6 +71,33 @@ namespace net.r_eg.IeXod.Tasks
             }
         };
 
+        /// <summary>
+        /// An additional references to the standard library assemblies using the default SDK path. L-117
+        /// </summary>
+        internal static readonly IDictionary<string, IEnumerable<string>> StdLibReferences = new Dictionary<string, IEnumerable<string>>(StringComparer.OrdinalIgnoreCase)
+        {
+            // all code languages
+            {
+                string.Empty,
+                new List<string>
+                {
+#if RUNTIME_TYPE_NETCORE
+                    "System.Runtime",
+#endif
+                }
+            },
+            // CSharp specific
+            {
+                "CS",
+                null
+            },
+            // Visual Basic specific
+            {
+                "VB",
+                null
+            }
+        };
+
         internal static readonly IDictionary<string, ISet<string>> ValidCodeLanguages = new Dictionary<string, ISet<string>>(StringComparer.OrdinalIgnoreCase)
         {
             // This dictionary contains a mapping between code languages and known aliases (like "C#").  Everything is case-insensitive.
@@ -561,9 +588,7 @@ namespace net.r_eg.IeXod.Tasks
                 }
 
                 // Attempt to "resolve" the assembly by getting a full path to our distributed reference assemblies
-                string assemblyFileName = reference.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) || reference.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
-                    ? reference
-                    : $"{reference}.dll";
+                string assemblyFileName = ResolveAssemblyFileNameExtension(reference);
 
                 string resolvedDir = paths.FirstOrDefault(p => File.Exists(Path.Combine(p, assemblyFileName)));
 
@@ -580,11 +605,42 @@ namespace net.r_eg.IeXod.Tasks
                 hasInvalidReference = true;
             }
 
-            // Transform the list of resolved assemblies to TaskItems if they were all resolved
-            items = hasInvalidReference ? null : resolvedAssemblyReferences.Select(i => (ITaskItem)new TaskItem(i)).ToArray();
+            if(hasInvalidReference)
+            {
+                items = null;
+                return false;
+            }
 
-            return !hasInvalidReference;
+            SetStdLibReferences(taskInfo, resolvedAssemblyReferences);
+
+            // Transform the list of resolved assemblies to TaskItems if they were all resolved
+            items = resolvedAssemblyReferences.Select(i => (ITaskItem)new TaskItem(i)).ToArray();
+            return true;
         }
+
+        /// <summary>
+        /// Sets an additional references to the standard library assemblies using <see cref="StdLibReferences"/> collection
+        /// without searching the actual path due to the default SDK path. L-117
+        /// </summary>
+        private static void SetStdLibReferences(RoslynCodeTaskFactoryTaskInfo taskInfo, ISet<string> collection)
+        {
+            foreach(var lib in StdLibReferences[string.Empty])
+            {
+                collection.Add(ResolveAssemblyFileNameExtension(lib));
+            }
+
+            if(StdLibReferences.ContainsKey(taskInfo.CodeLanguage)
+                && StdLibReferences[taskInfo.CodeLanguage] != null)
+            {
+                foreach(var lib in StdLibReferences[taskInfo.CodeLanguage])
+                    collection.Add(ResolveAssemblyFileNameExtension(lib));
+            }
+        }
+
+        private static string ResolveAssemblyFileNameExtension(string input)
+            => (input.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) || input.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+                    ? input
+                    : input + ".dll";
 
         private static CodeMemberProperty CreateProperty(CodeTypeDeclaration codeTypeDeclaration, string name, Type type, object defaultValue = null)
         {

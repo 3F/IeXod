@@ -101,8 +101,12 @@ namespace net.r_eg.IeXod.Shared
                         {
                             // Prevent the new app domain from looking in the VS test runner location. If this
                             // is not done, we will not be able to find net.r_eg.IeXod.* assemblies.
-                            appDomainInfo.ApplicationBase = BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory;
-                            appDomainInfo.ConfigurationFile = BuildEnvironmentHelper.Instance.CurrentMSBuildConfigurationFile;
+
+                            // L-114
+                            //appDomainInfo.ApplicationBase = BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory;
+                            //appDomainInfo.ConfigurationFile = BuildEnvironmentHelper.Instance.CurrentMSBuildConfigurationFile;
+
+                            appDomainInfo.ApplicationBase = BuildEnvironmentHelper.Instance.IeXodBinPath;
                         }
 
                         AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolver;

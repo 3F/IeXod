@@ -343,7 +343,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
                 OnlyLogCriticalEvents = true,
                 MaxNodeCount = numberOfParallelProjectsToBuild,
                 EnableNodeReuse = true,
-                DisableInProcNode = true,
+                //DisableInProcNode = true, // IeXod: L-98
                 SaveOperatingEnvironment = false,
                 Loggers = new List<ILogger> {new MockLogger(_output)}
             };
@@ -504,7 +504,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
             {
                 EnableNodeReuse = false,
                 Loggers = new ILogger[] {_logger},
-                DisableInProcNode = true,
+                //DisableInProcNode = true, // IeXod: L-98
             };
 
             BuildResult result = _buildManager.Build(customparameters, data);
@@ -3660,7 +3660,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
                     var parameters = new BuildParameters
                     {
-                        DisableInProcNode = true,
+                        //DisableInProcNode = true, // IeXod: L-98
                         EnableNodeReuse = false,
                     };
 
@@ -3726,7 +3726,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
             var buildParameters = new BuildParameters(_projectCollection)
             {
-                DisableInProcNode = true,
+                //DisableInProcNode = true, // IeXod: L-98
                 EnableNodeReuse = false,
                 Loggers = new ILogger[] {_logger}
             };
@@ -3810,7 +3810,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
             var parameters = new BuildParameters(_projectCollection)
             {
-                DisableInProcNode = true,
+                //DisableInProcNode = true, // IeXod: L-98
                 EnableNodeReuse = false,
                 Loggers = new ILogger[] {_logger}
             };
@@ -3879,7 +3879,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
             var buildParameters = new BuildParameters(_projectCollection)
             {
-                DisableInProcNode = true,
+                //DisableInProcNode = true, // IeXod: L-98
                 EnableNodeReuse = false,
                 Loggers = new ILogger[] { _logger }
             };
@@ -3982,7 +3982,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
                 var buildParameters = new BuildParameters()
                 {
-                    DisableInProcNode = true,
+                    //DisableInProcNode = true, // IeXod: L-98
                     MaxNodeCount = Environment.ProcessorCount,
                     EnableNodeReuse = false,
                     Loggers = new List<ILogger>()

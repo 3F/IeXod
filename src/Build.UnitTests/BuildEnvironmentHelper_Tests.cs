@@ -21,7 +21,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
         private const string MSBuildExeName = "MSBuild.exe";
 #endif
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-120")]
         public void GetExecutablePath()
         {
             var msbuildPath = Path.GetDirectoryName(FileUtilities.ExecutingAssemblyPath);

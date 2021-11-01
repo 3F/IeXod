@@ -14,9 +14,10 @@ namespace net.r_eg.IeXod.Tasks
 {
     internal abstract class RoslynCodeTaskFactoryCompilerBase : ToolTaskExtension
     {
-#if RUNTIME_TYPE_NETCORE
-        private static readonly string DotnetCliPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-#endif
+// L-113
+//#if RUNTIME_TYPE_NETCORE
+//        private static readonly string DotnetCliPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+//#endif
 
         private readonly Lazy<string> _executablePath;
 
@@ -30,17 +31,19 @@ namespace net.r_eg.IeXod.Tasks
                 {
                     // optionally distributed together with IeXod
                     () => Path.Combine(BuildEnvironmentHelper.Instance.IeXodBinPath, "Roslyn", ToolName),
-
-#if !RUNTIME_TYPE_NETCORE
-                    // Full framework MSBuild
                     () => Path.Combine(pathToBuildTools, "Roslyn", ToolName),
-#endif
-#if RUNTIME_TYPE_NETCORE
-                    // .NET Core 2.0+
-                    () => Path.Combine(pathToBuildTools, "Roslyn", "bincore", Path.ChangeExtension(ToolName, ".dll")),
-                    // Legacy .NET Core
-                    () => Path.Combine(pathToBuildTools, "Roslyn", Path.ChangeExtension(ToolName, ".dll")),
-#endif
+
+// L-113
+//#if !RUNTIME_TYPE_NETCORE
+//                    // Full framework MSBuild
+//                    () => Path.Combine(pathToBuildTools, "Roslyn", ToolName),
+//#endif
+//#if RUNTIME_TYPE_NETCORE
+//                    // .NET Core 2.0+
+//                    () => Path.Combine(pathToBuildTools, "Roslyn", "bincore", Path.ChangeExtension(ToolName, ".dll")),
+//                    // Legacy .NET Core
+//                    () => Path.Combine(pathToBuildTools, "Roslyn", Path.ChangeExtension(ToolName, ".dll")),
+//#endif
                 };
 
                 return possibleLocations.Select(possibleLocation => possibleLocation()).FirstOrDefault(File.Exists);
@@ -73,10 +76,11 @@ namespace net.r_eg.IeXod.Tasks
 
         protected internal override void AddCommandLineCommands(CommandLineBuilderExtension commandLine)
         {
-#if RUNTIME_TYPE_NETCORE
-            commandLine.AppendFileNameIfNotNull(_executablePath.Value);
-            commandLine.AppendTextUnquoted(" ");
-#endif
+// L-113
+//#if RUNTIME_TYPE_NETCORE
+//            commandLine.AppendFileNameIfNotNull(_executablePath.Value);
+//            commandLine.AppendTextUnquoted(" ");
+//#endif
             commandLine.AppendSwitchIfTrue("/noconfig", NoConfig);
 
             if (References != null)
@@ -102,11 +106,7 @@ namespace net.r_eg.IeXod.Tasks
                 return ToolExe;
             }
 
-#if RUNTIME_TYPE_NETCORE
-            return DotnetCliPath;
-#else
-            return _executablePath.Value;
-#endif
+            return _executablePath.Value; // L-113
         }
 
         protected override void LogToolCommand(string message)

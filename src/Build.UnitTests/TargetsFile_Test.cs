@@ -21,7 +21,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Check that the ARM flag is passed to the compiler when targeting ARM.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void TargetARM()
         {
             string file = null;
@@ -73,7 +73,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an empty platformtarget (equivalent to anycpu), library type assemblies do not 
         /// get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void AnyCPULibraryProjectIsNot32BitPreferred()
         {
             string file = null;
@@ -123,7 +123,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an explicit platform of anycpu, library type assemblies do not 
         /// get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void ExplicitAnyCPULibraryProjectIsNot32BitPreferred()
         {
             string file = null;
@@ -174,7 +174,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an empty platformtarget (equivalent to anycpu), winmdobj type assemblies do not 
         /// get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void AnyCPUWinMDObjProjectIsNot32BitPreferred()
         {
             string file = null;
@@ -230,7 +230,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an explicit platformtarget of anycpu, winmdobj type assemblies do not 
         /// get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void ExplicitAnyCPUWinMDObjProjectIsNot32BitPreferred()
         {
             string file = null;
@@ -287,7 +287,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an empty platformtarget (equivalent to anycpu), exe type assemblies 
         /// get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void AnyCPUExeProjectIs32BitPreferred()
         {
             string file = null;
@@ -337,7 +337,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an explicit platformtarget of anycpu, exe type assemblies 
         /// get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void ExplicitAnyCPUExeProjectIs32BitPreferred()
         {
             string file = null;
@@ -388,7 +388,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an empty platformtarget (equivalent to anycpu), exe type assemblies 
         /// that are targeting .NET 4.0 do not get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void AnyCPU40ExeProjectIsNot32BitPreferred()
         {
             string file = null;
@@ -438,7 +438,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an explicit platformtarget of anycpu, exe type assemblies that are 
         /// targeting .NET 4.0 do not get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void ExplicitAnyCPU40ExeProjectIsNot32BitPreferred()
         {
             string file = null;
@@ -489,7 +489,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an empty platformtarget (equivalent to anycpu), appcontainerexe type assemblies 
         /// get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void AnyCPUAppContainerExeProjectIs32BitPreferred()
         {
             string file = null;
@@ -545,7 +545,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Check that with an explicit platformtarget of anycpu, appcontainerexe type assemblies 
         /// get forced to anycpu32bitpreferred by default. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void ExplicitAnyCPUAppContainerExeProjectIs32BitPreferred()
         {
             string file = null;
@@ -602,7 +602,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Although AnyCPU library projects should not default to AnyCPU32BitPreferred, because that platform is 
         /// not supported for library projects, if Prefer32Bit is explicitly set, we should still respect that. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void AnyCPULibraryProjectIs32BitPreferredIfPrefer32BitSet()
         {
             string file = null;
@@ -654,7 +654,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// A project with no explicit OutputType will end up defaulting its OutputType to exe, 
         /// so it should also default to Prefer32Bit = true. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void AnyCPUProjectWithNoExplicitOutputTypeIs32BitPreferred()
         {
             string file = null;
@@ -704,7 +704,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// A project with no explicit OutputType will end up defaulting its OutputType to exe, 
         /// so it should also default to Prefer32Bit = true. 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void AnyCPUJupiterProjectWithNoExplicitOutputTypeIs32BitPreferred()
         {
             string file = null;
@@ -756,7 +756,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Validate that the GetFrameworkPaths target 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void TestGetFrameworkPaths()
         {
             MockLogger logger = new MockLogger();
@@ -791,7 +791,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Validate that the GetFrameworkPaths target 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void TestTargetFrameworkPaths()
         {
             string[] targetFrameworkVersions = { "v2.0", "v3.0", "v3.5", "v4.0", "v4.5", "" };
@@ -856,7 +856,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Doesn't synthesize Link metadata if the items are defined in the project  
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void NoLinkMetadataSynthesisWhenDefinedInProject()
         {
             string[] files = null;
@@ -918,7 +918,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Synthesizes Link metadata if the items are defined in an import and are on the whitelist
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void SynthesizeLinkMetadataForItemsOnWhitelist()
         {
             string[] files = null;
@@ -997,7 +997,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Don't synthesize link metadata if the SynthesizeLinkMetadata property is false
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void DontSynthesizeLinkMetadataIfPropertyNotSet()
         {
             string[] files = null;

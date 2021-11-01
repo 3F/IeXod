@@ -1346,7 +1346,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         /// <summary>
         /// Predecessors and imports
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void PropertyPredecessorsAndImports()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"

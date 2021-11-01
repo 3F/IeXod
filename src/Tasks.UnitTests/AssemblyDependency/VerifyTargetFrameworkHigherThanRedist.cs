@@ -123,7 +123,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that if the reference that is higher than the highest version in the redist list is an MSBuild assembly, we do
         /// not warn -- this is a hack until we figure out how to properly deal with .NET assemblies being removed from the framework.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-119")]
         [Trait("Category", "mono-osx-failing")]
         public void HigherThanHighestInRedistListForMSBuildAssembly()
         {
@@ -260,7 +260,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveAssemblyReference_Tests
         /// Verify that if the reference that is higher than the highest version in the redist list is an MSBuild assembly, we do
         /// not warn -- this is a hack until we figure out how to properly deal with .NET assemblies being removed from the framework.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-119")]
         [Trait("Category", "mono-osx-failing")]
         public void DependenciesHigherThanHighestInRedistListForMSBuildAssembly()
         {

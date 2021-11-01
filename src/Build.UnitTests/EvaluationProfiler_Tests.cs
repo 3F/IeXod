@@ -289,7 +289,8 @@ namespace net.r_eg.IeXod.Engine.UnitTests
             {
                 ShutdownInProcNodeOnBuildFinish = true,
                 Loggers = new ILogger[] { profilerLogger },
-                DisableInProcNode = true, // This is actually important since we also want to test the serialization of the events
+                //DisableInProcNode = true, // IeXod: L-98
+                                            // This is actually important since we also want to test the serialization of the events
                 EnableNodeReuse = false,
                 ProjectLoadSettings = setProjectLoadSetting ? ProjectLoadSettings.ProfileEvaluation : 0
             };

@@ -599,7 +599,7 @@ namespace net.r_eg.IeXod.UnitTests
                 string configContent = @"<?xml version =""1.0""?>
                                             <configuration>
                                                 <configSections>
-                                                    <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, net.r_eg.IeXod, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e"" />
+                                                    <section name=""msbuildToolsets"" type=""net.r_eg.IeXod.Evaluation.ToolsetConfigurationSection, IeXod, PublicKeyToken=4bbd2ef743db151e"" />
                                                     <foo/>
                                                 </configSections>
                                                 <startup>

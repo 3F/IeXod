@@ -86,6 +86,7 @@ namespace net.r_eg.IeXod.Shared
                 TryFromMSBuildAssembly,
                 TryFromDevConsole,
                 TryFromSetupApi,
+                TryFromVSDir,
                 TryFromAppContextBaseDirectory
             };
 
@@ -274,6 +275,27 @@ namespace net.r_eg.IeXod.Shared
                 runningTests: s_runningTests(),
                 runningInVisualStudio: false,
                 visualStudioPath: instances[0].Path);
+        }
+
+        private static BuildEnvironment TryFromVSDir()
+        {
+            string vsdir = s_getEnvironmentVariable("VSAPPIDDIR");
+            if(vsdir == null) return null;
+
+            string vsMSBuild = Path.GetFullPath(Path.Combine(vsdir, @"..\..\MSBuild\"));
+
+            string path = Path.Combine(vsMSBuild, CurrentToolsVersion);
+            if(!Directory.Exists(path))
+            {
+                // legacy tools versions
+                path = Directory.EnumerateDirectories(vsMSBuild, "*.0", SearchOption.TopDirectoryOnly).FirstOrDefault();
+                if(path == null) return null;
+            }
+
+            path = Path.Combine(path, "Bin", "MSBuild.exe");
+
+            return TryFromMSBuildAssemblyUnderVisualStudio(path, path, allowLegacyToolsVersion: true)
+                    ?? TryFromStandaloneMSBuildExe(path);
         }
 
         private static BuildEnvironment TryFromAppContextBaseDirectory()
