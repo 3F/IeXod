@@ -203,8 +203,6 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
             Assert.Equal("m2", item.GetMetadataValue("m"));
         }
 
-#if !IEXOD_DISABLE_TASKS
-
         /// <summary>
         /// Creates a ProjectItemInstance and casts it to ITaskItem2; makes sure that all escaped information is
         /// maintained correctly.  Also creates a new net.r_eg.IeXod.Utilities.TaskItem from the ProjectItemInstance
@@ -281,8 +279,6 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
             }
         }
 
-#endif
-
         /// <summary>
         /// Cast to ITaskItem
         /// </summary>
@@ -358,8 +354,6 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
             Assert.Equal(itemMetadata[1], item.GetMetadata("m2"));
         }
 
-#if !IEXOD_DISABLE_TASKS
-
         /// <summary>
         /// Create a new net.r_eg.IeXod.Utilities.TaskItem from the ProjectItemInstance where the ProjectItemInstance
         /// has item definition metadata on it.
@@ -396,8 +390,6 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
             Assert.Equal("v1", taskItem.GetMetadata("m3"));
             Assert.Equal(";x86;", taskItem.GetMetadata("m4"));
         }
-
-#endif
 
         /// <summary>
         /// Get metadata values inherited from item definitions

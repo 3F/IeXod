@@ -11,29 +11,54 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\Shared\Debugging\PrintLineDebugger.cs">
+    <!-- <Compile Include="..\Shared\Debugging\PrintLineDebugger.cs">
       <Link>Shared\Debugging\PrintLineDebugger.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\Debugging\PrintLineDebuggerWriters.cs">
+    </Compile> -->
+    <!-- <Compile Include="..\Shared\Debugging\PrintLineDebuggerWriters.cs">
       <Link>Shared\Debugging\PrintLineDebuggerWriters.cs</Link>
-    </Compile>
+    </Compile> -->
     <Compile Include="..\Utilities\Logger.cs">
       <Link>Utilities\Logger.cs</Link>
     </Compile>
     <Compile Include="..\Utilities\MuxLogger.cs">
       <Link>Utilities\MuxLogger.cs</Link>
     </Compile>
+    <Compile Include="..\Utilities\TrackedDependencies\FileTracker.cs">
+      <Link>Utilities\TrackedDependencies\FileTracker.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\TrackedDependencies\CanonicalTrackedInputFiles.cs">
+      <Link>Utilities\TrackedDependencies\CanonicalTrackedInputFiles.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\TrackedDependencies\CanonicalTrackedOutputFiles.cs">
+      <Link>Utilities\TrackedDependencies\CanonicalTrackedOutputFiles.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\TrackedDependencies\DependencyTableCache.cs">
+      <Link>Utilities\TrackedDependencies\DependencyTableCache.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\TrackedDependencies\TrackedDependencies.cs">
+      <Link>Utilities\TrackedDependencies\TrackedDependencies.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\TrackedDependencies\FlatTrackingData.cs">
+      <Link>Utilities\TrackedDependencies\FlatTrackingData.cs</Link>
+    </Compile>
+    <Compile Include="..\Utilities\TrackedDependencies\CanonicalTrackedFilesHelper.cs">
+      <Link>Utilities\TrackedDependencies\CanonicalTrackedFilesHelper.cs</Link>
+    </Compile>
+    <!-- <Compile Include="..\Utilities\ToolTask.cs">
+      <Link>Utilities\ToolTask.cs</Link>
+    </Compile> -->
+    
   </ItemGroup>
 
   <!-- IeXod. The Tasks feature is temporarily disabled -->
   <ItemGroup>
-    <Compile Remove="MockTask.cs" />
+    <!-- <Compile Remove="MockTask.cs" />
     <Compile Remove="MuxLogger_Tests.cs" />
     <Compile Remove="TaskItem_Tests.cs" />
     <Compile Remove="TaskLoggingHelper_Tests.cs" />
     <Compile Remove="ToolTask_Tests.cs" />
     <Compile Remove="TrackedDependencies\FileTrackerTests.cs" />
-    <Compile Remove="TrackedDependencies\TrackedDependenciesTests.cs" />
+    <Compile Remove="TrackedDependencies\TrackedDependenciesTests.cs" /> -->
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="CommandLineBuilder_Tests.cs" />
@@ -46,7 +71,7 @@
 
     <!-- <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" /> -->
     <ProjectReference Include="..\Build\IeXod.csproj" />
-    <!-- <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" /> -->
+    <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" />
     <!-- <ProjectReference Include="..\Framework\IeXod.Framework.csproj" /> -->
     <!-- <ProjectReference Include="..\MSBuild\MSBuild.csproj" ReferenceOutputAssembly="false" OutputItemType="ReferenceCopyLocalPaths" /> -->
     <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
@@ -75,9 +100,9 @@
       <Link>TestEnvironment.cs</Link>
     </Compile>
     <!-- <Compile Include="..\Shared\StringExtensions.cs" /> -->
-    <Compile Include="..\Build\BackEnd\Node\NativeMethods.cs">
+    <!-- <Compile Include="..\Build\BackEnd\Node\NativeMethods.cs">
       <Link>NativeMethods.cs</Link>
-    </Compile>
+    </Compile> -->
 
     <None Include="..\Shared\UnitTests\App.config">
       <Link>App.config</Link>

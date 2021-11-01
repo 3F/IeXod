@@ -69,16 +69,23 @@ namespace net.r_eg.IeXod.Shared
         /// <remarks>This method is thread-safe.</remarks>
         /// <param name="name"></param>
         /// <returns>The resource string, or null if not found.</returns>
-        internal static string GetString(string name)
+        internal static string GetString(string name) => GetString(name, null);
+
+        internal static string GetString(string name, Func<string, string> fallback)
         {
-            // NOTE: the ResourceManager.GetString() method is thread-safe
             string resource = GetStringFromEngineResources(name);
 
-            if (resource == null)
+            if(resource == null)
             {
                 resource = GetStringFromMSBuildExeResources(name);
             }
 
+            if(resource == null && fallback != null)
+            {
+                resource = fallback(name);
+            }
+
+            ErrorUtilities.VerifyThrow(resource != null, "Missing resource '{0}'", name);
             return resource;
         }
 
@@ -98,6 +105,20 @@ namespace net.r_eg.IeXod.Shared
             return resource;
         }
 
+        internal static string FormatString(string unformatted, params object[] args)
+        {
+            ErrorUtilities.VerifyThrowArgumentNull(unformatted, nameof(unformatted));
+
+            return ResourceUtilities.FormatString(unformatted, args);
+        }
+
+        internal static string FormatResourceString(string resourceName, params object[] args)
+        {
+            ErrorUtilities.VerifyThrowArgumentNull(resourceName, nameof(resourceName));
+
+            return FormatString(GetString(resourceName), args);
+        }
+
         static AssemblyResources()
         {
             s_tasksResources = new Lazy<ResourceManager>(() => GetResourceManager(ASM + ".Tasks.Strings", ASM + ".Tasks,"));
@@ -110,16 +131,11 @@ namespace net.r_eg.IeXod.Shared
         /// <returns>The resource string, or null if not found.</returns>
         private static string GetStringFromEngineResources(string name)
         {
-            string resource =
-                s_resources.GetString(name, CultureInfo.CurrentUICulture)
+            return s_resources.GetString(name, CultureInfo.CurrentUICulture)
                 ?? s_sharedResources.GetString(name, CultureInfo.CurrentUICulture)
                 ?? s_utilitiesResources.GetString(name, CultureInfo.CurrentUICulture)
                 ?? s_tasksResources.Value?.GetString(name, CultureInfo.CurrentUICulture)
                 ?? s_tasksSharedResources.Value?.GetString(name, CultureInfo.CurrentUICulture);
-
-            ErrorUtilities.VerifyThrow(resource != null, "Missing resource '{0}'", name);
-
-            return resource;
         }
 
         /// <summary>

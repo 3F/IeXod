@@ -1156,13 +1156,13 @@ namespace net.r_eg.IeXod.UnitTests
             success.ShouldBeTrue(); // "Build Failed.  See Std Out for details."
         }
 
-        [Fact(Skip = "IeXod. The Tasks feature is temporarily disabled")]
+        [Fact(Skip = "IeXod. L-106")]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyToolsetAndToolLocationHelperAgreeWhenVisualStudioVersionIsEmpty()
         {
             string projectContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='4.0'>
-                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='IeXod.Tasks, Version=0.1.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
+                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='IeXod.Tasks, PublicKeyToken=4bbd2ef743db151e' >
                          <ParameterGroup>     
                              <Sdk35ToolsPath />
                              <Sdk40ToolsPath />
@@ -1198,13 +1198,13 @@ namespace net.r_eg.IeXod.UnitTests
             success.ShouldBeTrue(); // "Build Failed.  See Std Out for details."
         }
 
-        [Fact(Skip = "IeXod. The Tasks feature is temporarily disabled")]
+        [Fact]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyToolsetAndToolLocationHelperAgreeWhenVisualStudioVersionIs10()
         {
             string projectContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='4.0'>
-                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='IeXod.Tasks, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
+                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='IeXod.Tasks, PublicKeyToken=4bbd2ef743db151e' >
                          <ParameterGroup>     
                              <Sdk35ToolsPath />
                              <Sdk40ToolsPath />
@@ -1242,13 +1242,13 @@ namespace net.r_eg.IeXod.UnitTests
             success.ShouldBeTrue(); // "Build Failed.  See Std Out for details."
         }
 
-        [Fact(Skip = "IeXod. The Tasks feature is temporarily disabled")]
+        [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void VerifyToolsetAndToolLocationHelperAgreeWhenVisualStudioVersionIs11()
         {
             string projectContents = @"
                     <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003' ToolsVersion='4.0'>
-                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyName='IeXod.Tasks, Culture=neutral, PublicKeyToken=4bbd2ef743db151e' >
+                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyFile='$(IeXodBinPath)\IeXod.Tasks.dll' >
                          <ParameterGroup>     
                              <Sdk35ToolsPath />
                              <Sdk40ToolsPath />

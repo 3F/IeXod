@@ -14,12 +14,13 @@ using System.Threading;
 using net.r_eg.IeXod.Framework;
 using net.r_eg.IeXod.Shared;
 using net.r_eg.IeXod.Utilities;
-using Microsoft.CodeAnalysis.BuildTasks;
 using Xunit;
 using BackEndNativeMethods = net.r_eg.IeXod.BackEnd.NativeMethods;
 
 // PLEASE NOTE: This is a UNICODE file as it contains UNICODE characters!
 #if FEATURE_FILE_TRACKER
+
+using Microsoft.CodeAnalysis.BuildTasks;
 
 namespace net.r_eg.IeXod.UnitTests.FileTracking
 {
@@ -280,6 +281,8 @@ namespace net.r_eg.IeXod.UnitTests.FileTracking
             Assert.True(foundCreateFileW || foundCreateFileA);
         }
 
+#if !IEXOD_DISABLE_L103
+
         [Fact(Skip = "FileTracker tests require VS2015 Update 3 or a packaged version of Tracker.exe https://github.com/Microsoft/msbuild/issues/649")]
         public void FileTrackerExtendedDirectoryTracking()
         {
@@ -508,6 +511,8 @@ class X
             FileTrackerTestHelper.AssertDidntFindStringInTLog("CreateFileW, Desired Access=0xc0000000, Creation Disposition=0x1:" + writeFile.ToUpperInvariant(), "writenoread.read.1.tlog");
             FileTrackerTestHelper.AssertFoundStringInTLog("CreateFileW, Desired Access=0xc0000000, Creation Disposition=0x1:" + writeFile.ToUpperInvariant(), "writenoread.write.1.tlog");
         }
+
+#endif
 
         [Fact(Skip = "FileTracker tests require VS2015 Update 3 or a packaged version of Tracker.exe https://github.com/Microsoft/msbuild/issues/649")]
         public void FileTrackerFindStrInCommandLine()
@@ -2231,6 +2236,8 @@ class X
 
         }
 
+#if !IEXOD_DISABLE_L103
+
         [Fact(Skip = "Needs investigation")]
         public void LaunchMultipleOfSameTool_ToolLaunchesOthers()
         {
@@ -2316,6 +2323,8 @@ namespace ConsoleApplication4
                 }
             }
         }
+
+#endif
 
         private static void InProcTrackingSpawnsToolWithTracker(bool useTrackerResponseFile)
         {

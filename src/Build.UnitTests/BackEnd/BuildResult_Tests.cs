@@ -341,13 +341,11 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
             Assert.Equal(result.NodeRequestId, deserializedResult.NodeRequestId);
             Assert.Equal(result["alpha"].ResultCode, deserializedResult["alpha"].ResultCode);
 
-#if !IEXOD_DISABLE_TASKS
             Assert.True(TranslationHelpers.CompareExceptions(result["alpha"].Exception, deserializedResult["alpha"].Exception));
             Assert.True(TranslationHelpers.CompareCollections(result["alpha"].Items, deserializedResult["alpha"].Items, TaskItemComparer.Instance));
             Assert.Equal(result["omega"].ResultCode, deserializedResult["omega"].ResultCode);
             Assert.True(TranslationHelpers.CompareExceptions(result["omega"].Exception, deserializedResult["omega"].Exception));
             Assert.True(TranslationHelpers.CompareCollections(result["omega"].Items, deserializedResult["omega"].Items, TaskItemComparer.Instance));
-#endif
         }
 
         private BuildRequest CreateNewBuildRequest(int configurationId, string[] targets)

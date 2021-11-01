@@ -311,7 +311,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants);IEXOD_DISABLE_TASKS</DefineConstants>
+    <DefineConstants>$(DefineConstants);IEXOD_DISABLE_L103</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>

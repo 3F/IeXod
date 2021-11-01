@@ -204,10 +204,11 @@ namespace net.r_eg.IeXod.Utilities
             ErrorUtilities.VerifyThrowArgumentNull(resourceName, nameof(resourceName));
             ErrorUtilities.VerifyThrowInvalidOperation(TaskResources != null, "Shared.TaskResourcesNotRegistered", TaskName);
 
-            //TODO: string resourceString = TaskResources.GetString(resourceName, CultureInfo.CurrentUICulture);
-            string resourceString = AssemblyResources.GetString(resourceName);
-
-            ErrorUtilities.VerifyThrowArgument(resourceString != null, "Shared.TaskResourceNotFound", resourceName, TaskName);
+            string resourceString = AssemblyResources.GetString
+            (
+                resourceName,
+                (resourceName) => TaskResources.GetString(resourceName, CultureInfo.CurrentUICulture)
+            );
 
             return FormatString(resourceString, args);
         }

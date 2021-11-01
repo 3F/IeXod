@@ -73,6 +73,27 @@ namespace net.r_eg.IeXod.UnitTests
         }
 
         /// <summary>
+        /// Helper method to tell us whether a particular metadata name is an MSBuild well-known metadata
+        /// (e.g., "RelativeDir", "FullPath", etc.)
+        /// </summary>
+        private static Hashtable s_builtInMetadataNames;
+        private static bool IsBuiltInItemMetadataName(string metadataName)
+        {
+            if (s_builtInMetadataNames == null)
+            {
+                s_builtInMetadataNames = new Hashtable();
+
+                Utilities.TaskItem dummyTaskItem = new Utilities.TaskItem();
+                foreach (string builtInMetadataName in dummyTaskItem.MetadataNames)
+                {
+                    s_builtInMetadataNames[builtInMetadataName] = string.Empty;
+                }
+            }
+
+            return s_builtInMetadataNames.Contains(metadataName);
+        }
+
+        /// <summary>
         /// Gets an item list from the project and assert that it contains
         /// exactly one item with the supplied name.
         /// </summary>
@@ -243,6 +264,156 @@ namespace net.r_eg.IeXod.UnitTests
             expectedItems.Length.ShouldBe(expectedDirectMetadataPerItem.Length);
         }
 
+        /// <summary>
+        /// Amazingly sophisticated :) helper function to determine if the set of ITaskItems returned from
+        /// a task match the expected set of ITaskItems.  It can also check that the ITaskItems have the expected
+        /// metadata, and that the ITaskItems are returned in the correct order.
+        ///
+        /// The "expectedItemsString" is a formatted way of easily specifying which items you expect to see.
+        /// The format is:
+        ///
+        ///         itemspec1 :   metadataname1=metadatavalue1 ; metadataname2=metadatavalue2 ; ...
+        ///         itemspec2 :   metadataname3=metadatavalue3 ; metadataname4=metadatavalue4 ; ...
+        ///         itemspec3 :   metadataname5=metadatavalue5 ; metadataname6=metadatavalue6 ; ...
+        ///
+        /// (Each item needs to be on its own line.)
+        ///
+        /// </summary>
+        /// <param name="expectedItemsString"></param>
+        /// <param name="actualItems"></param>
+        internal static void AssertItemsMatch(string expectedItemsString, ITaskItem[] actualItems)
+        {
+            AssertItemsMatch(expectedItemsString, actualItems, true);
+        }
+
+        /// <summary>
+        /// Amazingly sophisticated :) helper function to determine if the set of ITaskItems returned from
+        /// a task match the expected set of ITaskItems.  It can also check that the ITaskItems have the expected
+        /// metadata, and that the ITaskItems are returned in the correct order.
+        ///
+        /// The "expectedItemsString" is a formatted way of easily specifying which items you expect to see.
+        /// The format is:
+        ///
+        ///         itemspec1 :   metadataname1=metadatavalue1 ; metadataname2=metadatavalue2 ; ...
+        ///         itemspec2 :   metadataname3=metadatavalue3 ; metadataname4=metadatavalue4 ; ...
+        ///         itemspec3 :   metadataname5=metadatavalue5 ; metadataname6=metadatavalue6 ; ...
+        ///
+        /// (Each item needs to be on its own line.)
+        ///
+        /// </summary>
+        /// <param name="expectedItemsString"></param>
+        /// <param name="actualItems"></param>
+        /// <param name="orderOfItemsShouldMatch"></param>
+        internal static void AssertItemsMatch(string expectedItemsString, ITaskItem[] actualItems, bool orderOfItemsShouldMatch)
+        {
+            List<ITaskItem> expectedItems = ParseExpectedItemsString(expectedItemsString);
+
+            // Form a string of expected item specs.  For logging purposes only.
+            StringBuilder expectedItemSpecs = new StringBuilder();
+            foreach (ITaskItem expectedItem in expectedItems)
+            {
+                if (expectedItemSpecs.Length > 0)
+                {
+                    expectedItemSpecs.Append("; ");
+                }
+
+                expectedItemSpecs.Append(expectedItem.ItemSpec);
+            }
+
+            // Form a string of expected item specs.  For logging purposes only.
+            StringBuilder actualItemSpecs = new StringBuilder();
+            foreach (ITaskItem actualItem in actualItems)
+            {
+                if (actualItemSpecs.Length > 0)
+                {
+                    actualItemSpecs.Append("; ");
+                }
+
+                actualItemSpecs.Append(actualItem.ItemSpec);
+            }
+
+            bool outOfOrder = false;
+
+            // Loop through all the actual items.
+            for (int actualItemIndex = 0; actualItemIndex < actualItems.Length; actualItemIndex++)
+            {
+                ITaskItem actualItem = actualItems[actualItemIndex];
+
+                // Loop through all the expected items to find one with the same item spec.
+                ITaskItem expectedItem = null;
+                int expectedItemIndex;
+                for (expectedItemIndex = 0; expectedItemIndex < expectedItems.Count; expectedItemIndex++)
+                {
+                    if (expectedItems[expectedItemIndex].ItemSpec == actualItem.ItemSpec)
+                    {
+                        expectedItem = expectedItems[expectedItemIndex];
+
+                        // If the items are expected to be in the same order, then the expected item
+                        // should always be found at index zero, because we remove items from the expected
+                        // list as we find them.
+                        if ((expectedItemIndex != 0) && (orderOfItemsShouldMatch))
+                        {
+                            outOfOrder = true;
+                        }
+
+                        break;
+                    }
+                }
+
+                Assert.NotNull(expectedItem); // String.Format("Item '{0}' was returned but not expected.", actualItem.ItemSpec));
+
+                // Make sure all the metadata on the expected item matches the metadata on the actual item.
+                // Don't check built-in metadata ... only check custom metadata.
+                foreach (string metadataName in expectedItem.MetadataNames)
+                {
+                    // This check filters out any built-in item metadata, like "RelativeDir", etc.
+                    if (!IsBuiltInItemMetadataName(metadataName))
+                    {
+                        string expectedMetadataValue = expectedItem.GetMetadata(metadataName);
+                        string actualMetadataValue = actualItem.GetMetadata(metadataName);
+
+                        Assert.True(
+                                actualMetadataValue.Length > 0 || expectedMetadataValue.Length == 0,
+                                string.Format("Item '{0}' does not have expected metadata '{1}'.", actualItem.ItemSpec, metadataName)
+                            );
+
+                        Assert.True(
+                                actualMetadataValue.Length == 0 || expectedMetadataValue.Length > 0,
+                                string.Format("Item '{0}' has unexpected metadata {1}={2}.", actualItem.ItemSpec, metadataName, actualMetadataValue)
+                            );
+
+                        Assert.Equal(
+                                expectedMetadataValue,
+                                actualMetadataValue
+                            //string.Format
+                            //    (
+                            //        "Item '{0}' has metadata {1}={2} instead of expected {1}={3}.",
+                            //        actualItem.ItemSpec,
+                            //        metadataName,
+                            //        actualMetadataValue,
+                            //        expectedMetadataValue
+                            //    )
+                            );
+                    }
+                }
+                expectedItems.RemoveAt(expectedItemIndex);
+            }
+
+            // Log an error for any leftover items in the expectedItems collection.
+            foreach (ITaskItem expectedItem in expectedItems)
+            {
+                Assert.True(false, string.Format("Item '{0}' was expected but not returned.", expectedItem.ItemSpec));
+            }
+
+            if (outOfOrder)
+            {
+                Console.WriteLine("ERROR:  Items were returned in the incorrect order...");
+                Console.WriteLine("Expected:  " + expectedItemSpecs);
+                Console.WriteLine("Actual:    " + actualItemSpecs);
+                Assert.True(false, "Items were returned in the incorrect order.  See 'Standard Out' tab for more details.");
+            }
+        }
+
         internal static void AssertItemHasMetadata(Dictionary<string, string> expected, ProjectItem item)
         {
             AssertItemHasMetadata(expected, new ProjectItemTestItemAdapter(item));
@@ -280,6 +451,64 @@ namespace net.r_eg.IeXod.UnitTests
             {
                 Assert.Equal(expected[i], actual[i]); // "At index " + i + " expected " + expected[i].ToString() + " but was " + actual.ToString());
             }
+        }
+
+        /// <summary>
+        /// Parses the crazy string passed into AssertItemsMatch and returns a list of ITaskItems.
+        /// </summary>
+        /// <param name="expectedItemsString"></param>
+        /// <returns></returns>
+        private static List<ITaskItem> ParseExpectedItemsString(string expectedItemsString)
+        {
+            List<ITaskItem> expectedItems = new List<ITaskItem>();
+
+            // First, parse this massive string that we've been given, and create an ITaskItem[] out of it,
+            // so we can more easily compare it against the actual items.
+            string[] expectedItemsStringSplit = expectedItemsString.Split(MSBuildConstants.CrLf, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string singleExpectedItemString in expectedItemsStringSplit)
+            {
+                string singleExpectedItemStringTrimmed = singleExpectedItemString.Trim();
+                if (singleExpectedItemStringTrimmed.Length > 0)
+                {
+                    int indexOfColon = singleExpectedItemStringTrimmed.IndexOf(": ");
+                    if (indexOfColon == -1)
+                    {
+                        expectedItems.Add(new Utilities.TaskItem(singleExpectedItemStringTrimmed));
+                    }
+                    else
+                    {
+                        // We found a colon, which means there's metadata in there.
+
+                        // The item spec is the part before the colon.
+                        string itemSpec = singleExpectedItemStringTrimmed.Substring(0, indexOfColon).Trim();
+
+                        // The metadata is the part after the colon.
+                        string itemMetadataString = singleExpectedItemStringTrimmed.Substring(indexOfColon + 1);
+
+                        ITaskItem expectedItem = new Utilities.TaskItem(itemSpec);
+
+                        string[] itemMetadataPieces = itemMetadataString.Split(MSBuildConstants.SemicolonChar, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string itemMetadataPiece in itemMetadataPieces)
+                        {
+                            string itemMetadataPieceTrimmed = itemMetadataPiece.Trim();
+                            if (itemMetadataPieceTrimmed.Length > 0)
+                            {
+                                int indexOfEquals = itemMetadataPieceTrimmed.IndexOf('=');
+                                Assert.NotEqual(-1, indexOfEquals);
+
+                                string itemMetadataName = itemMetadataPieceTrimmed.Substring(0, indexOfEquals).Trim();
+                                string itemMetadataValue = itemMetadataPieceTrimmed.Substring(indexOfEquals + 1).Trim();
+
+                                expectedItem.SetMetadata(itemMetadataName, itemMetadataValue);
+                            }
+                        }
+
+                        expectedItems.Add(expectedItem);
+                    }
+                }
+            }
+
+            return expectedItems;
         }
 
         /// <summary>
@@ -848,13 +1077,6 @@ namespace net.r_eg.IeXod.UnitTests
                         </ItemGroup>
                     </Project>
                 ";
-        }
-
-        internal static void AssertItemsMatch(string expectedItemsString, ITaskItem[] actualItems, bool orderOfItemsShouldMatch)
-        {
-#if !IEXOD_DISABLE_TASKS
-            throw new NotImplementedException(@"logic at src\Deprecated\Engine\Shared\UnitTests\ObjectModelHelpers.cs");
-#endif
         }
     }
 

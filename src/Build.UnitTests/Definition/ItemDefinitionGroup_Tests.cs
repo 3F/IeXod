@@ -1865,8 +1865,6 @@ namespace net.r_eg.IeXod.UnitTests.Definition
         }
     }
 
-#if !IEXOD_DISABLE_TASKS
-
     public class ItemDefinitionGroup : net.r_eg.IeXod.Utilities.Task
     {
         public override bool Execute()
@@ -1875,6 +1873,5 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             return true;
         }
     }
-#endif
 
 }
