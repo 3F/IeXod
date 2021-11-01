@@ -257,7 +257,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         {
             string contents1 = CleanupFileContents(@"
 <Project xmlns='msbuildnamespace' ToolsVersion='msbuilddefaulttoolsversion'>
- <UsingTask TaskName='SetEnvv' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' >
+ <UsingTask TaskName='SetEnvv' TaskFactory='CodeTaskFactory' AssemblyFile='$(IeXodBinPath)\IeXod.Tasks.dll' >
                             <Task>
                                 <Code Language='cs'>
                                     System.Environment.SetEnvironmentVariable(""MOO"", ""When the dawn comes, tonight will be a memory too"");
@@ -841,7 +841,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
             string contents = CleanupFileContents(@"
 <Project xmlns='msbuildnamespace' ToolsVersion='msbuilddefaulttoolsversion'>
-<UsingTask TaskName='VerifyGlobalProjectCollection' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll'>
+<UsingTask TaskName='VerifyGlobalProjectCollection' TaskFactory='CodeTaskFactory' AssemblyFile='$(IeXodBinPath)\IeXod.Tasks.dll'>
                         <Task>
                             <Using Namespace='net.r_eg.IeXod.Evaluation'/>
                                <Reference Include='$(MSBuildToolsPath)\net.r_eg.IeXod.dll'/>

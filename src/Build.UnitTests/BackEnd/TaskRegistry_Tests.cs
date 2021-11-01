@@ -21,7 +21,6 @@ using net.r_eg.IeXod.Shared;
 using net.r_eg.IeXod.Shared.FileSystem;
 using InvalidProjectFileException = net.r_eg.IeXod.Exceptions.InvalidProjectFileException;
 using net.r_eg.IeXod.Utilities;
-using Microsoft.CodeAnalysis.BuildTasks;
 using Shouldly;
 using Xunit;
 

@@ -1107,7 +1107,7 @@ namespace net.r_eg.IeXod.UnitTests
         {
             string projectContents = ObjectModelHelpers.CleanupFileContents(@"
                     <Project xmlns='msbuildnamespace' ToolsVersion='msbuilddefaulttoolsversion'>
-                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll' >
+                        <UsingTask TaskName='VerifySdkPaths' TaskFactory='CodeTaskFactory' AssemblyFile='$(IeXodBinPath)\IeXod.Tasks.dll' >
                          <ParameterGroup>     
                              <Sdk35ToolsPath />
                              <Sdk40ToolsPath />

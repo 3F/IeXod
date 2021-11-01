@@ -50,6 +50,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\Shared\UnitTests\TestAssemblyInfo.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\Shared\FxCopExclusions\IeXod.Shared.Suppressions.cs">

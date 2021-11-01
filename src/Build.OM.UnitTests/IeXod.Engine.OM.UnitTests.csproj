@@ -15,7 +15,7 @@
 
   <PropertyGroup>
     <NuGetCommandLinePackageVersion>4.1.0</NuGetCommandLinePackageVersion>
-</PropertyGroup>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Shouldly" Version="$(ShouldlyVersion)" />
@@ -43,6 +43,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\UnitTests\TestAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -133,7 +137,7 @@
     <ProjectReference Include="..\Sdk\SdkResolver.csproj" />
     <!-- <ProjectReference Include="..\Framework\IeXod.Framework.csproj" /> -->
     <!-- <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" /> -->
-    <!-- <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" /> -->
+    <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" />
     <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
   </ItemGroup>
 

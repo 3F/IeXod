@@ -1509,7 +1509,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveAssemblyReference_Tests
 
             if (String.Compare(path, Path.Combine(s_myComponentsRootPath, "net.r_eg.IeXod.dll"), StringComparison.OrdinalIgnoreCase) == 0)
             {
-                return new AssemblyNameExtension("net.r_eg.IeXod, Version=12.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e");
+                return new AssemblyNameExtension("IeXod, Version=0.1.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e");
             }
 
             if (String.Compare(path, Path.Combine(s_myComponentsRootPath, "DependsOnMSBuild12.dll"), StringComparison.OrdinalIgnoreCase) == 0)
@@ -2400,7 +2400,7 @@ namespace net.r_eg.IeXod.UnitTests.ResolveAssemblyReference_Tests
             {
                 return new AssemblyNameExtension[]
                 {
-                    new AssemblyNameExtension("net.r_eg.IeXod, Version=12.0.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e")
+                    new AssemblyNameExtension("IeXod, Version=0.1.0.0, Culture=neutral, PublicKeyToken=4bbd2ef743db151e")
                 };
             }
 

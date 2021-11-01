@@ -643,7 +643,10 @@ namespace net.r_eg.IeXod.UnitTests
         [Fact]
         public void ToolPathIsFoundWhenDirectoryExistsWithNameOfTool()
         {
-            string toolName = NativeMethodsShared.IsWindows ? "cmd" : "sh";
+            // Do not use "cmd" since PathToToolUsed can be wrong defined as a C:\msys\bin\cmd due to MSYS env
+            // which produces MSB6003: The specified task executable "cmd" could not be run.
+            // System.ComponentModel.Win32Exception (0x80004005): The specified executable is not a valid application for this OS platform.
+            string toolName = NativeMethodsShared.IsWindows ? "cmd.exe" : "sh";
             string savedCurrentDirectory = Directory.GetCurrentDirectory();
 
             try

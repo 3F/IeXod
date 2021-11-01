@@ -61,7 +61,7 @@ namespace net.r_eg.IeXod.Graph.UnitTests
                     <Target Name='SelfTarget'>
                     </Target>
 
-                    <UsingTask TaskName='CustomMSBuild' TaskFactory='RoslynCodeTaskFactory' AssemblyFile='$(MSBuildToolsPath)\IeXod.Tasks.dll'>
+                    <UsingTask TaskName='CustomMSBuild' TaskFactory='RoslynCodeTaskFactory' AssemblyFile='$(IeXodBinPath)\IeXod.Tasks.dll'>
                         <ParameterGroup>
                           <Projects ParameterType='net.r_eg.IeXod.Framework.ITaskItem[]' Required='true' />
                           <Targets ParameterType='net.r_eg.IeXod.Framework.ITaskItem[]' Required='true' />
@@ -141,13 +141,13 @@ BuildEngine5.BuildProjectFilesInParallel(
             }
 
             // todo investigate why out of proc builds fail on macos https://github.com/Microsoft/msbuild/issues/3915
-            var disableInProcNode = !NativeMethodsShared.IsOSX;
+            //var disableInProcNode = !NativeMethodsShared.IsOSX; //L-98
 
             _buildParametersPrototype = new BuildParameters
             {
                 EnableNodeReuse = false,
                 IsolateProjects = true,
-                DisableInProcNode = disableInProcNode
+                //DisableInProcNode = disableInProcNode, //L-98
             };
         }
 

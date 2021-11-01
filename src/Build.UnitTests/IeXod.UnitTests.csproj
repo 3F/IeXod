@@ -23,7 +23,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\Shared\UnitTests\TestAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\Framework.UnitTests\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Shared\UnitTests\TestEnvironment.cs" />
+    <Compile Include="..\Shared\Debugging\PrintLineDebugger.cs" />
+    <Compile Include="..\Shared\Debugging\PrintLineDebuggerWriters.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,7 +27,7 @@
                       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(MonoBuild)' != 'true'"
                       ReferenceOutputAssembly="false"
                       OutputItemType="Content" /> -->
-    <!-- <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" /> -->
+    <ProjectReference Include="..\Tasks\IeXod.Tasks.csproj" />
     <!-- <ProjectReference Include="..\Utilities\IeXod.Utilities.csproj" /> -->
     <ProjectReference Include="..\Xunit.NetCore.Extensions\Xunit.NetCore.Extensions.csproj" />
 
@@ -39,6 +39,10 @@
     <!-- <ProjectReference Include="..\Samples\PortableTask\PortableTask.csproj" Private="false" ReferenceOutputAssembly="false" OutputItemType="PortableTaskResolvedProjectReferencePath" SetTargetFramework="TargetFramework=netstandard1.3" /> -->
 
     <Reference Include="System.Configuration" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" Version="$(SystemConfigurationVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\UnitTests\TestAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -125,6 +129,9 @@
     <!-- <Compile Include="..\Shared\UnitTests\TestEnvironment.cs" /> -->
     <Compile Include="..\Shared\Debugging\PrintLineDebugger.cs" />
     <Compile Include="..\Shared\Debugging\PrintLineDebuggerWriters.cs" />
+    <Compile Include="..\Shared\UnitTests\TaskParameter_Tests.cs">
+      <Link>TaskParameter_Tests.cs</Link>
+    </Compile>
   </ItemGroup>
 
   <Target Name="CopyTestProjects" AfterTargets="ResolveProjectReferences">
@@ -161,33 +168,6 @@
   
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
-  </ItemGroup>
-
-  <!-- IeXod. The Tasks feature is temporarily disabled -->
-  <ItemGroup>
-    <Compile Remove="BackEnd\FailingBuilderTask.cs" />
-    <Compile Remove="BackEnd\AssemblyLoadContextTestTasks.cs" />
-    <Compile Remove="BackEnd\FailingTask.cs" />
-    <Compile Remove="BackEnd\ProcessIdTask.cs" />
-    <Compile Remove="BackEnd\ItemCreationTask.cs" />
-    <Compile Remove="BackEnd\NullMetadataTask.cs" />
-    <Compile Remove="BackEnd\TaskRegistry_Tests.cs" />
-    <Compile Remove="BackEnd\TaskBuilderTestTask.cs" />
-    <Compile Remove="BackEnd\TaskBuilder_Tests.cs" />
-    <Compile Remove="BackEnd\TaskExecutionHost_Tests.cs" />
-    <Compile Remove="BackEnd\TaskHostConfiguration_Tests.cs" />
-    <Compile Remove="BackEnd\TaskHostFactory_Tests.cs" />
-    <Compile Remove="BackEnd\TaskHostTaskCancelled_Tests.cs" />
-    <Compile Remove="BackEnd\TaskHostTaskComplete_Tests.cs" />
-    <Compile Remove="BackEnd\TaskHost_Tests.cs" />
-    <Compile Remove="BackEnd\TaskItemComparer.cs" />
-    <Compile Remove="BackEnd\AssemblyTaskFactory_Tests.cs" />
-    <Compile Remove="BackEnd\ReturnFailureWithoutLoggingErrorTask.cs" />
-    <Compile Remove="FixPathOnUnix_Tests.cs" />
-    <Compile Remove="EscapingInProjects_Tests.cs" />
-    <!-- <Compile Include="..\Shared\UnitTests\TaskParameter_Tests.cs">
-      <Link>TaskParameter_Tests.cs</Link>
-    </Compile> -->
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">

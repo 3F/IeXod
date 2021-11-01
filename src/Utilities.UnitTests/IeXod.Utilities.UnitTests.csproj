@@ -3,12 +3,14 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(IeXodTestTFM)</TargetFrameworks>
-    <!-- <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget> -->
-    
     <AssemblyName>net.r_eg.IeXod.Utilities.UnitTests</AssemblyName>
     <IsTestProject>true</IsTestProject>
     <RootNamespace>net.r_eg.IeXod.Utilities.UnitTests</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\UnitTests\TestAssemblyInfo.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <!-- <Compile Include="..\Shared\Debugging\PrintLineDebugger.cs">
@@ -44,26 +46,8 @@
     <Compile Include="..\Utilities\TrackedDependencies\CanonicalTrackedFilesHelper.cs">
       <Link>Utilities\TrackedDependencies\CanonicalTrackedFilesHelper.cs</Link>
     </Compile>
-    <!-- <Compile Include="..\Utilities\ToolTask.cs">
-      <Link>Utilities\ToolTask.cs</Link>
-    </Compile> -->
-    
   </ItemGroup>
 
-  <!-- IeXod. The Tasks feature is temporarily disabled -->
-  <ItemGroup>
-    <!-- <Compile Remove="MockTask.cs" />
-    <Compile Remove="MuxLogger_Tests.cs" />
-    <Compile Remove="TaskItem_Tests.cs" />
-    <Compile Remove="TaskLoggingHelper_Tests.cs" />
-    <Compile Remove="ToolTask_Tests.cs" />
-    <Compile Remove="TrackedDependencies\FileTrackerTests.cs" />
-    <Compile Remove="TrackedDependencies\TrackedDependenciesTests.cs" /> -->
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="CommandLineBuilder_Tests.cs" />
-  </ItemGroup>
-  
   <ItemGroup>
     <PackageReference Include="Shouldly" Version="$(ShouldlyVersion)" />
     <PackageReference Include="System.IO.FileSystem.Primitives" Version="$(SystemIOFileSystemPrimitivesVersion)" />
