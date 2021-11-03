@@ -743,7 +743,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
         }
 
         [Theory]
-        [MemberData(nameof(ProjectInstanceHasEvaluationIdTestData))]
+        [MemberData(nameof(ProjectInstanceHasEvaluationIdTestData), DisableDiscoveryEnumeration = true)]
         public void ProjectInstanceHasEvaluationId(ProjectInstanceFactory projectInstanceFactory)
         {
             using (var env = TestEnvironment.Create())

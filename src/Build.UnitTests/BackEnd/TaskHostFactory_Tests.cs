@@ -16,7 +16,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.BackEnd
 {
     public sealed class TaskHostFactory_Tests
     {
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
         [SkipOnTargetFramework(TargetFrameworkMonikers.Netcoreapp, "https://github.com/microsoft/msbuild/issues/5158")]
         [Trait("Category", "mono-osx-failing")]
         public void TaskNodesDieAfterBuild()

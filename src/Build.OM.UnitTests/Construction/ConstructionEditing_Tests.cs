@@ -897,7 +897,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Construction
         }
 
         [Theory]
-        [MemberData(nameof(InsertMetadataElemenetAfterSiblingsTestData))]
+        [MemberData(nameof(InsertMetadataElemenetAfterSiblingsTestData), DisableDiscoveryEnumeration = true)]
         public void InsertMetadataElementAfterSiblings(AddMetadata addMetadata, int position, string expectedItem)
         {
             Action<ProjectItemElement, ProjectMetadataElement, ProjectMetadataElement> act = (i, c, r) => { i.InsertAfterChild(c, r); };
@@ -939,7 +939,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Construction
         }
 
         [Theory]
-        [MemberData(nameof(InsertMetadataElemenetBeforeSiblingsTestData))]
+        [MemberData(nameof(InsertMetadataElemenetBeforeSiblingsTestData), DisableDiscoveryEnumeration = true)]
         public void InsertMetadataElementBeforeSiblings(AddMetadata addMetadata, int position, string expectedItem)
         {
             Action<ProjectItemElement, ProjectMetadataElement, ProjectMetadataElement> act = (i, c, r) => { i.InsertBeforeChild(c, r);};

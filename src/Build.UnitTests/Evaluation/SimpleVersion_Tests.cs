@@ -122,7 +122,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         }
 
         [Theory]
-        [MemberData(nameof(Comparison_TestData))]
+        [MemberData(nameof(Comparison_TestData), DisableDiscoveryEnumeration = true)]
         public void CompareTo_ReturnsExpected(object version1Object, object version2Object, int expectedSign)
         {
             var version1 = (SimpleVersion)version1Object;
@@ -133,7 +133,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         }
 
         [Theory]
-        [MemberData(nameof(Comparison_TestData))]
+        [MemberData(nameof(Comparison_TestData), DisableDiscoveryEnumeration = true)]
         public void ComparisonOperators_ReturnExpected(object version1Object, object version2Object, int expectedSign)
         {
             var version1 = (SimpleVersion)version1Object;
@@ -191,7 +191,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         }
 
         [Theory]
-        [MemberData(nameof(Equals_TestData))]
+        [MemberData(nameof(Equals_TestData), DisableDiscoveryEnumeration = true)]
         public static void Equals_Other_ReturnsExpected(object version1Object, object version2Object, bool expected)
         {
             var version1 = (SimpleVersion)version1Object;
@@ -227,7 +227,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         }
 
         [Theory]
-        [MemberData(nameof(Parse_Valid_TestData))]
+        [MemberData(nameof(Parse_Valid_TestData), DisableDiscoveryEnumeration = true)]
         public static void Parse_ValidInput_ReturnsExpected(string input, object expected)
         {
             Assert.Equal(expected, SimpleVersion.Parse(input));
@@ -292,7 +292,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         }
 
         [Theory]
-        [MemberData(nameof(ToString_TestData))]
+        [MemberData(nameof(ToString_TestData), DisableDiscoveryEnumeration = true)]
         public static void ToString_Invoke_ReturnsExpected(object versionObject, string expected)
         {
             var version = (SimpleVersion)versionObject;

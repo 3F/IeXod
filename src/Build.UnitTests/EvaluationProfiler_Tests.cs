@@ -92,7 +92,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
 #if MONO
         [Theory(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Theory]
+        [Theory(Skip = "IeXod. L-98")]
 #endif
         public void VerifySimpleProfiledData(string elementName, string body)
         {
@@ -128,7 +128,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
 #if MONO
         [Theory(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Theory]
+        [Theory(Skip = "IeXod. L-98")]
 #endif
         public void VerifySimpleProfiledDataWithoutProjectLoadSetting(string elementName, string body)
         {
@@ -146,7 +146,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void VerifyProfiledData()
         {
@@ -183,7 +183,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void VerifyProfiledGlobData()
         {
@@ -217,7 +217,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void VerifyParentIdData()
         {
@@ -261,7 +261,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void VerifyIdsSanity()
         {

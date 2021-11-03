@@ -63,7 +63,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.Instance
         }
 
         [Theory]
-        [MemberData(nameof(TestData))]
+        [MemberData(nameof(TestData), DisableDiscoveryEnumeration = true)]
         public void ProjectTaskInstanceCanSerializeViaTranslator(
             IDictionary<string, (string, MockElementLocation)> parameters,
             List<ProjectTaskInstanceChild> outputs)

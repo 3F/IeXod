@@ -138,7 +138,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
             Assert.Equal("InitialProperty3", propertyValue);
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
         public void SimpleP2PBuildInProc()
         {
             var newParameters = _parameters.Clone();
@@ -149,7 +149,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
             SimpleP2PBuild(newParameters);
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
         public void SimpleP2PBuildOutOfProc()
         {
             var newParameters = _parameters.Clone();
@@ -386,7 +386,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void SimpleBuildOutOfProcess()
         {
@@ -399,7 +399,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void DisableInProcNode()
         {
@@ -672,7 +672,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #elif MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void OutOfProcNodeForwardCertainproperties()
         {
@@ -720,7 +720,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #elif MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void OutOfProcNodeForwardCertainpropertiesAlsoGetResultsFromCache()
         {
@@ -789,7 +789,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void ForwardNoPropertiesLaunchChildNode()
         {
@@ -833,7 +833,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #elif MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void VerifyCustomToolSetsPropagated()
         {
@@ -844,7 +844,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 <UsingTask TaskName='VerifyGlobalProjectCollection' TaskFactory='CodeTaskFactory' AssemblyFile='$(IeXodBinPath)\IeXod.Tasks.dll'>
                         <Task>
                             <Using Namespace='net.r_eg.IeXod.Evaluation'/>
-                               <Reference Include='$(MSBuildToolsPath)\net.r_eg.IeXod.dll'/>
+                               <Reference Include='$(IeXodBinPath)\IeXod.dll'/>
 <Code Type='Method'>
  <![CDATA[
                     
@@ -894,7 +894,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void ForwardNoPropertiesLaunchChildNodeDefault()
         {
@@ -2095,7 +2095,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void Regress239661()
         {
@@ -2156,7 +2156,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void ProjectInstanceTransfersToOOPNode()
         {
@@ -2221,7 +2221,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void ProjectInstanceLimitedTransferToOOPNode()
         {
@@ -2302,7 +2302,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// overall build result -- and thus the return value of the MSBuild task -- should reflect
         /// that failure. 
         /// </summary>
-        [Theory]
+        [Theory(Skip = "IeXod. L-98")]
         [InlineData(false)]
         [InlineData(true)]
         public void FailedAfterTargetInP2PShouldCauseOverallBuildFailure(bool disableInProcNode)
@@ -2351,7 +2351,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// that failure.  Specifically tests where there are multiple entrypoint targets with 
         /// AfterTargets, only one of which fails. 
         /// </summary>
-        [Theory]
+        [Theory(Skip = "IeXod. L-98")]
         [InlineData(false)]
         [InlineData(true)]
         public void FailedAfterTargetInP2PShouldCauseOverallBuildFailure_MultipleEntrypoints(bool disableInProcNode)
@@ -2417,7 +2417,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// that failure. This should also be true if the AfterTarget is an AfterTarget of the 
         /// entrypoint target.
         /// </summary>
-        [Theory]
+        [Theory(Skip = "IeXod. L-98")]
         [InlineData(false)]
         [InlineData(true)]
         public void FailedNestedAfterTargetInP2PShouldCauseOverallBuildFailure(bool disableInProcNode)
@@ -2522,7 +2522,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #elif MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-125")]
 #endif
         public void Regress473114()
         {
@@ -2621,7 +2621,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
 #endif
         public void VerifyMultipleRequestForSameProjectWithErrors_Simple()
         {
@@ -2704,7 +2704,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
 #endif
         public void VerifyMultipleRequestForSameProjectWithErrors_OnErrorChain()
         {
@@ -2823,7 +2823,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
 #endif
         public void VerifyMultipleRequestForSameProjectWithErrors_ErrorAndContinue()
         {
@@ -3112,7 +3112,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// legacy threading mode active and successfully build, and that one of those
         /// submissions can P2P to the other.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
         public void TestSimultaneousSubmissionsWithLegacyThreadingData_P2P()
         {
             string projectContent1 = @"<Project ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`msbuildnamespace`>
@@ -3200,7 +3200,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1245")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
 #endif
         public void TestSimultaneousSubmissionsWithLegacyThreadingData_P2P_MP()
         {
@@ -3286,7 +3286,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// This differs from transferring a project instance to an out-of-proc node because in this case the project
         /// was loaded by MSBuild, not supplied directly by the user.
         /// </remarks>
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
         public void Regress265010()
         {
             string contents = CleanupFileContents(@"
@@ -3702,7 +3702,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
             }
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
         public void OutOfProcFileBasedP2PBuildSucceeds()
         {
             const string mainProject = @"<Project>
@@ -3768,7 +3768,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// When a ProjectInstance based BuildRequestData is built out of proc, the node should
         /// not reload it from disk but instead fully utilize the entire translate project instance state
         /// to do the build
-        [Theory]
+        [Theory(Skip = "IeXod. L-98")]
         [InlineData(false)]
         [InlineData(true)]
         public void OutOfProcProjectInstanceBasedBuildDoesNotReloadFromDisk(bool shouldSerializeEntireState)
@@ -3922,7 +3922,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// <summary>
         /// Regression test for https://github.com/Microsoft/msbuild/issues/3047
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
         [SkipOnTargetFramework(TargetFrameworkMonikers.Mono, "out-of-proc nodes not working on mono yet")]
         public void MultiProcReentrantProjectWithCallTargetDoesNotFail()
         {

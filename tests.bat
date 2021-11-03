@@ -5,10 +5,10 @@ setlocal enableDelayedExpansion
 @REM set "OsEnvironment=windows"
 set "MonoBuild="
 set "XUnitConsole="
-set Platform="Any CPU"
+set _platform="Any CPU"
 
-set Configuration=%~1
-if not defined Configuration set Configuration=Release
+set _configuration=%~1
+if not defined _configuration set _configuration=Release
 
 :::~ 
 
@@ -22,7 +22,7 @@ if defined XUnitConsole ( @REM xunit.console.exe (xunit.runner.console package) 
 
     set "_L=category^^^!="
     set "_R=&"
-    set cmd=dotnet test -c %Configuration% /p:Platform=%Platform% --no-build --nologo --no-restore -v m
+    set cmd=dotnet test -c %_configuration% /p:Platform=%_platform% --no-build --nologo --no-restore -v m
 )
 set "_=!_R!!_L!"
 

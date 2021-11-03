@@ -12,6 +12,7 @@ using System.Reflection;
 using System.CodeDom.Compiler;
 
 using net.r_eg.IeXod.Utilities;
+using net.r_eg.IeXod.Shared;
 
 namespace net.r_eg.IeXod.UnitTests.BackEnd
 {
@@ -27,9 +28,19 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         /// <returns>The name of the assembly.</returns>
         public static string GetAssemblyForTask(string taskContents)
         {
-            string referenceAssembliesPath = ToolLocationHelper.GetPathToBuildTools(ToolLocationHelper.CurrentToolsVersion);
+            string pathToMSBuildBinaries = ToolLocationHelper.GetPathToBuildTools(ToolLocationHelper.CurrentToolsVersion);
+            string pathToIeXodBinaries = BuildEnvironmentHelper.Instance.IeXodBinPath;
 
-            string[] referenceAssemblies = new string[] { "System.dll", Path.Combine(referenceAssembliesPath, "net.r_eg.IeXod.Framework.dll"), Path.Combine(referenceAssembliesPath, "net.r_eg.IeXod.Utilities.Core.dll"), Path.Combine(referenceAssembliesPath, "IeXod.Tasks.dll") };
+            string[] referenceAssemblies = new[]
+            {
+                "System.dll",
+                Path.Combine(pathToIeXodBinaries, "IeXod.dll"),
+                Path.Combine(pathToIeXodBinaries, "IeXod.Tasks.dll"),
+                Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Framework.dll"),
+                Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Utilities.Core.dll"),
+                Path.Combine(pathToMSBuildBinaries, "Microsoft.Build.Tasks.Core.dll")
+            };
+
             return GetAssemblyForTask(taskContents, referenceAssemblies);
         }
 

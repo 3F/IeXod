@@ -1974,7 +1974,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         }
 
         [Theory]
-        [MemberData(nameof(TaskRegistryTranslationTestData))]
+        [MemberData(nameof(TaskRegistryTranslationTestData), DisableDiscoveryEnumeration = true)]
         public void TaskRegistryCanSerializeViaTranslator(List<ProjectUsingTaskElement> usingTaskElements, Toolset toolset)
         {
             var original = CreateTaskRegistryAndRegisterTasks(usingTaskElements, toolset);

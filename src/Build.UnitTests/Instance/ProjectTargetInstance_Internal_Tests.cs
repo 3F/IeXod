@@ -71,7 +71,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.Instance
         }
 
         [Theory]
-        [MemberData(nameof(TargetChildrenTestData))]
+        [MemberData(nameof(TargetChildrenTestData), DisableDiscoveryEnumeration = true)]
         public void ProjectTargetInstanceCanSerializeViaTranslator(
             ReadOnlyCollection<ProjectTargetInstanceChild> children,
             ReadOnlyCollection<ProjectOnErrorInstance> errorChildren)

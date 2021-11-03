@@ -271,7 +271,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Instance
 #if RUNTIME_TYPE_NETCORE || MONO
         [Fact(Skip = "FEATURE: TASKHOST")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
 #endif
         public void Escaping3()
         {

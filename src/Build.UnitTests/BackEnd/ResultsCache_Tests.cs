@@ -238,7 +238,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         }
 
         [Theory]
-        [MemberData(nameof(CacheSerializationTestData))]
+        [MemberData(nameof(CacheSerializationTestData), DisableDiscoveryEnumeration = true)]
         public void TestResultsCacheTranslation(object obj)
         {
             var resultsCache = (ResultsCache)obj;

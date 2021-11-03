@@ -91,7 +91,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.Globbing
         }
 
         [Theory]
-        [MemberData(nameof(CompositeMatchingTestData))]
+        [MemberData(nameof(CompositeMatchingTestData), DisableDiscoveryEnumeration = true)]
         public void CompositeMatching(CompositeGlob compositeGlob, string stringToMatch, bool shouldMatch)
         {
             if (shouldMatch)

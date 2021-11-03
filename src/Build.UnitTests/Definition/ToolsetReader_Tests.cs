@@ -1048,7 +1048,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                        );
 
             // Verifications
-            Assert.Equal(4, values.Count);
+            Assert.True(values.Count >= 4); // 4+ toolsets. IeXod.
             Assert.Equal("4.5", defaultToolsVersion);
             Assert.Equal(binPath, values["2.0"].ToolsPath);
             Assert.Equal(binPath2, values["4.0"].ToolsPath);
@@ -1101,7 +1101,10 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                        );
 
             // Verifications
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
+            Assert.False(values.ContainsKey("4.5"));
+            Assert.False(values.ContainsKey("5.5"));
+            Assert.False(values.ContainsKey("6.5"));
 
             string expectedDefault = "2.0";
             if (FrameworkLocationHelper.PathToDotNetFrameworkV20 == null)
@@ -1158,7 +1161,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                        );
 
             // Verifications
-            Assert.Equal(2, values.Count);
+            Assert.True(values.Count >= 2); // 2+ toolsets. IeXod.
             Assert.Equal("2.0", defaultToolsVersion);
             Assert.Equal(binPath, values["2.0"].ToolsPath);
             Assert.Equal(binPath2, values["4.0"].ToolsPath);
@@ -1333,7 +1336,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                        );
 
             // Verifications
-            Assert.Equal(2, values.Count);
+            Assert.True(values.Count >= 2); // 2+ toolsets. IeXod.
             Assert.Equal("4.5", defaultToolsVersion);
             Assert.Equal(v2Dir, values["4.5"].ToolsPath);
             Assert.Equal(v4Dir, values["5.0"].ToolsPath);
@@ -1390,7 +1393,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                            ToolsetDefinitionLocations.Default
                                                        );
 
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             Assert.Equal(@"D:\somePathToTasks", values["2.0"].ToolsPath);
             Assert.Equal(2, values["2.0"].Properties.Count);
             Assert.Equal(@"D:\somePathToDefault", values["2.0"].Properties["p1"].EvaluatedValue);
@@ -1711,7 +1714,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                            ToolsetDefinitionLocations.ConfigurationFile
                                                        );
 
-            Assert.Equal(2, values.Count);
+            Assert.True(values.Count >= 2); // 2+ toolsets. IeXod.
 
             Assert.Equal(v20Dir, values["2.0"].ToolsPath);
             Assert.Equal(2, values["2.0"].Properties.Count);
@@ -1898,7 +1901,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                            ToolsetDefinitionLocations.Registry
                                        );
 
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             Assert.Equal(expectedValue, values["2.0"].Properties["p"].EvaluatedValue);
         }
 
@@ -1959,7 +1962,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                            ToolsetDefinitionLocations.ConfigurationFile
                                        );
 
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             Assert.Equal(expectedValue, values["2.0"].Properties["p"].EvaluatedValue);
         }
 
@@ -2003,7 +2006,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                            ToolsetDefinitionLocations.Default
                                                        );
 
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             Assert.Empty(values["2.0"].Properties);
             Assert.Equal(overrideBinPath, values["2.0"].ToolsPath);
         }
@@ -2049,7 +2052,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                            ToolsetDefinitionLocations.Default
                                                        );
 
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             Assert.Empty(values["2.0"].Properties);
             Assert.Equal(binPath, values["2.0"].ToolsPath);
         }
@@ -2099,7 +2102,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                            ToolsetDefinitionLocations.Default
                                                        );
 
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             Assert.Single(values["2.0"].Properties);
             Assert.Equal(overrideBinPath, values["2.0"].ToolsPath);
             Assert.Null(values["2.0"].Properties["SomeRegistryProperty"]); // Was zapped
@@ -2184,7 +2187,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                            ToolsetDefinitionLocations.Default
                                                        );
 
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             Assert.Empty(values["2.0"].Properties);
             Assert.Equal(binPath, values["2.0"].ToolsPath);
         }
@@ -2216,7 +2219,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                            ToolsetDefinitionLocations.Default
                                                        );
 
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             Assert.Empty(values["2.0"].Properties);
             Assert.Equal(binPath, values["2.0"].ToolsPath);
         }
@@ -2242,7 +2245,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
                                                        );
 
             // Should either be the last-ditch 2.0 toolset, or if 2.0 is not installed, then the last-last-ditch of 4.0
-            Assert.Single(values);
+            Assert.True(values.ContainsKey("2.0")); // 1+ toolset. IeXod.
             if (FrameworkLocationHelper.PathToDotNetFrameworkV20 != null)
             {
                 Assert.Equal("2.0", defaultToolsVersion);

@@ -24,8 +24,8 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Roundtrip serialization tests for <see cref="ProfilerResult"/>
         /// </summary>
-        [MemberData(nameof(GetProfilerResults))]
         [Theory]
+        [MemberData(nameof(GetProfilerResults), DisableDiscoveryEnumeration = true)]
         public void ProfilerResultRoundTrip(ProfilerResult profilerResult)
         {
             var writeTranslator = TranslationHelpers.GetWriteTranslator();

@@ -37,7 +37,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests.Instance
         }
 
         [Theory]
-        [MemberData(nameof(MetadataTestData))]
+        [MemberData(nameof(MetadataTestData), DisableDiscoveryEnumeration = true)]
         public void ProjectItemGroupTaskItemInstanceCanSerializeViaTranslator(List<ProjectItemGroupTaskMetadataInstance> metadata)
         {
             var original = CreateTargetItem(null, metadata);

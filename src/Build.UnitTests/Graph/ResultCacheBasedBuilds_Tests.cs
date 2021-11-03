@@ -282,7 +282,7 @@ namespace net.r_eg.IeXod.Graph.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(BuildGraphData))]
+        [MemberData(nameof(BuildGraphData), DisableDiscoveryEnumeration = true)]
         public void BuildProjectGraphUsingCaches(Dictionary<int, int[]> edges)
         {
             var topoSortedNodes =

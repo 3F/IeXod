@@ -57,7 +57,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
         }
 
         [Theory]
-        [MemberData(nameof(CacheSerializationTestData))]
+        [MemberData(nameof(CacheSerializationTestData), DisableDiscoveryEnumeration = true)]
         public void ConfigCacheShouldBeTranslatable(object obj)
         {
             var initial = (ConfigCache) obj;

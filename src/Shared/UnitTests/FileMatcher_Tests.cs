@@ -67,7 +67,7 @@ namespace net.r_eg.IeXod.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(GetFilesComplexGlobbingMatchingInfo.GetTestData), MemberType = typeof(GetFilesComplexGlobbingMatchingInfo))]
+        [MemberData(nameof(GetFilesComplexGlobbingMatchingInfo.GetTestData), MemberType = typeof(GetFilesComplexGlobbingMatchingInfo), DisableDiscoveryEnumeration = true)]
         public void GetFilesComplexGlobbingMatching(GetFilesComplexGlobbingMatchingInfo info)
         {
             TransientTestFolder testFolder = _env.CreateFolder();

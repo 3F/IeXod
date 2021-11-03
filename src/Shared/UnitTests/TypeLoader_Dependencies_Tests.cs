@@ -20,7 +20,7 @@ namespace net.r_eg.IeXod.UnitTests
         private static readonly string TaskDllFileName = "TaskWithDependency.dll";
         private static readonly string DependencyDllFileName = "Dependency.dll";
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-122")]
         public void LoadAssemblyAndDependency_InsideProjectFolder()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))
@@ -37,7 +37,7 @@ namespace net.r_eg.IeXod.UnitTests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-122")]
         public void LoadAssemblyAndDependency_OutsideProjectFolder()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))

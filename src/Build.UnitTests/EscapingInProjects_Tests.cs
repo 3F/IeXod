@@ -96,7 +96,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// Make sure I can define a property with escaped characters and pass it into
         /// a string parameter of a task, in this case the Message task.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
         [Trait("Category", "mono-osx-failing")]
         public void SemicolonInPropertyPassedIntoStringParam_UsingTaskHost()
         {
@@ -149,7 +149,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// Make sure I can define a property with escaped characters and pass it into
         /// an ITaskItem[] task parameter.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
         [Trait("Category", "mono-osx-failing")]
         public void SemicolonInPropertyPassedIntoITaskItemParam_UsingTaskHost()
         {
@@ -587,7 +587,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// Do an item transform, where the transform expression contains an unescaped semicolon as well
         /// as an escaped percent sign.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
         [Trait("Category", "mono-osx-failing")]
         public void ItemTransformContainingSemicolon_InTaskHost()
         {
@@ -709,7 +709,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// If %2A (escaped '*') or %3F (escaped '?') is in an item's Include, it should be treated
         /// literally, not as a wildcard
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
         [Trait("Category", "mono-osx-failing")]
         public void EscapedWildcardsShouldNotBeExpanded_InTaskHost()
         {

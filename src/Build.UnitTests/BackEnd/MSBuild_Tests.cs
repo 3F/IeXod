@@ -363,7 +363,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// However, it's a situation where the project author doesn't have control over the
         /// property value and so he can't escape it himself.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-81")]
         public void PropertyOverridesContainSemicolon()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1162,7 +1162,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify stopOnFirstFailure with BuildInParallel override message are correctly logged when there are multiple nodes
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-98")]
         [Trait("Category", "mono-osx-failing")]
         public void StopOnFirstFailureandBuildInParallelMultipleNode()
         {

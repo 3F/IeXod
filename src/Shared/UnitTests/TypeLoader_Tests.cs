@@ -50,7 +50,7 @@ namespace net.r_eg.IeXod.UnitTests
         }
         
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-122")]
         public void LoadNonExistingAssembly()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))
@@ -68,7 +68,7 @@ namespace net.r_eg.IeXod.UnitTests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-122")]
         public void LoadInsideAsssembly()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))
@@ -85,7 +85,7 @@ namespace net.r_eg.IeXod.UnitTests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "IeXod. L-122")]
         public void LoadOutsideAssembly()
         {
             using (var dir = new FileUtilities.TempWorkingDirectory(ProjectFileFolder))

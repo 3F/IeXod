@@ -325,7 +325,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         }
 
         [Theory]
-        [MemberData(nameof(IndirectItemReferencesTestData))]
+        [MemberData(nameof(IndirectItemReferencesTestData), DisableDiscoveryEnumeration = true)]
         public void ItemOperationsShouldExpandIndirectItemReferences(string projectContent, string[] expectedItemValues, Dictionary<string, string> expectedItemMetadata)
         {
             var items = ObjectModelHelpers.GetItems(projectContent);
