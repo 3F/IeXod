@@ -22,7 +22,7 @@ if defined XUnitConsole ( @REM xunit.console.exe (xunit.runner.console package) 
 
     set "_L=category^^^!="
     set "_R=&"
-    set cmd=dotnet test -c %_configuration% /p:Platform=%_platform% --no-build --nologo --no-restore -v m
+    set cmd=dotnet test -c %_configuration% /p:Platform=%_platform% --no-build --nologo --no-restore -v q
 )
 set "_=!_R!!_L!"
 

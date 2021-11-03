@@ -52,11 +52,11 @@ namespace net.r_eg.IeXod.Tasks
                 {
                     "IeXod",
                     "IeXod.Tasks",
+
+#if TASKS_CORLIB_REF_MSBUILD
                     "mscorlib",
                     "netstandard",
-                    //-
-                    "Microsoft.Build.Framework",
-                    "Microsoft.Build.Utilities.Core",
+#endif
                 }
             },
             // CSharp specific assembly references
@@ -81,6 +81,11 @@ namespace net.r_eg.IeXod.Tasks
                 string.Empty,
                 new List<string>
                 {
+#if !TASKS_CORLIB_REF_MSBUILD
+                    "mscorlib",
+                    "netstandard",
+#endif
+
 #if RUNTIME_TYPE_NETCORE
                     "System.Runtime",
 #endif

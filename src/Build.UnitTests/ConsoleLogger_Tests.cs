@@ -262,7 +262,14 @@ namespace net.r_eg.IeXod.UnitTests
 
                 string targetStartedMessage = ResourceUtilities.FormatResourceStringStripCodeAndKeyword("TargetStartedProjectEntry", "YYY", tempProjectPath);
 
-                sc.ToString().ShouldContain(targetStartedMessage);
+                // The expected message may actually be split by CRLF due to the allocated screen buffer size in used streams;
+                // For example, `(entry point):` -> `(en` + \r\n + `try point):`
+                //      Target "YYY" in project "...Temp\4wfxtzhp.2fc\EmptyTargetsOnDetailedButNotNotmal\test.proj" (en
+                //      try point):
+                // Or it might be normal for a redirected like 2>&1> t.log
+                static string _Normalize(string input) => input.Replace("\r", string.Empty).Replace("\n", string.Empty);
+
+                _Normalize(sc.ToString()).ShouldContain(_Normalize(targetStartedMessage));
             }
             finally
             {
