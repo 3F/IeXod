@@ -535,7 +535,7 @@ namespace net.r_eg.IeXod.Execution
                 Dictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> registrations = GetRelevantRegistrations(taskIdentity, exactMatchRequired, qualified: false);
                 if(registrations.Count < 1)
                 {
-                    registrations = GetRelevantRegistrations(taskIdentity, !exactMatchRequired, qualified: true);
+                    registrations = GetRelevantRegistrations(taskIdentity, exactMatchRequired, qualified: true);
                 }
 
                 // look for the given task name in the registry; if not found, gather all registered task names that partially
