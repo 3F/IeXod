@@ -46,7 +46,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
                 var msBuildPath = Path.Combine(path, MSBuildExeName);
                 var msBuildConfig = Path.Combine(path, $"{MSBuildExeName}.config");
 
-                env.WithEnvironment("MSBUILD_EXE_PATH", env.MSBuildExePath);
+                env.WithEnvironment("IEXOD_PATH_TO_MSBUILD_EXE", env.MSBuildExePath);
                 BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false);
 
                 BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory.ShouldBe(path);
@@ -81,7 +81,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
                 var msBuildConfig = Path.Combine(msbuildBinDirectory, $"{MSBuildExeName}.config");
                 var vsMSBuildDirectory = Path.Combine(env.TempFolderRoot, "MSBuild");
 
-                env.WithEnvironment("MSBUILD_EXE_PATH", msBuildPath);
+                env.WithEnvironment("IEXOD_PATH_TO_MSBUILD_EXE", msBuildPath);
                 BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false);
 
                 BuildEnvironmentHelper.Instance.Mode.ShouldBe(BuildEnvironmentMode.VisualStudio);
@@ -113,7 +113,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
                 var msBuildConfig = Path.Combine(msbuildBinDirectory, $"{MSBuildExeName}.config");
                 var vsMSBuildDirectory = Path.Combine(env.TempFolderRoot, "MSBuild");
 
-                env.WithEnvironment("MSBUILD_EXE_PATH", msBuildPath);
+                env.WithEnvironment("IEXOD_PATH_TO_MSBUILD_EXE", msBuildPath);
                 BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false);
 
                 BuildEnvironmentHelper.Instance.Mode.ShouldBe(BuildEnvironmentMode.VisualStudio);

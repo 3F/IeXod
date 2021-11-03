@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
+using net.r_eg.IeXod.Shared;
 using net.r_eg.IeXod.UnitTests;
 using net.r_eg.IeXod.UnitTests.Shared;
 using Shouldly;
@@ -25,7 +26,9 @@ namespace Microsoft.Build.Engine.OM.UnitTests
         [Fact]
         public void TestOldNuget()
         {
-            string msbuildExePath = Path.GetDirectoryName(RunnerUtilities.PathToCurrentlyRunningMsBuildExe);
+            string IeXodPath = BuildEnvironmentHelper.Instance.IeXodBinPath;
+            string msbuildExePath = BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory;
+
             using TestEnvironment testEnvironment = TestEnvironment.Create();
             TransientTestFolder folder = testEnvironment.CreateFolder(createFolder: true);
             // The content of the solution isn't known to matter, but having a custom solution makes it easier to add requirements should they become evident.
@@ -49,7 +52,7 @@ GlobalSection(SolutionProperties) = preSolution
 EndGlobalSection
 EndGlobal
 ");
-            RunnerUtilities.RunProcessAndGetOutput(Path.Combine(msbuildExePath, "nuget", "NuGet.exe"), "restore " + sln.Path + " -MSBuildPath \"" + msbuildExePath + "\"", out bool success, outputHelper: _output);
+            RunnerUtilities.RunProcessAndGetOutput(Path.Combine(IeXodPath, "nuget", "NuGet.exe"), "restore " + sln.Path + " -MSBuildPath \"" + msbuildExePath + "\"", out bool success, outputHelper: _output);
             success.ShouldBeTrue();
         }
 #endif

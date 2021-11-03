@@ -126,7 +126,7 @@ namespace net.r_eg.IeXod.Shared
 
         private static BuildEnvironment TryFromEnvironmentVariable()
         {
-            var msBuildExePath = s_getEnvironmentVariable("MSBUILD_EXE_PATH");
+            var msBuildExePath = s_getEnvironmentVariable("IEXOD_PATH_TO_MSBUILD_EXE");
 
             return msBuildExePath == null
                 ? null

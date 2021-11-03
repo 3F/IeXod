@@ -19,7 +19,7 @@ namespace Microsoft.DotNet.Cli.Utils
         public static readonly string BinDirectoryName = "bin";
         public static readonly string ObjDirectoryName = "obj";
 
-        public static readonly string MSBUILD_EXE_PATH = "MSBUILD_EXE_PATH";
+        public static readonly string MSBUILD_EXE_PATH = "IEXOD_PATH_TO_MSBUILD_EXE";
         public static readonly string MSBuildExtensionsPath = "MSBuildExtensionsPath";
         public static readonly string EnableDefaultItems = "EnableDefaultItems";
 

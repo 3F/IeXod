@@ -1957,22 +1957,30 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
             var projectCollection2 = new ProjectCollection();
             File.WriteAllText(p2pProject, contents2);
 
-            Project project2 = projectCollection2.LoadProject(p2pProject);
+            using(var env = TestEnvironment.Create())
+            {
+                XmlDocumentWithLocation.ClearReadOnlyFlags_UnitTestsOnly(); // L-127
+                env.SetEnvironmentVariable("MSBUILDLOADALLFILESASREADONLY", null);
+                env.SetEnvironmentVariable("MSBuildLoadMicrosoftTargetsReadOnly", null);
+                env.SetEnvironmentVariable("MSBUILDLOADALLFILESASWRITEABLE", null);
 
-            _parameters.ResetCaches = false;
+                Project project2 = projectCollection2.LoadProject(p2pProject);
 
-            // Build the first project to make sure we get the expected default values out for the p2p call.
-            _parameters.ProjectRootElementCache = _projectCollection.ProjectRootElementCache;
-            _buildManager.BeginBuild(_parameters);
-            _buildManager.BuildRequest(data);
-            _buildManager.EndBuild();
+                _parameters.ResetCaches = false;
 
-            _logger.AssertLogContains("Value:Baz");
-            _logger.ClearLog();
+                // Build the first project to make sure we get the expected default values out for the p2p call.
+                _parameters.ProjectRootElementCache = _projectCollection.ProjectRootElementCache;
+                _buildManager.BeginBuild(_parameters);
+                _buildManager.BuildRequest(data);
+                _buildManager.EndBuild();
 
-            // Modify the property in the second project and save it to disk.
-            project2.SetProperty("Bar", "FOO");
-            project2.Save();
+                _logger.AssertLogContains("Value:Baz");
+                _logger.ClearLog();
+
+                // Modify the property in the second project and save it to disk.
+                project2.SetProperty("Bar", "FOO");
+                project2.Save();
+            }
 
             // Create a new build.
             ProjectInstance projectInstance2 = CreateProjectInstance(contents1, null, _projectCollection, false);
@@ -2823,7 +2831,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact(Skip = "IeXod. L-98")]
+        [Fact(Skip = "IeXod. L-121")]
 #endif
         public void VerifyMultipleRequestForSameProjectWithErrors_ErrorAndContinue()
         {
@@ -2913,7 +2921,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 #if MONO
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/1240")]
 #else
-        [Fact]
+        [Fact(Skip = "IeXod. L-121")]
 #endif
         public void VerifyMultipleRequestForSameProjectWithErrors_AfterTargets()
         {
@@ -3726,7 +3734,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
             var buildParameters = new BuildParameters(_projectCollection)
             {
-                //DisableInProcNode = true, // IeXod: L-98
+                DisableInProcNode = true,
                 EnableNodeReuse = false,
                 Loggers = new ILogger[] {_logger}
             };
@@ -3810,7 +3818,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
             var parameters = new BuildParameters(_projectCollection)
             {
-                //DisableInProcNode = true, // IeXod: L-98
+                DisableInProcNode = true,
                 EnableNodeReuse = false,
                 Loggers = new ILogger[] {_logger}
             };
@@ -3982,7 +3990,7 @@ namespace net.r_eg.IeXod.UnitTests.BackEnd
 
                 var buildParameters = new BuildParameters()
                 {
-                    //DisableInProcNode = true, // IeXod: L-98
+                    DisableInProcNode = true,
                     MaxNodeCount = Environment.ProcessorCount,
                     EnableNodeReuse = false,
                     Loggers = new List<ILogger>()
