@@ -621,11 +621,13 @@ namespace net.r_eg.IeXod.Evaluation
                     // Pass0: load initial properties
                     // Follow the order of precedence so that Global properties overwrite Environment properties
                     MSBuildEventSource.Log.EvaluatePass0Start(_projectRootElement.ProjectFileLocation.File);
-                    AddUnspecifiedDefaultProperties();
+
                     AddBuiltInProperties();
                     AddEnvironmentProperties();
                     AddToolsetProperties();
                     globalProperties = AddGlobalProperties();
+
+                    SetFallbackValuesForMostKnownProperties();
 
                     if (_interactive)
                     {
@@ -1139,35 +1141,46 @@ namespace net.r_eg.IeXod.Evaluation
         /// we'll define here some minimal set with most known or unspecified values.
         /// This should have less priority than <see cref="AddBuiltInProperties()"/>
         /// </summary>
-        private void AddUnspecifiedDefaultProperties()
+        private void SetFallbackValuesForMostKnownProperties()
         {
             foreach(var p in new Dictionary<string, string>(25)
             {
+                { ReservedPropertyNames.extensionsPath, "$([MSBuild]::GetMSBuildExtensionsPath())" },
+                { ReservedPropertyNames.extensionsPath32, "$([MSBuild]::GetMSBuildExtensionsPath())" },
+                { ReservedPropertyNames.extensionsPath64, @"$(MSBuildProgramFiles32)\MSBuild" },
+
                 { "MSBuildToolsPath32", "$([MSBuild]::GetToolsDirectory32())" },
                 { "MSBuildToolsPath64", "$([MSBuild]::GetToolsDirectory64())" },
+                { "MSBuildToolsPath", "$([MSBuild]::GetCurrentToolsDirectory())" },
+
                 { "MSBuildSDKsPath", "$([MSBuild]::GetMSBuildSDKsPath())" },
                 { "MSBuildFrameworkToolsPath", @"$(SystemRoot)\Microsoft.NET\Framework\v$(MSBuildRuntimeVersion)\" },
                 { "MSBuildFrameworkToolsPath32", @"$(SystemRoot)\Microsoft.NET\Framework\v$(MSBuildRuntimeVersion)\" },
                 { "MSBuildFrameworkToolsPath64", @"$(SystemRoot)\Microsoft.NET\Framework64\v$(MSBuildRuntimeVersion)\" },
-                { "MSBuildFrameworkToolsRoot", @"$(SystemRoot)\Microsoft.NET\Framework\" },
+
+                { ReservedPropertyNames.frameworkToolsRoot, @"$(SystemRoot)\Microsoft.NET\Framework\" },
                 { "VsInstallRoot", "$([MSBuild]::GetVsInstallRoot())" },
                 { "MSBuildToolsRoot", @"$(VsInstallRoot)\MSBuild" },
-                { "MSBuildExtensionsPath", "$([MSBuild]::GetMSBuildExtensionsPath())" },
-                { "MSBuildExtensionsPath32", "$([MSBuild]::GetMSBuildExtensionsPath())" },
                 { "RoslynTargetsPath", @"$([MSBuild]::GetToolsDirectory32())\Roslyn" },
 
-                // VC Specific Paths, only specific known versions
+                // VC Specific Paths
+                { "VCTargetsPath16", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath16)','$(MSBuildExtensionsPath32)\Microsoft\VC\v160\'))" },
                 { "VCTargetsPath14", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath14)','$([MSBuild]::GetProgramFiles32())\MSBuild\Microsoft.Cpp\v4.0\V140\'))" },
                 { "VCTargetsPath12", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath12)','$([MSBuild]::GetProgramFiles32())\MSBuild\Microsoft.Cpp\v4.0\V120\'))" },
                 { "VCTargetsPath11", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath11)','$([MSBuild]::GetProgramFiles32())\MSBuild\Microsoft.Cpp\v4.0\V110\'))" },
                 { "VCTargetsPath10", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath10)','$([MSBuild]::GetProgramFiles32())\MSBuild\Microsoft.Cpp\v4.0\'))" },
-
-                { "MSBuildExtensionsPath64", @"$(MSBuildProgramFiles32)\MSBuild" },
+                { "VCTargetsPath", "$(VCTargetsPath16)" },
 
                 // VSSDK
                 { "VSToolsPath", @"$(MSBuildProgramFiles32)\MSBuild\Microsoft\VisualStudio\v$(VisualStudioVersion)" },
 
-            }) _data.SetProperty(p.Key, p.Value, isGlobalProperty: false, mayBeReserved: false);
+            })
+            {
+                if(_data.GetProperty(p.Key) == null)
+                {
+                    _data.SetProperty(p.Key, p.Value, isGlobalProperty: false, mayBeReserved: false);
+                }
+            }
         }
 
         /// <summary>
