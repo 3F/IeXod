@@ -87,6 +87,7 @@ namespace net.r_eg.IeXod.Shared
                 TryFromDevConsole,
                 TryFromSetupApi,
                 TryFromVSDir,
+                TryFromHMSBuild,
                 TryFromAppContextBaseDirectory
             };
 
@@ -298,6 +299,33 @@ namespace net.r_eg.IeXod.Shared
                     ?? TryFromStandaloneMSBuildExe(path);
         }
 
+        private static BuildEnvironment TryFromHMSBuild()
+        {
+            string hmsbuild = s_getHMSBuildPath();
+            if(hmsbuild == null) return null;
+
+            Process p = new()
+            {
+                StartInfo = new ProcessStartInfo(hmsbuild, "-only-path")
+                {
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                }
+            };
+
+            p.Start();
+            p.WaitForExit();
+            if(p.ExitCode != 0) return null;
+
+            string path = p.StandardOutput.ReadToEnd().Trim(new[] { ' ', '\r', '\n' });
+
+            return string.IsNullOrEmpty(path)
+                    ? null
+                    : TryFromMSBuildAssemblyUnderVisualStudio(path, path, true)
+                        ?? TryFromStandaloneMSBuildExe(path);
+        }
+
         private static BuildEnvironment TryFromAppContextBaseDirectory()
         {
             // Assemblies compiled against anything older than .NET 4.0 won't have a System.AppContext
@@ -432,6 +460,13 @@ namespace net.r_eg.IeXod.Shared
             return Environment.GetEnvironmentVariable(variable);
         }
 
+        private static string GetHMSBuildPath()
+        {
+            string hmsbuild = Path.Combine(BuildEnvironment.ExecutingAssemblyPath, "hMSBuild.bat");
+
+            return File.Exists(hmsbuild) ? hmsbuild : null;
+        }
+
         /// <summary>
         /// Resets the current singleton instance (for testing).
         /// </summary>
@@ -439,13 +474,15 @@ namespace net.r_eg.IeXod.Shared
             Func<string> getExecutingAssemblyPath = null, Func<string> getAppContextBaseDirectory = null,
             Func<IEnumerable<VisualStudioInstance>> getVisualStudioInstances = null,
             Func<string, string> getEnvironmentVariable = null,
-            Func<bool> runningTests = null)
+            Func<bool> runningTests = null,
+            Func<string> getHMSBuildPath = null)
         {
             s_getProcessFromRunningProcess = getProcessFromRunningProcess ?? GetProcessFromRunningProcess;
             s_getExecutingAssemblyPath = getExecutingAssemblyPath ?? GetExecutingAssemblyPath;
             s_getAppContextBaseDirectory = getAppContextBaseDirectory ?? GetAppContextBaseDirectory;
             s_getVisualStudioInstances = getVisualStudioInstances ?? VisualStudioLocationHelper.GetInstances;
             s_getEnvironmentVariable = getEnvironmentVariable ?? GetEnvironmentVariable;
+            s_getHMSBuildPath = getHMSBuildPath ?? GetHMSBuildPath;
 
             //  Tests which specifically test the BuildEnvironmentHelper need it to be able to act as if it is not running tests
             s_runningTests = runningTests ?? CheckIfRunningTests;
@@ -458,6 +495,7 @@ namespace net.r_eg.IeXod.Shared
         private static Func<string> s_getAppContextBaseDirectory = GetAppContextBaseDirectory;
         private static Func<IEnumerable<VisualStudioInstance>> s_getVisualStudioInstances = VisualStudioLocationHelper.GetInstances;
         private static Func<string, string> s_getEnvironmentVariable = GetEnvironmentVariable;
+        private static Func<string> s_getHMSBuildPath = GetHMSBuildPath;
         private static Func<bool> s_runningTests = CheckIfRunningTests;
 
 
@@ -524,8 +562,6 @@ namespace net.r_eg.IeXod.Shared
                 MSBuildToolsDirectory64 = CurrentMSBuildToolsDirectory;
             }
 
-            IeXodBinPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
             // We can't detect an environment, don't try to set other paths.
             if (mode == BuildEnvironmentMode.None || currentMSBuildExeFile == null || currentToolsDirectory == null)
                 return;
@@ -564,6 +600,9 @@ namespace net.r_eg.IeXod.Shared
                 ? Path.Combine(VisualStudioInstallRootDirectory, "MSBuild")
                 : MSBuildToolsDirectory32;
         }
+
+        internal static string ExecutingAssemblyPath { get; }
+            = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         internal BuildEnvironmentMode Mode { get; }
 
@@ -647,6 +686,6 @@ namespace net.r_eg.IeXod.Shared
         /// <summary>
         /// Path to the IeXod directory.
         /// </summary>
-        internal string IeXodBinPath { get; }
+        internal string IeXodBinPath => ExecutingAssemblyPath;
     }
 }

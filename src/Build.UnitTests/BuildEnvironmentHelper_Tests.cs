@@ -221,7 +221,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
             using (var env = new EmptyStandaloneEnviroment(MSBuildExeName))
             {
                 // Only the app base directory will be available
-                BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, () => env.BuildDirectory, env.VsInstanceMock, env.EnvironmentMock, () => false);
+                BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, () => env.BuildDirectory, env.VsInstanceMock, env.EnvironmentMock, () => false, ReturnNull);
 
                 // Make sure we get the right MSBuild entry point. On .NET Core this will be MSBuild.dll, otherwise MSBuild.exe
                 Path.GetFileName(BuildEnvironmentHelper.Instance.CurrentMSBuildExePath).ShouldBe(MSBuildExeName);
@@ -264,7 +264,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
             {
                 env.WithEnvironment("VSINSTALLDIR", env.TempFolderRoot);
                 env.WithEnvironment("VisualStudioVersion", visualStudioVersion);
-                BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false);
+                BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false, ReturnNull);
 
                 if (shouldBeValid)
                 {
@@ -324,7 +324,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
                 env.WithVsInstance(new VisualStudioInstance("VS", env.TempFolderRoot, new Version(visualStudioVersion)));
 
                 // This test has no context to find MSBuild other than Visual Studio root.
-                BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false);
+                BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false, ReturnNull);
 
                 if (shouldBeValid)
                 {
@@ -349,7 +349,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
                 env.WithVsInstance(new VisualStudioInstance("VS", env.TempFolderRoot, new Version("14.0")));
 
                 // This test has no context to find MSBuild other than Visual Studio root.
-                BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false);
+                BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(ReturnNull, ReturnNull, ReturnNull, env.VsInstanceMock, env.EnvironmentMock, () => false, ReturnNull);
 
                 BuildEnvironmentHelper.Instance.VisualStudioInstallRootDirectory.ShouldBeNull();
                 BuildEnvironmentHelper.Instance.Mode.ShouldBe(BuildEnvironmentMode.None);
@@ -464,7 +464,7 @@ namespace net.r_eg.IeXod.Engine.UnitTests
             {
                 var entryProcess = Path.Combine(Path.GetTempPath(), "foo.exe");
                 BuildEnvironmentHelper.ResetInstance_ForUnitTestsOnly(() => entryProcess, ReturnNull, ReturnNull,
-                    env.VsInstanceMock, env.EnvironmentMock, () => false);
+                    env.VsInstanceMock, env.EnvironmentMock, () => false, ReturnNull);
 
                 BuildEnvironmentHelper.Instance.CurrentMSBuildExePath.ShouldBe(entryProcess);
                 BuildEnvironmentHelper.Instance.CurrentMSBuildToolsDirectory.ShouldBe(Path.GetDirectoryName(entryProcess));
