@@ -1032,7 +1032,7 @@ Project(""{";
         /// <summary>
         /// Open lots of projects concurrently to try to trigger problems
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]  //This test is platform specific for Windows
         public void ConcurrentProjectOpenAndCloseThroughProject()
         {
@@ -1704,7 +1704,7 @@ true, true, true)]
             AssertReload(SimpleProject, ComplexProject, false, false, false, act);
         }
 
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void ReloadFromMemoryWhenProjectIsInMemoryKeepsProjectFileEmpty()
         {
             AssertProjectFileAfterReload(
@@ -1713,7 +1713,7 @@ true, true, true)]
                 (initial, reload, actualFile) => { Assert.Equal(String.Empty, actualFile); });
         }
 
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void ReloadFromMemoryWhenProjectIsInFileKeepsProjectFile()
         {
             AssertProjectFileAfterReload(
@@ -1722,7 +1722,7 @@ true, true, true)]
                 (initial, reload, actualFile) => { Assert.Equal(initial, actualFile); });
         }
 
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void ReloadFromFileWhenProjectIsInMemorySetsProjectFile()
         {
             AssertProjectFileAfterReload(
@@ -1731,7 +1731,7 @@ true, true, true)]
                 (initial, reload, actualFile) => { Assert.Equal(reload, actualFile);});
         }
 
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void ReloadFromFileWhenProjectIsInFileUpdatesProjectFile()
         {
             AssertProjectFileAfterReload(

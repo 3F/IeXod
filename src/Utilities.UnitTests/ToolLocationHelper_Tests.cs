@@ -3634,7 +3634,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify that the GetPlatformExtensionSDKLocation method can be correctly called during evaluation time as a msbuild function.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void VerifyGetInstalledSDKLocations()
         {
             string testDirectoryRoot = Path.Combine(Path.GetTempPath(), "VerifyGetInstalledSDKLocations");
@@ -3703,7 +3703,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify that the GetPlatformExtensionSDKLocation method can be correctly called during evaluation time as a msbuild function.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void VerifyGetInstalledSDKLocations2()
         {
             string testDirectoryRoot = Path.Combine(Path.GetTempPath(), "VerifyGetInstalledSDKLocations2");
@@ -3773,7 +3773,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Setup some fake entries in the registry and verify we get the correct sdk from there.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyGetInstalledSDKLocations3()
         {
@@ -4238,7 +4238,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify that the GetPlatformSDKPropsFileLocation method can be correctly called for pre-OneCore SDKs during evaluation time as a msbuild function.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyGetPreOneCoreSDKPropsLocation()
         {
@@ -4314,7 +4314,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Verify that the GetPlatformSDKPropsFileLocation method can be correctly called for OneCore SDK during evaluation time as a msbuild function.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         [Trait("Category", "mono-osx-failing")]
         public void VerifyGetOneCoreSDKPropsLocation()
         {

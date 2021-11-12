@@ -1516,7 +1516,7 @@ namespace net.r_eg.IeXod.UnitTests.OM.Definition
         /// Setting a property that originates in an import should not try to edit the property there.
         /// It should set it in the main project file.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void SetPropertyOriginatingInImport()
         {
             ProjectRootElement xml = ProjectRootElement.Create();

@@ -1346,7 +1346,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         /// <summary>
         /// Predecessors and imports
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void PropertyPredecessorsAndImports()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"
@@ -1370,7 +1370,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         /// <summary>
         /// New properties get a null predecessor until reevaluation
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void PropertyPredecessorsSetProperty()
         {
             // Need an existing property with the same name in an import
@@ -1996,7 +1996,7 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
         /// <summary>
         /// New properties do not appear in the evaluated properties list until reevaluation
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void AllEvaluatedPropertiesSetProperty()
         {
             string content = ObjectModelHelpers.CleanupFileContents(@"

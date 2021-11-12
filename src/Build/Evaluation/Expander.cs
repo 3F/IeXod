@@ -28,6 +28,7 @@ using AvailableStaticMethods = net.r_eg.IeXod.Internal.AvailableStaticMethods;
 using ReservedPropertyNames = net.r_eg.IeXod.Internal.ReservedPropertyNames;
 using TaskItem = net.r_eg.IeXod.Execution.ProjectItemInstance.TaskItem;
 using TaskItemFactory = net.r_eg.IeXod.Execution.ProjectItemInstance.TaskItem.TaskItemFactory;
+using net.r_eg.IeXod.Compatibility;
 
 namespace net.r_eg.IeXod.Evaluation
 {
@@ -3384,7 +3385,7 @@ namespace net.r_eg.IeXod.Evaluation
                             {
                                 // If we're invoking a method, then there are deeper attempts that
                                 // can be made to invoke the method
-                                if ((_bindingFlags & BindingFlags.InvokeMethod) == BindingFlags.InvokeMethod)
+                                if((_bindingFlags & BindingFlags.InvokeMethod) == BindingFlags.InvokeMethod)
                                 {
                                     // The standard binder failed, so do our best to coerce types into the arguments for the function
                                     // This may happen if the types need coercion, but it may also happen if the object represents a type that contains open type parameters, that is, ContainsGenericParameters returns true. 
@@ -4898,6 +4899,14 @@ namespace net.r_eg.IeXod.Evaluation
                     {
                         functionResult = ((MethodInfo)memberInfo).Invoke(objectInstance /* null if static method */, args);
                     }
+                }
+                else if(OriginIntrinsicFunctions.TryInvokeStatic(out object result, _methodMethodName, args))
+                {
+                    functionResult = result;
+                }
+                else if(OriginIntrinsicFunctions.TryUseInstance(out string stdout, _methodMethodName, args))
+                {
+                    functionResult = stdout;
                 }
                 else if (!isConstructor)
                 {

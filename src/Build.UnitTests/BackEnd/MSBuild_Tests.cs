@@ -363,7 +363,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// However, it's a situation where the project author doesn't have control over the
         /// property value and so he can't escape it himself.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact(Skip = "IeXod. L-139")]
         public void PropertyOverridesContainSemicolon()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();

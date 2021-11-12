@@ -125,7 +125,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Ensures that when the user specifies a custom directory build props file that it is imported correctly.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void ImportsDirectoryBuildProjectCustomFile()
         {
             string customFilePath = ObjectModelHelpers.CreateFileInTempProjectDirectory(CustomBuildProjectFile, BasicDirectoryBuildProjectContents);
@@ -153,7 +153,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Ensures that if a directory build project exists, it will be imported.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void ImportsDirectoryBuildProjectIfExists()
         {
             ObjectModelHelpers.CreateFileInTempProjectDirectory(DirectoryBuildProjectFile, BasicDirectoryBuildProjectContents);

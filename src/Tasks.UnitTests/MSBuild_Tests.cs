@@ -339,7 +339,7 @@ namespace net.r_eg.IeXod.UnitTests
 #if RUNTIME_TYPE_NETCORE
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/259")]
 #else
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact(Skip = "IeXod. L-139")]
 #endif
         [Trait("Category", "mono-osx-failing")]
         public void PropertyOverridesContainSemicolon()
@@ -1481,6 +1481,29 @@ namespace net.r_eg.IeXod.UnitTests
             {
                 File.Delete(projectFile1);
             }
+        }
+
+        [Fact]
+        public void OriginMSBuildStaticFunctionsTest() // L-81
+        {
+            string prjFile = Path.Combine("src", "foo", "foo.csproj");
+
+            Project project = ObjectModelHelpers.LoadProjectFileInTempProjectDirectory
+            (
+                ObjectModelHelpers.CreateFileInTempProjectDirectory
+                (
+                    prjFile,
+                    $@"
+                    <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                      <PropertyGroup>
+                        <foo>bar</foo>
+                      </PropertyGroup>
+                      <Import Project=`$(MSBuildBinPath)\Microsoft.CSharp.targets` />
+                    </Project>"
+                )
+            );
+
+            Assert.Equal("bar", project.GetPropertyValue("foo"));
         }
     }
 

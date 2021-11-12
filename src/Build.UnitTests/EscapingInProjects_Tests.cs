@@ -940,7 +940,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: Escaping in conditionals is broken.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact(Skip = "IeXod. L-139")]
         public void SemicolonInConfiguration()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1000,7 +1000,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: Escaping in conditionals is broken.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void SemicolonInConfiguration_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");
@@ -1070,7 +1070,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: CopyBuildTarget target fails if the output assembly name contains a semicolon or single-quote
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact(Skip = "IeXod. L-139")]
         public void SemicolonInAssemblyName()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1125,7 +1125,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: CopyBuildTarget target fails if the output assembly name contains a semicolon or single-quote
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void SemicolonInAssemblyName_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");
@@ -1190,7 +1190,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: Conversion Issue: Properties with $(xxx) as literals are not being converted correctly
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact(Skip = "IeXod. L-139")]
         public void DollarSignInAssemblyName()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1245,7 +1245,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// <summary>
         ///     ESCAPING: Conversion Issue: Properties with $(xxx) as literals are not being converted correctly
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void DollarSignInAssemblyName_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");
@@ -1310,7 +1310,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// <summary>
         /// This is the case when one of the source code files in the project has a filename containing a semicolon.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact(Skip = "IeXod. L-139")]
         public void SemicolonInSourceCodeFilename()
         {
             ObjectModelHelpers.DeleteTempProjectDirectory();
@@ -1365,7 +1365,7 @@ namespace net.r_eg.IeXod.UnitTests.EscapingInProjects_Tests
         /// <summary>
         /// This is the case when one of the source code files in the project has a filename containing a semicolon.
         /// </summary>
-        [Fact(Skip = "IeXod. L-81")]
+        [Fact]
         public void SemicolonInSourceCodeFilename_UsingTaskHost()
         {
             string originalOverrideTaskHostVariable = Environment.GetEnvironmentVariable("MSBUILDFORCEALLTASKSOUTOFPROC");

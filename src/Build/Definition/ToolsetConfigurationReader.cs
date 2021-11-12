@@ -293,9 +293,9 @@ namespace net.r_eg.IeXod.Evaluation
         {
             var xml = XDocument.Load(file);
 
-            foreach(var section in xml.Descendants("section"))
+            foreach(XElement section in xml.Descendants("section"))
             {
-                var type = section.Attribute("type");
+                XAttribute type = section.Attribute("type");
 
                 // Microsoft.Build.Evaluation.ToolsetConfigurationSection, Microsoft.Build, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
                 if(type.Value.IndexOf("Microsoft.Build", StringComparison.OrdinalIgnoreCase) != -1)
@@ -304,7 +304,7 @@ namespace net.r_eg.IeXod.Evaluation
                 }
             }
 
-            var fout = FileUtilities.GetTemporaryFile();
+            string fout = FileUtilities.GetTemporaryFile();
             xml.Save(fout);
 
             return new ExeConfigurationFileMap { ExeConfigFilename = fout };

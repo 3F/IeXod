@@ -40,6 +40,8 @@ namespace net.r_eg.IeXod.Shared
         /// </summary>
         private static readonly string[] s_msBuildExeNames = { "MSBuild.exe", "MSBuild.dll" };
 
+        internal static char[] StreamTrimChars { get; } = new[] { ' ', '\r', '\n' };
+
         /// <summary>
         /// Gets the cached Build Environment instance.
         /// </summary>
@@ -306,7 +308,7 @@ namespace net.r_eg.IeXod.Shared
 
             Process p = new()
             {
-                StartInfo = new ProcessStartInfo(hmsbuild, "-only-path")
+                StartInfo = new ProcessStartInfo(hmsbuild, "-only-path -notamd64")
                 {
                     CreateNoWindow = true,
                     UseShellExecute = false,
@@ -318,7 +320,7 @@ namespace net.r_eg.IeXod.Shared
             p.WaitForExit();
             if(p.ExitCode != 0) return null;
 
-            string path = p.StandardOutput.ReadToEnd().Trim(new[] { ' ', '\r', '\n' });
+            string path = p.StandardOutput.ReadToEnd().Trim(StreamTrimChars);
 
             return string.IsNullOrEmpty(path)
                     ? null
