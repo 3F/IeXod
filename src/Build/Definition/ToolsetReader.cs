@@ -4,15 +4,15 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using net.r_eg.IeXod.Shared;
 using net.r_eg.IeXod.Collections;
+using net.r_eg.IeXod.Construction;
 using net.r_eg.IeXod.Execution;
 using net.r_eg.IeXod.Internal;
+using net.r_eg.IeXod.Shared;
 using net.r_eg.IeXod.Shared.FileSystem;
 using error = net.r_eg.IeXod.Shared.ErrorUtilities;
 using InvalidProjectFileException = net.r_eg.IeXod.Exceptions.InvalidProjectFileException;
@@ -116,6 +116,7 @@ namespace net.r_eg.IeXod.Evaluation
             ToolsetDefinitionLocations locations
             )
         {
+            // including local .config file with toolset sections, eg. <toolset toolsVersion="Current">
             var defaultVer = ReadAllToolsetsNative
             (
                 toolsets,
@@ -136,36 +137,42 @@ namespace net.r_eg.IeXod.Evaluation
 
             foreach(var vs in VisualStudioLocationHelper.GetInstances())
             {
-                string vstr = $"{vs.Version.Major}.0";
-                string toolbin = FileUtilities.CombinePaths
+                string toolsVersion = $"{vs.Version.Major}.0";
+                string toolsPath = FileUtilities.CombinePaths
                 (
                     vs.Path,
                     "MSBuild",
-                    vs.Version.Major >= 16 ? _CUR : vstr,
+                    vs.Version.Major >= 16 ? _CUR : toolsVersion,
                     "Bin"
                 );
 
                 if(IntPtr.Size == 8)
                 {
-                    string toolbin64 = FileUtilities.CombinePaths(toolbin, "amd64");
-                    if(Directory.Exists(toolbin64))
+                    string toolsPath64 = FileUtilities.CombinePaths(toolsPath, "amd64");
+                    if(Directory.Exists(toolsPath64))
                     {
-                        toolbin = toolbin64;
+                        toolsPath = toolsPath64;
                     }
                 }
 
-                if(!toolsets.ContainsKey(vstr))
+                if(!toolsets.ContainsKey(toolsVersion))
                 {
-                    // For Mono
-                    var buildProperties = CreateStandardProperties(globalProperties, vstr, NativeMethodsShared.FrameworkBasePath, toolbin);
+                    PropertyDictionary<ProjectPropertyInstance> buildProperties = GetOrCreateStandardProperties
+                    (
+                        toolsVersion,
+                        toolsPath,
+                        root: NativeMethodsShared.FrameworkBasePath,
+                        environmentProperties,
+                        globalProperties
+                    );
 
                     toolsets.Add
                     (
-                        vstr,
+                        toolsVersion,
                         new Toolset
                         (
-                            vstr,
-                            toolbin,
+                            toolsVersion,
+                            toolsPath,
                             buildProperties,
                             environmentProperties,
                             globalProperties,
@@ -177,6 +184,8 @@ namespace net.r_eg.IeXod.Evaluation
                 }
             }
 
+            // it should be already added if .config provides this, eg.~ `<toolset toolsVersion="Current">`
+            // or consider it as alias
             if(!toolsets.ContainsKey(_CUR))
             {
                 var actual = toolsets.GetMostActual();
@@ -575,6 +584,27 @@ namespace net.r_eg.IeXod.Evaluation
                 EvaluateAndSetProperty(property, properties, globalProperties, initialProperties, accumulateProperties, ref toolsPath, ref binPath, ref expander);
             }
 
+            if(toolsVersion.Name == MSBuildConstants.CurrentToolsVersion)
+            {
+                IElementLocation location = ElementLocation.Create(typeof(FallbackPropertyValues).FullName);
+                foreach(var p in FallbackPropertyValues.MSBuildCurrentToolset)
+                {
+                    if(properties.GetProperty(p.Key) != null) continue;
+
+                    EvaluateAndSetProperty
+                    (
+                        new ToolsetPropertyDefinition(p.Key, p.Value, location),
+                        properties,
+                        globalProperties,
+                        initialProperties,
+                        accumulateProperties,
+                        ref toolsPath,
+                        ref binPath,
+                        ref expander
+                    );
+                }
+            }
+
             Dictionary<string, SubToolset> subToolsets = new Dictionary<string, SubToolset>(StringComparer.OrdinalIgnoreCase);
             IEnumerable<string> subToolsetVersions = GetSubToolsetVersions(toolsVersion.Name);
 
@@ -625,6 +655,90 @@ namespace net.r_eg.IeXod.Evaluation
             }
 
             return toolset;
+        }
+
+        private static PropertyDictionary<ProjectPropertyInstance> GetOrCreateStandardProperties
+            (
+                string toolsVersion,
+                string toolsPath,
+                string root,
+                PropertyDictionary<ProjectPropertyInstance> environmentProperties,
+                PropertyDictionary<ProjectPropertyInstance> globalProperties
+            )
+        {
+            PropertyDictionary<ProjectPropertyInstance> buildProperties = null;
+
+#if FEATURE_TOOLSET_USE_STD_PROPS_BEFORE_CFG_OR_FALLBACK
+
+            // origin, for Mono
+            buildProperties = CreateStandardProperties(
+                globalProperties, toolsVersion, root, toolsPath
+            );
+#endif
+
+            if(buildProperties != null) return buildProperties;
+
+            buildProperties = new();
+
+            PropertyDictionary<ProjectPropertyInstance> initialProperties = new(environmentProperties);
+            initialProperties.ImportProperties(globalProperties);
+
+            PropertyDictionary<ProjectPropertyInstance> initialPropertiesClone = new(initialProperties);
+            Expander<ProjectPropertyInstance, ProjectItemInstance> expander = new(initialPropertiesClone, FileSystems.Default);
+
+#if FEATURE_SYSTEM_CONFIGURATION
+
+            ToolsetConfigurationSection appcfg = ToolsetConfigurationReaderHelpers.ReadToolsetConfigurationSection(
+                ToolsetConfigurationReader.ReadAppConfiguration(Path.Combine(toolsPath, "MSBuild.exe.config"))
+            );
+
+            if(appcfg?.Toolsets.Count > 0)
+            {
+                ToolsetElement toolset = appcfg.Toolsets.GetElement(0);
+
+                foreach(ToolsetElement.PropertyElement p in toolset.PropertyElements)
+                {
+                    ElementLocation location = ElementLocation.Create(p.ElementInformation.Source, p.ElementInformation.LineNumber, 0);
+                    AddOrUpdateTo(buildProperties, p.Name, p.Value, expander, initialPropertiesClone, location);
+                }
+            }
+
+#endif
+
+            if(toolsVersion == MSBuildConstants.CurrentToolsVersion)
+            {
+                IElementLocation location = ElementLocation.Create(typeof(FallbackPropertyValues).FullName);
+                foreach(var p in FallbackPropertyValues.MSBuildCurrentToolset)
+                {
+                    if(buildProperties.GetProperty(p.Key) != null) continue;
+
+                    AddOrUpdateTo(buildProperties, p.Key, p.Value, expander, initialPropertiesClone, location);
+                }
+            }
+
+            return buildProperties;
+        }
+
+        private static bool AddOrUpdateTo
+            (
+                PropertyDictionary<ProjectPropertyInstance> properties,
+                string name,
+                string value,
+                Expander<ProjectPropertyInstance, ProjectItemInstance> expander,
+                PropertyDictionary<ProjectPropertyInstance> initialProperties,
+                IElementLocation location
+            )
+        {
+            if(string.IsNullOrEmpty(name)) return false;
+
+            ToolsetPropertyDefinition pdef = new(name, value, location);
+            string evaluated = ExpandPropertyUnescaped(pdef, expander);
+
+            var property = ProjectPropertyInstance.Create(pdef.Name, evaluated, mayBeReserved: true, isImmutable: false);
+            initialProperties[pdef.Name] = property;
+            properties.Set(property);
+
+            return true;
         }
 
         /// <summary>
@@ -793,7 +907,7 @@ namespace net.r_eg.IeXod.Evaluation
         /// Expands the given unexpanded property expression using the properties in the
         /// given expander.
         /// </summary>
-        private string ExpandPropertyUnescaped(ToolsetPropertyDefinition property, Expander<ProjectPropertyInstance, ProjectItemInstance> expander)
+        private static string ExpandPropertyUnescaped(ToolsetPropertyDefinition property, Expander<ProjectPropertyInstance, ProjectItemInstance> expander)
         {
             try
             {

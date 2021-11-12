@@ -162,6 +162,7 @@
       <Link>SharedUtilities\VisualStudioLocationHelper.cs</Link>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="FallbackPropertyValues.cs" />
     <Compile Include="BackEnd\BuildManager\BuildManager.cs" />
     <Compile Include="BackEnd\BuildManager\BuildParameters.cs" />
     <Compile Include="BackEnd\BuildManager\CacheSerialization.cs" />

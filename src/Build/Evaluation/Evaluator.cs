@@ -1143,38 +1143,7 @@ namespace net.r_eg.IeXod.Evaluation
         /// </summary>
         private void SetFallbackValuesForMostKnownProperties()
         {
-            foreach(var p in new Dictionary<string, string>(25)
-            {
-                { ReservedPropertyNames.extensionsPath, "$([MSBuild]::GetMSBuildExtensionsPath())" },
-                { ReservedPropertyNames.extensionsPath32, "$([MSBuild]::GetMSBuildExtensionsPath())" },
-                { ReservedPropertyNames.extensionsPath64, @"$(MSBuildProgramFiles32)\MSBuild" },
-
-                { "MSBuildToolsPath32", "$([MSBuild]::GetToolsDirectory32())" },
-                { "MSBuildToolsPath64", "$([MSBuild]::GetToolsDirectory64())" },
-                { "MSBuildToolsPath", "$([MSBuild]::GetCurrentToolsDirectory())" },
-
-                { "MSBuildSDKsPath", "$([MSBuild]::GetMSBuildSDKsPath())" },
-                { "MSBuildFrameworkToolsPath", @"$(SystemRoot)\Microsoft.NET\Framework\v$(MSBuildRuntimeVersion)\" },
-                { "MSBuildFrameworkToolsPath32", @"$(SystemRoot)\Microsoft.NET\Framework\v$(MSBuildRuntimeVersion)\" },
-                { "MSBuildFrameworkToolsPath64", @"$(SystemRoot)\Microsoft.NET\Framework64\v$(MSBuildRuntimeVersion)\" },
-
-                { ReservedPropertyNames.frameworkToolsRoot, @"$(SystemRoot)\Microsoft.NET\Framework\" },
-                { "VsInstallRoot", "$([MSBuild]::GetVsInstallRoot())" },
-                { "MSBuildToolsRoot", @"$(VsInstallRoot)\MSBuild" },
-                { "RoslynTargetsPath", @"$([MSBuild]::GetToolsDirectory32())\Roslyn" },
-
-                // VC Specific Paths
-                { "VCTargetsPath16", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath16)','$(MSBuildExtensionsPath32)\Microsoft\VC\v160\'))" },
-                { "VCTargetsPath14", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath14)','$([MSBuild]::GetProgramFiles32())\MSBuild\Microsoft.Cpp\v4.0\V140\'))" },
-                { "VCTargetsPath12", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath12)','$([MSBuild]::GetProgramFiles32())\MSBuild\Microsoft.Cpp\v4.0\V120\'))" },
-                { "VCTargetsPath11", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath11)','$([MSBuild]::GetProgramFiles32())\MSBuild\Microsoft.Cpp\v4.0\V110\'))" },
-                { "VCTargetsPath10", @"$([MSBuild]::ValueOrDefault('$(VCTargetsPath10)','$([MSBuild]::GetProgramFiles32())\MSBuild\Microsoft.Cpp\v4.0\'))" },
-                { "VCTargetsPath", "$(VCTargetsPath16)" },
-
-                // VSSDK
-                { "VSToolsPath", @"$(MSBuildProgramFiles32)\MSBuild\Microsoft\VisualStudio\v$(VisualStudioVersion)" },
-
-            })
+            foreach(var p in FallbackPropertyValues.MSBuildCurrentToolset)
             {
                 if(_data.GetProperty(p.Key) == null)
                 {
@@ -1287,6 +1256,12 @@ namespace net.r_eg.IeXod.Evaluation
 
             foreach (ProjectPropertyInstance toolsetProperty in _data.Toolset.Properties.Values)
             {
+                // REVIEW: L-135. Toolset now may aggregate an additional properties in a fallback stage;
+                //       That's why below we just set the lowest priority for all toolset properties in attempts to add into our bag.
+                //       But here we can also focus on ignoring only the fallback properties because I'm not sure about compatibility.
+                if(_data.GlobalPropertiesDictionary.GetProperty(toolsetProperty.Name) != null
+                    || _environmentProperties.GetProperty(toolsetProperty.Name) != null) continue;
+
                 P property = _data.SetProperty(toolsetProperty.Name, ((IProperty)toolsetProperty).EvaluatedValueEscaped, false /* NOT global property */, false /* may NOT be a reserved name */);
                 toolsetProperties.Add(property);
             }

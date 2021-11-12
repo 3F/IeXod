@@ -51,6 +51,27 @@ namespace net.r_eg.IeXod.Evaluation
         private readonly Dictionary<string, Dictionary<string, ProjectImportPathMatch>> _projectImportSearchPathsCache;
 
         /// <summary>
+        /// Read specified configuration (.config) file.
+        /// </summary>
+        /// <param name="file">Full path to file.</param>
+        /// <returns>It will return <c>null</c> if it does not exist or value is <c>null</c>.</returns>
+        internal static Configuration ReadAppConfiguration(string file)
+        {
+            if(file == null || !FileSystems.Default.FileExists(file))
+            {
+                return null;
+            }
+
+            ExeConfigurationFileMap map = QualifyConfig(file);
+
+            try
+            {
+                return ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None, true);
+            }
+            finally { File.Delete(map.ExeConfigFilename); }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         internal ToolsetConfigurationReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties)
@@ -258,14 +279,10 @@ namespace net.r_eg.IeXod.Evaluation
         private static Configuration ReadApplicationConfiguration()
         {
             // When running from the command-line or from VS, use the msbuild.exe.config file.
-            if (BuildEnvironmentHelper.Instance.Mode != BuildEnvironmentMode.None &&
-                !BuildEnvironmentHelper.Instance.RunningTests &&
-                FileSystems.Default.FileExists(BuildEnvironmentHelper.Instance.CurrentMSBuildConfigurationFile))
+            if (BuildEnvironmentHelper.Instance.Mode != BuildEnvironmentMode.None && !BuildEnvironmentHelper.Instance.RunningTests)
             {
-                var map = QualifyConfig(BuildEnvironmentHelper.Instance.CurrentMSBuildConfigurationFile);
-
-                try { return ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None, true); }
-                finally { File.Delete(map.ExeConfigFilename); }
+                Configuration c = ReadAppConfiguration(BuildEnvironmentHelper.Instance.CurrentMSBuildConfigurationFile);
+                if(c != null) return c;
             }
 
             // When running tests or the expected config file doesn't exist, fall-back to default

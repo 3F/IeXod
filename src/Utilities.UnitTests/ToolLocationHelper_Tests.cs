@@ -34,12 +34,6 @@ namespace net.r_eg.IeXod.UnitTests
     {
         private readonly ITestOutputHelper _output;
 
-#if USE_MSBUILD_DLL_EXTN
-        private const string MSBuildExeName = "MSBuild.dll";
-#else
-        private const string MSBuildExeName = "MSBuild.exe";
-#endif
-
         public ToolLocationHelper_Tests(ITestOutputHelper output)
         {
             _output = output;
@@ -713,7 +707,7 @@ namespace net.r_eg.IeXod.UnitTests
             }
         }
 
-        [Fact(Skip = "IeXod. L-89")]
+        [Fact]
         [Trait("Category", "mono-osx-failing")]
         public void TestGetPathToBuildToolsFile()
         {
@@ -733,16 +727,16 @@ namespace net.r_eg.IeXod.UnitTests
 
             ToolLocationHelper.GetPathToDotNetFrameworkFile("MSBuild.exe", TargetDotNetFrameworkVersion.Version40).ShouldBe(ToolLocationHelper.GetPathToBuildToolsFile("MSBuild.exe", "4.0"));
 
-            string tv12path = Path.Combine(ProjectCollection.GlobalProjectCollection.GetToolset(ObjectModelHelpers.MSBuildDefaultToolsVersion).ToolsPath, MSBuildExeName);
+            string tv12path = Path.Combine(ProjectCollection.GlobalProjectCollection.GetToolset(ObjectModelHelpers.MSBuildDefaultToolsVersion).ToolsPath, "MSBuild.exe");
 
-            tv12path.ShouldBe(ToolLocationHelper.GetPathToBuildToolsFile(MSBuildExeName, ObjectModelHelpers.MSBuildDefaultToolsVersion));
-            tv12path.ShouldBe(ToolLocationHelper.GetPathToBuildToolsFile(MSBuildExeName, ToolLocationHelper.CurrentToolsVersion));
+            tv12path.ShouldBe(ToolLocationHelper.GetPathToBuildToolsFile("MSBuild.exe", ObjectModelHelpers.MSBuildDefaultToolsVersion));
+            tv12path.ShouldBe(ToolLocationHelper.GetPathToBuildToolsFile("MSBuild.exe", ToolLocationHelper.CurrentToolsVersion));
         }
 
 #if RUNTIME_TYPE_NETCORE
         [Fact(Skip = "https://github.com/Microsoft/msbuild/issues/722")]
 #else
-        [Fact(Skip = "IeXod. L-89")]
+        [Fact]
         [Trait("Category", "mono-osx-failing")]
 #endif
         public void TestGetPathToBuildToolsFile_32Bit()
