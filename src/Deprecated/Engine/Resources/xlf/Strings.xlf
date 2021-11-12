@@ -398,8 +398,8 @@
         <note from="bb-metadata">fuzzyMatch="100" wordcount="11" adjWordcount="2.75" curWordcount="2.75" tmLabel="N''"</note>
       </trans-unit>
       <trans-unit id="DefaultTasksFileLoadFailureWarning">
-        <source>MSB4010: The "{0}" files could not be successfully loaded from their expected location "{1}". Default tasks will not be available. {2}</source>
-        <note>{StrBegin="MSB4010: "}UE: This message is shown when the default tasks files that are located alongside the MSBuild binaries cannot be
+        <source>XD4010: The "{0}" files could not be successfully loaded from their expected location "{1}". Default tasks will not be available. {2}</source>
+        <note>{StrBegin="XD4010: "}UE: This message is shown when the default tasks files that are located alongside the MSBuild binaries cannot be
     found, either because they don't exist, or because of lack of permissions. "{2}" contains a message explaining why.
     LOCALIZATION: "{2}" is a message from some FX method and is already localized.</note>
         <alt-trans match-quality="100%" tool="BlackBox/MSR MT" />

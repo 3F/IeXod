@@ -190,7 +190,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
 
             Assert.Equal(0, mockLogger.WarningCount);
             Assert.Single(mockLogger.BuildMessageEvents);
-            Assert.Contains("MSB4010", mockLogger.FullLog);
+            Assert.Contains("XD4010", mockLogger.FullLog);
 
             foreach (string unexpectedRegisteredTask in unexpectedRegisteredTasks)
             {
@@ -214,7 +214,7 @@ namespace net.r_eg.IeXod.UnitTests.Definition
             Console.WriteLine(mockLogger.FullLog);
             Assert.Equal(0, mockLogger.WarningCount);
             Assert.Single(mockLogger.BuildMessageEvents);
-            Assert.Contains("MSB4010", mockLogger.FullLog);
+            Assert.Contains("XD4010", mockLogger.FullLog);
         }
 
         /// <summary>
