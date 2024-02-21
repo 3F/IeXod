@@ -37,15 +37,15 @@
     <None Include="..\..\.tools\hMSBuild.bat" Pack="true" PackagePath="lib/$([System.String]::Join(';lib/', '$(IeXodTFM.Split(`;`))'))">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <!-- after ResolveHostfxrCopyLocalContent -->
-    <hostfxrX64lib Include="$(OutputPath)\*\x64\hostfxr.dll" />
-    <hostfxrX86lib Include="$(OutputPath)\*\x86\hostfxr.dll" />
-    <None Include="@(hostfxrX64lib)" Pack="true" PackagePath="lib/">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="@(hostfxrX86lib)" Pack="true" PackagePath="lib/">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <!-- 
+        TODO: after ResolveHostfxrCopyLocalContent
+        <hostfxrX64lib Include="$(OutputPath)\*\x64\hostfxr.dll" />
+        <None Include="@(hostfxrX64lib)" Pack="true" PackagePath="lib/" />
+    -->
+    <None Include="$(OutputPath)\net472\x64\hostfxr.dll" Pack="true" PackagePath="lib/net472/x64" />
+    <None Include="$(OutputPath)\net472\x86\hostfxr.dll" Pack="true" PackagePath="lib/net472/x86" />
+    <None Include="$(OutputPath)\netcoreapp2.1\x64\hostfxr.dll" Pack="true" PackagePath="lib/netcoreapp2.1/x64" />
+    <None Include="$(OutputPath)\netcoreapp2.1\x86\hostfxr.dll" Pack="true" PackagePath="lib/netcoreapp2.1/x86" />
   </ItemGroup>
 
   <ItemGroup>

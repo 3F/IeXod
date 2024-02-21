@@ -2,8 +2,56 @@
 IeXod - https://github.com/3F/IeXod
 - - - - - - - - - - - - - - - - - - 
 
+[0.2] 2024.02.22
 
-[v0.1-beta] 2020.06.04
+    * NEW: New Evaluation.Expander. Adds external use of missing functions:
+           new/unknown(yet for IeXod engine) MSBuild static functions $([MSBuild]::...
+           
+    * NEW: Basic Tasks support as IeXod.Tasks. + RoslynCodeTaskFactory. (No host or extenral nodes yet)
+           IeXod.Tasks also improves additional references to standard library assemblies 
+           in RoslynCodeTaskFactory + Compilers (Roslyn tools)
+    
+    * NEW: Support hMSBuild 2.4.1 helper for custom search related engines.
+    
+    * NEW: IeXodBinPath property. Where IeXod.dll is located.
+    
+    * FIXED: Possible InvalidProjectFileException "Could not find a part of the path ..."
+             When Import SDKs projects.
+    
+    * FIXED: Wrong minimal compatible Sdk version ~ 1.1.0
+             When Sdk-style evaluation, e.g. Sdk="Microsoft.NET.Sdk"
+             
+    * FIXED: Failed hostfxr use in Sdk resolving when .NET Core target platforms.
+    
+    * FIXED: Possible incorrect evaluation MSBuildExtensionsPath or like properties.
+    
+    * FIXED: Using most of the original MSBxxxx messages.
+    
+    * FIXED: Fixed SdkResolverLoader and ProjectInstance initialization.
+    
+    * CHANGED: Improved expanding of the Import attribute using extra fallback logic.
+    
+    * CHANGED: .tasks processing using IeXod.Tasks by default.
+    
+    * CHANGED: MSBuildFrameworkToolsRoot changed to FrameworkBasePath value at runtime.
+    
+    * CHANGED: MSB4010 Warning now is considered as XD4010 Message.
+    
+    * CHANGED: MSBUILD_EXE_PATH now is considered as IEXOD_PATH_TO_MSBUILD_EXE
+    
+    * CHANGED: Changed logic for searching Toolset properties using extra fallback.
+    
+    * CHANGED: Improved searcing of the original engine.
+    
+    * CHANGED: Improved accessing to the most known properties from the original engine and its SDKs.
+    
+    * CHANGED: Original ProjectCollection.Version changed as EngineVersion
+               Modified Version now points to MSBuild-compatible Version.
+    
+    * CHANGED: Updated hostfxr.dll 6.0.22 (fix doubling the collection using hostfxr_get_available_sdks_result_fn, etc.)
+
+
+[0.1-beta] 2020.06.04
 
     * Initial public release.
     
@@ -12,7 +60,7 @@ IeXod - https://github.com/3F/IeXod
       https://github.com/3F/IeXod
 
     
-[v1.0][SdkResolver] 2020.06.04
+[1.0][SdkResolver] 2020.06.04
 
     * Initial public release.
     

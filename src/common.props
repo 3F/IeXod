@@ -194,13 +194,13 @@
     <Copyright>Copyright (c) .NET Foundation and contributors
   | Copyright (c) 2020-2024  Denis Kuzmin &lt;x-3F@outlook.com&gt; github/3F
     </Copyright>
-    <Title>[ IeXod ] 🧰 The most portable alternative to Microsoft.Build</Title>
-    <Description>This is IeXod and its components. 🧰 The most portable alternative to Microsoft.Build for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax. https://github.com/3F/IeXod</Description>
+    <Title>[ IeXod ] The most portable alternative to Microsoft.Build</Title>
+    <Description>The most portable alternative to Microsoft.Build for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax. https://github.com/3F/IeXod</Description>
     <PackageOwners>reg</PackageOwners>
     <PackageProjectUrl>https://github.com/3F/IeXod</PackageProjectUrl>
     <RepositoryUrl>https://github.com/3F/IeXod</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>MSBuild evaluator MicrosoftBuild evaluating VisualStudio parser project-parser projects csproj vcxproj MSBuildSdkResolver VS2019 VS2017 VS2015 VS2013 VS2012 VS2010 msbuildtargets xml targets props proj EvMSBuild SobaScript IeXod IeXodSdkResolver</PackageTags>
+    <PackageTags>MSBuild evaluator MicrosoftBuild evaluating VisualStudio parser project-parser projects csproj vcxproj MSBuildSdkResolver VS2022 VS2019 VS2017 VS2015 VS2013 VS2012 VS2010 msbuildtargets xml targets props proj IeXod IeXodSdkResolver</PackageTags>
     <PackageReleaseNotes> changelog: https://github.com/3F/IeXod/blob/master/changelog.txt </PackageReleaseNotes>
     <Authors>github.com/3F/IeXod</Authors>
   </PropertyGroup>

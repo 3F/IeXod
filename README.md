@@ -1,6 +1,6 @@
 # [IeXod](https://github.com/3F/IeXod)
 
-The most portable alternative to Microsoft.Build for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax.
+The most portable alternative to *Microsoft.Build* for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax.
 
 ```r
 Copyright (c) .NET Foundation and contributors
@@ -12,16 +12,15 @@ Copyright (c) IeXod contributors https://github.com/3F/IeXod/graphs/contributors
 [![Build status](https://ci.appveyor.com/api/projects/status/mclqcptonbch6jjv/branch/master?svg=true)](https://ci.appveyor.com/project/3Fs/iexod/branch/master)
 [![release](https://img.shields.io/github/v/release/3F/IeXod?include_prereleases&sort=semver)](https://github.com/3F/IeXod/releases/latest)
 [![NuGet IeXod](https://img.shields.io/nuget/v/IeXod.svg)](https://www.nuget.org/packages/IeXod/)
-[![Tests](https://img.shields.io/appveyor/tests/3Fs/iexod/master.svg)](https://ci.appveyor.com/project/3Fs/iexod/build/tests)
 
 
-# Why IeXod
+## Why IeXod
 
 https://github.com/3F/MvsSln/issues/23
 
-## 🔍 Easy to use
+### 🔍 Easy to use
 
-MSBuild with its typical error [[?]](https://github.com/3F/MvsSln/wiki/Advanced-Features#about--possible--problems)
+*Microsoft.Build* with its typical error [[?]](https://github.com/3F/MvsSln/wiki/Advanced-Features#about--possible--problems)
 
 ```csharp
 // 'The SDK 'Microsoft.NET.Sdk' specified could not be found.
@@ -41,7 +40,7 @@ new Project("<path to Sdk-style project file>"); // Microsoft.NET.Sdk ->
 */
 ```
 
-## 🔧 Configurable Sdk resolvers at runtime:
+### 🔧 Configurable Sdk resolvers at runtime
 
 ```csharp
 new Project("...", properties, ProjectToolsOptions.Default);
@@ -59,32 +58,32 @@ ProjectToolsOptions.Default.SdkResolvers = new SdkResolver[] {
 };
 ```
 
-## 🧦🎯 Automatic searching of the modern Toolsets
+### 🧦🎯 Automatic searching of the modern Toolsets
 
-VS setup API + Registry + Configuration files;
+VS setup **API** + Registry + [hMSBuild.bat](https://3F.github.io/hMSBuild/releases/latest/) + Configuration files + ...;
 
 That continues direction of https://github.com/3F/hMSBuild
 
-## 🔨 Exposing Toolsets in classical notation:
+### 🔨 Exposing Toolsets in classical notation
 
-```csharp
-> {[Current, ToolsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64]}
+```
+> {[Current, ToolsPath=...\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64]}
+...
 {[14.0, ToolsPath=C:\Program Files (x86)\MSBuild\14.0\bin\amd64]}
-{[15.0, ToolsPath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64]}
->> {[16.0, ToolsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64]}
+{[15.0, ToolsPath=...\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64]}
+{[16.0, ToolsPath=...\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64]}
+>> {[17.0, ToolsPath=...\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64]}
 ```
 
-## 🧰 Portability, Compatibility, and Functionality
+### 🧰 Portability, Compatibility, and Functionality
 
 > Modern #MSBuild assemblies are much more closely integrated with #VisualStudio and much more difficult to maintain independently [[?]](https://twitter.com/GitHub3F/status/1184170248532119552)
 
 This is most important goal for [IeXod](https://github.com/3F/IeXod) project. To help to avoid the following nightmare: 
 
-❌ From difficulty use (\~ [Microsoft.Build.Locator](https://www.nuget.org/packages/Microsoft.Build.Locator/) an official solution) to unpredictable behavior in various products (\~ Visual Studio etc) due to active integration inside a single environment with *Microsoft.Build.*
+❌ From difficulty use (\~ [Microsoft.Build.Locator](https://www.nuget.org/packages/Microsoft.Build.Locator/)) to unpredictable behavior in various products (\~ Visual Studio etc) due to active integration inside a single environment with *Microsoft.Build.*
 
-## 🎈 Something More
-
-We were just born. Alpha state :3
+### 🎈 Something More
 
 in progress ...
 
@@ -92,13 +91,12 @@ Follow the news;
 
 * https://github.com/3F
 * https://github.com/3F/IeXod
-* https://twitter.com/GitHub3F
 
 Contribute;
 
 Enjoy!
 
-# IeXod and custom Sdk Resolvers
+## IeXod and custom Sdk Resolvers
 
 IeXod provides independent interface for the easiest implementation of any new Sdk Resolvers.
 
@@ -106,7 +104,7 @@ IeXod provides independent interface for the easiest implementation of any new S
 
 Extend evaluation as you need; Then, easily register and configure new resolvers on the fly!
 
-# Where is used
+## Where is used
 
 ( 📅 Planned at least after first stable IeXod release )
 
