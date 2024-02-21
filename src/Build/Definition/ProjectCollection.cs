@@ -448,7 +448,7 @@ namespace net.r_eg.IeXod.Evaluation
         /// If you want the assembly version, use Constants.AssemblyVersion.
         /// This is not the <see cref="ToolsetsVersion">ToolsetCollectionVersion</see>.
         /// </remarks>
-        public static Version Version
+        public static Version EngineVersion
         {
             get
             {
@@ -465,6 +465,13 @@ namespace net.r_eg.IeXod.Evaluation
                 return s_engineVersion;
             }
         }
+
+        /// <summary>
+        /// Gets a MSBuild-compatible ProjectCollection.Version
+        /// https://learn.microsoft.com/en-us/dotnet/api/microsoft.build.evaluation.projectcollection.version
+        /// </summary>
+        /// <remarks>See <see cref="EngineVersion"/> for reference to current engine.</remarks>
+        public static Version Version { get; } = new Version(MSBuildConstants.BaseMSBuildEngineVersion);
 
         /// <summary>
         /// Gets a version of the Engine suitable for display to a user.

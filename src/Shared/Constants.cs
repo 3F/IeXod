@@ -75,7 +75,12 @@ namespace net.r_eg.IeXod.Shared
         /// Current version of this MSBuild Engine assembly in the form, e.g, "12.0"
         /// </summary>
         internal const string CurrentProductVersion = "16.0";
-        
+
+        /// <summary>
+        /// The base of MSBuild Engine in the form Major.Minor.Build.
+        /// </summary>
+        internal const string BaseMSBuildEngineVersion = "16.0.0"; // L-155
+
         /// <summary>
         /// Symbol used in ProjectReferenceTarget items to represent default targets
         /// </summary>

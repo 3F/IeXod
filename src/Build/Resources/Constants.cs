@@ -155,7 +155,7 @@ namespace net.r_eg.IeXod.Internal
         /// Current version of this MSBuild Engine assembly in the 
         /// form, e.g, "4.0"
         /// </summary>
-        internal static string AssemblyVersion => MSBuildConstants.CurrentProductVersion;
+        internal static string AssemblyVersion => MSBuildConstants.CurrentProductVersion; //TODO: L-155
 
         /// <summary>
         /// Version number of this IeXod. System.Version notation.

@@ -2603,8 +2603,10 @@ namespace net.r_eg.IeXod.UnitTests.Evaluation
             ProjectCollection.Version.ToString().ShouldStartWith(msbuildVersionProperty,
                 "ProjectCollection.Version should match the property MSBuildVersion, but can contain another version part");
 
-            ProjectCollection.DisplayVersion.ShouldStartWith(msbuildVersionProperty,
-                "DisplayVersion is semver2 while MSBuildVersion is Major.Minor.Build but should be a prefix match");
+            Version IeXodVersion = new Version(project.GetPropertyValue("IeXodVersion"));
+            //TODO: L-159
+            ProjectCollection.DisplayVersion.ShouldStartWith(IeXodVersion.ToString(3),
+                "DisplayVersion is semver2 while IeXodVersion is Major.Minor.Build but should be a prefix match");
         }
 
 
