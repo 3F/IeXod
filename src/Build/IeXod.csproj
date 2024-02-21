@@ -34,7 +34,7 @@
     <None Include="..\..\THIRDPARTYNOTICES.txt" Pack="true" PackagePath="" />
     <None Include="..\..\README.md" Pack="true" PackagePath="" />
     <None Include="..\..\changelog.txt" Pack="true" PackagePath="" />
-    <None Include="..\..\hMSBuild.bat" Pack="true" PackagePath="lib/$([System.String]::Join(';lib/', '$(IeXodTFM.Split(`;`))'))">
+    <None Include="..\..\.tools\hMSBuild.bat" Pack="true" PackagePath="lib/$([System.String]::Join(';lib/', '$(IeXodTFM.Split(`;`))'))">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

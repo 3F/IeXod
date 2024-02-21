@@ -1,17 +1,13 @@
 @echo off
 
-set reltype=%~1
-if not defined reltype set reltype=Release
-set _platform="Any CPU"
+call .tools\hMSBuild -GetNuTool & (
+    if [%~1]==[#] exit /B 0
+)
 
-echo Restore packages ...
-call hMSBuild -t:restore /v:q /m:8 /p:Configuration="%reltype%" /p:Platform=%_platform% /nologo || goto err
-
-echo Build IeXod ...
-call hMSBuild IeXod.sln /t:Build /v:m /m:6 /p:Configuration="%reltype%" /p:Platform=%_platform% /nologo || goto err
-
-exit /B 0
+set "reltype=%~1" & if not defined reltype set reltype=Release
+call packages\vsSolutionBuildEvent\cim.cmd /v:m /m:7 /p:Configuration=%reltype% || goto err
+exit /B
 
 :err
-echo. Build failed. 1>&2
+    echo Failed build>&2
 exit /B 1

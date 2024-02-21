@@ -86,7 +86,7 @@
     <IeXodTestTFM>net472;netcoreapp2.1</IeXodTestTFM>
     <IeXodTestTFM Condition="$(OsUnixLike)=='true'">$(NetCoreTFM)</IeXodTestTFM>
 
-    <NoWarn>$(NoWarn);NETSDK1138</NoWarn>
+    <NoWarn>$(NoWarn);NETSDK1138</NoWarn> <!-- L-133 -->
   </PropertyGroup>
 
   <PropertyGroup>
@@ -97,6 +97,7 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <DiscoverEditorConfigFiles>true</DiscoverEditorConfigFiles>
   </PropertyGroup>
 
@@ -190,8 +191,7 @@
 
   <PropertyGroup>
     <Copyright>Copyright (c) .NET Foundation and contributors
-  | Copyright (c) 2020  Denis Kuzmin &lt; x-3F@outlook.com &gt; GitHub/3F
-  | Copyright (c) IeXod contributors
+  | Copyright (c) 2020-2024  Denis Kuzmin &lt;x-3F@outlook.com&gt; github/3F
     </Copyright>
     <Title>[ IeXod ] 🧰 The most portable alternative to Microsoft.Build</Title>
     <Description>This is IeXod and its components. 🧰 The most portable alternative to Microsoft.Build for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax. https://github.com/3F/IeXod</Description>

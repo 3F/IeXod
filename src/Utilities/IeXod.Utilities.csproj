@@ -28,7 +28,7 @@
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETStandard'">
     <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop" Version="$(MicrosoftVisualStudioSetupConfigurationInteropVersion)" />
 
-    <Reference Include="System.Configuration" Version="$(SystemConfigurationVersion)" />
+    <Reference Include="System.Configuration" Version="$(SystemConfigurationNetfxVersion)" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">

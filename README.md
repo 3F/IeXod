@@ -1,27 +1,25 @@
 # [IeXod](https://github.com/3F/IeXod)
 
+The most portable alternative to Microsoft.Build for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax.
+
 ```r
 Copyright (c) .NET Foundation and contributors
-Copyright (c) 2020-2021  Denis Kuzmin <x-3F@outlook.com> github/3F
+Copyright (c) 2020-2024  Denis Kuzmin <x-3F@outlook.com> github/3F
 Copyright (c) IeXod contributors https://github.com/3F/IeXod/graphs/contributors
 ```
 
-[ [ <sub>@</sub> ☕ ] ](https://3F.github.io/Donation/) [![License](https://img.shields.io/badge/License-MIT-74A5C2.svg)](https://github.com/3F/IeXod/blob/master/LICENSE)
-
-🧰 The most portable alternative to Microsoft.Build for evaluating, manipulating, and other progressive data processing in a compatible XML-like syntax.
-
+[ 「 ❤ 」 ](https://3F.github.io/fund) [![License](https://img.shields.io/badge/License-MIT-74A5C2.svg)](https://github.com/3F/IeXod/blob/master/LICENSE)
 [![Build status](https://ci.appveyor.com/api/projects/status/mclqcptonbch6jjv/branch/master?svg=true)](https://ci.appveyor.com/project/3Fs/iexod/branch/master)
 [![release](https://img.shields.io/github/v/release/3F/IeXod?include_prereleases&sort=semver)](https://github.com/3F/IeXod/releases/latest)
 [![NuGet IeXod](https://img.shields.io/nuget/v/IeXod.svg)](https://www.nuget.org/packages/IeXod/)
 [![Tests](https://img.shields.io/appveyor/tests/3Fs/iexod/master.svg)](https://ci.appveyor.com/project/3Fs/iexod/build/tests)
 
-[![Build history](https://buildstats.info/appveyor/chart/3Fs/iexod?buildCount=20&includeBuildsFromPullRequest=true&showStats=true)](https://ci.appveyor.com/project/3Fs/iexod/history)
 
-# Why IeXod ?
+# Why IeXod
 
 https://github.com/3F/MvsSln/issues/23
 
-## 🔍 Easy to use:
+## 🔍 Easy to use
 
 MSBuild with its typical error [[?]](https://github.com/3F/MvsSln/wiki/Advanced-Features#about--possible--problems)
 

@@ -5,10 +5,7 @@
     <ProductIeXodSdkResolverVersion>1.0.0</ProductIeXodSdkResolverVersion>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DotnetSdkForTestsVersion>3.1.202</DotnetSdkForTestsVersion>
-  </PropertyGroup>
-
+  <!-- Packages -->
   <PropertyGroup>
     <XliffTasksVersion>1.0.0-beta.19253.1</XliffTasksVersion> <!-- https://github.com/dotnet/xliff-tasks -->
     <SystemCollectionsImmutableVersion>1.7.1</SystemCollectionsImmutableVersion>
@@ -30,24 +27,34 @@
     <xunitrunnervisualstudioVersion>2.4.1</xunitrunnervisualstudioVersion>
     <ShouldlyVersion>3.0.2</ShouldlyVersion>
     <FluentAssertionsVersion>5.10.3</FluentAssertionsVersion>
-    <NewtonsoftJsonVersion>12.0.3</NewtonsoftJsonVersion>
+    <NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>
     <MicrosoftExtensionsDependencyModelVersion>5.0.0-preview.6.20263.7</MicrosoftExtensionsDependencyModelVersion>
-    <NuGetVersioningVersion>5.7.0-preview.1.6609</NuGetVersioningVersion>
-    <NuGetPackagingVersion>5.7.0-preview.1.6609</NuGetPackagingVersion>
-    <NuGetPackagingCoreVersion>5.7.0-preview.1.6609</NuGetPackagingCoreVersion>
-    <NuGetFrameworksVersion>5.7.0-preview.1.6609</NuGetFrameworksVersion>
-    <NuGetProjectModelVersion>5.7.0-preview.1.6609</NuGetProjectModelVersion>
+    <NuGetVersioningVersion>5.11.6</NuGetVersioningVersion>
+    <NuGetPackagingVersion>5.11.6</NuGetPackagingVersion>
+    <NuGetPackagingCoreVersion>5.11.6</NuGetPackagingCoreVersion>
+    <NuGetFrameworksVersion>5.11.6</NuGetFrameworksVersion>
+    <NuGetProjectModelVersion>5.11.6</NuGetProjectModelVersion>
     <MicrosoftDotNetPlatformAbstractionsVersion>3.1.4</MicrosoftDotNetPlatformAbstractionsVersion>
-    <MicrosoftNETCoreDotNetHostResolverVersion>5.0.0-preview.2.20152.11</MicrosoftNETCoreDotNetHostResolverVersion>
+    <MicrosoftNETCoreDotNetHostResolverVersion>6.0.22</MicrosoftNETCoreDotNetHostResolverVersion>
     <MicrosoftDotNetXUnitExtensionsVersion>5.0.0-beta.20261.9</MicrosoftDotNetXUnitExtensionsVersion>
     <SystemCollectionsConcurrentVersion>4.3.0</SystemCollectionsConcurrentVersion>
     <MicrosoftCodeAnalysisBuildTasksVersion>3.9.0-5.21120.8</MicrosoftCodeAnalysisBuildTasksVersion>
-    <SystemConfigurationVersion>2.0.5</SystemConfigurationVersion>
     <SystemIOFileSystemPrimitivesVersion>4.3.0</SystemIOFileSystemPrimitivesVersion>
-    <SystemCodeDomVersion>5.0.0</SystemCodeDomVersion>
+    <SystemCodeDomVersion>6.0.0-preview.4.21253.7</SystemCodeDomVersion>
     <SystemResourcesExtensionsVersion>4.7.1</SystemResourcesExtensionsVersion>
     <MicrosoftNetCompilersToolsetVersion>3.11.0</MicrosoftNetCompilersToolsetVersion>
     <SystemXmlXPathVersion>4.3.0</SystemXmlXPathVersion>
     <!-- <XUnitRunnerConsoleVersion>2.4.1</XUnitRunnerConsoleVersion> -->
   </PropertyGroup>
+
+  <!-- Assemblies -->
+  <PropertyGroup>
+    <SystemConfigurationNetfxVersion>2.0.5</SystemConfigurationNetfxVersion>
+  </PropertyGroup>
+
+  <!-- Tools And SDKs -->
+  <PropertyGroup>
+    <DotnetSdkForTestsVersion>3.1.202</DotnetSdkForTestsVersion>
+  </PropertyGroup>
+
 </Project>

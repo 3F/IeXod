@@ -1,0 +1,31 @@
+﻿{
+  "Header": {
+    "_": [
+      " This file for vsSolutionBuildEvent ",
+      " https://github.com/3F/vsSolutionBuildEvent "
+    ],
+    "Compatibility": "0.12.4"
+  },
+  "PreBuild": [
+    {
+      "Enabled": true,
+      "Name": "ModulesAndPkg",
+      "Caption": "Restore packages ...",
+      "Mode": {
+        "$type": "net.r_eg.vsSBE.Events.ModeScript, vsSolutionBuildEvent",
+        "Type": "Script",
+        "Command__": [
+          "##[( !(#[IO exists.file(\"packages/__checked\")]) )",
+          "{",
+          "    #[File call(\".tools\\hMSBuild.bat\", \"~x ~c $(Configuration) -t:restore /v:q /nologo\", 300)]",
+          "",
+          "    #[IO copy.directory(\"\", \"packages/\", true)]",
+          "    #[File write(\"packages/__checked\"): ]",
+          "}]",
+          "",
+          "#[File scall(\".tools\\hMSBuild.bat\", \"~x ~c $(Configuration) -t:restore /v:q /nologo\", 300)]"
+        ]
+      }
+    }
+  ]
+}
