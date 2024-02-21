@@ -7,6 +7,7 @@
 
   <!-- Packages -->
   <PropertyGroup>
+    <ConariVersion>1.5.0</ConariVersion>
     <XliffTasksVersion>1.0.0-beta.19253.1</XliffTasksVersion> <!-- https://github.com/dotnet/xliff-tasks -->
     <SystemCollectionsImmutableVersion>1.7.1</SystemCollectionsImmutableVersion>
     <SystemThreadingTasksDataflowVersion>4.11.1</SystemThreadingTasksDataflowVersion>

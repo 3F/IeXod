@@ -37,6 +37,15 @@
     <None Include="..\..\.tools\hMSBuild.bat" Pack="true" PackagePath="lib/$([System.String]::Join(';lib/', '$(IeXodTFM.Split(`;`))'))">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <!-- after ResolveHostfxrCopyLocalContent -->
+    <hostfxrX64lib Include="$(OutputPath)\*\x64\hostfxr.dll" />
+    <hostfxrX86lib Include="$(OutputPath)\*\x86\hostfxr.dll" />
+    <None Include="@(hostfxrX64lib)" Pack="true" PackagePath="lib/">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="@(hostfxrX86lib)" Pack="true" PackagePath="lib/">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +54,7 @@
     <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
     <PackageReference Include="System.Threading.Tasks.Dataflow" Version="$(SystemThreadingTasksDataflowVersion)" />
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
-
+    <PackageReference Include="Conari" Version="$(ConariVersion)" />
     <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" Condition="'$(MonoBuild)' == 'true'" />
   </ItemGroup>
 

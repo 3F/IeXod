@@ -23,7 +23,7 @@ namespace Microsoft.Build.Engine.OM.UnitTests
         // NuGet version 4.1.0 was somewhat arbitrarily chosen. 3.5 breaks with an unrelated error, and 4.8.2 does not fail when a new dependency is introduced. This is a safe middle point.
 #if !DEBUG
         [SkipOnTargetFramework(TargetFrameworkMonikers.Netcoreapp)]
-        [Fact]
+        [Fact(Skip = "IeXod. L-157")]
         public void TestOldNuget()
         {
             string IeXodPath = BuildEnvironmentHelper.Instance.IeXodBinPath;

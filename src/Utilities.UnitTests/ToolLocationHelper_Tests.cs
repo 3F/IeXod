@@ -1967,17 +1967,17 @@ namespace net.r_eg.IeXod.UnitTests
         /// </summary>
         [Fact]
         [Trait("Category", "mono-osx-failing")]
-        public void GetPathToReferenceAssembliesDefaultLocation45()
+        public void GetPathToReferenceAssembliesDefaultLocation48()
         {
             FrameworkNameVersioning frameworkName = null;
             IList<string> directories = null;
-            if (ToolLocationHelper.GetPathToDotNetFrameworkReferenceAssemblies(TargetDotNetFrameworkVersion.Version45) != null)
+            if (ToolLocationHelper.GetPathToDotNetFrameworkReferenceAssemblies(TargetDotNetFrameworkVersion.Version48) != null)
             {
-                frameworkName = new FrameworkNameVersioning(".NETFramework", new Version("4.5"));
+                frameworkName = new FrameworkNameVersioning(".NETFramework", new Version("4.8"));
                 directories = ToolLocationHelper.GetPathToReferenceAssemblies(frameworkName);
                 directories.Count.ShouldBe(1); // "Expected the method to return one path."
 
-                string referenceAssemblyPath = ToolLocationHelper.GetPathToDotNetFrameworkReferenceAssemblies(TargetDotNetFrameworkVersion.Version45);
+                string referenceAssemblyPath = ToolLocationHelper.GetPathToDotNetFrameworkReferenceAssemblies(TargetDotNetFrameworkVersion.Version48);
                 directories[0].ShouldBe(referenceAssemblyPath, StringCompareShould.IgnoreCase);
             }
             // else

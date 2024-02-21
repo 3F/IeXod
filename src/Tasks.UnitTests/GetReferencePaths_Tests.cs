@@ -28,7 +28,7 @@ namespace net.r_eg.IeXod.UnitTests
         [Fact]
         public void TestGeneralFrameworkMonikerGood()
         {
-            string targetFrameworkMoniker = ".NetFramework, Version=v4.5";
+            string targetFrameworkMoniker = ".NetFramework, Version=v4.8";
             MockEngine engine = new MockEngine();
             GetReferenceAssemblyPaths getReferencePaths = new GetReferenceAssemblyPaths();
             getReferencePaths.BuildEngine = engine;

@@ -18,6 +18,7 @@
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)com.github.3F.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <PropertyGroup>

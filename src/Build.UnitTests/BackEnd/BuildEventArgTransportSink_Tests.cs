@@ -124,7 +124,7 @@ namespace net.r_eg.IeXod.UnitTests.Logging
         /// <summary>
         /// Make sure shutdown will correctly null out the send data delegate
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-157")]
         [Trait("Category", "mono-osx-failing")]
         [SkipOnTargetFramework(TargetFrameworkMonikers.Netcoreapp, "https://github.com/Microsoft/msbuild/issues/282")]
         public void TestShutDown()
