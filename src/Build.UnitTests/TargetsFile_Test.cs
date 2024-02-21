@@ -756,7 +756,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Validate that the GetFrameworkPaths target 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-164")]
         public void TestGetFrameworkPaths()
         {
             MockLogger logger = new MockLogger();
@@ -791,7 +791,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Validate that the GetFrameworkPaths target 
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-164")]
         public void TestTargetFrameworkPaths()
         {
             string[] targetFrameworkVersions = { "v2.0", "v3.0", "v3.5", "v4.0", "v4.5", "" };

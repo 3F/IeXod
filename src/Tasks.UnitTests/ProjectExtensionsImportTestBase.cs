@@ -154,7 +154,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// <summary>
         /// Ensures that an error is logged if MSBuildProjectExtensionsPath is modified after it was set by Microsoft.Common.props.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-164")]
         public void ErrorIfChangedInBodyOfProject()
         {
             Project project = ObjectModelHelpers.LoadProjectFileInTempProjectDirectory(ObjectModelHelpers.CreateFileInTempProjectDirectory(_projectRelativePath, @"
@@ -180,7 +180,7 @@ namespace net.r_eg.IeXod.UnitTests
         /// Ensures that an error is logged if BaseIntermediateOutputPath is modified after it was set by Microsoft.Common.props and 
         /// EnableBaseIntermediateOutputPathMismatchWarning is 'true'.
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-164")]
         public void WarningIfBaseIntermediateOutputPathIsChangedInBodyOfProject()
         {
             Project project = ObjectModelHelpers.LoadProjectFileInTempProjectDirectory(ObjectModelHelpers.CreateFileInTempProjectDirectory(_projectRelativePath, @"

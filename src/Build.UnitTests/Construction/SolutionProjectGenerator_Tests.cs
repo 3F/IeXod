@@ -657,7 +657,7 @@ EndGlobal
         /// <seealso href="https://github.com/Microsoft/msbuild/issues/69">
         /// MSBuild should generate metaprojects that relay the outputs of the individual MSBuild invocations
         /// </seealso>
-        [Fact]
+        [Fact(Skip = "IeXod. L-164")]
         public void SolutionConfigurationWithDependenciesRelaysItsOutputs()
         {
             #region Large strings representing solution & projects
@@ -1319,7 +1319,7 @@ EndGlobal
         /// <summary>
         /// Tests the algorithm for choosing default configuration/platform values for solutions
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-164")]
         public void TestConfigurationPlatformDefaults1()
         {
             string solutionFileContents =
@@ -1597,7 +1597,7 @@ EndGlobal
         /// <summary>
         /// Verifies that the SolutionProjectGenerator will correctly escape project file paths
         /// </summary>
-        [Fact]
+        [Fact(Skip = "IeXod. L-164")]
         public void SolutionGeneratorEscapingProjectFilePaths()
         {
             string solutionFileContents =

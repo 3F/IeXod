@@ -1262,8 +1262,7 @@ namespace net.r_eg.IeXod.Evaluation
                 if(_data.GlobalPropertiesDictionary.GetProperty(toolsetProperty.Name) != null
                     || _environmentProperties.GetProperty(toolsetProperty.Name) != null) continue;
 
-                P property = _data.SetProperty(toolsetProperty.Name, ((IProperty)toolsetProperty).EvaluatedValueEscaped, false /* NOT global property */, false /* may NOT be a reserved name */);
-                toolsetProperties.Add(property);
+                toolsetProperties.Add(_data.SetProperty(toolsetProperty.Name, ((IProperty)toolsetProperty).EvaluatedValueEscaped, isGlobalProperty: false, mayBeReserved: false));
             }
 
             if (_data.SubToolsetVersion == null)

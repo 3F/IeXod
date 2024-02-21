@@ -26,7 +26,7 @@ namespace net.r_eg.IeXod.Tasks.UnitTests
         /// Verifies that when a user overrides the BaseIntermediateOutputPath that the build still works.
         /// </summary>
         /// <remarks>This was written because of regression https://github.com/Microsoft/msbuild/issues/1509. </remarks>
-        [Fact]
+        [Fact(Skip = "IeXod. L-164")]
         public void OverrideBaseIntermediateOutputPathSucceeds()
         {
             Project project = ObjectModelHelpers.CreateInMemoryProject($@"

@@ -6,6 +6,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using net.r_eg.IeXod.Internal;
+using net.r_eg.IeXod.Shared;
 
 namespace net.r_eg.IeXod
 {
@@ -15,7 +16,7 @@ namespace net.r_eg.IeXod
     /// </summary>
     internal static class FallbackPropertyValues
     {
-        internal static readonly ReadOnlyDictionary<string, string> MSBuildCurrentToolset = new(new Dictionary<string, string>(23)
+        internal static readonly ReadOnlyDictionary<string, string> MSBuildCurrentToolset = new(new Dictionary<string, string>(25)
         {
             { ReservedPropertyNames.extensionsPath, "$([MSBuild]::GetMSBuildExtensionsPath())" },
             { ReservedPropertyNames.extensionsPath32, "$([MSBuild]::GetMSBuildExtensionsPath())" },
@@ -32,8 +33,9 @@ namespace net.r_eg.IeXod
             { "MSBuildFrameworkToolsPath", @"$(SystemRoot)\Microsoft.NET\Framework\v$(MSBuildRuntimeVersion)\" },
             { "MSBuildFrameworkToolsPath32", @"$(SystemRoot)\Microsoft.NET\Framework\v$(MSBuildRuntimeVersion)\" },
             { "MSBuildFrameworkToolsPath64", @"$(SystemRoot)\Microsoft.NET\Framework64\v$(MSBuildRuntimeVersion)\" },
+            { "MSBuildFrameworkToolsPathArm64", @"$(SystemRoot)\Microsoft.NET\FrameworkArm64\v$(MSBuildRuntimeVersion)\" },
 
-            { ReservedPropertyNames.frameworkToolsRoot, @"$(SystemRoot)\Microsoft.NET\Framework\" },
+            { ReservedPropertyNames.frameworkToolsRoot, $"{NativeMethodsShared.FrameworkBasePath}\\" },
             { "VsInstallRoot", "$([MSBuild]::GetVsInstallRoot())" },
             { "MSBuildToolsRoot", @"$(VsInstallRoot)\MSBuild" },
             { "RoslynTargetsPath", @"$([MSBuild]::GetToolsDirectory32())\Roslyn" },
