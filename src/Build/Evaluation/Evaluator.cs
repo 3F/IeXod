@@ -1664,11 +1664,16 @@ namespace net.r_eg.IeXod.Evaluation
             //
 
             // Adding the value of $(MSBuildExtensionsPath*) property to the list of search paths
-            var prop = _data.GetProperty(fallbackSearchPathMatch.PropertyName);
 
-            var pathsToSearch = new string[fallbackSearchPathMatch.SearchPaths.Count + 1];
-            pathsToSearch[0] = prop?.EvaluatedValue;                       // The actual value of the property, with no fallbacks
-            fallbackSearchPathMatch.SearchPaths.CopyTo(pathsToSearch, 1);  // The list of fallbacks, in order
+            const int _S_PATH_LIM = 2;
+            var pathsToSearch = new string[fallbackSearchPathMatch.SearchPaths.Count + _S_PATH_LIM];
+
+            // The actual values of the properties, with no fallbacks
+            pathsToSearch[0] = _data.GetProperty(fallbackSearchPathMatch.PropertyName)?.EvaluatedValue;
+            pathsToSearch[1] = _data.Toolset.Properties[fallbackSearchPathMatch.PropertyName]?.EvaluatedValue; //TODO: ?subtools, L-152
+
+            // The list of fallbacks, in order
+            fallbackSearchPathMatch.SearchPaths.CopyTo(pathsToSearch, _S_PATH_LIM);
             
             string extensionPropertyRefAsString = fallbackSearchPathMatch.MsBuildPropertyFormat;
 
@@ -1686,8 +1691,10 @@ namespace net.r_eg.IeXod.Evaluation
             // Try every extension search path, till we get a Hit:
             // 1. 1 or more project files loaded
             // 2. 1 or more project files *found* but ignored (like circular, self imports)
-            foreach (var extensionPath in pathsToSearch)
+            for(int idx = 0; idx < pathsToSearch.Length; ++idx)
             {
+                string extensionPath = pathsToSearch[idx];
+
                 // In the rare case that the property we've enabled for search paths hasn't been defined
                 // we will skip it, but continue with other paths in the fallback order.
                 if (string.IsNullOrEmpty(extensionPath))
@@ -1709,6 +1716,18 @@ namespace net.r_eg.IeXod.Evaluation
 
                 var newExpandedImportPath = importElement.Project.Replace(extensionPropertyRefAsString, extensionPathExpanded, StringComparison.OrdinalIgnoreCase);
                 _evaluationLoggingContext.LogComment(MessageImportance.Low, "TryingExtensionsPath", newExpandedImportPath, extensionPathExpanded);
+
+                // Check only actual values of the properties, NO fallbacks; This does not support containsWildcards==true /L-149, L-158
+                if(idx < _S_PATH_LIM && !_fallbackSearchPathsCache.FileExists(
+                    _expander.ExpandIntoStringLeaveEscaped
+                    (
+                        newExpandedImportPath,
+                        ExpanderOptions.ExpandProperties,
+                        importElement.ProjectLocation
+                    )))
+                {
+                    continue;
+                }
 
                 List<ProjectRootElement> projects;
                 var result = ExpandAndLoadImportsFromUnescapedImportExpression(directoryOfImportingFile, importElement, newExpandedImportPath, false, out projects);

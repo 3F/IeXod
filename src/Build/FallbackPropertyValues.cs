@@ -19,6 +19,7 @@ namespace net.r_eg.IeXod
         {
             { ReservedPropertyNames.extensionsPath, "$([MSBuild]::GetMSBuildExtensionsPath())" },
             { ReservedPropertyNames.extensionsPath32, "$([MSBuild]::GetMSBuildExtensionsPath())" },
+            { ReservedPropertyNames.extensionsPath64, "$([MSBuild]::GetMSBuildExtensionsPath())" },
             //{ ReservedPropertyNames.extensionsPath64, @"$(MSBuildProgramFiles32)\MSBuild" },
 
             { "MSBuildToolsPath32", "$([MSBuild]::GetToolsDirectory32())" },
